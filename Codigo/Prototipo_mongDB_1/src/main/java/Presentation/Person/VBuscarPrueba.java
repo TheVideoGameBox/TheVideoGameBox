@@ -1,3 +1,4 @@
+/*
 package Presentation.Person;
 
 import Logic.Person.TPerson;
@@ -126,3 +127,4 @@ public class VBuscarPrueba extends JFrame{
 		return backButtonContainer;
 	}
 }
+*/

@@ -4,7 +4,7 @@ import Logic.Person.SAPersonImp;
 import Logic.Person.TPerson;
 import Presentation.Person.VAddPerson;
 import Presentation.Person.VBajaPrueba;
-import Presentation.Person.VBuscarPrueba;
+//import Presentation.Person.VBuscarPrueba;
 import Presentation.Person.VEditarPrueba;
 
 import javax.swing.*;
@@ -209,13 +209,12 @@ public class VPrincipal extends JFrame{
 		mainPanel.setBorder(new BorderTitle("Personas", Color.white));
 		mainPanel.add(Box.createRigidArea(new Dimension(10,0)));
 
-/*		for(TPerson p : pruebas) {
+		for(TPerson p : pruebas) {
 			if(p.isActivo()) {
 				mainPanel.add(pruebaPanel(p));
 				mainPanel.add(Box.createRigidArea(new Dimension(10,0)));
 			}
 		}
-*/
 		return mainPanel;
 	}
 	
@@ -232,7 +231,7 @@ public class VPrincipal extends JFrame{
 		@Override
 			public void mouseClicked(MouseEvent e) {
 
-				VBuscarPrueba buscar = new VBuscarPrueba(p);
+//				VBuscarPrueba buscar = new VBuscarPrueba(p);
 				dispose();
 
 		}

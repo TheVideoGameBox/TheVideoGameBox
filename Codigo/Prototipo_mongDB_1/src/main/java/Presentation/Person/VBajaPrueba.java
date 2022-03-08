@@ -98,7 +98,7 @@ public class VBajaPrueba extends JFrame{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					SAPersonImp saPersonImp = new SAPersonImp();
-					saPersonImp.delete(p.getId());
+					saPersonImp.delete(p.getNif());
 					VPrincipal principal = new VPrincipal();
 					dispose();
 				}
