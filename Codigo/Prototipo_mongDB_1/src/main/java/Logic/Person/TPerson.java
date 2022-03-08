@@ -1,6 +1,9 @@
 package Logic.Person;
 
+import org.bson.types.ObjectId;
+
 public class TPerson {
+    private ObjectId id;
     private String nif;
     private String nombre;
     private String apellidos;
@@ -19,6 +22,14 @@ public class TPerson {
         this.apellidos = apellidos;
         this.activo = activo;
     }
+
+    public ObjectId getId() {
+        return id;
+    }
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
 
     public String getNif() {
         return nif;

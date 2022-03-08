@@ -1,6 +1,9 @@
 package Logic.Person;
 
+import org.bson.types.ObjectId;
+
 public class Person {
+    private ObjectId id;
     private String nif;
     private String nombre;
     private String apellidos;
@@ -28,6 +31,13 @@ public class Person {
         this.nombre = tPerson.getNombre();
         this.apellidos = tPerson.getApellidos();
         this.activo = tPerson.isActivo();
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
+    public void setId(ObjectId id) {
+        this.id = id;
     }
 
     public String getNif() {
@@ -69,6 +79,7 @@ public class Person {
     @Override
     public String toString() {
         return "Person[" +
+                "id=" + id +
                 ", nif='" + nif + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
