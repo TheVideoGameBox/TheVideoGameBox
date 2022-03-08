@@ -1,3 +1,4 @@
+/*
 package Presentation.Person;
 
 import Logic.Person.SAPersonImp;
@@ -118,3 +119,4 @@ public class VBajaPrueba extends JFrame{
 		this.setVisible(true);
 	}
 }
+*/

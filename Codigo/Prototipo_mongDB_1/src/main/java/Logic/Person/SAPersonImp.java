@@ -8,23 +8,23 @@ import java.util.List;
 public class SAPersonImp implements SAPerson {
 
     @Override
-    public int add(TPerson tPerson) {
+    public String add(TPerson tPerson) {
         DAOPersonImp person = new DAOPersonImp();
         if(tPerson.getNif().length() == 9) {
             person.add(tPerson);
         }
-        else return -1;
+        else return "";
 
-        return tPerson.getId();
+        return "";
     }
 
     @Override
-    public int delete(int id) {
+    public int delete(String id) {
         return 0;
     }
 
     @Override
-    public TPerson read(int id) {
+    public TPerson read(String id) {
         return null;
     }
 
