@@ -1,6 +1,6 @@
 package Presentation.Person;
 
-import Logic.Person.SAPersonImp;
+import Logic.Person.PersonFunctions;
 import Logic.Person.TPerson;
 import Presentation.JPanelConFondo;
 import Presentation.VPrincipal;
@@ -75,8 +75,8 @@ public class VAddPerson extends JFrame{
 				if(textFields.get(0).getText().length() > 2 && textFields.get(1).getText().length() > 2 && textFields.get(2).getText().length() > 2) {
 					TPerson p = new TPerson(textFields.get(0).getText(), textFields.get(1).getText(), textFields.get(2).getText());
 
-					SAPersonImp saPersonImp = new SAPersonImp();
-					saPersonImp.add(p);
+					PersonFunctions personFunctions = new PersonFunctions();
+					personFunctions.add(p);
 					
 					VPrincipal principal = new VPrincipal();
 					dispose();

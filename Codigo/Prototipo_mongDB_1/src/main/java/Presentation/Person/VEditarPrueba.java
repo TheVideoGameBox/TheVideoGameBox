@@ -1,6 +1,6 @@
 package Presentation.Person;
 
-import Logic.Person.SAPersonImp;
+import Logic.Person.PersonFunctions;
 import Logic.Person.TPerson;
 import Presentation.JPanelConFondo;
 import Presentation.VPrincipal;
@@ -84,8 +84,8 @@ public class VEditarPrueba extends JFrame{
 					p.setNombre(textFields.get(1).getText());
 					p.setApellidos(textFields.get(2).getText());
 
-					SAPersonImp saPersonImp = new SAPersonImp();
-					saPersonImp.update(p);
+					PersonFunctions personFunctions = new PersonFunctions();
+					personFunctions.update(p);
 					
 					VPrincipal principal = new VPrincipal();
 					dispose();

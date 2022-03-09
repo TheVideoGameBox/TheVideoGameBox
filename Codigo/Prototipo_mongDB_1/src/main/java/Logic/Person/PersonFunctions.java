@@ -1,11 +1,11 @@
 package Logic.Person;
 
-import Data.Person.Person;
+import Data.Person.PersonData;
 import org.bson.types.ObjectId;
 
 import java.util.List;
 
-public class SAPersonImp {
+public class PersonFunctions {
 
     public ObjectId add(TPerson tPerson) {
         if (tPerson.getNif().length() != 9)
@@ -15,25 +15,25 @@ public class SAPersonImp {
         else if (!Character.isAlphabetic(tPerson.getNif().charAt(8)))
             return null;
 
-        Person person = new Person();
-        person.add(tPerson);
+        PersonData personData = new PersonData();
+        personData.add(tPerson);
         return tPerson.getId();
     }
 
     public ObjectId delete(ObjectId _id) {
-        Person person = new Person();
-        person.delete(_id);
+        PersonData personData = new PersonData();
+        personData.delete(_id);
         return _id;
     }
 
     public List<TPerson> readAll() {
-        Person person = new Person();
-        return person.readAll();
+        PersonData personData = new PersonData();
+        return personData.readAll();
     }
 
     public int update(TPerson tPerson) {
-        Person person = new Person();
-        person.update(tPerson);
+        PersonData personData = new PersonData();
+        personData.update(tPerson);
         return 0;
     }
 }

@@ -1,6 +1,6 @@
 package Presentation.Person;
 
-import Logic.Person.SAPersonImp;
+import Logic.Person.PersonFunctions;
 import Logic.Person.TPerson;
 import Presentation.VPrincipal;
 
@@ -97,8 +97,8 @@ public class VBajaPrueba extends JFrame{
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					SAPersonImp saPersonImp = new SAPersonImp();
-					saPersonImp.delete(p.getId());
+					PersonFunctions personFunctions = new PersonFunctions();
+					personFunctions.delete(p.getId());
 					VPrincipal principal = new VPrincipal();
 					dispose();
 				}

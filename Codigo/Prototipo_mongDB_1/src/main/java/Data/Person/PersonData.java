@@ -1,5 +1,6 @@
 package Data.Person;
 
+import Logic.Person.Person;
 import Logic.Person.TPerson;
 import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
@@ -20,7 +21,7 @@ import static com.mongodb.MongoClientSettings.getDefaultCodecRegistry;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person {
+public class PersonData {
     private final static String URL = "mongodb+srv://MongoDB-GPS:ZUCUvvYbKW@gps.iox2a.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
     private final static String DATABASE = "GPS";
 
@@ -29,10 +30,10 @@ public class Person {
             CodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
             CodecRegistry pojoCodeRegistry = fromRegistries(getDefaultCodecRegistry(), fromProviders(pojoCodecProvider));
             MongoDatabase db = mongoClient.getDatabase(DATABASE).withCodecRegistry(pojoCodeRegistry);
-            Logic.Person.Person person = new Logic.Person.Person(tPerson);
+            Person person = new Person(tPerson);
 
-            if(!reactivate(tPerson, db.getCollection("personas", Logic.Person.Person.class))) {
-                db.getCollection("personas", Logic.Person.Person.class).insertOne(person);
+            if(!reactivate(tPerson, db.getCollection("personas", Person.class))) {
+                db.getCollection("personas", Person.class).insertOne(person);
             }
 
         } catch (MongoException e) {
@@ -47,13 +48,13 @@ public class Person {
             CodecRegistry pojoCodeRegistry = fromRegistries(getDefaultCodecRegistry(), fromProviders(pojoCodecProvider));
             MongoDatabase db = mongoClient.getDatabase(DATABASE).withCodecRegistry(pojoCodeRegistry);
 
-            MongoCollection<Logic.Person.Person> collection = db.getCollection("personas", Logic.Person.Person.class);
+            MongoCollection<Person> collection = db.getCollection("personas", Person.class);
 
-            List<Logic.Person.Person> personas = new ArrayList<Logic.Person.Person>();
+            List<Person> personas = new ArrayList<Person>();
             collection.find(eq("_id", _id)).into(personas);
 
             if(personas.size() == 1){
-                Logic.Person.Person persona = new Logic.Person.Person(personas.get(0).toTransfer());
+                Person persona = new Person(personas.get(0).toTransfer());
                 persona.setActivo(false);
                 collection.replaceOne(eq("_id", _id), persona);
             }
@@ -70,8 +71,8 @@ public class Person {
             MongoDatabase db = mongoClient.getDatabase(DATABASE).withCodecRegistry(pojoCodeRegistry);
 
             List<TPerson> ps = new ArrayList<>();
-            FindIterable<Logic.Person.Person> iter = db.getCollection("personas", Logic.Person.Person.class).find();
-            for(Logic.Person.Person p : iter) {
+            FindIterable<Person> iter = db.getCollection("personas", Person.class).find();
+            for(Person p : iter) {
                 ps.add(p.toTransfer());
             }
             return ps;
@@ -86,13 +87,13 @@ public class Person {
             CodecRegistry pojoCodeRegistry = fromRegistries(getDefaultCodecRegistry(), fromProviders(pojoCodecProvider));
             MongoDatabase db = mongoClient.getDatabase(DATABASE).withCodecRegistry(pojoCodeRegistry);
 
-            MongoCollection<Logic.Person.Person> collection = db.getCollection("personas", Logic.Person.Person.class);
+            MongoCollection<Person> collection = db.getCollection("personas", Person.class);
 
-            List<Logic.Person.Person> personas = new ArrayList<Logic.Person.Person>();
+            List<Person> personas = new ArrayList<Person>();
             collection.find(eq("_id", tPerson.getId())).into(personas);
 
             if(personas.size() == 1){
-                Logic.Person.Person persona = new Logic.Person.Person(personas.get(0).toTransfer());
+                Person persona = new Person(personas.get(0).toTransfer());
                 if(tPerson.getNif() != null) persona.setNif(tPerson.getNif());
                 if(tPerson.getNombre() != null) persona.setNombre(tPerson.getNombre());
                 if(tPerson.getApellidos() != null) persona.setApellidos(tPerson.getApellidos());
@@ -105,11 +106,11 @@ public class Person {
         return null;
     }
 
-    private boolean reactivate(TPerson tPerson, MongoCollection<Logic.Person.Person> collection) {
-        List<Logic.Person.Person> personas = new ArrayList<Logic.Person.Person>();
+    private boolean reactivate(TPerson tPerson, MongoCollection<Person> collection) {
+        List<Person> personas = new ArrayList<Person>();
         collection.find(eq("nif", tPerson.getNif())).into(personas);
         if(personas.size() == 1){
-            Logic.Person.Person persona = new Logic.Person.Person(personas.get(0).toTransfer());
+            Person persona = new Person(personas.get(0).toTransfer());
             persona.setActivo(true);
             collection.replaceOne(eq("_id", personas.get(0).getId()), persona);
             return true;

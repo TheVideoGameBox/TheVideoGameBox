@@ -1,6 +1,6 @@
 package Presentation;
 
-import Logic.Person.SAPersonImp;
+import Logic.Person.PersonFunctions;
 import Logic.Person.TPerson;
 import Presentation.Person.VAddPerson;
 import Presentation.Person.VBajaPrueba;
@@ -192,7 +192,7 @@ public class VPrincipal extends JFrame{
 		midPanel.add(Box.createRigidArea(new Dimension(0,10)));
 
 		List<TPerson> personas = new ArrayList<TPerson>();
-		SAPersonImp functions = new SAPersonImp();
+		PersonFunctions functions = new PersonFunctions();
 		personas = functions.readAll();
 		midPanel.add(todasPruebaPanel(personas));
 		midPanel.add(Box.createRigidArea(new Dimension(0,10)));
