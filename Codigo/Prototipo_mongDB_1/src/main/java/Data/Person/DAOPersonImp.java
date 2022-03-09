@@ -2,6 +2,7 @@ package Data.Person;
 
 import Logic.Person.Person;
 import Logic.Person.TPerson;
+import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -11,9 +12,7 @@ import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
-
 import static com.mongodb.client.model.Filters.eq;
-
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static com.mongodb.MongoClientSettings.getDefaultCodecRegistry;
@@ -33,8 +32,8 @@ public class DAOPersonImp {
             Person person = new Person(tPerson);
 
             db.getCollection("personas", Person.class).insertOne(person);
-        } catch (Exception e) {
-            return "";
+        } catch (MongoException e) {
+            return null;
         }
 
         return "";
@@ -58,8 +57,8 @@ public class DAOPersonImp {
                 collection.replaceOne(eq("nif", nif), persona);
             }
 
-        } catch (Exception e) {
-            return "";
+        } catch (MongoException e) {
+            return null;
         }
 
         return "";
@@ -76,10 +75,9 @@ public class DAOPersonImp {
             for(Person p : iter) {
                 ps.add(p.toTransfer());
             }
-            List<Person> person = new ArrayList<Person>();
             return ps;
 
-        } catch (Exception e) {
+        } catch (MongoException e) {
             return null;
         }
     }
