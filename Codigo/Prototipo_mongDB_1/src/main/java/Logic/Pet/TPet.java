@@ -10,7 +10,14 @@ public class TPet {
     private String tipo;
     private String infoExtra;
     private boolean activo;
-
+    
+    public TPet(String nif, String nombre, String tipo, String infoExtra) {
+    	 this.nif = nif;
+         this.nombre = nombre;
+         this.tipo = tipo;
+         this.infoExtra = infoExtra;
+    }
+    
     public TPet(ObjectId id, String nif, String nombre, String tipo, String infoExtra, Boolean activo) {
         this.id = id;
         this.nif = nif;
