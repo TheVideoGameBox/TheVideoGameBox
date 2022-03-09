@@ -3,9 +3,9 @@ package Presentation;
 import Logic.Person.PersonFunctions;
 import Logic.Person.TPerson;
 import Presentation.Person.VAddPerson;
-import Presentation.Person.VBajaPrueba;
-import Presentation.Person.VBuscarPrueba;
-import Presentation.Person.VEditarPrueba;
+import Presentation.Person.VBajaPerson;
+import Presentation.Person.VBuscarPerson;
+import Presentation.Person.VEditarPerson;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -231,7 +231,7 @@ public class VPrincipal extends JFrame{
 		@Override
 			public void mouseClicked(MouseEvent e) {
 
-				VBuscarPrueba buscar = new VBuscarPrueba(p);
+				VBuscarPerson buscar = new VBuscarPerson(p);
 				dispose();
 
 		}
@@ -258,7 +258,7 @@ public class VPrincipal extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VEditarPrueba editar = new VEditarPrueba(p);
+				VEditarPerson editar = new VEditarPerson(p);
 				dispose();
 			}
 
@@ -276,7 +276,7 @@ public class VPrincipal extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VBajaPrueba b = new VBajaPrueba(p);
+				VBajaPerson b = new VBajaPerson(p);
 				dispose();
 			}
 

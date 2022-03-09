@@ -10,10 +10,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class VBuscarPrueba extends JFrame{
+public class VBuscarPerson extends JFrame{
 	private TPerson p;
 
-	public VBuscarPrueba(TPerson p) {
+	public VBuscarPerson(TPerson p) {
 		Image iconFrame = new ImageIcon(getClass().getClassLoader().getResource("icono_prueba.png")).getImage();
 		this.setIconImage(iconFrame);
 		setTitle("Buscar Prueba");

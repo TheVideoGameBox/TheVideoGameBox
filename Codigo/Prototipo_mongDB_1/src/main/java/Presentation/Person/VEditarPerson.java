@@ -14,11 +14,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-public class VEditarPrueba extends JFrame{
+public class VEditarPerson extends JFrame{
 	private TPerson p;
 	private ArrayList<JTextField> textFields;
 
-	public VEditarPrueba(TPerson p) {
+	public VEditarPerson(TPerson p) {
 		Image iconFrame = new ImageIcon(getClass().getClassLoader().getResource("icono_prueba.png")).getImage();
 		this.setIconImage(iconFrame);
 		setTitle("Editar Prueba");

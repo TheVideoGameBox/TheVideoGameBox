@@ -10,9 +10,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class VBajaPrueba extends JFrame{
+public class VBajaPerson extends JFrame{
 	private TPerson p;
-	public VBajaPrueba(TPerson p) {
+	public VBajaPerson(TPerson p) {
 		Image iconFrame = new ImageIcon(getClass().getClassLoader().getResource("icono_prueba.png")).getImage();
 		this.setIconImage(iconFrame);
 		setTitle("Baja Persona");
