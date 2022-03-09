@@ -1,40 +1,29 @@
 package Data.Person;
 
+import Data.Connection;
 import Logic.Person.Person;
 import Logic.Person.TPerson;
 import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.codecs.configuration.CodecProvider;
-import org.bson.codecs.configuration.CodecRegistry;
-import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.types.ObjectId;
 
 import static com.mongodb.client.model.Filters.eq;
-import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
-import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
-import static com.mongodb.MongoClientSettings.getDefaultCodecRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PersonData {
-    private final static String URL = "mongodb+srv://MongoDB-GPS:ZUCUvvYbKW@gps.iox2a.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-    private final static String DATABASE = "GPS";
-
     public ObjectId add(TPerson tPerson) {
-        try(MongoClient mongoClient = MongoClients.create(URL)) {
-            CodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
-            CodecRegistry pojoCodeRegistry = fromRegistries(getDefaultCodecRegistry(), fromProviders(pojoCodecProvider));
-            MongoDatabase db = mongoClient.getDatabase(DATABASE).withCodecRegistry(pojoCodeRegistry);
+        try {
+            MongoDatabase db = Connection.getDataBase();
+
             Person person = new Person(tPerson);
 
-            if(!reactivate(tPerson, db.getCollection("personas", Person.class))) {
+            if(!reactivate(tPerson, db.getCollection("personas", Person.class)))
                 db.getCollection("personas", Person.class).insertOne(person);
-            }
+
 
         } catch (MongoException e) {
             return null;
@@ -43,10 +32,8 @@ public class PersonData {
     }
 
     public ObjectId delete(ObjectId _id) {
-        try(MongoClient mongoClient = MongoClients.create(URL)) {
-            CodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
-            CodecRegistry pojoCodeRegistry = fromRegistries(getDefaultCodecRegistry(), fromProviders(pojoCodecProvider));
-            MongoDatabase db = mongoClient.getDatabase(DATABASE).withCodecRegistry(pojoCodeRegistry);
+        try {
+            MongoDatabase db = Connection.getDataBase();
 
             MongoCollection<Person> collection = db.getCollection("personas", Person.class);
 
@@ -61,14 +48,13 @@ public class PersonData {
         } catch (MongoException e) {
             return null;
         }
+
         return _id;
     }
 
     public List<TPerson> readAll() {
-        try(MongoClient mongoClient = MongoClients.create(URL)) {
-            CodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
-            CodecRegistry pojoCodeRegistry = fromRegistries(getDefaultCodecRegistry(), fromProviders(pojoCodecProvider));
-            MongoDatabase db = mongoClient.getDatabase(DATABASE).withCodecRegistry(pojoCodeRegistry);
+        try {
+            MongoDatabase db = Connection.getDataBase();
 
             List<TPerson> ps = new ArrayList<>();
             FindIterable<Person> iter = db.getCollection("personas", Person.class).find();
@@ -82,10 +68,8 @@ public class PersonData {
     }
 
     public ObjectId update(TPerson tPerson) {
-        try(MongoClient mongoClient = MongoClients.create(URL)) {
-            CodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
-            CodecRegistry pojoCodeRegistry = fromRegistries(getDefaultCodecRegistry(), fromProviders(pojoCodecProvider));
-            MongoDatabase db = mongoClient.getDatabase(DATABASE).withCodecRegistry(pojoCodeRegistry);
+        try {
+            MongoDatabase db = Connection.getDataBase();
 
             MongoCollection<Person> collection = db.getCollection("personas", Person.class);
 
@@ -103,6 +87,7 @@ public class PersonData {
         } catch (MongoException e) {
             return null;
         }
+
         return null;
     }
 
