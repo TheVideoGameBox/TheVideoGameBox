@@ -1,47 +1,39 @@
 package Logic.Person;
 
-import Data.Person.DAOPersonImp;
+import Data.Person.Person;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
 public class SAPersonImp {
 
-    public String add(TPerson tPerson) {
+    public ObjectId add(TPerson tPerson) {
         if (tPerson.getNif().length() != 9)
-            return "";
+            return null;
         else if (!tPerson.getNif().substring(0, 8).matches("^[0-9]+$"))
-            return "";
+            return null;
         else if (!Character.isAlphabetic(tPerson.getNif().charAt(8)))
-            return "";
+            return null;
 
-        DAOPersonImp person = new DAOPersonImp();
-
+        Person person = new Person();
         person.add(tPerson);
-
-        return "";
+        return tPerson.getId();
     }
 
-    public String delete(String nif) {
-        if (nif.length() != 9)
-            return "";
-        else if (!nif.substring(0, 8).matches("^[0-9]+$"))
-            return "";
-        else if (!Character.isAlphabetic(nif.charAt(8)))
-            return "";
-
-        DAOPersonImp person = new DAOPersonImp();
-
-        person.delete(nif);
-
-        return "";
+    public ObjectId delete(ObjectId _id) {
+        Person person = new Person();
+        person.delete(_id);
+        return _id;
     }
 
     public List<TPerson> readAll() {
-        DAOPersonImp person = new DAOPersonImp();
+        Person person = new Person();
         return person.readAll();
     }
 
     public int update(TPerson tPerson) {
+        Person person = new Person();
+        person.update(tPerson);
         return 0;
     }
 }

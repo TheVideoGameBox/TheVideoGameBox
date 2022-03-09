@@ -4,7 +4,7 @@ import Logic.Person.SAPersonImp;
 import Logic.Person.TPerson;
 import Presentation.Person.VAddPerson;
 import Presentation.Person.VBajaPrueba;
-//import Presentation.Person.VBuscarPrueba;
+import Presentation.Person.VBuscarPrueba;
 import Presentation.Person.VEditarPrueba;
 
 import javax.swing.*;
@@ -231,7 +231,7 @@ public class VPrincipal extends JFrame{
 		@Override
 			public void mouseClicked(MouseEvent e) {
 
-//				VBuscarPrueba buscar = new VBuscarPrueba(p);
+				VBuscarPrueba buscar = new VBuscarPrueba(p);
 				dispose();
 
 		}

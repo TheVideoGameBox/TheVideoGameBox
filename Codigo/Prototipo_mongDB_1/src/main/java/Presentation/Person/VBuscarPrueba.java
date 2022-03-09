@@ -1,4 +1,3 @@
-/*
 package Presentation.Person;
 
 import Logic.Person.TPerson;
@@ -48,7 +47,7 @@ public class VBuscarPrueba extends JFrame{
 		formContainer.setBorder(new EmptyBorder(20, 20, 20, 20));
 		formContainer.setAutoscrolls(true);
 		
-		JLabel titleLabel = new JLabel("Datos de la " + p.getNombre());
+		JLabel titleLabel = new JLabel("Datos de " + p.getNombre());
 		titleLabel.setAlignmentX(CENTER_ALIGNMENT);
 		titleLabel.setFont(new Font("Leelawadee", Font.BOLD, 40));
 		titleLabel.setForeground(new Color(64, 147, 255));
@@ -127,4 +126,3 @@ public class VBuscarPrueba extends JFrame{
 		return backButtonContainer;
 	}
 }
-*/
