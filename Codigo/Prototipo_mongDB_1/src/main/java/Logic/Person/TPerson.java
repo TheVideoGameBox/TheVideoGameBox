@@ -16,7 +16,8 @@ public class TPerson {
         this.activo = true;
     }
 
-    public TPerson(String nif, String nombre, String apellidos, boolean activo) {
+    public TPerson(ObjectId id, String nif, String nombre, String apellidos, boolean activo) {
+        this.id = id;
         this.nif = nif;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -26,10 +27,10 @@ public class TPerson {
     public ObjectId getId() {
         return id;
     }
+
     public void setId(ObjectId id) {
         this.id = id;
     }
-
 
     public String getNif() {
         return nif;

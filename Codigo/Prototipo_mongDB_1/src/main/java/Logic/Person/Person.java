@@ -19,11 +19,12 @@ public class Person {
         this.activo = true;
     }
 
-    public Person(String nif, String nombre, String apellidos, Boolean activo) {
+    public Person(ObjectId id, String nif, String nombre, String apellidos, Boolean activo) {
+        this.id = id;
         this.nif = nif;
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.activo = activo;
+        //this.activo = activo;
     }
 
     public Person(TPerson tPerson) {
@@ -36,6 +37,7 @@ public class Person {
     public ObjectId getId() {
         return id;
     }
+
     public void setId(ObjectId id) {
         this.id = id;
     }
@@ -73,7 +75,7 @@ public class Person {
     }
 
     public TPerson toTransfer() {
-        return new TPerson(nif, nombre, apellidos, activo);
+        return new TPerson(id, nif, nombre, apellidos, activo);
     }
 
     @Override
