@@ -86,7 +86,7 @@ private ArrayList<JTextField> textFields;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(textFields.get(0).getText().length() > 2 && textFields.get(1).getText().length() > 2 && textFields.get(2).getText().length() > 2) {
+				if(!textFields.get(0).getText().isEmpty() && !textFields.get(1).getText().isEmpty() && !textFields.get(2).getText().isEmpty()) {
 					TPet p = new TPet(textFields.get(0).getText(), textFields.get(1).getText(), textFields.get(2).getText(), textFields.get(3).getText());
 
 					PetFunctions petFunctions = new PetFunctions();

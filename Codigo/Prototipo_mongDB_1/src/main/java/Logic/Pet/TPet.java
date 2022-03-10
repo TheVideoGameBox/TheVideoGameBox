@@ -16,6 +16,7 @@ public class TPet {
          this.nombre = nombre;
          this.tipo = tipo;
          this.infoExtra = infoExtra;
+         this.activo = true;
     }
     
     public TPet(ObjectId id, String nif, String nombre, String tipo, String infoExtra, Boolean activo) {

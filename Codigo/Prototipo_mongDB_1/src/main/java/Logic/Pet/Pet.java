@@ -11,6 +11,10 @@ public class Pet {
     private String infoExtra;
     private boolean activo;
 
+    public Pet(){
+
+    }
+
     public Pet(ObjectId id, String nif, String nombre, String tipo, String infoExtra, Boolean activo) {
         this.id = id;
         this.nif = nif;
@@ -21,6 +25,11 @@ public class Pet {
     }
 
     public Pet(TPet tPet) {
+        this.nif = tPet.getNif();
+        this.nombre = tPet.getNombre();
+        this.tipo = tPet.getTipo();
+        this.infoExtra = tPet.getInfoExtra();
+        //this.activo = tPet.isActivo();
     }
 
     public ObjectId getId() {
@@ -77,7 +86,7 @@ public class Pet {
 
     @Override
     public String toString() {
-        return "Person[" +
+        return "Pet[" +
                 "id=" + id +
                 ", nif='" + nif + '\'' +
                 ", nombre='" + nombre + '\'' +

@@ -1,6 +1,7 @@
 package Data.Pet;
 
 import Data.Connection;
+import Logic.Person.Person;
 import Logic.Pet.Pet;
 import Logic.Pet.TPet;
 import com.mongodb.MongoException;
@@ -52,7 +53,6 @@ public class PetData {
     public List<TPet> readAll() {
         try {
             MongoDatabase db = Connection.getDataBase();
-
             List<TPet> ps = new ArrayList<>();
             FindIterable<Pet> iter = db.getCollection("pets", Pet.class).find();
             for(Pet p : iter) {

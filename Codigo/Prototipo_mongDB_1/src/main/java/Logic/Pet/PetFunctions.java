@@ -8,9 +8,6 @@ import java.util.List;
 public class PetFunctions {
 
     public ObjectId add(TPet tPet) {
-        if (tPet.getNif().length() != 9) return null;
-        else if (!tPet.getNif().substring(0, 9).matches("^[0-9]+$")) return null;
-
         PetData petData = new PetData();
         petData.add(tPet);
         return tPet.getId();
