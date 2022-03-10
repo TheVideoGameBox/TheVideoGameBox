@@ -2,10 +2,15 @@ package Presentation;
 
 import Logic.Person.PersonFunctions;
 import Logic.Person.TPerson;
+import Logic.Pet.PetFunctions;
+import Logic.Pet.TPet;
 import Presentation.Person.VAddPerson;
-import Presentation.Person.VBajaPrueba;
-import Presentation.Person.VBuscarPrueba;
-import Presentation.Person.VEditarPrueba;
+import Presentation.Person.VBajaPerson;
+import Presentation.Person.VBuscarPerson;
+import Presentation.Person.VEditarPerson;
+import Presentation.Pet.VBajaPet;
+import Presentation.Pet.VBuscarPet;
+import Presentation.Pet.VEditarPet;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -21,10 +26,12 @@ import java.util.List;
 public class VPrincipal extends JFrame{
 	
 	private static int logged;
+	private static int personPag;
 	
 	public VPrincipal() {
 		super();
 		logged = -1;
+		personPag = 0;
 		initGUI();
 	}
 	public VPrincipal(int log) {
@@ -133,7 +140,7 @@ public class VPrincipal extends JFrame{
 		registro.setToolTipText("Registrarse");
 		*/
 		
-		JLabel icono = new JLabel("Aquï¿½ irï¿½a un icono");
+		JLabel icono = new JLabel("Aquí iría un icono");
 		icono.setForeground(Color.white);
 		icono.setFont(new Font("Arial Nova", 1, 30));
 		
@@ -165,7 +172,7 @@ public class VPrincipal extends JFrame{
 		buttonContainer.setMaximumSize(new Dimension(1000, 60));
 		buttonContainer.setLayout(new BoxLayout(buttonContainer, BoxLayout.X_AXIS));
 		
-		JButton aniadir = new JButton("Aï¿½adir prueba");
+		JButton aniadir = new JButton("Añadir persona");
 		aniadir.setPreferredSize(new Dimension(180, 80));
 		aniadir.setMaximumSize(new Dimension(180, 80));
 		aniadir.setMinimumSize(new Dimension(180, 80));
@@ -192,33 +199,77 @@ public class VPrincipal extends JFrame{
 		midPanel.add(Box.createRigidArea(new Dimension(0,10)));
 
 		List<TPerson> personas = new ArrayList<TPerson>();
-		PersonFunctions functions = new PersonFunctions();
-		personas = functions.readAll();
-		midPanel.add(todasPruebaPanel(personas));
+		PersonFunctions perFunctions = new PersonFunctions();
+		personas = perFunctions.readAll();
+		midPanel.add(personasPanel(personas));
+		
+		List<TPet> mascotas = new ArrayList<TPet>();
+		PetFunctions petFunctions = new PetFunctions();
+		mascotas = petFunctions.readAll();
+		midPanel.add(mascotasPanel(mascotas));
 		midPanel.add(Box.createRigidArea(new Dimension(0,10)));
 		
 		return midPanel;
 	}
 	
-	private JPanelRound todasPruebaPanel(List<TPerson> pruebas) {
+	private JPanelRound personasPanel(List<TPerson> personas) {
 		JPanelRound mainPanel = new JPanelRound();
 		mainPanel.setBackground(new Color(64, 147, 255));
 		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-		mainPanel.setMaximumSize(new Dimension(1000, 150));
+		mainPanel.setMaximumSize(new Dimension(1100, 150));
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
 		mainPanel.setBorder(new BorderTitle("Personas", Color.white));
+		
+		JButton back = new JButton("<");
+		back.setForeground(Color.white);
+		back.setBackground(new Color(64, 147, 255));
+		back.setFocusPainted(false);
+		back.setBorderPainted(false);
+		back.setPreferredSize(new Dimension(25, 150));
+		back.setMaximumSize(new Dimension(25, 150));
+		back.setMinimumSize(new Dimension(25, 150));
+		
+		mainPanel.add(back);
+		mainPanel.add(Box.createRigidArea(new Dimension(5,0)));
+
+		for(TPerson p : personas) {
+			if(p.isActivo()) {
+				mainPanel.add(personaPanel(p));
+				mainPanel.add(Box.createRigidArea(new Dimension(7,0)));
+			}
+		}
+		
+		JButton next = new JButton(">");
+		next.setForeground(Color.white);
+		next.setBackground(new Color(64, 147, 255));
+		next.setFocusPainted(false);
+		next.setBorderPainted(false);
+		next.setPreferredSize(new Dimension(25, 150));
+		next.setMaximumSize(new Dimension(25, 150));
+		next.setMinimumSize(new Dimension(25, 150));
+		mainPanel.add(next);
+		return mainPanel;
+	}
+	
+	private JPanelRound mascotasPanel(List<TPet> mascotas) {
+		JPanelRound mainPanel = new JPanelRound();
+		mainPanel.setBackground(new Color(64, 147, 255));
+		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		mainPanel.setMaximumSize(new Dimension(1100, 150));
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
+		mainPanel.setBorder(new BorderTitle("Mascotas", Color.white));
 		mainPanel.add(Box.createRigidArea(new Dimension(10,0)));
 
-		for(TPerson p : pruebas) {
+		for(TPet p : mascotas) {
 			if(p.isActivo()) {
-				mainPanel.add(pruebaPanel(p));
+				mainPanel.add(mascotaPanel(p));
 				mainPanel.add(Box.createRigidArea(new Dimension(10,0)));
 			}
 		}
 		return mainPanel;
 	}
 	
-	private JPanelRound2 pruebaPanel(TPerson p) {
+	private JPanelRound2 personaPanel(TPerson p) {
 		JPanelRound2 mainPanel = new JPanelRound2();
 		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		mainPanel.setMaximumSize(new Dimension(200, 130));
@@ -231,7 +282,7 @@ public class VPrincipal extends JFrame{
 		@Override
 			public void mouseClicked(MouseEvent e) {
 
-				VBuscarPrueba buscar = new VBuscarPrueba(p);
+				VBuscarPerson buscar = new VBuscarPerson(p);
 				dispose();
 
 		}
@@ -258,7 +309,7 @@ public class VPrincipal extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VEditarPrueba editar = new VEditarPrueba(p);
+				VEditarPerson editar = new VEditarPerson(p);
 				dispose();
 			}
 
@@ -276,7 +327,80 @@ public class VPrincipal extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VBajaPrueba b = new VBajaPrueba(p);
+				VBajaPerson b = new VBajaPerson(p);
+				dispose();
+			}
+
+		});
+
+		buttonContainer.add(editar);
+		buttonContainer.add(eliminar);
+
+		mainPanel.add(texto, BorderLayout.NORTH);
+		mainPanel.add(buttonContainer, BorderLayout.SOUTH);
+
+		return mainPanel;
+	}
+	
+	private JPanelRound2 mascotaPanel(TPet p) {
+		JPanelRound2 mainPanel = new JPanelRound2();
+		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		mainPanel.setMaximumSize(new Dimension(200, 130));
+		mainPanel.setLayout(new BorderLayout());
+
+		JLabel texto = new JLabel(p.getNombre());
+		texto.setForeground(Color.white);
+		texto.addMouseListener(new MouseListener(){
+
+		@Override
+			public void mouseClicked(MouseEvent e) {
+
+				VBuscarPet buscar = new VBuscarPet(p);
+				dispose();
+
+		}
+
+			public void mousePressed(MouseEvent e) {}
+			public void mouseReleased(MouseEvent e) {}
+			public void mouseEntered(MouseEvent e) {}
+			public void mouseExited(MouseEvent e) {}
+
+		});
+
+		JPanel buttonContainer = new JPanel(new FlowLayout());
+		buttonContainer.setOpaque(false);
+
+		JButton editar = new JButton("Editar");
+		editar.setBackground(new Color(62, 168, 18));
+		editar.setForeground(Color.white);
+		editar.setBorder(BorderFactory.createBevelBorder(0));
+		editar.setPreferredSize(new Dimension(80,35));
+		editar.setMaximumSize(new Dimension(80,35));
+		editar.setMinimumSize(new Dimension(80,35));
+		editar.setFocusPainted(false);
+		editar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VEditarPet editar = new VEditarPet(p);
+				dispose();
+			}
+
+		});
+
+		JButton eliminar = new JButton("Eliminar");
+		eliminar.setBackground(new Color(161, 35, 18));
+		eliminar.setForeground(Color.white);
+		eliminar.setBorder(BorderFactory.createBevelBorder(0));
+		eliminar.setPreferredSize(new Dimension(80,35));
+		eliminar.setMaximumSize(new Dimension(80,35));
+		eliminar.setMinimumSize(new Dimension(80,35));
+		eliminar.setFocusPainted(false);
+		eliminar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VBajaPet b = new VBajaPet(p);
 				dispose();
 			}
 

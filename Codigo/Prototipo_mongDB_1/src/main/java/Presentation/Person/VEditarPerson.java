@@ -14,14 +14,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-public class VEditarPrueba extends JFrame{
+public class VEditarPerson extends JFrame{
 	private TPerson p;
 	private ArrayList<JTextField> textFields;
 
-	public VEditarPrueba(TPerson p) {
+	public VEditarPerson(TPerson p) {
 		Image iconFrame = new ImageIcon(getClass().getClassLoader().getResource("icono_prueba.png")).getImage();
 		this.setIconImage(iconFrame);
-		setTitle("Editar Prueba");
+		setTitle("Editar Persona");
 		this.p = p;
 		textFields = new ArrayList<JTextField>();
 		init_GUI();
@@ -62,7 +62,7 @@ public class VEditarPrueba extends JFrame{
 		formContainer.setBorder(new EmptyBorder(20, 20, 20, 20));
 		formContainer.setAutoscrolls(true);
 		
-		JLabel titleLabel = new JLabel("Editar Prueba");
+		JLabel titleLabel = new JLabel("Editar Persona");
 		titleLabel.setAlignmentX(CENTER_ALIGNMENT);
 		titleLabel.setFont(new Font("Leelawadee", Font.BOLD, 40));
 		titleLabel.setForeground(new Color(64, 147, 255));

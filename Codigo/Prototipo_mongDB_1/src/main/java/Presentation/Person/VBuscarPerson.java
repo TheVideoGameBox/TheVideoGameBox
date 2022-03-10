@@ -3,21 +3,25 @@ package Presentation.Person;
 import Logic.Person.TPerson;
 import Presentation.JPanelConFondo;
 import Presentation.VPrincipal;
+import Presentation.Pet.VAddPet;
+import Logic.Pet.TPet;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class VBuscarPrueba extends JFrame{
+public class VBuscarPerson extends JFrame{
 	private TPerson p;
-
-	public VBuscarPrueba(TPerson p) {
+	private List<TPet> pets;
+	public VBuscarPerson(TPerson p) {
 		Image iconFrame = new ImageIcon(getClass().getClassLoader().getResource("icono_prueba.png")).getImage();
 		this.setIconImage(iconFrame);
-		setTitle("Buscar Prueba");
+		setTitle("Buscar Persona");
 		this.p = p;
+//		pets = p.getPets();
 		init_GUI();
 		this.setLocationRelativeTo(null);
 	}
@@ -68,7 +72,8 @@ public class VBuscarPrueba extends JFrame{
 		apellidoLabel.setFont(new Font("Leelawadee", Font.BOLD, 15));
 		apellidoLabel.setAlignmentX(CENTER_ALIGNMENT);
 		JLabel activoLabel = new JLabel();
-		activoLabel.setFont(new Font("Leelawadee", Font.BOLD, 15));
+		activoLabel.setFont(new Font("Leelawadee", Font.BOLD, 20));
+		activoLabel.setAlignmentX(CENTER_ALIGNMENT);
 		if (p.isActivo()) {
 			activoLabel.setText("Activo");
 			activoLabel.setForeground(Color.green);
@@ -88,6 +93,45 @@ public class VBuscarPrueba extends JFrame{
 		formContainer.add(activoLabel);
 		
 		midPanel.add(formContainer);
+		
+		JLabel petTitle = new JLabel("Mascotas");
+		petTitle.setFont(new Font("Leelawadee", Font.BOLD, 30));
+		petTitle.setForeground(new Color(64, 147, 255));
+		petTitle.setAlignmentX(CENTER_ALIGNMENT);
+		
+		formContainer.add(petTitle);
+		
+//		JScrollPane scrollFrame = new JScrollPane(formContainer);
+//		scrollFrame.setOpaque(false);
+//		scrollFrame.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+//		mainPanel.add(scrollFrame);
+		
+//		for(int i=0; i < pets.size(); i++) {
+//			//Mostraría el nombre de la mascota o mostraría toda la información si le clickas
+//		}
+		
+		JButton addPet = new JButton("Añadir Mascota");
+		addPet.setPreferredSize(new Dimension(180, 40));
+		addPet.setMaximumSize(new Dimension(180, 40));
+		addPet.setMinimumSize(new Dimension(180, 40));
+		addPet.setBackground(new Color(64, 147, 255));
+		addPet.setForeground(Color.white);
+		addPet.setFont(new Font("Leelawadee", Font.BOLD, 20));
+		addPet.setBorder(BorderFactory.createBevelBorder(0));
+		addPet.setFocusPainted(false);
+		addPet.setAlignmentX(CENTER_ALIGNMENT);
+		addPet.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VAddPet alta = new VAddPet();
+				dispose();
+			}
+			
+		});
+		
+		formContainer.add(Box.createRigidArea(new Dimension(0, 20)));
+		formContainer.add(addPet);
 		
 		mainPanel.add(Box.createRigidArea(new Dimension(0,80)));
 		mainPanel.add(midPanel);

@@ -10,9 +10,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class VBajaPrueba extends JFrame{
+public class VBajaPerson extends JFrame{
 	private TPerson p;
-	public VBajaPrueba(TPerson p) {
+	public VBajaPerson(TPerson p) {
 		Image iconFrame = new ImageIcon(getClass().getClassLoader().getResource("icono_prueba.png")).getImage();
 		this.setIconImage(iconFrame);
 		setTitle("Baja Persona");
@@ -28,7 +28,7 @@ public class VBajaPrueba extends JFrame{
 		mainPanel.setBackground(Color.white);
 				
 		// TITULO
-		JLabel titleLabel = new JLabel("ï¿½Desea eliminar la prueba con la siguiente informacion?");
+		JLabel titleLabel = new JLabel("¿Desea eliminar la persona con la siguiente informacion?");
 		titleLabel.setAlignmentX(CENTER_ALIGNMENT);
 		titleLabel.setFont(new Font("Leelawadee", Font.BOLD, 17));
 		titleLabel.setForeground(new Color(64, 147, 255));

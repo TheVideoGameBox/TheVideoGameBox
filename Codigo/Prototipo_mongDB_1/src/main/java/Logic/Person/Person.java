@@ -12,13 +12,6 @@ public class Person {
     public Person() {
     }
 
-    public Person(String nif, String nombre, String apellidos) {
-        this.nif = nif;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.activo = true;
-    }
-
     public Person(ObjectId id, String nif, String nombre, String apellidos, Boolean activo) {
         this.id = id;
         this.nif = nif;
