@@ -6,9 +6,9 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ prototipo_2_dev ]
+    branches: [ main, prototipo_2_dev ]
   pull_request:
-    branches: [ prototipo_2_dev ]
+    branches: [ main, prototipo_2_dev ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
