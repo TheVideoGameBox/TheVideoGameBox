@@ -1,0 +1,52 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main, prototipo_2_dev, prototipo_2_ci ]
+  pull_request:
+    branches: [ main, prototipo_2_dev, prototipo_2_ci ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@prototipo_2_ci
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo 1. What is in this directory?
+          ls -a
+          echo
+          echo 2. What is the tree of this repository?
+          tree .
+          echo
+          echo 3. Is Java installed?
+          java -version
+          echo
+          echo 4. What about build tools?
+          mvn --version
+          gradle --version
+          ant -version
+          echo
+          echo 7. What is the workspace location
+          echo $RUNNER_WORKSPACE
+          echo
+          echo 8. What is running this script?
+          whoami
+          echo
+          echo 9. How is the disc laid out?
+          df
+          echo
+          echo 10. What environment variables are avaialable?
+          env
