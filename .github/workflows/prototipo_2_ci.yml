@@ -28,7 +28,9 @@ jobs:
         run: cd Codigo/Prototipo_mongDB_1
         
       - name: Paso 3.2 - Compilar/Build el proyecto de Java con Maven
-        run: mvn -B package --file pom.xml
+        run: |
+            ls
+            mvn -B package --file pom.xml
       
       - name: Paso 3.3 - Comprobar que se ha compilado correctamente el proyecto
         run: ls -a
