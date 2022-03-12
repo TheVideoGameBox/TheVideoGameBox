@@ -28,6 +28,4 @@ jobs:
         run: |
             cd Codigo/Prototipo_mongDB_1
             mvn clean -B package --file pom.xml
-      
-      - name: Paso 3.2 - Comprobar que se ha compilado correctamente el proyecto
-        run: ls -a
+            ls -a
