@@ -38,7 +38,7 @@ jobs:
       - name: Paso 3.2 - Comprobar que se ha compilado el proyecto correctamente
         run: |
             cd Codigo/Prototipo_mongDB_1/build
-            ls -a | grep *.jar
+            ls | grep .jar
             
       - name: Paso 4.1 - Ejecutar tests unitarios
         run: |
