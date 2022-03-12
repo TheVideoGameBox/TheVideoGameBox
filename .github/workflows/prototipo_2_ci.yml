@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main, prototipo_2_tests_jbehave ]
+    branches: [ prototipo_2_tests_jbehave, main ]
   pull_request:
-    branches: [ main, prototipo_2_tests_jbehave ]
+    branches: [ prototipo_2_tests_jbehave, main ]
 
 jobs:
   build:
