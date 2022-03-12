@@ -36,4 +36,9 @@ public class PersonFunctions {
         personData.update(tPerson);
         return 0;
     }
+
+    public void deleteFromDataBase(ObjectId id){
+        PersonData personData = new PersonData();
+        personData.deleteFromDataBase(id);
+    }
 }

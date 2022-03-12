@@ -91,6 +91,17 @@ public class PersonData {
         return null;
     }
 
+    public void deleteFromDataBase(ObjectId id){
+        try {
+            MongoDatabase db = Connection.getDataBase();
+
+            MongoCollection<Person> collection = db.getCollection("personas", Person.class);
+
+            collection.deleteOne(eq("_id", id));
+        } catch (MongoException e) {
+        }
+    }
+
     private boolean reactivate(TPerson tPerson, MongoCollection<Person> collection) {
         List<Person> personas = new ArrayList<Person>();
         collection.find(eq("nif", tPerson.getNif())).into(personas);
