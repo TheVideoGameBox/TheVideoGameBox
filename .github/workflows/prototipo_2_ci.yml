@@ -28,8 +28,15 @@ jobs:
         run: |
             cd Codigo/Prototipo_mongDB_1
             mvn clean -B package --file pom.xml
+            mkdir build && cp target/*.jar build
             
       - name: Paso 3.2 - Comprobar que se ha compilado el proyecto correctamente
         run: |
-            cd Codigo/Prototipo_mongDB_1/target
-            ls -a
+            cd Codigo/Prototipo_mongDB_1/build
+            ls -a | grep *.jar
+            
+      - name: Paso 5.1 - Subir el proyecto compilado como un artefacto
+        uses: actions/upload-artifact@v2
+        with:
+          name: PrototipoMongoDB
+          path: Codigo/Prototipo_mongDB_1/build
