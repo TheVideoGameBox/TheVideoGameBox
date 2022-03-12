@@ -24,13 +24,10 @@ jobs:
       - name: Paso 2.2 - Comprobar version de Java
         run: java -version
         
-      - name: Paso 3.1 - Ir a la direccion del proyecto
-        run: cd Codigo/Prototipo_mongDB_1
-        
-      - name: Paso 3.2 - Compilar/Build el proyecto de Java con Maven
+      - name: Paso 3.1 - Compilar/Build el proyecto de Java con Maven
         run: |
-            ls
-            mvn -B package --file pom.xml
+            cd Codigo/Prototipo_mongDB_1
+            mvn clean -B package --file pom.xml
       
-      - name: Paso 3.3 - Comprobar que se ha compilado correctamente el proyecto
+      - name: Paso 3.2 - Comprobar que se ha compilado correctamente el proyecto
         run: ls -a
