@@ -43,7 +43,13 @@ jobs:
       - name: Paso 4.1 - Ejecutar tests unitarios
         run: |
              cd Codigo/Prototipo_mongDB_1
-             mvn test
+             mvn -Dtest=UnitTest test
+             
+      - name: Paso 4.2 - Ejecutar tests de integracion
+        if: success()
+        run: |
+             cd Codigo/Prototipo_mongDB_1
+             mvn -Dtest=IntegrationTest test
         
       - name: Paso 5.1 - Subir el proyecto compilado como un artefacto
         if: success()
