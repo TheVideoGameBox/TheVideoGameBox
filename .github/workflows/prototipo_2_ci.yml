@@ -34,7 +34,9 @@ jobs:
         run: |
             cd Codigo/Prototipo_mongDB_1/build
             ls -a | grep *.jar
-            
+      - name: Paso 4.1 - Ejecutar tests unitario
+        run: echo Ejecutar los JUnit
+        
       - name: Paso 5.1 - Subir el proyecto compilado como un artefacto
         uses: actions/upload-artifact@v2
         with:
