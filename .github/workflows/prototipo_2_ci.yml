@@ -2,9 +2,14 @@ name: CI
 
 on:
   push:
-    branches: [ prototipo_2_tests_jbehave, main ]
+    branches:
+    - main
+    - prototipo_2_tests_jbehave
   pull_request:
-    branches: [ prototipo_2_tests_jbehave, main ]
+    branches:
+    - main
+    - prototipo_2_tests_jbehave
+  workflow_dispatch:
 
 jobs:
   build:
@@ -33,11 +38,15 @@ jobs:
       - name: Paso 3.2 - Comprobar que se ha compilado el proyecto correctamente
         run: |
             cd Codigo/Prototipo_mongDB_1/build
-            ls -a
-      - name: Paso 4.1 - Ejecutar tests unitario
-        run: echo Ejecutar los JUnit
+            ls -a | grep *.jar
+            
+      - name: Paso 4.1 - Ejecutar tests unitarios
+        run: |
+             cd Codigo/Prototipo_mongDB_1
+             mvn test
         
       - name: Paso 5.1 - Subir el proyecto compilado como un artefacto
+        if: success()
         uses: actions/upload-artifact@v2
         with:
           name: PrototipoMongoDB
