@@ -8,6 +8,8 @@
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<class>Logic.Person.Person</class>
+		<class>Logic.Pet.Pet</class>
+		<class>Logic.City.City</class>
 		<shared-cache-mode>NONE</shared-cache-mode>
 		<properties>
 			<property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />

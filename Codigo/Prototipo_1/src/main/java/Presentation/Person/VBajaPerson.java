@@ -1,4 +1,4 @@
-package Presentation;
+package Presentation.Person;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,10 +20,11 @@ import javax.swing.border.EmptyBorder;
 
 import Logic.Functions;
 import Logic.Person.TPerson;
+import Presentation.VPrincipal;
 
-public class VBajaPrueba extends JFrame{
+public class VBajaPerson extends JFrame{
 	private TPerson p;
-	public VBajaPrueba(TPerson p) {
+	public VBajaPerson(TPerson p) {
 		Image iconFrame = new ImageIcon(getClass().getClassLoader().getResource("icono_prueba.png")).getImage();
 		this.setIconImage(iconFrame);
 		setTitle("Baja Persona");

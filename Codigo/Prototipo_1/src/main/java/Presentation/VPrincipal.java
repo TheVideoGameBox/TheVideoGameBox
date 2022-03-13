@@ -25,6 +25,10 @@ import javax.swing.border.EmptyBorder;
 
 import Logic.Functions;
 import Logic.Person.TPerson;
+import Presentation.Person.VAddPerson;
+import Presentation.Person.VBajaPerson;
+import Presentation.Person.VBuscarPerson;
+import Presentation.Person.VEditarPerson;
 
 
 public class VPrincipal extends JFrame{
@@ -241,7 +245,7 @@ public class VPrincipal extends JFrame{
 		@Override
 			public void mouseClicked(MouseEvent e) {
 
-				VBuscarPrueba buscar = new VBuscarPrueba(p);
+				VBuscarPerson buscar = new VBuscarPerson(p);
 				dispose();
 
 		}
@@ -268,7 +272,7 @@ public class VPrincipal extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VEditarPrueba editar = new VEditarPrueba(p);
+				VEditarPerson editar = new VEditarPerson(p);
 				dispose();
 			}
 
@@ -286,7 +290,7 @@ public class VPrincipal extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VBajaPrueba b = new VBajaPrueba(p);
+				VBajaPerson b = new VBajaPerson(p);
 				dispose();
 			}
 

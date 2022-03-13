@@ -1,4 +1,4 @@
-package Presentation;
+package Presentation.Person;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -25,12 +25,14 @@ import javax.swing.border.EmptyBorder;
 
 import Logic.Functions;
 import Logic.Person.TPerson;
+import Presentation.JPanelConFondo;
+import Presentation.VPrincipal;
 
-public class VEditarPrueba extends JFrame{
+public class VEditarPerson extends JFrame{
 	private TPerson p;
 	private ArrayList<JTextField> textFields;
 
-	public VEditarPrueba(TPerson p) {
+	public VEditarPerson(TPerson p) {
 		Image iconFrame = new ImageIcon(getClass().getClassLoader().getResource("icono_prueba.png")).getImage();
 		this.setIconImage(iconFrame);
 		setTitle("Editar Prueba");
