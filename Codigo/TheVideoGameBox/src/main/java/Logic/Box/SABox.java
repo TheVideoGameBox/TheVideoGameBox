@@ -1,4 +1,4 @@
 package Logic.Box;
 
-public class SABox {
+public interface SABox {
 }

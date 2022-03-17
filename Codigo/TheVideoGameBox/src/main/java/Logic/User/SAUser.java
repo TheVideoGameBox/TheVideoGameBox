@@ -1,4 +1,4 @@
 package Logic.User;
 
-public class SAUser {
+public interface SAUser {
 }

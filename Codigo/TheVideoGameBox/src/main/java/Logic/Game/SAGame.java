@@ -1,4 +1,4 @@
 package Logic.Game;
 
-public class SAGame {
+public interface SAGame {
 }
