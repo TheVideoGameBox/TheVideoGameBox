@@ -5,15 +5,24 @@ import org.bson.types.ObjectId;
 import java.util.List;
 
 public class TGame {
+    //MongoDB id
     private ObjectId id;
+    //Nombre de juego
     private String name;
+    //Portada del juego
     private String cover;
+    //Lista de desarrolladores del juego
     private List<String> developer;
+    //Lista de categorias del juego
     private List<String> categories;
+    //Lista de plataformas(consolas/ordenador) del juego
     private List<String> platforms;
+    //Descripcion del juego
     private String description;
+    //Booleano para gestionar la baja logica
     private boolean isDeleted;
 
+    //Constructors
     public TGame(String name, String cover, List<String> developer, List<String> categories, List<String> platforms, String description) {
         this.name = name;
         this.cover = cover;
@@ -34,6 +43,7 @@ public class TGame {
         this.isDeleted = isDeleted;
     }
 
+    //Getters and setters
     public ObjectId getId() {
         return id;
     }
