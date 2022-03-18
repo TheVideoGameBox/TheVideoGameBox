@@ -9,9 +9,8 @@ import com.mongodb.client.MongoDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-public class DAOGame {
+public class DAOGameImp {
 
     public List<TGame> SearchAllByName(String name) {
         List<TGame> result = new ArrayList<>();
