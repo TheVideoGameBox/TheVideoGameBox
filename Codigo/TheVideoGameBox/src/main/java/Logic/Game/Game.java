@@ -1,10 +1,12 @@
 package Logic.Game;
 
+import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import java.util.List;
 
-public class TGame {
+public class Game {
+
     //MongoDB id
     private ObjectId id;
     //Nombre de juego
@@ -24,7 +26,11 @@ public class TGame {
 
     //Constructors
 
-    public TGame(String name, String cover, List<String> developer, List<String> categories, List<String> platforms, String description) {
+    //Constructor publico vacio para poder obtener el POJO desde MongoDB
+    public Game() {
+    }
+
+    public Game(String name, String cover, List<String> developer, List<String> categories, List<String> platforms, String description) {
         this.name = name;
         this.cover = cover;
         this.developer = developer;
@@ -33,7 +39,7 @@ public class TGame {
         this.description = description;
     }
 
-    public TGame(ObjectId id, String name, String cover, List<String> developer, List<String> categories, List<String> platforms, String description, boolean isDeleted) {
+    public Game(ObjectId id, String name, String cover, List<String> developer, List<String> categories, List<String> platforms, String description, boolean isDeleted) {
         this.id = id;
         this.name = name;
         this.cover = cover;
@@ -42,6 +48,18 @@ public class TGame {
         this.platforms = platforms;
         this.description = description;
         this.isDeleted = isDeleted;
+    }
+
+    //Crear una entidad Mongo a partir de un transfer
+    public Game(TGame tGame){
+        this.id = tGame.getId();
+        this.name = tGame.getName();
+        this.cover = tGame.getCover();
+        this.developer = tGame.getDeveloper();
+        this.categories = tGame.getCategories();
+        this.platforms = tGame.getPlatforms();
+        this.description = tGame.getDescription();
+        this.isDeleted = tGame.isDeleted();
     }
 
     //Getters and setters
@@ -108,5 +126,36 @@ public class TGame {
 
     public void setDeleted(boolean deleted) {
         isDeleted = deleted;
+    }
+
+    //Obtener todos los datos de un transfer
+    public void setData(TGame tGame){
+        this.id = tGame.getId();
+        this.name = tGame.getName();
+        this.cover = tGame.getCover();
+        this.developer = tGame.getDeveloper();
+        this.categories = tGame.getCategories();
+        this.platforms = tGame.getPlatforms();
+        this.description = tGame.getDescription();
+        this.isDeleted = tGame.isDeleted();
+    }
+
+    //Transformar una entidad de MongoDB a un transfer
+    public TGame toTransfer(){
+        return new TGame(id, name, cover, developer, categories, platforms, description, isDeleted);
+    }
+
+    @Override
+    public String toString() {
+        return "{ " +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cover='" + cover + '\'' +
+                ", developer=" + developer +
+                ", categories=" + categories +
+                ", platforms=" + platforms +
+                ", description='" + description + '\'' +
+                ", isDeleted=" + isDeleted +
+                " }";
     }
 }
