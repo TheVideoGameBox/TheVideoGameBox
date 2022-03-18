@@ -9,8 +9,8 @@ public class Event {
 
     //  Codigos de eventos para GAME [100-300)
     public static final int SearchAllByName = 101;
-    public static final int SearchAllByNameOk = 102;
-    public static final int SearchAllByNameKo = 103;
+    public static final int ResSearchAllByNameOk = 102;
+    public static final int ResSearchAllByNameKo = 103;
 
 
 
