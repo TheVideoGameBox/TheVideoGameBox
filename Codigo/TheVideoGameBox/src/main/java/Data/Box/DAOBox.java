@@ -1,4 +1,6 @@
 package Data.Box;
 
-public class DAOBox {
+public interface DAOBox {
+
+
 }

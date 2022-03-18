@@ -1,4 +1,5 @@
 package Data.User;
 
-public class DAOUser {
+public interface DAOUser {
+
 }

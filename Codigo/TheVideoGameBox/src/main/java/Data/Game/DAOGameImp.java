@@ -10,7 +10,7 @@ import com.mongodb.client.MongoDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DAOGameImp {
+public class DAOGameImp implements DAOGame {
 
     public List<TGame> SearchAllByName(String name) {
         List<TGame> result = new ArrayList<>();

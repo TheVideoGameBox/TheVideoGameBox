@@ -1,7 +1,7 @@
 package Data;
 
 import Data.Box.DAOBox;
-import Data.Game.DAOGameImp;
+import Data.Game.DAOGame;
 import Data.User.DAOUser;
 
 public abstract class DAOAbstractFactory {
@@ -20,7 +20,7 @@ public abstract class DAOAbstractFactory {
 
     public abstract DAOBox createDAOBox();
 
-    public abstract DAOGameImp createDAOGame();
+    public abstract DAOGame createDAOGame();
 
     public abstract DAOUser createDAOUser();
 
