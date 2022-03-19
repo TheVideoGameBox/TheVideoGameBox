@@ -5,10 +5,15 @@ import Logic.Game.Game;
 import Logic.Game.TGame;
 import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.bson.types.ObjectId;
+import static com.mongodb.client.model.Filters.eq;
+
 
 public class DAOGameImp implements DAOGame {
 
@@ -28,5 +33,22 @@ public class DAOGameImp implements DAOGame {
         return result;
     }
 
-
+    public Game SearchOne(ObjectId _id) {
+		Game game = null;
+		try {
+			MongoDatabase db = Connection.getInstance().getConnection();
+			MongoCollection<Game> collection = db.getCollection("games", Game.class);
+			
+			List<Game> games = new ArrayList<Game>();
+			collection.find(eq("_id", _id)).into(games);
+			
+			if (games.size() == 1) {
+				game = new Game(games.get(0).toTransfer());
+			}
+		}
+		catch(MongoException e) {
+			return game;
+		}
+    	return game;
+    }
 }
