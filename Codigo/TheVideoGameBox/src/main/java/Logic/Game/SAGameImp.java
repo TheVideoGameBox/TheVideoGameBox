@@ -13,4 +13,9 @@ public class SAGameImp implements SAGame {
         return result = DAOAbstractFactory.getInstance().createDAOGame().SearchAllByName(name);
     }
 
+    @Override
+    public TGame SearchOne(String name) {
+        return DAOAbstractFactory.getInstance().createDAOGame().SearchOne(name);
+    }
+
 }
