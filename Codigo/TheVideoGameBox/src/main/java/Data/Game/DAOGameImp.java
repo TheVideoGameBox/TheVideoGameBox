@@ -33,7 +33,7 @@ public class DAOGameImp implements DAOGame {
         return result;
     }
 
-    public Game SearchOne(ObjectId _id) {
+    public TGame SearchOne(ObjectId _id) {
 		Game game = null;
 		try {
 			MongoDatabase db = Connection.getInstance().getConnection();
@@ -47,8 +47,8 @@ public class DAOGameImp implements DAOGame {
 			}
 		}
 		catch(MongoException e) {
-			return game;
+			return null;
 		}
-    	return game;
+    	return game.toTransfer();
     }
 }

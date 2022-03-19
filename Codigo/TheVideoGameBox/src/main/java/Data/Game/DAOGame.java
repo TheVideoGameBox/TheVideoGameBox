@@ -9,5 +9,5 @@ import org.bson.types.ObjectId;
 
 public interface DAOGame {
     public List<TGame> SearchAllByName(String name);
-    public Game SearchOne(ObjectId id);
+    public TGame SearchOne(ObjectId id);
 }
