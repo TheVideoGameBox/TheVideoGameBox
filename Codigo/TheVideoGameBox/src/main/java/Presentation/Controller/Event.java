@@ -11,6 +11,9 @@ public class Event {
     public static final int SEARCH_ALL_BY_NAME = 100;
     public static final int RES_SEARCH_ALL_BY_NAME_OK = 101;
     public static final int RES_SEARCH_ALL_BY_NAME_KO = 102;
+    public static final int SEARCH_ONE_BY_NAME = 103;
+    public static final int RES_SEARCH_ONE_BY_NAME_OK = 104;
+    public static final int RES_SEARCH_ONE_BY_NAME_KO = 105;
 
 
 
