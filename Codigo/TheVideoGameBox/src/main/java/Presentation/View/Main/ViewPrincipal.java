@@ -2,11 +2,17 @@ package Presentation.View.Main;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import Presentation.Controller.ApplicationController;
+import Presentation.View.IView;
+import Presentation.View.ViewAbstractFactory;
+import Presentation.Controller.Event;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ViewPrincipal extends JFrame{
+public class ViewPrincipal extends JFrame implements IView{
 
 	private static int logged;
 	
@@ -175,7 +181,8 @@ public class ViewPrincipal extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				
+				String search = searchName.getText();
+				ApplicationController.getInstance().action(Event.SEARCH_ALL_BY_NAME, search);
 				
 			}
 			
@@ -258,5 +265,10 @@ public class ViewPrincipal extends JFrame{
 		mainPanel.add(leftBottonPanel);
 		
 		return mainPanel;
+	}
+
+	@Override
+	public void update(int event, Object data) {
+				
 	}
 }
