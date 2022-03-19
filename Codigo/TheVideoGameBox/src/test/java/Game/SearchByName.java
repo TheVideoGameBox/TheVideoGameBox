@@ -11,6 +11,6 @@ public class SearchByName {
 
     @Test
     public void testInputIncorrect(){
-        //Comprobar que si el usuario introduce 0 o mas de 50 caracteres, se produce un fallo
+        //Comprobar si el usuario introduce 0 o mas de 50 caracteres, se produce un fallo
     }
 }
