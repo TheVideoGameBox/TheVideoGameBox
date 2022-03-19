@@ -1,6 +1,7 @@
 package Presentation.Command;
 
-public interface ICommand {
+import Presentation.Controller.Context;
 
+public interface ICommand {
     public Context execute(Object data);
 }
