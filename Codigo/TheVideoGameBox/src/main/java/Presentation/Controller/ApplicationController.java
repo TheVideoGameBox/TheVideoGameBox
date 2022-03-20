@@ -10,5 +10,5 @@ public abstract class ApplicationController {
         return instance;
     }
 
-    public abstract void action(int event, Object data);
+    public abstract void action(Context context);
 }

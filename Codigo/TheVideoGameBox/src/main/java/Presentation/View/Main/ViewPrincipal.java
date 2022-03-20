@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import Presentation.Controller.ApplicationController;
+import Presentation.Controller.Context;
 import Presentation.View.IView;
 import Presentation.View.ViewAbstractFactory;
 import Presentation.Controller.Event;
@@ -182,7 +183,7 @@ public class ViewPrincipal extends JFrame implements IView{
 			public void actionPerformed(ActionEvent e) {
 				
 				String search = searchName.getText();
-				ApplicationController.getInstance().action(Event.SEARCH_ALL_BY_NAME, search);
+				ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BY_NAME, search));
 				
 			}
 			
@@ -268,7 +269,7 @@ public class ViewPrincipal extends JFrame implements IView{
 	}
 
 	@Override
-	public void update(int event, Object data) {
+	public void update(Context context) {
 				
 	}
 }
