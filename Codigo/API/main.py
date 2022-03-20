@@ -8,4 +8,6 @@ if __name__ == '__main__':
 
     with open('games.json') as file:
         file_data = load(file)
-        games.insert_one(file_data)
+
+        for data in file_data:
+            games.insert_one(file_data.get(data))
