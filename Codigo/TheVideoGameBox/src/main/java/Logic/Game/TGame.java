@@ -98,4 +98,17 @@ public class TGame {
     public void setSummary(String summary) {
         this.summary = summary;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cover='" + cover + '\'' +
+                ", involved_companies=" + involved_companies +
+                ", genres=" + genres +
+                ", platforms=" + platforms +
+                ", summary='" + summary + '\'' +
+                '}';
+    }
 }

@@ -14,7 +14,7 @@ public class CommandSearchAllByName implements ICommand {
     @Override
     public Context execute(Object data) {
         SAGame saGame = SAAbstractFactory.getInstance().createSAGame();
-        List<TGame> result = saGame.SearchAllByName((String) data);
+        List<TGame> result = saGame.searchAllByName((String) data);
         Context con;
 
         if(!result.isEmpty()) con = new Context(Event.RES_SEARCH_ALL_BY_NAME_OK, result);
