@@ -270,6 +270,9 @@ public class ViewPrincipal extends JFrame implements IView{
 
 	@Override
 	public void update(Context context) {
-				
+		if(context.getEvent() == Event.RES_SEARCH_ALL_BY_NAME_KO) {
+			JOptionPane.showMessageDialog(null, "No ha habido resultados para la busqueda");
+		}
+	
 	}
 }

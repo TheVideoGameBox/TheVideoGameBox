@@ -9,13 +9,20 @@ import Presentation.View.Game.ViewSearchByName;
 import Presentation.View.Main.ViewPrincipal;
 
 public class ViewFactory extends ViewAbstractFactory{
+	
+	
     @SuppressWarnings("unchecked")
 	@Override
     public IView createView(Context context) {
-        return switch(context.getEvent()) {
-        	case Event.VIEW -> new ViewPrincipal();
-        	case Event.SEARCH_ALL_BY_NAME -> new ViewSearchByName((List<TGame>) context.getData());
-        	default -> null;  
+        switch(context.getEvent()) {
+        	case Event.VIEW -> currentView = new ViewPrincipal();
+        	case Event.RES_SEARCH_ALL_BY_NAME_OK -> currentView = new ViewSearchByName((List<TGame>) context.getData());
         };
+        return currentView;
     }
+
+	@Override
+	public IView getCurrentIView() {
+		return currentView;
+	}
 }

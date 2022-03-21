@@ -4,9 +4,8 @@ public class Event {
 
     // Codigos de eventos para la UI [0-100)
     public static final int VIEW = 0;
-
-
-
+    
+    
     //  Codigos de eventos para GAME [100-300)
     public static final int SEARCH_ALL_BY_NAME = 100;
     public static final int RES_SEARCH_ALL_BY_NAME_OK = 101;

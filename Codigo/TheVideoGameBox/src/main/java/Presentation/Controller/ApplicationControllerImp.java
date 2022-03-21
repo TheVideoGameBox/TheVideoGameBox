@@ -12,7 +12,7 @@ public class ApplicationControllerImp extends ApplicationController {
         if(command != null){
         	Context res = command.execute(context.getData());
         	if(ViewAbstractFactory.getInstance().createView(res) == null) {
-        		 ViewAbstractFactory.getInstance().createView(context).update(res);
+        		ViewAbstractFactory.getInstance().getCurrentIView().update(res);
         	}
         }else{
         	ViewAbstractFactory.getInstance().createView(context);

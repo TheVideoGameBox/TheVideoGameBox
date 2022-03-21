@@ -2,6 +2,9 @@ package Launcher;
 
 import javax.swing.SwingUtilities;
 
+import Presentation.Controller.Context;
+import Presentation.Controller.Event;
+import Presentation.View.ViewFactory;
 import Presentation.View.Main.ViewPrincipal;
 
 public class Launcher {
@@ -11,7 +14,7 @@ public class Launcher {
             SwingUtilities.invokeAndWait(new Runnable() {
                 @Override
                 public void run() {
-                    new ViewPrincipal();
+                    ViewFactory.getInstance().createView(new Context(Event.VIEW, null));
                 }
             });
         } catch (Exception e) {

@@ -175,7 +175,7 @@ public class ViewSearchByName extends JFrame implements IView{
 
 		});
 		
-		
+		/*
 		Image image = null;
 		//Sustituir //images.igdb.com/igdb/image/upload/t_thumb/co2dc0.jpg con la url del juego
 		URL url = new URL( "htpps:"+"//images.igdb.com/igdb/image/upload/t_thumb/co2dc0.jpg");
@@ -184,7 +184,7 @@ public class ViewSearchByName extends JFrame implements IView{
 		JLabel cover = new JLabel(new ImageIcon(image));
 				
 		// CONSTRUIR PANEL
-		panel.add(cover, BorderLayout.WEST);
+		panel.add(cover, BorderLayout.WEST);*/
 		panel.add(name, BorderLayout.CENTER);
 		
 
