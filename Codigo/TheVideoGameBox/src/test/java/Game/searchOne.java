@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class SearchOne {
+public class searchOne {
 
     private static SAGame saGame;
     private final ObjectId _id = new ObjectId("62370c135c37793c661d73bf");
