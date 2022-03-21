@@ -6,6 +6,6 @@ import org.bson.types.ObjectId;
 
 public interface DAOBox {
 	public int create(TBox box);
-	public void addGame(TBox tBox, ObjectId idGame);
+	public ObjectId addGame(TBox tBox, ObjectId idGame);
 
 }

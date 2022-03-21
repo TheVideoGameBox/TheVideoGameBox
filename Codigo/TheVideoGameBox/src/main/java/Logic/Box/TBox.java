@@ -21,6 +21,7 @@ public class TBox {
     private boolean active;
 	//Array de TGames
 	private List<ObjectId> gameList;
+	private ObjectId gameId;
 	
     //Constructors
     

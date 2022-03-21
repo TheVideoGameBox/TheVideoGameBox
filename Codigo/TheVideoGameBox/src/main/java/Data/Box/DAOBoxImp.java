@@ -41,7 +41,7 @@ public class DAOBoxImp implements DAOBox {
 	}
 
 	@Override
-	public void addGame(TBox tBox, ObjectId idGame) {
+	public ObjectId addGame(TBox tBox, ObjectId idGame) {
 		List<ObjectId> gameList = new ArrayList<>();
 		try {
 			MongoDatabase db = Connection.getInstance().getConnection();
@@ -50,7 +50,8 @@ public class DAOBoxImp implements DAOBox {
 			gameList.add(idGame);
 			db.getCollection("boxes", Box.class).updateOne(eq("_id", tBox.getId()), eq("gameList", gameList));
 		} catch (MongoException e) {
-
+			return null;
 		}
+		return idGame;
 	}
 }

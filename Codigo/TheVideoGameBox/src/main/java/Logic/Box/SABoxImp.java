@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import Data.DAOAbstractFactory;
 import Data.Box.DAOBox;
+import org.bson.types.ObjectId;
 
 public class SABoxImp implements SABox {
 
@@ -21,18 +22,19 @@ public class SABoxImp implements SABox {
 		return result;
 	}
 
-	
+	@Override
+	public ObjectId addGame(TBox tBox, ObjectId gameId) {
+		DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+		return daoBox.addGame(tBox, gameId);
+	}
+
 	private boolean correctPrivacy(boolean privacy) {
 		return !Objects.isNull(privacy);
 	}
 
-
-
 	private boolean correctCategory(String category) {
 		return category.length()>0;
 	}
-
-
 
 	private boolean correctDescription(String description) {
 		return description.length()>0&&description.length()<=250;
