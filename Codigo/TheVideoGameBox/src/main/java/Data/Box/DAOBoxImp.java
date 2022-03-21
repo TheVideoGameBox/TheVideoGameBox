@@ -45,7 +45,7 @@ public class DAOBoxImp implements DAOBox {
 		List<ObjectId> gameList = new ArrayList<>();
 		try {
 			MongoDatabase db = Connection.getInstance().getConnection();
-			Box box = (Box) db.getCollection("boxes", Box.class).find(eq("_id", tBox.getId()));
+			Box box = db.getCollection("boxes", Box.class).find(eq("_id", tBox.getId())).first();
 			gameList = box.getGameList();
 			gameList.add(idGame);
 			db.getCollection("boxes", Box.class).updateOne(eq("_id", tBox.getId()), eq("gameList", gameList));
