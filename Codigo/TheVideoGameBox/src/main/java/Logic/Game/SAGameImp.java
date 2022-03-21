@@ -1,6 +1,7 @@
 package Logic.Game;
 
 import Data.DAOAbstractFactory;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,11 @@ public class SAGameImp implements SAGame {
     @Override
     public TGame SearchOne(String name) {
         return DAOAbstractFactory.getInstance().createDAOGame().searchOne(name);
+    }
+
+    @Override
+    public TGame SearchOne(ObjectId _id) {
+        return DAOAbstractFactory.getInstance().createDAOGame().SearchOne(_id);
     }
 
 }
