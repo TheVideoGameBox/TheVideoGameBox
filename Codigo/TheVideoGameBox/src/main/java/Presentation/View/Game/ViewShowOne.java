@@ -8,6 +8,8 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -140,12 +142,18 @@ public class ViewShowOne extends JFrame implements IView {
 		//coverLabel.setIcon(new ImageIcon(getClass().getClassLoader().getResource(game.getCover()))); // No creo que esto sea así.
 		JLabel nameLabel = null;
 		if(game.getName() != null) nameLabel = new JLabel(game.getName());
-		JLabel companyLabel = null;
-		if(game.getInvolvedCompanies() != null && !game.getInvolvedCompanies().isEmpty()) companyLabel = new JLabel(game.getInvolvedCompanies().get(0));	// Habría que mostrar las demás. (En una tabla?)
-		JLabel categoryLabel = null;
-		if(game.getGenres() != null) categoryLabel = new JLabel(game.getGenres().get(0)); // Habría que mostrar las demás. (En una tabla?)
-		JLabel platformLabel = null;
-		if(game.getPlatforms() != null && !game.getPlatforms().isEmpty()) platformLabel = new JLabel(game.getPlatforms().get(0)); // Habría que mostrar las demás. (En una tabla?)
+		List<JLabel> companyLabel = new ArrayList<>();
+		for(int i = 0; game.getInvolvedCompanies() != null && !game.getInvolvedCompanies().isEmpty() && i < game.getGenres().size(); i++) {
+			companyLabel.add(new JLabel(game.getInvolvedCompanies().get(i)));
+		}
+		List<JLabel> categoryLabel = new ArrayList<>();
+		for(int i = 0; game.getGenres() != null && !game.getGenres().isEmpty() && i < game.getGenres().size(); i++) {
+			categoryLabel.add(new JLabel(game.getGenres().get(i)));
+		}
+		List<JLabel> platformLabel = new ArrayList<>();
+		for(int i = 0; game.getPlatforms() != null && !game.getPlatforms().isEmpty() && i < game.getGenres().size(); i++) {
+			platformLabel.add(new JLabel(game.getPlatforms().get(i)));
+		}
 		JLabel descLabel = null;
 		if(game.getSummary() != null) descLabel = new JLabel(game.getSummary());
 		
@@ -155,15 +163,21 @@ public class ViewShowOne extends JFrame implements IView {
 		midPanel.add(backButtonPanel);
 		midPanel.add(coverLabel);
 		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-		midPanel.add(nameLabel);
+		if(nameLabel != null) midPanel.add(nameLabel);
 		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-		//midPanel.add(companyLabel);
+		for(int i = 0; companyLabel != null && i < companyLabel.size(); i++) {
+			midPanel.add(companyLabel.get(i));
+		}
 		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-		midPanel.add(categoryLabel);
+		for(int i = 0; categoryLabel != null && i < categoryLabel.size(); i++) {
+			midPanel.add(categoryLabel.get(i));
+		}
 		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-		//midPanel.add(platformLabel);
+		for(int i = 0; platformLabel != null && i < platformLabel.size(); i++) {
+			midPanel.add(platformLabel.get(i));
+		}
 		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-		//midPanel.add(descLabel);
+		if(descLabel != null) midPanel.add(descLabel);
 		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 		this.pack();
 		return midPanel;
