@@ -18,13 +18,8 @@ public class SAGameImp implements SAGame {
     }
 
     @Override
-    public TGame SearchOne(String name) {
-        return DAOAbstractFactory.getInstance().createDAOGame().searchOne(name);
-    }
-
-    @Override
-    public TGame SearchOne(ObjectId _id) {
-        return DAOAbstractFactory.getInstance().createDAOGame().SearchOne(_id);
+    public TGame searchOne(ObjectId _id) {
+        return DAOAbstractFactory.getInstance().createDAOGame().searchOne(_id);
     }
 
 }

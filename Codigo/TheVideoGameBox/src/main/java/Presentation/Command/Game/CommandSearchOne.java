@@ -12,12 +12,12 @@ public class CommandSearchOne implements ICommand {
     @Override
     public Context execute(Object data) {
         SAGame saGame = SAAbstractFactory.getInstance().createSAGame();
-        TGame result = saGame.SearchOne((ObjectId) data);
+        TGame result = saGame.searchOne((ObjectId) data);
         Context con;
 
         if(result != null) con = new Context(Event.RES_SEARCH_ONE_OK, result);
-        else new Context(Event.RES_SEARCH_ONE_KO, null);
+        else con = new Context(Event.RES_SEARCH_ONE_KO, null);
 
-        return null;
+        return con;
     }
 }

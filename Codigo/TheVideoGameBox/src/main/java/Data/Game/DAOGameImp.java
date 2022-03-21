@@ -20,7 +20,7 @@ import static com.mongodb.client.model.Filters.eq;
 
 public class DAOGameImp implements DAOGame {
 
-    public List<TGame> SearchAllByName(String name) {
+    public List<TGame> searchAllByName(String name) {
         List<TGame> result = new ArrayList<>();
         try {
             MongoDatabase db = Connection.getInstance().getConnection();
@@ -34,7 +34,7 @@ public class DAOGameImp implements DAOGame {
         return result;
     }
 
-    public TGame SearchOne(ObjectId _id) {
+    public TGame searchOne(ObjectId _id) {
 		Game game = null;
 		try {
 			MongoDatabase db = Connection.getInstance().getConnection();

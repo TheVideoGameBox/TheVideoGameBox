@@ -7,6 +7,6 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 public interface DAOGame {
-    public List<TGame> SearchAllByName(String name);
-    public TGame SearchOne(ObjectId id);
+    public List<TGame> searchAllByName(String name);
+    public TGame searchOne(ObjectId id);
 }

@@ -159,8 +159,7 @@ public class ViewSearchByName extends JFrame implements IView{
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-				//ApplicationController.getInstance().action(Event.SEARCH_ONE, game.getId());
+				ApplicationController.getInstance().action(new Context(Event.SEARCH_ONE, game.getId()));
 				dispose();
 			}
 

@@ -14,26 +14,29 @@ import javax.swing.border.EmptyBorder;
 
 import Logic.Game.TGame;
 import Presentation.Controller.ApplicationController;
+import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Main.BorderTitle;
 import Presentation.View.Main.JPanelConFondo;
+import org.bson.types.ObjectId;
 
 public class ViewShowOne extends JFrame implements IView {
 
 	private static final long serialVersionUID = 1L;
 
 	TGame game;
+	private ObjectId _id;
 	private static int logged;
 	
 	public ViewShowOne(TGame game) {
 		super();
 		logged = -1;
 		this.game = game;
-		initGUI();
+		initGUI(game);
 	}
 
-	private void initGUI() {
+	private void initGUI(TGame game) {
 		
 		this.setPreferredSize(new Dimension(1150, 750));
 		this.setLocation(400,100);
@@ -134,12 +137,12 @@ public class ViewShowOne extends JFrame implements IView {
 		
 		// INFO DEL JUEGO
 		JLabel coverLabel = new JLabel();
-		coverLabel.setIcon(new ImageIcon(getClass().getClassLoader().getResource(game.getCover()))); // No creo que esto sea así.
+		//coverLabel.setIcon(new ImageIcon(getClass().getClassLoader().getResource(game.getCover()))); // No creo que esto sea así.
 		JLabel nameLabel = new JLabel(game.getName());
-		JLabel companyLabel = new JLabel(game.getDeveloper().get(0));	// Habría que mostrar las demás. (En una tabla?)
-		JLabel categoryLabel = new JLabel(game.getCategories().get(0)); // Habría que mostrar las demás. (En una tabla?)
+		JLabel companyLabel = new JLabel(game.getInvolvedCompanies().get(0));	// Habría que mostrar las demás. (En una tabla?)
+		JLabel categoryLabel = new JLabel(game.getGenres().get(0)); // Habría que mostrar las demás. (En una tabla?)
 		JLabel platformLabel = new JLabel(game.getPlatforms().get(0)); // Habría que mostrar las demás. (En una tabla?)
-		JLabel descLabel = new JLabel(game.getDescription());
+		JLabel descLabel = new JLabel(game.getSummary());
 		
 		// BACK BUTTON
 		JPanel backButtonPanel = goBackButtonPanel();
@@ -149,18 +152,15 @@ public class ViewShowOne extends JFrame implements IView {
 		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 		midPanel.add(nameLabel);
 		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-		midPanel.add(companyLabel);
+		//midPanel.add(companyLabel);
 		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 		midPanel.add(categoryLabel);
 		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-		midPanel.add(platformLabel);
+		//midPanel.add(platformLabel);
 		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 		midPanel.add(descLabel);
 		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 		this.pack();
-		
-		
-		
 		return midPanel;
 	}
 	
@@ -179,22 +179,17 @@ public class ViewShowOne extends JFrame implements IView {
 		goBackButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ApplicationController.getInstance().action(0, Event.VIEW);
+				ApplicationController.getInstance().action(new Context(Event.VIEW, _id));
 				dispose();
 			}
 		});
-		
 		backButtonPanel.add(goBackButton);
 		
 		return backButtonPanel;
 	}
 
 	@Override
-	public void update(int event, Object data) {
-		
-		
-		
+	public void update(Context context) {
 
-		
 	}
 }

@@ -1,4 +1,4 @@
-package Game;
+package Unit.Game;
 
 import Logic.Game.SAGame;
 import Logic.Game.TGame;
@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class searchOne {
+public class SearchOne {
 
     private static SAGame saGame;
     private final ObjectId _id = new ObjectId("62370c135c37793c661d73bf");
@@ -21,7 +21,7 @@ public class searchOne {
 
     @Test
     public void testCorrect(){
-        TGame tGame = saGame.SearchOne(_id);
+        TGame tGame = saGame.searchOne(_id);
         assertNotNull(tGame);
     }
 
