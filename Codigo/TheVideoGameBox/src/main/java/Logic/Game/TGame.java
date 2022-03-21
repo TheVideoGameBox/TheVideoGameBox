@@ -33,7 +33,7 @@ public class TGame {
         this.description = description;
     }
 
-    public TGame(ObjectId id, String name, String cover, List<String> developer, List<String> categories, List<String> platforms, String description, boolean isDeleted) {
+    public TGame(ObjectId id, String name, String cover, List<String> developer, List<String> categories, List<String> platforms, String description, boolean deleted) {
         this.id = id;
         this.name = name;
         this.cover = cover;
@@ -41,7 +41,7 @@ public class TGame {
         this.categories = categories;
         this.platforms = platforms;
         this.description = description;
-        this.isDeleted = isDeleted;
+        this.isDeleted = deleted;
     }
 
     //Getters and setters
@@ -106,7 +106,7 @@ public class TGame {
         return isDeleted;
     }
 
-    public void setDeleted(boolean deleted) {
+    public void setActive(boolean deleted) {
         isDeleted = deleted;
     }
 }

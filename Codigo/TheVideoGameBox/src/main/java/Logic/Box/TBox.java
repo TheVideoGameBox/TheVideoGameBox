@@ -5,6 +5,9 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 public class TBox {
+	
+	//Falta añadir usuario al que pertenece la Box y array de ID's de Games
+	
 	//MongoDB id
     private ObjectId id;
     //Nombre de la box
@@ -16,7 +19,7 @@ public class TBox {
     //Categoría de la box
     private String category;
     //Booleano para gestionar la baja logica
-    private boolean isDeleted;
+    private boolean active;
 	
     //Constructors
     
@@ -28,13 +31,13 @@ public class TBox {
 	}
 
 
-	public TBox(ObjectId id, String name, String description, boolean privacy, String category, boolean isDeleted) {
+	public TBox(ObjectId id, String name, String description, boolean privacy, String category, boolean active) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.privacy = privacy;
 		this.category = category;
-		this.isDeleted = isDeleted;
+		this.active = active;
 	}
 
 
@@ -90,13 +93,13 @@ public class TBox {
 	}
 
 
-	public boolean isDeleted() {
-		return isDeleted;
+	public boolean isActive() {
+		return active;
 	}
 
 
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
+	public void setActive(boolean active) {
+		this.active = active;
 	}
     
     

@@ -5,6 +5,9 @@ import org.bson.types.ObjectId;
 
 public class Box {
 
+	//Falta añadir usuario al que pertenece la Box y array de ID's de Games
+	
+	
 	//MongoDB id
     private ObjectId id;
     //Nombre de la box
@@ -16,9 +19,11 @@ public class Box {
     //Categoría de la box
     private String category;
     //Booleano para gestionar la baja logica
-    private boolean isDeleted;
+    private boolean active;
     
     //Constructors
+    
+    public Box() {}
     
 	public Box(String name, String description, boolean privacy, String category) {
 		this.name = name;
@@ -27,13 +32,13 @@ public class Box {
 		this.category = category;
 	}
 	
-	public Box(ObjectId id, String name, String description, boolean privacy, String category, boolean isDeleted) {
+	public Box(ObjectId id, String name, String description, boolean privacy, String category, boolean active) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.privacy = privacy;
 		this.category = category;
-		this.isDeleted = isDeleted;
+		this.active = active;
 	}
 	
 	public Box(TBox box) {
@@ -42,7 +47,7 @@ public class Box {
 		this.description=box.getDescription();
 		this.privacy=box.getPrivacy();
 		this.category=box.getCategory();
-		this.isDeleted=box.isDeleted();
+		this.active=box.isActive();
 	}
 
     //Getters and setters
@@ -77,16 +82,16 @@ public class Box {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public boolean isDeleted() {
-		return isDeleted;
+	public boolean isActive() {
+		return active;
 	}
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
+	public void setActive(boolean active) {
+		this.active = active;
 	}
     
 	
 	public TBox toTransfer() {
-		return new TBox(id, category, category, isDeleted, category, isDeleted);
+		return new TBox(id, category, category, active, category, active);
 	}
 	
 	
