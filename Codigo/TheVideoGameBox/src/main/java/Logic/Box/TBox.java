@@ -15,28 +15,29 @@ public class TBox {
     //Descripcion de la box
     private String description;
     //Privacidad de la box
-    private boolean privacy;
+    private Privacy privacy;
     //Categoría de la box
-    private String category;
+    private List<Category> categories;
     //Booleano para gestionar la baja logica
     private boolean active;
 	
     //Constructors
     
-    public TBox(String name, String description, boolean privacy, String category) {
+    public TBox(String name, String description, Privacy privacy, List<Category> categories) {
 		this.name = name;
 		this.description = description;
 		this.privacy = privacy;
-		this.category = category;
+		this.categories = categories;
+		this.active = true;
 	}
 
 
-	public TBox(ObjectId id, String name, String description, boolean privacy, String category, boolean active) {
+	public TBox(ObjectId id, String name, String description, Privacy privacy, List<Category> categories, boolean active) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.privacy = privacy;
-		this.category = category;
+		this.categories = categories;
 		this.active = active;
 	}
 
@@ -73,23 +74,23 @@ public class TBox {
 	}
 
 
-	public boolean getPrivacy() {
+	public Privacy getPrivacy() {
 		return privacy;
 	}
 
 
-	public void setPrivacy(boolean privacy) {
+	public void setPrivacy(Privacy privacy) {
 		this.privacy = privacy;
 	}
 
 
-	public String getCategory() {
-		return category;
+	public List<Category> getCategories() {
+		return categories;
 	}
 
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 
 

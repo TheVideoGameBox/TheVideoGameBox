@@ -1,7 +1,8 @@
 package Logic.Box;
 
-import org.bson.Document;
 import org.bson.types.ObjectId;
+
+import java.util.List;
 
 public class Box {
 
@@ -15,9 +16,9 @@ public class Box {
     //Descripcion de la box
     private String description;
     //Privacidad de la box
-    private boolean privacy;
+    private Privacy privacy;
     //Categoría de la box
-    private String category;
+    private List<Category> categories;
     //Booleano para gestionar la baja logica
     private boolean active;
     
@@ -25,29 +26,29 @@ public class Box {
     
     public Box() {}
     
-	public Box(String name, String description, boolean privacy, String category) {
+	public Box(String name, String description, Privacy privacy, List<Category> categories) {
 		this.name = name;
 		this.description = description;
 		this.privacy = privacy;
-		this.category = category;
+		this.categories = categories;
 	}
 	
-	public Box(ObjectId id, String name, String description, boolean privacy, String category, boolean active) {
+	public Box(ObjectId id, String name, String description, Privacy privacy, List<Category> categories, boolean active) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.privacy = privacy;
-		this.category = category;
+		this.categories = categories;
 		this.active = active;
 	}
 	
 	public Box(TBox box) {
-		this.id=box.getId();
-		this.name=box.getName();
-		this.description=box.getDescription();
-		this.privacy=box.getPrivacy();
-		this.category=box.getCategory();
-		this.active=box.isActive();
+		this.id = box.getId();
+		this.name = box.getName();
+		this.description = box.getDescription();
+		this.privacy = box.getPrivacy();
+		this.categories = box.getCategories();
+		this.active = box.isActive();
 	}
 
     //Getters and setters
@@ -70,17 +71,17 @@ public class Box {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public boolean isPrivacy() {
+	public Privacy isPrivacy() {
 		return privacy;
 	}
-	public void setPrivacy(boolean privacy) {
+	public void setPrivacy(Privacy privacy) {
 		this.privacy = privacy;
 	}
-	public String getCategory() {
-		return category;
+	public List<Category> getCategories() {
+		return categories;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 	public boolean isActive() {
 		return active;
@@ -91,7 +92,7 @@ public class Box {
     
 	
 	public TBox toTransfer() {
-		return new TBox(id, category, category, active, category, active);
+		return new TBox(id, name, description, privacy, categories, active);
 	}
 	
 	

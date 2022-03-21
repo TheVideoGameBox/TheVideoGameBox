@@ -11,6 +11,6 @@ import Logic.Box.TBox;
 
 public interface DAOBox {
 
-	public int create(TBox box);
-
+	public ObjectId create(TBox box);
+	public void deleteFromDatabase(ObjectId id);
 }

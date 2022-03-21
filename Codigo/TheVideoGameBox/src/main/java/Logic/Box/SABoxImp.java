@@ -1,46 +1,50 @@
 package Logic.Box;
 
-import java.util.Objects;
-
 import Data.DAOAbstractFactory;
 import Data.Box.DAOBox;
+import org.bson.types.ObjectId;
+
+import java.util.List;
 
 public class SABoxImp implements SABox {
 
-	@Override
-	public int createBox(TBox box) {
-	int result=-1;
-		
-		DAOBox daoBox= DAOAbstractFactory.getInstance().createDAOBox();
-		
-		if(correctName(box.getName())&&correctDescription(box.getDescription())
-			&&correctPrivacy(box.getPrivacy())&&correctCategory(box.getCategory())) {
-			result=daoBox.create(box);
-		}
-		
-		return result;
-	}
+    @Override
+    public ObjectId createBox(TBox box) {
+        if (!correctName(box.getName()))
+            return null;
 
-	
-	private boolean correctPrivacy(boolean privacy) {
-		return !Objects.isNull(privacy);
-	}
+        if (!correctDescription(box.getDescription()))
+            return null;
 
+        if (!correctCategory(box.getCategories()))
+            return null;
 
+        if (!correctPrivacy(box.getPrivacy()))
+            return null;
 
-	private boolean correctCategory(String category) {
-		return category.length()>0;
-	}
+        DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
 
+        return daoBox.create(box);
+    }
 
+    @Override
+    public void deleteFromDatabase(ObjectId id){
+        DAOAbstractFactory.getInstance().createDAOBox().deleteFromDatabase(id);
+    }
 
-	private boolean correctDescription(String description) {
-		return description.length()>0&&description.length()<=250;
-	}
+    private boolean correctCategory(List<Category> categories) {
+        return categories != null && !categories.isEmpty();
+    }
 
-	private boolean correctName(String name) {
-		return name.length()>0 && name.length()<=50;
-	}
-	
-	
+    private boolean correctPrivacy(Privacy privacy){
+        return privacy != null;
+    }
+
+    private boolean correctDescription(String description) {
+        return description != null && (description.length() > 0 && description.length() <= 250);
+    }
+
+    private boolean correctName(String name) {
+        return name != null && name.length() > 0 && name.length() <= 50;
+    }
 }
