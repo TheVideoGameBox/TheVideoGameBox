@@ -6,6 +6,7 @@ import org.bson.types.ObjectId;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Updates;
 
 import Data.Connection;
 import Logic.Box.Box;
@@ -26,7 +27,7 @@ public class DAOBoxImp implements DAOBox {
 	            boxes.insertOne(insert);
 	            
 	            result=1;
-
+	            
 	        } catch (MongoException e) {
 	            return result;
 	        }
@@ -41,7 +42,7 @@ public class DAOBoxImp implements DAOBox {
 			Box box = db.getCollection("boxes", Box.class).find(eq("_id", tBox.getId())).first();
 			gameList = box.getGameList();
 			gameList.add(idGame);
-			db.getCollection("boxes", Box.class).updateOne(eq("_id", tBox.getId()), eq("gameList", gameList));
+			db.getCollection("boxes", Box.class).updateOne(eq("_id", tBox.getId()), Updates.set("gameList", gameList));
 		} catch (MongoException e) {
 			return null;
 		}

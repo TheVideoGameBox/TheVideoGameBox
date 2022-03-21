@@ -125,7 +125,7 @@ public class Game {
     }
 
     public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+    	isDeleted = deleted;
     }
 
     //Obtener todos los datos de un transfer
