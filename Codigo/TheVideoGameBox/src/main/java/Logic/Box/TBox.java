@@ -31,7 +31,6 @@ public class TBox {
 		this.category = category;
 	}
 
-
 	public TBox(ObjectId id, String name, String description, boolean privacy, String category, boolean active) {
 		this.id = id;
 		this.name = name;
