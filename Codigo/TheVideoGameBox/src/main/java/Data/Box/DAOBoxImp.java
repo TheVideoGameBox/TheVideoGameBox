@@ -1,5 +1,6 @@
 package Data.Box;
 
+import Logic.Game.TGame;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -23,11 +24,16 @@ public class DAOBoxImp implements DAOBox {
 	            boxes.insertOne(insert);
 	            
 	            result=1;
-	            
+
 	        } catch (MongoException e) {
 	            return result;
 	        }
 	        return result;
 	}
-	
+
+	@Override
+	public void addGame(TBox tBox, TGame tGame) {
+
+	}
+
 }

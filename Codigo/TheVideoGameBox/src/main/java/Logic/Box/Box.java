@@ -1,7 +1,10 @@
 package Logic.Box;
 
+import Logic.Game.TGame;
 import org.bson.Document;
 import org.bson.types.ObjectId;
+
+import java.util.List;
 
 public class Box {
 
@@ -20,6 +23,8 @@ public class Box {
     private String category;
     //Booleano para gestionar la baja logica
     private boolean active;
+	//Array de juegos
+	private List<ObjectId> gameList;
     
     //Constructors
     
@@ -48,6 +53,7 @@ public class Box {
 		this.privacy=box.getPrivacy();
 		this.category=box.getCategory();
 		this.active=box.isActive();
+		this.gameList = box.getGameList();
 	}
 
     //Getters and setters
@@ -55,43 +61,61 @@ public class Box {
 	public ObjectId getId() {
 		return id;
 	}
+
 	public void setId(ObjectId id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public boolean isPrivacy() {
 		return privacy;
 	}
+
 	public void setPrivacy(boolean privacy) {
 		this.privacy = privacy;
 	}
+
 	public String getCategory() {
 		return category;
 	}
+
 	public void setCategory(String category) {
 		this.category = category;
 	}
+
 	public boolean isActive() {
 		return active;
 	}
+
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-    
-	
+
+	public List<ObjectId> getGameList() {
+		return gameList;
+	}
+
+	public void setGameList(List<ObjectId> gameList) {
+		this.gameList = gameList;
+	}
+
 	public TBox toTransfer() {
-		return new TBox(id, category, category, active, category, active);
+		return new TBox(id, category, category, active, category, active, gameList);
 	}
 	
 	
