@@ -138,11 +138,16 @@ public class ViewShowOne extends JFrame implements IView {
 		// INFO DEL JUEGO
 		JLabel coverLabel = new JLabel();
 		//coverLabel.setIcon(new ImageIcon(getClass().getClassLoader().getResource(game.getCover()))); // No creo que esto sea así.
-		JLabel nameLabel = new JLabel(game.getName());
-		JLabel companyLabel = new JLabel(game.getInvolvedCompanies().get(0));	// Habría que mostrar las demás. (En una tabla?)
-		JLabel categoryLabel = new JLabel(game.getGenres().get(0)); // Habría que mostrar las demás. (En una tabla?)
-		JLabel platformLabel = new JLabel(game.getPlatforms().get(0)); // Habría que mostrar las demás. (En una tabla?)
-		JLabel descLabel = new JLabel(game.getSummary());
+		JLabel nameLabel = null;
+		if(game.getName() != null) nameLabel = new JLabel(game.getName());
+		JLabel companyLabel = null;
+		if(game.getInvolvedCompanies() != null && !game.getInvolvedCompanies().isEmpty()) companyLabel = new JLabel(game.getInvolvedCompanies().get(0));	// Habría que mostrar las demás. (En una tabla?)
+		JLabel categoryLabel = null;
+		if(game.getGenres() != null) categoryLabel = new JLabel(game.getGenres().get(0)); // Habría que mostrar las demás. (En una tabla?)
+		JLabel platformLabel = null;
+		if(game.getPlatforms() != null && !game.getPlatforms().isEmpty()) platformLabel = new JLabel(game.getPlatforms().get(0)); // Habría que mostrar las demás. (En una tabla?)
+		JLabel descLabel = null;
+		if(game.getSummary() != null) descLabel = new JLabel(game.getSummary());
 		
 		// BACK BUTTON
 		JPanel backButtonPanel = goBackButtonPanel();
@@ -158,7 +163,7 @@ public class ViewShowOne extends JFrame implements IView {
 		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 		//midPanel.add(platformLabel);
 		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-		midPanel.add(descLabel);
+		//midPanel.add(descLabel);
 		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 		this.pack();
 		return midPanel;
