@@ -1,12 +1,6 @@
 package Data.Box;
 
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.regex;
-
-import Logic.Game.Game;
-import com.mongodb.client.FindIterable;
-import org.bson.BSONObject;
-import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 import com.mongodb.MongoException;
@@ -19,7 +13,6 @@ import Logic.Box.TBox;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class DAOBoxImp implements DAOBox {
 
