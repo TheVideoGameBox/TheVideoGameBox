@@ -67,10 +67,12 @@ public class ViewSearchByName extends JFrame implements IView{
 		JPanel contentContainer = new JPanel();
 		contentContainer.setLayout(new BoxLayout(contentContainer, BoxLayout.Y_AXIS));
 		contentContainer.setAlignmentX(CENTER_ALIGNMENT);
-		contentContainer.setBackground(new Color(128, 0, 0));
+		contentContainer.setOpaque(false);
 
 		JScrollPane scrollFrame = new JScrollPane(contentContainer);
 		contentContainer.setAutoscrolls(true);
+		scrollFrame.setOpaque(false);
+		scrollFrame.getViewport().setOpaque(false);
 
 		mainPanel.add(scrollFrame);
 
@@ -78,24 +80,26 @@ public class ViewSearchByName extends JFrame implements IView{
 		JPanel headerContainer = new JPanel();
 		headerContainer.setMaximumSize(new Dimension(1200, 100));
 		headerContainer.setLayout(new BoxLayout(headerContainer, BoxLayout.X_AXIS));
-		headerContainer.setBackground(Color.white);
+		headerContainer.setOpaque(false);
 		headerContainer.add(Box.createRigidArea(new Dimension(60, 0)));
 
 		// TITLE
 		JLabel title = new JLabel("Games Results");
 		title.setFont(new Font(title.getFont().getName(), Font.PLAIN, 25));
 		title.setAlignmentX(CENTER_ALIGNMENT);
-		title.setForeground(new Color(128, 0, 0));
+		title.setForeground(Color.white);
 		title.setFont(new Font("sans-serif", 1, 20));
 		headerContainer.add(title);
-		headerContainer.add(Box.createRigidArea(new Dimension(220, 0)));
+		headerContainer.add(Box.createRigidArea(new Dimension(190, 0)));
 
 		// ICONO DE MENU
 		JButton icon = new JButton();
 		icon.setIcon(new ImageIcon((getClass().getClassLoader().getResource("logo_small_blanco.png"))));
 		icon.setToolTipText("Back to main window");
 		icon.setBorderPainted(false);
-		icon.setBackground(Color.white);
+		icon.setOpaque(false);
+		icon.setContentAreaFilled(false);
+		icon.setFocusPainted(false);
 		icon.setAlignmentX(CENTER_ALIGNMENT);
 		headerContainer.add(icon);
 		headerContainer.add(Box.createRigidArea(new Dimension(270, 0)));
@@ -174,17 +178,16 @@ public class ViewSearchByName extends JFrame implements IView{
 			}
 
 		});
-		
-		/*
-		Image image = null;
-		//Sustituir //images.igdb.com/igdb/image/upload/t_thumb/co2dc0.jpg con la url del juego
-		URL url = new URL( "htpps:"+"//images.igdb.com/igdb/image/upload/t_thumb/co2dc0.jpg");
-		image = ImageIO.read(url);
-		
-		JLabel cover = new JLabel(new ImageIcon(image));
+		JLabel cover = new JLabel();
+		if(game.getCover() != "nan") {
+			Image image = null;
+			URL url = new URL( "https:"+ game.getCover());
+			image = ImageIO.read(url);
+			cover = new JLabel(new ImageIcon(image));
+		}
 				
 		// CONSTRUIR PANEL
-		panel.add(cover, BorderLayout.WEST);*/
+		panel.add(cover, BorderLayout.WEST);
 		panel.add(name, BorderLayout.CENTER);
 		
 

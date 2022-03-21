@@ -182,8 +182,9 @@ public class ViewPrincipal extends JFrame implements IView{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				String search = searchName.getText();
+				String search = textName.getText();
 				ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BY_NAME, search));
+				dispose();
 				
 			}
 			
