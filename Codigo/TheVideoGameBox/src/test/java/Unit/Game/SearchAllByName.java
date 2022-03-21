@@ -17,10 +17,10 @@ public class SearchAllByName {
 
     private static SAGame saGame;
 
-    private String correct = "lego";
-    private String correctEmptyResult = "@!214_=-";
-    private String limit = new String(new char[51]).replace('\0', 'f');
-    private String empty = "";
+    private static final String correct = "lego";
+    private static final String correctEmptyResult = "@!214_=-";
+    private static final String limit = new String(new char[51]).replace('\0', 'f');
+    private static final String empty = "";
 
     @BeforeClass
     public static void init(){
