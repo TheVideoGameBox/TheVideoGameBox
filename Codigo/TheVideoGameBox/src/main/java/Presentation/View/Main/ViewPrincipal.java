@@ -4,8 +4,10 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import Presentation.Controller.ApplicationController;
+import Presentation.Controller.Context;
 import Presentation.View.IView;
 import Presentation.View.ViewAbstractFactory;
+import Presentation.View.Box.ViewCreateBox;
 import Presentation.Controller.Event;
 
 import java.awt.*;
@@ -101,14 +103,38 @@ public class ViewPrincipal extends JFrame implements IView{
 		JLabel icon = new JLabel();
 		icon.setIcon(new ImageIcon(getClass().getClassLoader().getResource("logo_small_blanco.png")));
 		
+
+		//BOTON CREAR BOX
+		
+		JButton createBox = new JButton("Create Box");
+		createBox.setPreferredSize(new Dimension(120, 50));
+		createBox.setMaximumSize(new Dimension(120, 50));
+		createBox.setMinimumSize(new Dimension(120, 50));
+		createBox.setBackground(new Color(50, 170, 0));
+		createBox.setForeground(Color.white);
+		createBox.setFont(new Font("Leelawadee", Font.BOLD, 15));
+		createBox.setBorder(BorderFactory.createBevelBorder(0));
+		createBox.setFocusPainted(false);
+		createBox.setToolTipText("Create Box");
+		createBox.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ViewCreateBox createView = new ViewCreateBox();
+				dispose();
+			}
+			
+		});
+		
 		topPanel.add(Box.createRigidArea(new Dimension(20,0)));
 		topPanel.add(logIn);
 		topPanel.add(Box.createRigidArea(new Dimension(10,0)));
 		topPanel.add(registro);
 		topPanel.add(Box.createRigidArea(new Dimension(110,0)));
 		topPanel.add(icon);
+		topPanel.add(Box.createRigidArea(new Dimension(200,0)));
+		topPanel.add(createBox);
 
-		
 		return topPanel;
 	}
 	
@@ -181,8 +207,9 @@ public class ViewPrincipal extends JFrame implements IView{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				String search = searchName.getText();
-				ApplicationController.getInstance().action(Event.SEARCH_ALL_BY_NAME, search);
+				String search = textName.getText();
+				ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BY_NAME, search));
+				dispose();
 				
 			}
 			
@@ -268,7 +295,10 @@ public class ViewPrincipal extends JFrame implements IView{
 	}
 
 	@Override
-	public void update(int event, Object data) {
-				
+	public void update(Context context) {
+		if(context.getEvent() == Event.RES_SEARCH_ALL_BY_NAME_KO) {
+			JOptionPane.showMessageDialog(null, "No ha habido resultados para la busqueda");
+		}
+	
 	}
 }

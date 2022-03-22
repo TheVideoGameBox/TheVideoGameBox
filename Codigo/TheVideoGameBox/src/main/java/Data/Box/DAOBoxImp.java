@@ -17,20 +17,20 @@ import java.util.List;
 
 public class DAOBoxImp implements DAOBox {
 
-	public int create(TBox box) {
-		int result=-1;
-	        try {
-	            MongoDatabase db = Connection.getInstance().getConnection();
-	            MongoCollection<Box> boxes = db.getCollection("boxes",Box.class);
-	            Box insert = new Box(box.getName(), box.getDescription(), box.getPrivacy(), box.getCategory());
-				insert.setActive(true);
-	            boxes.insertOne(insert);
-	            
-	            result=1;
-	            
-	        } catch (MongoException e) {
-	            return result;
-	        }
+	public ObjectId create(TBox box) {
+		ObjectId result;
+
+		try {
+			MongoDatabase db = Connection.getInstance().getConnection();
+			MongoCollection<Box> boxes = db.getCollection("boxes", Box.class);
+
+			Box insert = new Box(box);
+
+			result = boxes.insertOne(insert).getInsertedId().asObjectId().getValue();
+		} catch (MongoException | NullPointerException e) {
+			result = null;
+		}
+
 		return result;
 	}
 
@@ -40,7 +40,7 @@ public class DAOBoxImp implements DAOBox {
 		try {
 			MongoDatabase db = Connection.getInstance().getConnection();
 			Box box = db.getCollection("boxes", Box.class).find(eq("_id", tBox.getId())).first();
-			gameList = box.getGameList();
+			if(box.getGameList() != null) gameList = box.getGameList();
 			gameList.add(idGame);
 			db.getCollection("boxes", Box.class).updateOne(eq("_id", tBox.getId()), Updates.set("gameList", gameList));
 		} catch (MongoException e) {
@@ -48,4 +48,16 @@ public class DAOBoxImp implements DAOBox {
 		}
 		return idGame;
 	}
+
+    @Override
+    public void deleteFromDatabase(ObjectId id) {
+        try {
+            MongoDatabase db = Connection.getInstance().getConnection();
+            MongoCollection<Box> boxes = db.getCollection("boxes", Box.class);
+
+            boxes.deleteOne(eq("_id", id));
+        } catch (MongoException e) {
+
+        }
+    }
 }

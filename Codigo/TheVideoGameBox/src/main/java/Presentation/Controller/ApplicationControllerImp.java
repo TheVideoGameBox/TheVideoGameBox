@@ -6,14 +6,16 @@ import Presentation.View.ViewAbstractFactory;
 
 public class ApplicationControllerImp extends ApplicationController {
     @Override
-    public void action(int event, Object data) {
-        ICommand command = CommandAbstractFactory.getInstance().createCommand(event);
+    public void action(Context context) {
+        ICommand command = CommandAbstractFactory.getInstance().createCommand(context.getEvent());
 
         if(command != null){
-            Context context = command.execute(data);
-            ViewAbstractFactory.getInstance().createView(context.getEvent()).update(context.getEvent(), context.getData());
+        	Context res = command.execute(context.getData());
+        	if(ViewAbstractFactory.getInstance().createView(res) == null) {
+        		ViewAbstractFactory.getInstance().getCurrentIView().update(res);
+        	}
         }else{
-            ViewAbstractFactory.getInstance().createView(event);
+        	ViewAbstractFactory.getInstance().createView(context);
         }
     }
 }

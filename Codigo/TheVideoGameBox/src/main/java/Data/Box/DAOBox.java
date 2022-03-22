@@ -1,11 +1,17 @@
 package Data.Box;
 
-import Logic.Game.TGame;
-import Logic.Box.TBox;
+import org.bson.Document;
 import org.bson.types.ObjectId;
 
-public interface DAOBox {
-	public int create(TBox box);
-	public ObjectId addGame(TBox tBox, ObjectId idGame);
+import com.mongodb.MongoException;
+import com.mongodb.client.MongoDatabase;
 
+import Data.Connection;
+import Logic.Box.TBox;
+
+public interface DAOBox {
+
+	public ObjectId create(TBox box);
+	public ObjectId addGame(TBox tBox, ObjectId idGame);
+	public void deleteFromDatabase(ObjectId id);
 }

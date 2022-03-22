@@ -1,6 +1,7 @@
 package Logic.Box;
 
 import java.util.List;
+
 import org.bson.types.ObjectId;
 
 public class TBox {
@@ -14,87 +15,100 @@ public class TBox {
     //Descripcion de la box
     private String description;
     //Privacidad de la box
-    private boolean privacy;
+    private Privacy privacy;
     //Categoría de la box
-    private String category;
+    private List<Category> categories;
     //Booleano para gestionar la baja logica
     private boolean active;
 	//Array de TGames
 	private List<ObjectId> gameList;
 	private ObjectId gameId;
-	
+
     //Constructors
     
-    public TBox(String name, String description, boolean privacy, String category) {
+    public TBox(String name, String description, Privacy privacy, List<Category> categories) {
 		this.name = name;
 		this.description = description;
 		this.privacy = privacy;
-		this.category = category;
+		this.categories = categories;
+		this.active = true;
 	}
 
-	public TBox(ObjectId id, String name, String description, boolean privacy, String category, boolean active) {
+	public TBox(ObjectId id, String name, String description, Privacy privacy, List<Category> categories, boolean active) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.privacy = privacy;
-		this.category = category;
+		this.categories = categories;
 		this.active = active;
 	}
 
-	public TBox(ObjectId id, String name, String description, boolean privacy, String category, boolean active, List<ObjectId> gameList) {
+	public TBox(ObjectId id, String name, String description, Privacy privacy, List<Category> category, boolean active, List<ObjectId> gameList) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.privacy = privacy;
-		this.category = category;
+		this.categories = category;
 		this.active = active;
 		this.gameList = gameList;
 	}
 
 	//Getters and setters
+	
 	public ObjectId getId() {
 		return id;
 	}
+
 
 	public void setId(ObjectId id) {
 		this.id = id;
 	}
 
+
 	public String getName() {
 		return name;
 	}
+
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
+
 	public String getDescription() {
 		return description;
 	}
+
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public boolean getPrivacy() {
+
+	public Privacy getPrivacy() {
 		return privacy;
 	}
 
-	public void setPrivacy(boolean privacy) {
+
+	public void setPrivacy(Privacy privacy) {
 		this.privacy = privacy;
 	}
 
-	public String getCategory() {
-		return category;
+
+	public List<Category> getCategories() {
+		return categories;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
+
 
 	public boolean isActive() {
 		return active;
 	}
+
 
 	public void setActive(boolean active) {
 		this.active = active;
