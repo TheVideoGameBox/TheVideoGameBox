@@ -33,7 +33,8 @@ public class ViewPrincipal extends JFrame implements IView{
 		
 		JPanelConFondo mainpanel = new JPanelConFondo();
 		mainpanel.setLayout(new BorderLayout());
-		mainpanel.setImagen(new ImageIcon(getClass().getClassLoader().getResource("fondo_triangular.png")).getImage());
+		//mainpanel.setImagen(new ImageIcon(getClass().getClassLoader().getResource("fondo_triangular.png")).getImage());
+		mainpanel.setBackground(new Color(60, 77, 96));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(mainpanel);
 		
@@ -64,8 +65,10 @@ public class ViewPrincipal extends JFrame implements IView{
 		logIn.setIcon(new ImageIcon(getClass().getClassLoader().getResource("user_icon.png")));
 		logIn.setMaximumSize(new Dimension(120, 50));
 		logIn.setMinimumSize(new Dimension(120, 50));
-		logIn.setBackground(new Color(64, 147, 255));
-		logIn.setForeground(Color.white);
+		//logIn.setBackground(new Color(64, 147, 255));
+		//logIn.setForeground(Color.white);
+		logIn.setContentAreaFilled(false);
+		logIn.setForeground(new Color(170, 170, 170));
 		logIn.setFont(new Font("Leelawadee", Font.BOLD, 15));
 		//logIn.setBorder(BorderFactory.createBevelBorder(0));
 		logIn.setFocusPainted(false);
@@ -92,8 +95,10 @@ public class ViewPrincipal extends JFrame implements IView{
 		registro.setPreferredSize(new Dimension(120, 50));
 		registro.setMaximumSize(new Dimension(120, 50));
 		registro.setMinimumSize(new Dimension(120, 50));
-		registro.setBackground(new Color(255, 170, 0));
-		registro.setForeground(Color.white);
+		//registro.setBackground(new Color(255, 170, 0));
+		//registro.setForeground(Color.white);
+		registro.setContentAreaFilled(false);
+		registro.setForeground(new Color(170, 170, 170));
 		registro.setFont(new Font("Leelawadee", Font.BOLD, 15));
 		//registro.setBorder(BorderFactory.createBevelBorder(0));
 		registro.setFocusPainted(false);
@@ -112,8 +117,10 @@ public class ViewPrincipal extends JFrame implements IView{
 		createBox.setPreferredSize(new Dimension(120, 50));
 		createBox.setMaximumSize(new Dimension(120, 50));
 		createBox.setMinimumSize(new Dimension(120, 50));
-		createBox.setBackground(new Color(50, 170, 0));
-		createBox.setForeground(Color.white);
+		//createBox.setBackground(new Color(50, 170, 0));
+		//createBox.setForeground(Color.white);
+		createBox.setContentAreaFilled(false);
+		createBox.setForeground(new Color(170, 170, 170));
 		createBox.setFont(new Font("Leelawadee", Font.BOLD, 15));
 		//createBox.setBorder(BorderFactory.createBevelBorder(0));
 		createBox.setFocusPainted(false);

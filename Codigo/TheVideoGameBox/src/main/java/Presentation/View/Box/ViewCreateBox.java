@@ -1,12 +1,10 @@
 package Presentation.View.Box;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -40,12 +38,15 @@ public class ViewCreateBox extends JFrame implements IView{
 	
 	public void initGUI() {
 		this.getContentPane().removeAll();
-		this.setPreferredSize(new Dimension(900, 550));
-		this.setLocation(400, 100);
+		this.setPreferredSize(new Dimension(775, 550));
+		//this.setLocation(400, 100);
 
 		JPanelConFondo mainpanel = new JPanelConFondo();
 		mainpanel.setLayout(new BoxLayout(mainpanel,BoxLayout.Y_AXIS));
-		mainpanel.setImagen(new ImageIcon(getClass().getClassLoader().getResource("fondo_triangular.png")).getImage());
+		//mainpanel.setImagen(new ImageIcon(getClass().getClassLoader().getResource("fondo_triangular.png")).getImage());
+		Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("caja_definitiva.png"))).getImage();
+		this.setIconImage(iconFrame);
+		mainpanel.setBackground(new Color(60, 77, 96));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(mainpanel);
 		
@@ -62,25 +63,28 @@ public class ViewCreateBox extends JFrame implements IView{
 		midPanel.setOpaque(false);
 		JPanel formContainer = new JPanel();
 		formContainer.setLayout(new BoxLayout(formContainer, BoxLayout.Y_AXIS));
-		formContainer.setPreferredSize(new Dimension(400, 500));
+		formContainer.setPreferredSize(new Dimension(400, 700));
+		formContainer.setMinimumSize(new Dimension(400, 0));
 		formContainer.setAlignmentX(CENTER_ALIGNMENT);
-		formContainer.setAlignmentY(CENTER_ALIGNMENT);
+		formContainer.setAlignmentY(TOP_ALIGNMENT);
 		formContainer.setOpaque(false);
-		formContainer.setBorder(new EmptyBorder(20, 20, 20, 20));
+		formContainer.setBorder(new EmptyBorder(0, 20, 20, 20));
 		formContainer.setAutoscrolls(true);
 		
 		//TITULO
 		JLabel titleLabel = new JLabel("Create Box");
 		titleLabel.setAlignmentX(CENTER_ALIGNMENT);
 		titleLabel.setFont(new Font("Leelawadee", Font.BOLD, 40));
-		titleLabel.setForeground(new Color(64, 147, 255));
+		titleLabel.setForeground(new Color(170, 180, 180));
 		
 		//BOTON SUBMIT
 		JButton submitButton = new JButton("Submit");
 		submitButton.setMaximumSize(new Dimension(500, 30));
 		submitButton.setAlignmentX(CENTER_ALIGNMENT);
-		submitButton.setBackground(new Color(64, 147, 255));
-		submitButton.setForeground(Color.white);
+		//submitButton.setBackground(new Color(64, 147, 255));
+		//submitButton.setForeground(Color.white);
+		submitButton.setContentAreaFilled(false);
+		submitButton.setForeground(new Color(170, 170, 170));
 		submitButton.setFont(new Font("Leelawadee", Font.BOLD, 15));
 		submitButton.setFocusPainted(false);
 		submitButton.setBorderPainted(false);
@@ -118,6 +122,7 @@ public class ViewCreateBox extends JFrame implements IView{
 		mainpanel.add(midPanel);
 		
 		this.pack();
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 	
@@ -130,10 +135,16 @@ public class ViewCreateBox extends JFrame implements IView{
 		JLabel label = new JLabel(title);
 		label.setFont(new Font("Leelawadee", Font.BOLD, 15));
 		label.setAlignmentX(CENTER_ALIGNMENT);
+		label.setForeground(new Color(170, 180, 180));
 
 		JTextField input = new JTextField(6);
+		input.setBackground(new Color(25, 29, 35));
+		input.setForeground(Color.white);
+		input.setFont(new Font("Leelawadee", Font.BOLD, 13));
 		input.setMaximumSize(new Dimension(400, 30));
 		input.setPreferredSize(new Dimension(400, 30));
+		input.setBorder(null);
+		input.setHorizontalAlignment(0);
 		textFields.add(input);
 
 		container.add(label);
@@ -141,7 +152,6 @@ public class ViewCreateBox extends JFrame implements IView{
 
 		return container;
 	}
-
 	
 	private JPanel backButtonContainer(){
 		//BACK BUTTON
@@ -151,10 +161,13 @@ public class ViewCreateBox extends JFrame implements IView{
 		
 		JButton backButton = new JButton("Volver al Principio");
 		backButton.setFont(new Font("Leelawadee", Font.BOLD, 15));
-		backButton.setBackground(new Color(64, 147, 255));
-		backButton.setForeground(Color.white);
+		//backButton.setBackground(new Color(64, 147, 255));
+		//backButton.setForeground(Color.white);
+		backButton.setContentAreaFilled(false);
+		backButton.setForeground(new Color(170, 170, 170));
 		backButton.setToolTipText("Volver a la pagina principal");
 		backButton.setPreferredSize(new Dimension(180, 50));
+		backButton.setMinimumSize(new Dimension(180, 50));
 		backButton.setFocusPainted(false);
 		backButton.setAlignmentX(LEFT_ALIGNMENT);
 		backButton.setBorder(null);
