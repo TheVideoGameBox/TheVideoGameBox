@@ -22,25 +22,23 @@ public class TGame {
 
     //Constructors
 
-    public TGame(String name, String cover, List<String> involved_companies, List<String> categories, List<String> platforms, String description) {
+    public TGame(String name, String cover, List<String> involved_companies, List<String> categories, List<String> platforms, String summary) {
         this.name = name;
         this.cover = cover;
         this.involved_companies = involved_companies;
         this.genres = categories;
         this.platforms = platforms;
-        this.summary = description;
+        this.summary = summary;
     }
 
-    public TGame(ObjectId id, String name, String cover, List<String> developer, List<String> categories, List<String> platforms, String description, boolean deleted) {
+    public TGame(ObjectId id, String name, String cover, List<String> involved_companies, List<String> categories, List<String> platforms, String summary) {
         this.id = id;
         this.name = name;
         this.cover = cover;
         this.involved_companies = involved_companies;
         this.genres = categories;
         this.platforms = platforms;
-        this.description = description;
-        this.isDeleted = deleted;
-        this.summary = description;
+        this.summary = summary;
     }
 
     //Getters and setters
@@ -99,14 +97,6 @@ public class TGame {
 
     public void setSummary(String summary) {
         this.summary = summary;
-    }
-
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setActive(boolean deleted) {
-        isDeleted = deleted;
     }
     
     @Override

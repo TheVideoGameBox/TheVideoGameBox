@@ -22,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 
 import Logic.Box.SABoxImp;
 import Logic.Box.TBox;
+import Presentation.Controller.Context;
 import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.ViewPrincipal;
@@ -171,9 +172,11 @@ public class ViewCreateBox extends JFrame implements IView{
 		
 		return backButtonContainer;
 	}
-	
+
 	@Override
-	public void update(int event, Object data) {
+	public void update(Context context) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
