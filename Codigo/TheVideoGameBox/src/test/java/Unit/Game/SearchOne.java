@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class SearchOne {
 
     private static SAGame saGame;
-    private final ObjectId _id = new ObjectId("62370c135c37793c661d73bf");
+    private final ObjectId _id = new ObjectId("623a0636207a93d657bf5f8b");
 
     @BeforeClass
     public static void init(){
