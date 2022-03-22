@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.fail;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class SearchAllByName {
         List<TGame> games = saGame.searchAllByName(correct);
 
         try{
+            assertFalse(games.isEmpty());
             for(TGame game : games)
                 assertTrue(game.getName().toLowerCase().contains(correct));
         }catch (Exception ae){
