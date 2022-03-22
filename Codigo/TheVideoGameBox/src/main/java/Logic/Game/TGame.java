@@ -11,37 +11,36 @@ public class TGame {
     private String name;
     //Portada del juego
     private String cover;
-    //Lista de desarrolladores del juego
-    private List<String> developer;
+    //Lista de compañias involucradas en el desarrollo del juego
+    private List<String> involved_companies;
     //Lista de categorias del juego
-    private List<String> categories;
+    private List<String> genres;
     //Lista de plataformas(consolas/ordenador) del juego
     private List<String> platforms;
     //Descripcion del juego
-    private String description;
-    //Booleano para gestionar la baja logica
-    private boolean isDeleted;
+    private String summary;
 
     //Constructors
 
-    public TGame(String name, String cover, List<String> developer, List<String> categories, List<String> platforms, String description) {
+    public TGame(String name, String cover, List<String> involved_companies, List<String> categories, List<String> platforms, String description) {
         this.name = name;
         this.cover = cover;
-        this.developer = developer;
-        this.categories = categories;
+        this.involved_companies = involved_companies;
+        this.genres = categories;
         this.platforms = platforms;
-        this.description = description;
+        this.summary = description;
     }
 
     public TGame(ObjectId id, String name, String cover, List<String> developer, List<String> categories, List<String> platforms, String description, boolean deleted) {
         this.id = id;
         this.name = name;
         this.cover = cover;
-        this.developer = developer;
-        this.categories = categories;
+        this.involved_companies = involved_companies;
+        this.genres = categories;
         this.platforms = platforms;
         this.description = description;
         this.isDeleted = deleted;
+        this.summary = description;
     }
 
     //Getters and setters
@@ -70,20 +69,20 @@ public class TGame {
         this.cover = cover;
     }
 
-    public List<String> getDeveloper() {
-        return developer;
+    public List<String> getInvolvedCompanies() {
+        return involved_companies;
     }
 
-    public void setDeveloper(List<String> developer) {
-        this.developer = developer;
+    public void setInvolvedCompanies(List<String> involved_companies) {
+        this.involved_companies = involved_companies;
     }
 
-    public List<String> getCategories() {
-        return categories;
+    public List<String> getGenres() {
+        return genres;
     }
 
-    public void setCategories(List<String> categories) {
-        this.categories = categories;
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
     }
 
     public List<String> getPlatforms() {
@@ -94,12 +93,12 @@ public class TGame {
         this.platforms = platforms;
     }
 
-    public String getDescription() {
-        return description;
+    public String getSummary() {
+        return summary;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public boolean isDeleted() {
@@ -108,5 +107,17 @@ public class TGame {
 
     public void setActive(boolean deleted) {
         isDeleted = deleted;
+      
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cover='" + cover + '\'' +
+                ", involved_companies=" + involved_companies +
+                ", genres=" + genres +
+                ", platforms=" + platforms +
+                ", summary='" + summary + '\'' +
+                '}';
     }
 }
