@@ -67,9 +67,10 @@ public class ViewPrincipal extends JFrame implements IView{
 		logIn.setBackground(new Color(64, 147, 255));
 		logIn.setForeground(Color.white);
 		logIn.setFont(new Font("Leelawadee", Font.BOLD, 15));
-		logIn.setBorder(BorderFactory.createBevelBorder(0));
+		//logIn.setBorder(BorderFactory.createBevelBorder(0));
 		logIn.setFocusPainted(false);
 		logIn.setToolTipText("Log In");
+		logIn.setBorder(null);
 		logIn.addActionListener(new ActionListener() {
 
 			@Override
@@ -94,9 +95,10 @@ public class ViewPrincipal extends JFrame implements IView{
 		registro.setBackground(new Color(255, 170, 0));
 		registro.setForeground(Color.white);
 		registro.setFont(new Font("Leelawadee", Font.BOLD, 15));
-		registro.setBorder(BorderFactory.createBevelBorder(0));
+		//registro.setBorder(BorderFactory.createBevelBorder(0));
 		registro.setFocusPainted(false);
 		registro.setToolTipText("Register");
+		registro.setBorder(null);
 		
 		//Icono de la aplicacion
 		
@@ -113,9 +115,10 @@ public class ViewPrincipal extends JFrame implements IView{
 		createBox.setBackground(new Color(50, 170, 0));
 		createBox.setForeground(Color.white);
 		createBox.setFont(new Font("Leelawadee", Font.BOLD, 15));
-		createBox.setBorder(BorderFactory.createBevelBorder(0));
+		//createBox.setBorder(BorderFactory.createBevelBorder(0));
 		createBox.setFocusPainted(false);
 		createBox.setToolTipText("Create Box");
+		createBox.setBorder(null);
 		createBox.addActionListener(new ActionListener() {
 
 			@Override
@@ -186,11 +189,13 @@ public class ViewPrincipal extends JFrame implements IView{
 		textPanelN.setOpaque(false);
 		textPanelN.setLayout(new BoxLayout(textPanelN, BoxLayout.X_AXIS));
 		textPanelN.add(Box.createRigidArea(new Dimension(50, 0)));
+		textPanelN.setBorder(null);
 		
 		JTextField textName = new JTextField();
 		textName.setPreferredSize(new Dimension(200, 30));
 		textName.setMinimumSize(new Dimension(200, 30));
 		textName.setMaximumSize(new Dimension(200, 30));
+		textName.setBorder(null);
 
 		JButton searchName = new JButton("SEARCH");
 		searchName.setPreferredSize(new Dimension(120, 30));
@@ -199,9 +204,10 @@ public class ViewPrincipal extends JFrame implements IView{
 		searchName.setBackground(new Color(64, 147, 255));
 		searchName.setForeground(Color.white);
 		searchName.setFont(new Font("Leelawadee", Font.BOLD, 15));
-		searchName.setBorder(BorderFactory.createBevelBorder(0));
+		//searchName.setBorder(BorderFactory.createBevelBorder(0));
 		searchName.setFocusPainted(false);
 		searchName.setToolTipText("Search a Game by Name");
+		searchName.setBorder(null);
 		searchName.addActionListener(new ActionListener() {
 
 			@Override

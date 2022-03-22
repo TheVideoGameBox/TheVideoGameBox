@@ -70,7 +70,7 @@ public class ViewCreateBox extends JFrame implements IView{
 		formContainer.setAutoscrolls(true);
 		
 		//TITULO
-		JLabel titleLabel = new JLabel("Alta Persona");
+		JLabel titleLabel = new JLabel("Create Box");
 		titleLabel.setAlignmentX(CENTER_ALIGNMENT);
 		titleLabel.setFont(new Font("Leelawadee", Font.BOLD, 40));
 		titleLabel.setForeground(new Color(64, 147, 255));
@@ -157,7 +157,8 @@ public class ViewCreateBox extends JFrame implements IView{
 		backButton.setPreferredSize(new Dimension(180, 50));
 		backButton.setFocusPainted(false);
 		backButton.setAlignmentX(LEFT_ALIGNMENT);
-		backButton.setBorder(BorderFactory.createBevelBorder(0));
+		backButton.setBorder(null);
+		//backButton.setBorder(BorderFactory.createBevelBorder(0));
 		backButtonContainer.add(backButton);
 	
 		backButton.addActionListener(new ActionListener(){
