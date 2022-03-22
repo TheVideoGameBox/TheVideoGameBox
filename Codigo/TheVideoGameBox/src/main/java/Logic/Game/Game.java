@@ -1,5 +1,6 @@
 package Logic.Game;
 
+import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import java.util.List;

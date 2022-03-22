@@ -7,23 +7,16 @@ import java.util.List;
 public class Box {
 
 	//Falta añadir usuario al que pertenece la Box y array de ID's de Games
-	
-	
-	//MongoDB id
     private ObjectId id;
-    //Nombre de la box
     private String name;
-    //Descripcion de la box
     private String description;
-    //Privacidad de la box
     private Privacy privacy;
-    //Categoría de la box
     private List<Category> categories;
-    //Booleano para gestionar la baja logica
     private boolean active;
+	private List<ObjectId> gameList;
+	private ObjectId gameId;
     
-    //Constructors
-    
+
     public Box() {}
     
 	public Box(String name, String description, Privacy privacy, List<Category> categories) {
@@ -51,7 +44,15 @@ public class Box {
 		this.active = box.isActive();
 	}
 
-    //Getters and setters
+	public Box(ObjectId id, String name, String description, Privacy privacy, List<Category> category, boolean active, List<ObjectId> gameList) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.privacy = privacy;
+		this.categories = category;
+		this.active = active;
+		this.gameList = gameList;
+	}
 
 	public ObjectId getId() {
 		return id;
@@ -89,7 +90,14 @@ public class Box {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-    
+
+	public List<ObjectId> getGameList() {
+		return gameList;
+	}
+
+	public void setGameList(List<ObjectId> gameList) {
+		this.gameList = gameList;
+	}
 	
 	public TBox toTransfer() {
 		return new TBox(id, name, description, privacy, categories, active);

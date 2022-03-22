@@ -20,7 +20,10 @@ public class TBox {
     private List<Category> categories;
     //Booleano para gestionar la baja logica
     private boolean active;
-	
+	//Array de TGames
+	private List<ObjectId> gameList;
+	private ObjectId gameId;
+
     //Constructors
     
     public TBox(String name, String description, Privacy privacy, List<Category> categories) {
@@ -31,7 +34,6 @@ public class TBox {
 		this.active = true;
 	}
 
-
 	public TBox(ObjectId id, String name, String description, Privacy privacy, List<Category> categories, boolean active) {
 		this.id = id;
 		this.name = name;
@@ -41,6 +43,15 @@ public class TBox {
 		this.active = active;
 	}
 
+	public TBox(ObjectId id, String name, String description, Privacy privacy, List<Category> category, boolean active, List<ObjectId> gameList) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.privacy = privacy;
+		this.categories = category;
+		this.active = active;
+		this.gameList = gameList;
+	}
 
 	//Getters and setters
 	
@@ -102,7 +113,13 @@ public class TBox {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-    
-    
+
+	public List<ObjectId> getGameList() {
+		return gameList;
+	}
+
+	public void setGameList(List<ObjectId> gameList) {
+		this.gameList = gameList;
+	}
 }
 
