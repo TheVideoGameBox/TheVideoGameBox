@@ -3,9 +3,7 @@ package Unit.Game;
 import Data.Connection;
 import Logic.Game.Game;
 import Logic.Game.SAGame;
-import Logic.Game.TGame;
 import Logic.SAAbstractFactory;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.types.ObjectId;
 import org.junit.BeforeClass;
@@ -13,7 +11,8 @@ import org.junit.Test;
 
 import java.util.Objects;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 public class SearchOne {
 
@@ -23,15 +22,18 @@ public class SearchOne {
     @BeforeClass
     public static void init() {
         MongoDatabase db = Connection.getInstance().getConnection();
-        MongoCollection<Game> games = db.getCollection("games", Game.class);
-        _id = Objects.requireNonNull(games.find().first()).getId();
+        _id = Objects.requireNonNull(db.getCollection("games", Game.class).find().first()).getId();
         saGame = SAAbstractFactory.getInstance().createSAGame();
     }
 
     @Test
     public void testCorrect(){
-        TGame tGame = saGame.searchOne(_id);
-        assertNotNull(tGame);
+        try {
+            assertNotNull(saGame.searchOne(_id));
+        } catch (Exception ae) {
+            fail(ae.getMessage());
+        }
+
     }
 
 }

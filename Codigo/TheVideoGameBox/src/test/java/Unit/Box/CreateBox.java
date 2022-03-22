@@ -1,29 +1,19 @@
 package Unit.Box;
 
-import Data.Connection;
-import Data.DAOAbstractFactory;
-import Logic.Box.*;
-import Logic.Game.TGame;
+import Logic.Box.Category;
+import Logic.Box.Privacy;
+import Logic.Box.SABox;
+import Logic.Box.TBox;
 import Logic.SAAbstractFactory;
-
-import com.mongodb.MongoException;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import org.bson.types.ObjectId;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.fail;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertNotNull;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-import static com.mongodb.client.model.Filters.eq;
+import static org.junit.Assert.*;
 
 public class CreateBox {
 
