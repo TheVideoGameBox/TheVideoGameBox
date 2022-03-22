@@ -1,0 +1,59 @@
+name: TVGB_CI
+
+on:
+  push:
+    branches:
+    - stage
+  pull_request:
+    branches:
+    - stage
+  workflow_dispatch:
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Paso 1 - Checkout rama stage
+        uses: actions/checkout@v3
+        with:
+          ref: 'stage'
+
+      - name: Paso 2.1 - Preparar JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+          
+      - name: Paso 2.2 - Comprobar version de Java
+        run: java -version
+        
+      - name: Paso 3.1 - Compilar/Build el proyecto de Java con Maven
+        run: |
+            cd Codigo/Prototipo_mongDB_1
+            mvn clean -B package --file pom.xml
+            mkdir build && cp target/*.jar build
+            
+      - name: Paso 3.2 - Comprobar que se ha compilado el proyecto correctamente
+        run: |
+            cd Codigo/Prototipo_mongDB_1/build
+            ls | grep .jar
+            
+      - name: Paso 4.1 - Ejecutar tests unitarios
+        run: |
+             cd Codigo/Prototipo_mongDB_1
+             mvn -Dtest=Unit -DfailIfNoTests=false test
+             
+      - name: Paso 4.2 - Ejecutar tests de integracion
+        if: success()
+        run: |
+             cd Codigo/Prototipo_mongDB_1
+             mvn -Dtest=Integration -DfailIfNoTests=false test
+        
+      - name: Paso 5.1 - Subir el proyecto compilado como un artefacto
+        if: success()
+        uses: actions/upload-artifact@v2
+        with:
+          name: PrototipoMongoDB
+          path: Codigo/TheVideoGameBox/build
