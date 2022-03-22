@@ -43,7 +43,7 @@ jobs:
       - name: Paso 4.1 - Ejecutar tests unitarios
         run: |
              cd Codigo/TheVideoGameBox
-             mvn -Dtest=Unit.Box.SearchAllByName -DfailIfNoTests=false test
+             mvn -Dtest="Unit/Box/**" -DfailIfNoTests=false test
              
       - name: Paso 4.2 - Ejecutar tests de integracion
         if: success()
