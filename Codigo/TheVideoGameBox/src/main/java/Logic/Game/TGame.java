@@ -107,7 +107,8 @@ public class TGame {
 
     public void setActive(boolean deleted) {
         isDeleted = deleted;
-      
+    }
+    
     @Override
     public String toString() {
         return "{" +
