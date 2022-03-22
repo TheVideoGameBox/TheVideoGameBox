@@ -8,9 +8,13 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -138,26 +142,44 @@ public class ViewShowOne extends JFrame implements IView {
 		midPanel.setBorder(new BorderTitle("About the game", Color.white));
 		
 		// INFO DEL JUEGO
-		JLabel coverLabel = new JLabel();
-		//coverLabel.setIcon(new ImageIcon(getClass().getClassLoader().getResource(game.getCover()))); // No creo que esto sea así.
-		JLabel nameLabel = null;
-		if(game.getName() != null) nameLabel = new JLabel(game.getName());
-		List<JLabel> companyLabel = new ArrayList<>();
+		JLabel coverLabel = new JLabel();			// Carátula del juego.
+		if (game.getCover() != "nan") {
+			Image image = null;
+			URL url;
+			try {
+				url = new URL("https:" + game.getCover());
+				image = ImageIO.read(url);
+				coverLabel = new JLabel(new ImageIcon(image));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		JLabel nameLabel = null;					// Nombre del juego.
+		if(game.getName() != null) {
+			nameLabel = new JLabel(game.getName());
+		}
+		
+		List<JLabel> companyLabel = new ArrayList<>();		// Empresas responsables del juego.
 		for(int i = 0; game.getInvolvedCompanies() != null && !game.getInvolvedCompanies().isEmpty() && i < game.getGenres().size(); i++) {
 			companyLabel.add(new JLabel(game.getInvolvedCompanies().get(i)));
 		}
-		List<JLabel> categoryLabel = new ArrayList<>();
+		
+		List<JLabel> categoryLabel = new ArrayList<>();		// Categorías del juego.
 		for(int i = 0; game.getGenres() != null && !game.getGenres().isEmpty() && i < game.getGenres().size(); i++) {
 			categoryLabel.add(new JLabel(game.getGenres().get(i)));
 		}
-		List<JLabel> platformLabel = new ArrayList<>();
+		
+		List<JLabel> platformLabel = new ArrayList<>();		// Plataformas para las que está disponible el juego.
 		for(int i = 0; game.getPlatforms() != null && !game.getPlatforms().isEmpty() && i < game.getGenres().size(); i++) {
 			platformLabel.add(new JLabel(game.getPlatforms().get(i)));
 		}
-		JLabel descLabel = null;
+		
+		JLabel descLabel = null;			// Descripción del juego.
 		if(game.getSummary() != null) descLabel = new JLabel(game.getSummary());
 		
-		// BACK BUTTON
+		// BACK BUTTON (para volver a la vista principal).
 		JPanel backButtonPanel = goBackButtonPanel();
 		
 		midPanel.add(backButtonPanel);
@@ -208,7 +230,5 @@ public class ViewShowOne extends JFrame implements IView {
 	}
 
 	@Override
-	public void update(Context context) {
-
-	}
+	public void update(Context context) {}
 }
