@@ -31,13 +31,15 @@ public class TGame {
         this.summary = description;
     }
 
-    public TGame(ObjectId id, String name, String cover, List<String> involved_companies, List<String> categories, List<String> platforms, String description) {
+    public TGame(ObjectId id, String name, String cover, List<String> developer, List<String> categories, List<String> platforms, String description, boolean deleted) {
         this.id = id;
         this.name = name;
         this.cover = cover;
         this.involved_companies = involved_companies;
         this.genres = categories;
         this.platforms = platforms;
+        this.description = description;
+        this.isDeleted = deleted;
         this.summary = description;
     }
 
@@ -99,6 +101,13 @@ public class TGame {
         this.summary = summary;
     }
 
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setActive(boolean deleted) {
+        isDeleted = deleted;
+      
     @Override
     public String toString() {
         return "{" +

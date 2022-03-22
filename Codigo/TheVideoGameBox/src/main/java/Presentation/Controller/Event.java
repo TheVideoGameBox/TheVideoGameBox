@@ -23,5 +23,8 @@ public class Event {
 
 
     // Codigos de eventos para BOX [500-700)
+    public static final int CREATE_BOX = 500;
+    public static final int RES_CREATE_BOX_OK = 502;
+    public static final int RES_CREATE_BOX_KO = 503;
 
 }
