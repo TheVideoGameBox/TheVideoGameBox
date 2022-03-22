@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
@@ -21,7 +22,7 @@ public class AddGameToBox {
     private static SABox saBox;
     private static ObjectId idBox = null;
 
-    private static final TBox correct = new TBox("TEST_ADD_GAME", "TEST_ADD_GAME", Privacy.PRIVATE, new ArrayList<Logic.Box.Category>(Arrays.asList(Category.RACING)));
+    private static final TBox correct = new TBox("TEST_ADD_GAME", "TEST_ADD_GAME", Privacy.PRIVATE, new ArrayList<Logic.Box.Category>(List.of(Category.RACING, Category.INDIE)));
     private static final ObjectId idGame = new ObjectId("62370c135c37793c661d73bf");
 
     @BeforeClass
