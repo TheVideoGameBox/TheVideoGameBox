@@ -55,5 +55,5 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v2
         with:
-          name: PrototipoMongoDB
+          name: TheVideoGameBox_Executable
           path: Codigo/TheVideoGameBox/build
