@@ -6,23 +6,16 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Logic.Box.Category;
@@ -79,54 +72,30 @@ public class ViewCreateBox extends JFrame implements IView{
 		mainPanel.setImagen(new ImageIcon(getClass().getClassLoader().getResource("fondo_triangular.png")).getImage());
 		getContentPane().add(mainPanel);
 		mainPanel.setLayout(null);
-		initGUI();
-	}
-
-	public void initGUI() {
-		this.getContentPane().removeAll();
-		this.setPreferredSize(new Dimension(775, 550));
-		//this.setLocation(400, 100);
-
-		JPanelConFondo mainpanel = new JPanelConFondo();
-		mainpanel.setLayout(new BoxLayout(mainpanel,BoxLayout.Y_AXIS));
-		//mainpanel.setImagen(new ImageIcon(getClass().getClassLoader().getResource("fondo_triangular.png")).getImage());
-		Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("caja_definitiva.png"))).getImage();
-		this.setIconImage(iconFrame);
-		//mainpanel.setBackground(new Color(60, 77, 96));
-		mainpanel.setBackground(new Color(25, 29, 35));
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.add(mainpanel);
-
+		
 		midPanel = new JPanel();
 		midPanel.setBounds(203, 23, 556, 446);
 		midPanel.setOpaque(false);
 		mainPanel.add(midPanel);
 		midPanel.setLayout(null);
-		JPanel formContainer = new JPanel();
-		formContainer.setLayout(new BoxLayout(formContainer, BoxLayout.Y_AXIS));
-		formContainer.setPreferredSize(new Dimension(400, 700));
-		formContainer.setMinimumSize(new Dimension(400, 0));
-		formContainer.setAlignmentX(CENTER_ALIGNMENT);
-		formContainer.setAlignmentY(TOP_ALIGNMENT);
-		formContainer.setOpaque(false);
-		formContainer.setBorder(new EmptyBorder(0, 20, 20, 20));
-		formContainer.setAutoscrolls(true);
-
-		//TITULO
+		
+	
+		
 		JLabel titleLabel = new JLabel("Create Box");
+		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		titleLabel.setAlignmentX(CENTER_ALIGNMENT);
 		titleLabel.setFont(new Font("Leelawadee", Font.BOLD, 40));
 		titleLabel.setBounds(158, 22, 225, 59);
 		titleLabel.setForeground(SystemColor.controlHighlight);
 		midPanel.add(titleLabel);
-
+		
 		textFieldName = new JTextField();
 		textFieldName.setToolTipText("Type new Box name");
 		textFieldName.setFont(new Font("Leelawadee", Font.PLAIN, 13));
 		textFieldName.setBounds(81, 114, 401, 30);
 		midPanel.add(textFieldName);
 		textFieldName.setColumns(10);
-
+		
 		JLabel labelName = new JLabel("Name:");
 		labelName.setToolTipText("");
 		labelName.setForeground(Color.WHITE);
@@ -134,38 +103,38 @@ public class ViewCreateBox extends JFrame implements IView{
 		labelName.setAlignmentX(CENTER_ALIGNMENT);
 		labelName.setBounds(257, 97, 66, 14);
 		midPanel.add(labelName);
-
+		
 		JLabel labelDescription = new JLabel("Description:");
 		labelDescription.setToolTipText("");
-		labelDescription.setForeground(new Color(170, 170, 170));
+		labelDescription.setForeground(Color.WHITE);
 		labelDescription.setFont(new Font("Leelawadee", Font.BOLD, 15));
 		labelDescription.setAlignmentX(0.5f);
 		labelDescription.setBounds(238, 162, 97, 14);
 		midPanel.add(labelDescription);
-
+		
 		textFieldDescription = new JTextField();
 		textFieldDescription.setToolTipText("Type new Box description");
 		textFieldDescription.setFont(new Font("Leelawadee", Font.PLAIN, 13));
 		textFieldDescription.setColumns(10);
 		textFieldDescription.setBounds(81, 180, 401, 30);
 		midPanel.add(textFieldDescription);
-
+		
 		JLabel labelCategories = new JLabel("Categories:");
 		labelCategories.setToolTipText("Select categories");
-		labelCategories.setForeground(new Color(170, 170, 170));
+		labelCategories.setForeground(Color.WHITE);
 		labelCategories.setFont(new Font("Leelawadee", Font.BOLD, 15));
 		labelCategories.setAlignmentX(0.5f);
 		labelCategories.setBounds(36, 277, 88, 19);
 		midPanel.add(labelCategories);
-
-
+		
+		
 		
 		comboBoxPrivacy = new JComboBox(Privacy.values());
 		comboBoxPrivacy.setBackground(UIManager.getColor("Button.light"));
 		comboBoxPrivacy.setFont(new Font("Leelawadee", Font.PLAIN, 14));
 		comboBoxPrivacy.setBounds(395, 276, 87, 22);
 		midPanel.add(comboBoxPrivacy);
-
+		
 		JButton btnCreate = new JButton("CREATE");
 		btnCreate.setForeground(Color.WHITE);
 		btnCreate.setFont(new Font("Leelawadee", Font.BOLD, 15));
@@ -180,20 +149,20 @@ public class ViewCreateBox extends JFrame implements IView{
 			}
 		});
 		midPanel.add(btnCreate);
-
+		
 		addPanelCheckboxes();
-
-
+		
+		
 		backButtonContainer = new JPanel();
 		backButtonContainer.setLayout(null);
 		backButtonContainer.setOpaque(false);
 		backButtonContainer.setBounds(10, 11, 196, 67);
 		addBackButton();
 		mainPanel.add(backButtonContainer);
-
-
-
-
+		
+		
+		
+		
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
@@ -205,19 +174,19 @@ public class ViewCreateBox extends JFrame implements IView{
 		String description = textFieldDescription.getText();
 		List<Category> categories = getCategories();
 		Privacy privacy = getPrivacy();
-
+		
 		TBox box = new TBox(name, description, privacy, categories);
-
+		
 		ApplicationController.getInstance().action(new Context(Event.CREATE_BOX, box));
-
+		
 		ViewPrincipal principal = new ViewPrincipal();
 		dispose();
-
+		
 	}
 
 	private Privacy getPrivacy() {
 		String privacy=comboBoxPrivacy.getSelectedItem().toString();
-
+		
 		if(privacy.equals(Privacy.PRIVATE.toString()))
 			return Privacy.PRIVATE;
 		else
@@ -226,7 +195,7 @@ public class ViewCreateBox extends JFrame implements IView{
 
 	private List<Category> getCategories() {
 		List<Category> categories = new ArrayList<>();
-
+		
 		if(checkBoxShooter.isSelected()) {
 			categories.add(Category.SHOOTER);
 		}
@@ -279,7 +248,7 @@ public class ViewCreateBox extends JFrame implements IView{
 		checkBoxStrategy.setFocusable(false);
 		checkBoxStrategy.setBounds(6, 33, 91, 23);
 		panelCategories.add(checkBoxStrategy);
-
+		
 		checkBoxIndie = new JCheckBox("Indie");
 		checkBoxIndie.setOpaque(false);
 		checkBoxIndie.setForeground(Color.WHITE);
@@ -287,7 +256,7 @@ public class ViewCreateBox extends JFrame implements IView{
 		checkBoxIndie.setFocusable(false);
 		checkBoxIndie.setBounds(6, 59, 83, 23);
 		panelCategories.add(checkBoxIndie);
-
+		
 		checkBoxRPG = new JCheckBox("RPG");
 		checkBoxRPG.setOpaque(false);
 		checkBoxRPG.setForeground(Color.WHITE);
@@ -295,7 +264,7 @@ public class ViewCreateBox extends JFrame implements IView{
 		checkBoxRPG.setFocusable(false);
 		checkBoxRPG.setBounds(6, 85, 83, 23);
 		panelCategories.add(checkBoxRPG);
-
+		
 		checkBoxRacing = new JCheckBox("Racing");
 		checkBoxRacing.setOpaque(false);
 		checkBoxRacing.setForeground(Color.WHITE);
@@ -303,7 +272,7 @@ public class ViewCreateBox extends JFrame implements IView{
 		checkBoxRacing.setFocusable(false);
 		checkBoxRacing.setBounds(6, 111, 83, 23);
 		panelCategories.add(checkBoxRacing);
-
+		
 		checkBoxSandbox = new JCheckBox("Sandbox");
 		checkBoxSandbox.setHorizontalAlignment(SwingConstants.CENTER);
 		checkBoxSandbox.setOpaque(false);
@@ -312,7 +281,7 @@ public class ViewCreateBox extends JFrame implements IView{
 		checkBoxSandbox.setFocusable(false);
 		checkBoxSandbox.setBounds(99, 20, 83, 23);
 		panelCategories.add(checkBoxSandbox);
-
+		
 		checkBoxHorror = new JCheckBox("Terror");
 		checkBoxHorror.setOpaque(false);
 		checkBoxHorror.setForeground(Color.WHITE);
@@ -320,7 +289,7 @@ public class ViewCreateBox extends JFrame implements IView{
 		checkBoxHorror.setFocusable(false);
 		checkBoxHorror.setBounds(101, 46, 81, 23);
 		panelCategories.add(checkBoxHorror);
-
+		
 		checkBoxSports = new JCheckBox("Deporte");
 		checkBoxSports.setOpaque(false);
 		checkBoxSports.setForeground(Color.WHITE);
@@ -328,7 +297,7 @@ public class ViewCreateBox extends JFrame implements IView{
 		checkBoxSports.setFocusable(false);
 		checkBoxSports.setBounds(101, 72, 81, 23);
 		panelCategories.add(checkBoxSports);
-
+		
 		checkBoxSurvival = new JCheckBox("Supervivencia");
 		checkBoxSurvival.setOpaque(false);
 		checkBoxSurvival.setForeground(Color.WHITE);
@@ -348,13 +317,13 @@ public class ViewCreateBox extends JFrame implements IView{
 
 	private void addBackButton() {
 		JButton backButton = new JButton("Go back");
-		backButton.setForeground(new Color(170, 170, 170));
+		backButton.setForeground(Color.WHITE);
 		backButton.setFont(new Font("Leelawadee", Font.BOLD, 15));
 		backButton.setBackground(new Color(64, 147, 255));
 		backButton.setBounds(36, 11, 119, 45);
 		backButton.setFocusable(false);
 		backButtonContainer.add(backButton);
-	
+		
 		backButton.addActionListener(new ActionListener(){
 
 			@Override
@@ -364,7 +333,7 @@ public class ViewCreateBox extends JFrame implements IView{
 			}
 			
 		});
-
+		
 	}
 
 	@Override
@@ -377,7 +346,7 @@ public class ViewCreateBox extends JFrame implements IView{
 		case Event.RES_CREATE_BOX_KO:
 			JOptionPane.showMessageDialog(null, "No se pudo crear la Box");
 		}
-
+		
 		ApplicationController.getInstance().action(new Context(Event.VIEW, null));
 		dispose();
 	}
