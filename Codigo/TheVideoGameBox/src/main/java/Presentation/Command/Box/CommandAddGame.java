@@ -14,7 +14,7 @@ public class CommandAddGame implements ICommand {
     @Override
     public Context execute(Object data) {
         SABox saBox = SAAbstractFactory.getInstance().createSABox();
-        Pair<TBox, ObjectId> aux = (Pair<TBox, ObjectId>) data;
+        Pair<ObjectId, ObjectId> aux = (Pair<ObjectId, ObjectId>) data;
         ObjectId result = saBox.addGame(aux.getLeft(), aux.getRight());
         Context con;
 

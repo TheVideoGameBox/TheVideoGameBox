@@ -34,13 +34,12 @@ public class AddGameToBox {
 
         saBox = SAAbstractFactory.getInstance().createSABox();
         idBox = saBox.createBox(correct);
-        correct.setId(idBox);
     }
 
     @Test
     public void testCorrectResult() {
         try {
-            assertNotNull(saBox.addGame(correct, idGame));
+            assertNotNull(saBox.addGame(idBox, idGame));
         } catch (Exception ae) {
             fail(ae.getMessage());
         }

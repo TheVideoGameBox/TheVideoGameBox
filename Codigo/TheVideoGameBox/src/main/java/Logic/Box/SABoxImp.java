@@ -29,19 +29,20 @@ public class SABoxImp implements SABox {
     }
 
     @Override
+    public ObjectId addGame(ObjectId idBox, ObjectId gameId) {
+        DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+        return daoBox.addGame(idBox, gameId);
+    }
+
+    @Override
     public void deleteFromDatabase(ObjectId id){
         DAOAbstractFactory.getInstance().createDAOBox().deleteFromDatabase(id);
     }
 
-	@Override
-	public ObjectId addGame(TBox tBox, ObjectId gameId) {
-		DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
-		return daoBox.addGame(tBox, gameId);
-	}
-
 	private boolean correctPrivacy(boolean privacy) {
 		return !Objects.isNull(privacy);
 	}
+
     private boolean correctCategory(List<Category> categories) {
         return categories != null && !categories.isEmpty();
     }
