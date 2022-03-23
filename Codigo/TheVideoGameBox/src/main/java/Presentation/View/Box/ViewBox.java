@@ -3,9 +3,12 @@ package Presentation.View.Box;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -14,7 +17,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Logic.Box.TBox;
@@ -88,11 +93,49 @@ public class ViewBox extends JFrame implements IView{
 		midPanel.setBackground(new Color(64, 147, 255));
 		midPanel.setBorder(new BorderTitle("Info about box", Color.black));
 		
+		// Nombre de box
+		JLabel boxNameLabel = new JLabel(box.getName());
+		boxNameLabel.setAlignmentX(LEFT_ALIGNMENT);
+		boxNameLabel.setFont(new Font("Leelawadee", Font.BOLD, 30));
+		boxNameLabel.setForeground(Color.WHITE);
+		
 		// En esta HU (Añadir un juego a una box), solamente va a haber un botón para añadir juegos. El resto de la vista
 		// de la box se realizará en Ver juegos de la box.
 		
-		//ADD GAME BUTTON
-		JButton addGameButton = new JButton("Add game");
+		//ADD GAME 
+			// ADD GAME LABEL
+		JLabel addGameLabel = new JLabel("Search here to add a new game to the box");
+		addGameLabel.setAlignmentX(LEFT_ALIGNMENT);
+		addGameLabel.setFont(new Font("Leelawadee", Font.ITALIC, 30));
+		addGameLabel.setForeground(Color.WHITE);
+		
+			// Input para introducir el nombre del juego que se desea añadir
+		JTextField nameGame = new JTextField();
+		nameGame.setText("name of game");
+		nameGame.setForeground(Color.LIGHT_GRAY);
+		nameGame.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				nameGame.setText(null);
+				nameGame.setForeground(Color.DARK_GRAY);
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			
+		});
+		
+			// ADD GAME BUTTON
+		JButton addGameButton = new JButton("Add a new game");
 		addGameButton.setIcon(new ImageIcon((getClass().getClassLoader().getResource("add_button.png"))));
 		addGameButton.setBackground(new Color(255, 255, 255));
 		addGameButton.setForeground(Color.white);
@@ -100,18 +143,18 @@ public class ViewBox extends JFrame implements IView{
 		addGameButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//try {
+				try {
 					// Llamamos al evento de search all by name, pues la vista va a ser la misma, pero cambiará que al hacer click
 					// en un juego, en lugar de mostrar su info, se añadirá a la box.
 					//Controller
-				//} //catch(Exception e) {
-					
-				//}
+				} catch(Exception e1) {
+					JOptionPane.showMessageDialog(null, "Incorrect name format");
+				}
 			}
 			
 		});
 		
-		return null;
+		return midPanel;
 	}
 
 	@Override
