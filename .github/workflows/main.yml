@@ -32,7 +32,8 @@ jobs:
       - name: Paso 3.1 - Compilar/Build el proyecto de Java con Maven
         run: |
             cd Codigo/TheVideoGameBox
-            mvn clean -B package --file pom.xml
+            mvn clean compile assembly:single
+            mvn install
             mkdir build && cp target/*.jar build
             
       - name: Paso 3.2 - Comprobar que se ha compilado el proyecto correctamente
