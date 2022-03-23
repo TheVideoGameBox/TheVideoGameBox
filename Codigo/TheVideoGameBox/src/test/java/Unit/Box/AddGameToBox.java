@@ -31,13 +31,21 @@ public class AddGameToBox {
     public static void init() {
         MongoDatabase db = Connection.getInstance().getConnection();
         idGame = Objects.requireNonNull(db.getCollection("games", Game.class).find().first()).getId();
-
         saBox = SAAbstractFactory.getInstance().createSABox();
         idBox = saBox.createBox(correct);
     }
 
     @Test
-    public void testCorrectResult() {
+    public void testCorrectAddGame() {
+        try {
+            assertNotNull(saBox.addGame(idBox, idGame));
+        } catch (Exception ae) {
+            fail(ae.getMessage());
+        }
+    }
+
+    @Test
+    public void testCorrectAddGameX2() {        //Por ahora se puede añadir el mismo juego infinitas veces a la box
         try {
             assertNotNull(saBox.addGame(idBox, idGame));
         } catch (Exception ae) {
