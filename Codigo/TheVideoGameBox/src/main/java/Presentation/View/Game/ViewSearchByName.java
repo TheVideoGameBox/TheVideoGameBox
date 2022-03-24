@@ -118,8 +118,9 @@ public class ViewSearchByName extends JFrame implements IView{
 
 		// HELP
 		JPanel helpPanel = new JPanel();
-		JLabel help = new JLabel("Push on a game for more information");
+		JLabel help = new JLabel("Push the TVGB logo to go back the main window");
 		help.setForeground(Color.white);
+		help.setAlignmentX(CENTER_ALIGNMENT);
 		help.setFont(new Font("Leelawadee", Font.BOLD, 13));
 		helpPanel.setOpaque(false);
 		helpPanel.setMaximumSize(new Dimension(1000, 40));
@@ -146,15 +147,22 @@ public class ViewSearchByName extends JFrame implements IView{
 
 		JPanelRound panel = new JPanelRound();
 		panel.setLayout(new BorderLayout());
-		panel.setBorder(new EmptyBorder(10, 10, 10, 10));
-		panel.setMaximumSize(new Dimension(1000, 170));
-		panel.setPreferredSize(new Dimension(1000, 170));
-		panel.setMinimumSize(new Dimension(1000, 170));
-
+		panel.setBorder(new EmptyBorder(10, 10, 10, 20));
+		panel.setMaximumSize(new Dimension(1000, 135));
+		panel.setPreferredSize(new Dimension(1000, 135));
+		panel.setMinimumSize(new Dimension(1000, 135));
+		
+		JPanel namePanel = new JPanel();
+		namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.X_AXIS));
+		namePanel.setOpaque(false);
+		namePanel.setMaximumSize(new Dimension(700, 135));
+		namePanel.setPreferredSize(new Dimension(700, 135));
+		namePanel.setMinimumSize(new Dimension(700, 135));
+		
 		// NAME
 		JLabel name = new JLabel("Nombre: " + game.getName());
 		name.setForeground(Color.white);
-		name.setFont(new Font("Leelawadee", Font.BOLD, 15));
+		name.setFont(new Font("Leelawadee", Font.BOLD, 20));
 		name.addMouseListener(new MouseListener() {
 
 			@Override
@@ -185,11 +193,46 @@ public class ViewSearchByName extends JFrame implements IView{
 			cover = new JLabel(new ImageIcon(image));
 		}
 				
-		// CONSTRUIR PANEL
-		panel.add(cover, BorderLayout.WEST);
-		panel.add(name, BorderLayout.CENTER);
+		// CONSTRUIR NAMEPANEL
+		namePanel.add(Box.createRigidArea(new Dimension(10, 0)));
+		namePanel.add(cover);
+		namePanel.add(Box.createRigidArea(new Dimension(70, 0)));
+		namePanel.add(name);
 		
+		//BUTTON PANEL
+		JPanel buttonPanel = new JPanel(new BorderLayout());
+		buttonPanel.setOpaque(false);
+		buttonPanel.setMaximumSize(new Dimension(300, 135));
+		buttonPanel.setPreferredSize(new Dimension(300, 135));
+		buttonPanel.setMinimumSize(new Dimension(300, 135));
+		JButton viewInfo = new JButton("View Information");
+		viewInfo.setPreferredSize(new Dimension(170, 45));
+		viewInfo.setMaximumSize(new Dimension(170, 45));
+		viewInfo.setMinimumSize(new Dimension(170, 45));
+		viewInfo.setBackground(new Color(64, 147, 255));
+		viewInfo.setForeground(Color.white);
+		viewInfo.setFont(new Font("Leelawadee", Font.BOLD, 15));
+		viewInfo.setBorder(BorderFactory.createBevelBorder(0));
+		viewInfo.setFocusPainted(false);
+		viewInfo.setAlignmentX(CENTER_ALIGNMENT);
+		viewInfo.setAlignmentY(CENTER_ALIGNMENT);
+		viewInfo.setToolTipText("Search a Game by Name");
+		viewInfo.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ApplicationController.getInstance().action(new Context(Event.SEARCH_ONE, game.getId()));
+				dispose();
+			}
+			
+		});
+		buttonPanel.add(viewInfo, BorderLayout.CENTER);
+		
+		//CONSTRUIR PANEL
+		
+		panel.add(namePanel, BorderLayout.WEST);
+		panel.add(buttonPanel, BorderLayout.EAST);
+		
 		return panel;
 	}
 
