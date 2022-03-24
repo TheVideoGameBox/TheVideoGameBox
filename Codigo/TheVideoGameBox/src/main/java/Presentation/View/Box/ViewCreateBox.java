@@ -46,7 +46,8 @@ public class ViewCreateBox extends JFrame implements IView{
 		//mainpanel.setImagen(new ImageIcon(getClass().getClassLoader().getResource("fondo_triangular.png")).getImage());
 		Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("caja_definitiva.png"))).getImage();
 		this.setIconImage(iconFrame);
-		mainpanel.setBackground(new Color(60, 77, 96));
+		//mainpanel.setBackground(new Color(60, 77, 96));
+		mainpanel.setBackground(new Color(25, 29, 35));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(mainpanel);
 		
@@ -138,8 +139,9 @@ public class ViewCreateBox extends JFrame implements IView{
 		label.setForeground(new Color(170, 180, 180));
 
 		JTextField input = new JTextField(6);
-		input.setBackground(new Color(25, 29, 35));
-		input.setForeground(Color.white);
+		input.setBackground(new Color(60, 77, 96));
+		//input.setBackground(new Color(25, 29, 35));
+		input.setForeground(new Color(220, 220, 220));
 		input.setFont(new Font("Leelawadee", Font.BOLD, 13));
 		input.setMaximumSize(new Dimension(400, 30));
 		input.setPreferredSize(new Dimension(400, 30));
