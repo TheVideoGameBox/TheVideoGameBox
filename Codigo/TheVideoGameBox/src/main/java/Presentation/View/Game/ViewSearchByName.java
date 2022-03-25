@@ -186,33 +186,35 @@ public class ViewSearchByName extends JFrame implements IView{
 
 		});
 		JLabel cover = new JLabel();
-		if(game.getCover() != "nan") {
+		if(game.getCover() != null) {
 			Image image = null;
 			URL url = new URL( "https:"+ game.getCover());
 			image = ImageIO.read(url);
 			cover = new JLabel(new ImageIcon(image));
 		}
+		else {
+			cover.setIcon(new ImageIcon((getClass().getClassLoader().getResource("no_image.png"))));
+		}
 				
 		// CONSTRUIR NAMEPANEL
 		namePanel.add(Box.createRigidArea(new Dimension(10, 0)));
 		namePanel.add(cover);
-		namePanel.add(Box.createRigidArea(new Dimension(70, 0)));
+		namePanel.add(Box.createRigidArea(new Dimension(55, 0)));
 		namePanel.add(name);
 		
 		//BUTTON PANEL
 		JPanel buttonPanel = new JPanel(new BorderLayout());
 		buttonPanel.setOpaque(false);
-		buttonPanel.setMaximumSize(new Dimension(300, 135));
-		buttonPanel.setPreferredSize(new Dimension(300, 135));
-		buttonPanel.setMinimumSize(new Dimension(300, 135));
 		JButton viewInfo = new JButton("View Information");
-		viewInfo.setPreferredSize(new Dimension(170, 45));
-		viewInfo.setMaximumSize(new Dimension(170, 45));
-		viewInfo.setMinimumSize(new Dimension(170, 45));
-		viewInfo.setBackground(new Color(64, 147, 255));
+		viewInfo.setIcon(new ImageIcon((getClass().getClassLoader().getResource("info_icon.png"))));
+		viewInfo.setPreferredSize(new Dimension(200, 45));
+		viewInfo.setMaximumSize(new Dimension(200, 45));
+		viewInfo.setMinimumSize(new Dimension(200, 45));
 		viewInfo.setForeground(Color.white);
 		viewInfo.setFont(new Font("Leelawadee", Font.BOLD, 15));
-		viewInfo.setBorder(BorderFactory.createBevelBorder(0));
+		viewInfo.setBorderPainted(false);
+		viewInfo.setOpaque(false);
+		viewInfo.setContentAreaFilled(false);
 		viewInfo.setFocusPainted(false);
 		viewInfo.setAlignmentX(CENTER_ALIGNMENT);
 		viewInfo.setAlignmentY(CENTER_ALIGNMENT);

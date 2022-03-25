@@ -126,7 +126,7 @@ public class ViewShowOne extends JFrame implements IView {
 		// Carátula del juego.
 		JLabel coverLabel = new JLabel();	
 		coverLabel.setAlignmentX(CENTER_ALIGNMENT);
-		if (game.getCover() != "nan") {
+		if (game.getCover() != null) {
 			Image image = null;
 			URL url;
 			try {
@@ -138,6 +138,9 @@ public class ViewShowOne extends JFrame implements IView {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		else {
+			coverLabel.setIcon(new ImageIcon((getClass().getClassLoader().getResource("no_image.png"))));
 		}
 		
 		// Nombre del juego.
