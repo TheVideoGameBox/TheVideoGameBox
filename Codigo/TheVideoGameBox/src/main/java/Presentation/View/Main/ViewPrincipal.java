@@ -214,8 +214,13 @@ public class ViewPrincipal extends JFrame implements IView{
 			public void actionPerformed(ActionEvent e) {
 				
 				String search = textName.getText();
-				ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BY_NAME, search));
-				dispose();
+				if(search.length() <= 50 && search.length() > 0) {
+					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BY_NAME, search));
+					dispose();
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "There is no games with that name");
+				}
 				
 			}
 			
@@ -303,8 +308,9 @@ public class ViewPrincipal extends JFrame implements IView{
 	@Override
 	public void update(Context context) {
 		if(context.getEvent() == Event.RES_SEARCH_ALL_BY_NAME_KO) {
-			JOptionPane.showMessageDialog(null, "No ha habido resultados para la busqueda");
+			JOptionPane.showMessageDialog(null, "There isn't any game with that name");
 		}
-	
+		ApplicationController.getInstance().action(new Context(Event.VIEW, null));
+		dispose();
 	}
 }

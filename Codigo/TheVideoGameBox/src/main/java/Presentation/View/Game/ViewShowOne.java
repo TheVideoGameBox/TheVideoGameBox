@@ -80,6 +80,7 @@ public class ViewShowOne extends JFrame implements IView {
 		backButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("back_icon.png")));
 		backButton.setMaximumSize(new Dimension(50, 50));
 		backButton.setMinimumSize(new Dimension(50, 50));
+		backButton.setBorderPainted(false);
 		backButton.setOpaque(false);
 		backButton.setContentAreaFilled(false);
 		backButton.setFocusPainted(false);
@@ -99,7 +100,7 @@ public class ViewShowOne extends JFrame implements IView {
 				
 		topPanel.add(Box.createRigidArea(new Dimension(20,0)));
 		topPanel.add(backButton);
-		topPanel.add(Box.createRigidArea(new Dimension(260,0)));
+		topPanel.add(Box.createRigidArea(new Dimension(270,0)));
 		topPanel.add(icon);
 
 		

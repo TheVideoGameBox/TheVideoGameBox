@@ -11,7 +11,7 @@ public class ApplicationControllerImp extends ApplicationController {
 
         if(command != null){
         	Context res = command.execute(context.getData());
-        	if(ViewAbstractFactory.getInstance().createView(res) == null) {
+        	if(ViewAbstractFactory.getInstance().createView(res) != null) {
         		ViewAbstractFactory.getInstance().getCurrentIView().update(res);
         	}
         }else{

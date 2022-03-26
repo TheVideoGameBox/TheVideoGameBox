@@ -17,7 +17,7 @@ public class ViewFactory extends ViewAbstractFactory{
 	@Override
     public IView createView(Context context) {
         switch(context.getEvent()) {
-        	case Event.VIEW -> currentView = new ViewPrincipal();
+        	case Event.VIEW, Event.RES_SEARCH_ALL_BY_NAME_KO -> currentView = new ViewPrincipal();
         	case Event.RES_SEARCH_ALL_BY_NAME_OK -> currentView = new ViewSearchByName((List<TGame>) context.getData());
 			case Event.RES_SEARCH_ONE_OK -> currentView = new ViewShowOne((TGame) context.getData());
         };

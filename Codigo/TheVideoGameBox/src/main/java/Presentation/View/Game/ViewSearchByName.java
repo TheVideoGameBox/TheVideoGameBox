@@ -90,7 +90,7 @@ public class ViewSearchByName extends JFrame implements IView{
 		title.setForeground(Color.white);
 		title.setFont(new Font("sans-serif", 1, 20));
 		headerContainer.add(title);
-		headerContainer.add(Box.createRigidArea(new Dimension(190, 0)));
+		headerContainer.add(Box.createRigidArea(new Dimension(130, 0)));
 
 		// ICONO DE MENU
 		JButton icon = new JButton();
@@ -163,28 +163,6 @@ public class ViewSearchByName extends JFrame implements IView{
 		JLabel name = new JLabel("Nombre: " + game.getName());
 		name.setForeground(Color.white);
 		name.setFont(new Font("Leelawadee", Font.BOLD, 20));
-		name.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				ApplicationController.getInstance().action(new Context(Event.SEARCH_ONE, game.getId()));
-				dispose();
-			}
-
-			public void mousePressed(MouseEvent e) {
-			}
-
-			public void mouseReleased(MouseEvent e) {
-
-			}
-
-			public void mouseEntered(MouseEvent e) {
-			}
-
-			public void mouseExited(MouseEvent e) {
-			}
-
-		});
 		JLabel cover = new JLabel();
 		if(game.getCover() != null) {
 			Image image = null;
@@ -240,7 +218,7 @@ public class ViewSearchByName extends JFrame implements IView{
 
 	@Override
 	public void update(Context context) {
-				
+		
 	}
 
 }
