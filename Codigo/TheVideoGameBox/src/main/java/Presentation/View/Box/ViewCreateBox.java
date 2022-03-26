@@ -97,12 +97,12 @@ public class ViewCreateBox extends JFrame implements IView{
 		textFieldDescription.setBounds(81, 180, 401, 30);
 		midPanel.add(textFieldDescription);
 		
-		JLabel labelCategories = new JLabel("Categories:");
-		labelCategories.setToolTipText("Select categories");
+		JLabel labelCategories = new JLabel("Genres:");
+		labelCategories.setToolTipText("Select genres");
 		labelCategories.setForeground(Color.WHITE);
 		labelCategories.setFont(new Font("Leelawadee", Font.BOLD, 15));
 		labelCategories.setAlignmentX(0.5f);
-		labelCategories.setBounds(36, 277, 88, 19);
+		labelCategories.setBounds(62, 277, 60, 19);
 		midPanel.add(labelCategories);
 		
 		
@@ -156,10 +156,6 @@ public class ViewCreateBox extends JFrame implements IView{
 		TBox box = new TBox(name, description, privacy, categories);
 		
 		ApplicationController.getInstance().action(new Context(Event.CREATE_BOX, box));
-		
-		ViewPrincipal principal = new ViewPrincipal();
-		dispose();
-		
 	}
 
 	private Privacy getPrivacy() {
@@ -306,7 +302,7 @@ public class ViewCreateBox extends JFrame implements IView{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ViewPrincipal principal = new ViewPrincipal();
+				ApplicationController.getInstance().action(new Context(Event.VIEW, null));
 				dispose();
 			}
 			
@@ -319,13 +315,15 @@ public class ViewCreateBox extends JFrame implements IView{
 		
 		switch(context.getEvent()) {
 		case Event.RES_CREATE_BOX_OK:
-			JOptionPane.showMessageDialog(null, "Box creada con id: " + (String)context.getData());
+			JOptionPane.showMessageDialog(this, "Box creada con ID: " + context.getData().toString(),"Create Box", JOptionPane.INFORMATION_MESSAGE);
+			ApplicationController.getInstance().action(new Context(Event.VIEW, null));
+			dispose();
 			break;
 		case Event.RES_CREATE_BOX_KO:
-			JOptionPane.showMessageDialog(null, "No se pudo crear la Box");
+			JOptionPane.showMessageDialog(null, "No se pudo crear la Box","Create Box", JOptionPane.ERROR_MESSAGE);
+			break;
 		}
+	
 		
-		ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-		dispose();
 	}
 }
