@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 
 public class ViewSearchByName extends JFrame implements IView{
@@ -51,6 +52,7 @@ public class ViewSearchByName extends JFrame implements IView{
 
 		JScrollPane scrollFrame = new JScrollPane(contentContainer);
 		contentContainer.setAutoscrolls(true);
+		scrollFrame.getVerticalScrollBar().setUnitIncrement(25);
 		scrollFrame.setOpaque(false);
 		scrollFrame.getViewport().setOpaque(false);
 
@@ -140,13 +142,14 @@ public class ViewSearchByName extends JFrame implements IView{
 		namePanel.setMinimumSize(new Dimension(700, 135));
 		
 		// NAME
-		JLabel name = new JLabel("Nombre: " + game.getName());
+		JLabel name = new JLabel(game.getName());
 		name.setForeground(Color.white);
 		name.setFont(new Font("Leelawadee", Font.BOLD, 20));
 		JLabel cover = new JLabel();
 		if(game.getCover() != null) {
 			Image image = null;
 			URL url = new URL( "https:"+ game.getCover());
+			url.openConnection().addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 			image = ImageIO.read(url);
 			cover = new JLabel(new ImageIcon(image));
 		}
