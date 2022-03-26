@@ -17,7 +17,7 @@ public class SABoxImp implements SABox {
         if (!correctDescription(box.getDescription()))
             return null;
 
-        if (!correctCategory(box.getCategories()))
+        if (!correctGenres(box.getGenres()))
             return null;
 
         if (!correctPrivacy(box.getPrivacy()))
@@ -43,7 +43,7 @@ public class SABoxImp implements SABox {
 		return !Objects.isNull(privacy);
 	}
 
-    private boolean correctCategory(List<Category> categories) {
+    private boolean correctGenres(List<Genres> categories) {
         return categories != null && !categories.isEmpty();
     }
 

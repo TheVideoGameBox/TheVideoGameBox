@@ -17,7 +17,7 @@ public class TBox {
     //Privacidad de la box
     private Privacy privacy;
     //Categoría de la box
-    private List<Category> categories;
+    private List<Genres> genres;
     //Booleano para gestionar la baja logica
     private boolean active;
 	//Array de TGames
@@ -26,29 +26,29 @@ public class TBox {
 
     //Constructors
     
-    public TBox(String name, String description, Privacy privacy, List<Category> categories) {
+    public TBox(String name, String description, Privacy privacy, List<Genres> genres) {
 		this.name = name;
 		this.description = description;
 		this.privacy = privacy;
-		this.categories = categories;
+		this.genres = genres;
 		this.active = true;
 	}
 
-	public TBox(ObjectId id, String name, String description, Privacy privacy, List<Category> categories, boolean active) {
+	public TBox(ObjectId id, String name, String description, Privacy privacy, List<Genres> genres, boolean active) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.privacy = privacy;
-		this.categories = categories;
+		this.genres = genres;
 		this.active = active;
 	}
 
-	public TBox(ObjectId id, String name, String description, Privacy privacy, List<Category> category, boolean active, List<ObjectId> gameList) {
+	public TBox(ObjectId id, String name, String description, Privacy privacy, List<Genres> genres, boolean active, List<ObjectId> gameList) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.privacy = privacy;
-		this.categories = category;
+		this.genres = genres;
 		this.active = active;
 		this.gameList = gameList;
 	}
@@ -95,13 +95,13 @@ public class TBox {
 	}
 
 
-	public List<Category> getCategories() {
-		return categories;
+	public List<Genres> getGenres() {
+		return genres;
 	}
 
 
-	public void setCategories(List<Category> categories) {
-		this.categories = categories;
+	public void setGenres(List<Genres> genres) {
+		this.genres = genres;
 	}
 
 

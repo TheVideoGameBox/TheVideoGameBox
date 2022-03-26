@@ -1,6 +1,6 @@
 package Unit.Box;
 
-import Logic.Box.Category;
+import Logic.Box.Genres;
 import Logic.Box.Privacy;
 import Logic.Box.SABox;
 import Logic.Box.TBox;
@@ -21,16 +21,16 @@ public class CreateBox {
 
     private static final String LIMIT_50 = new String(new char[51]).replace('\0', 'f');
     private static final String LIMIT_250 = new String(new char[251]).replace('\0', 'f');
-    private static final ArrayList<Category> CATEGORIES = new ArrayList<Category>(Arrays.asList(Category.INDIE));
+    private static final ArrayList<Genres> CATEGORIES = new ArrayList<Genres>(Arrays.asList(Genres.INDIE));
 
-    private static final TBox correct = new TBox("TEST_CREATE", "TEST_CREATE", Privacy.PRIVATE, new ArrayList<Category>(Arrays.asList(Category.INDIE)));
-    private static final TBox[] limit = {new TBox(LIMIT_50, "TEST_CREATE", Privacy.PRIVATE, new ArrayList<Category>(Arrays.asList(Category.INDIE))),
-            new TBox("TEST_CREATE", LIMIT_250, Privacy.PRIVATE, new ArrayList<Category>(Arrays.asList(Category.INDIE)))};
-    private static final TBox[] empty = {new TBox("", "TEST_CREATE", Privacy.PRIVATE, new ArrayList<Category>(Arrays.asList(Category.INDIE))),
-            new TBox("TEST_CREATE", "", Privacy.PRIVATE, new ArrayList<Category>(Arrays.asList(Category.INDIE))),
-            new TBox("TEST_CREATE", "TEST_CREATE", Privacy.PRIVATE, new ArrayList<Category>()),
+    private static final TBox correct = new TBox("TEST_CREATE", "TEST_CREATE", Privacy.PRIVATE, new ArrayList<Genres>(Arrays.asList(Genres.INDIE)));
+    private static final TBox[] limit = {new TBox(LIMIT_50, "TEST_CREATE", Privacy.PRIVATE, new ArrayList<Genres>(Arrays.asList(Genres.INDIE))),
+            new TBox("TEST_CREATE", LIMIT_250, Privacy.PRIVATE, new ArrayList<Genres>(Arrays.asList(Genres.INDIE)))};
+    private static final TBox[] empty = {new TBox("", "TEST_CREATE", Privacy.PRIVATE, new ArrayList<Genres>(Arrays.asList(Genres.INDIE))),
+            new TBox("TEST_CREATE", "", Privacy.PRIVATE, new ArrayList<Genres>(Arrays.asList(Genres.INDIE))),
+            new TBox("TEST_CREATE", "TEST_CREATE", Privacy.PRIVATE, new ArrayList<Genres>()),
             new TBox("TEST_CREATE", "TEST_CREATE", Privacy.PRIVATE, null),
-            new TBox("TEST_CREATE", "TEST_CREATE", null, new ArrayList<Category>(Arrays.asList(Category.INDIE)))};
+            new TBox("TEST_CREATE", "TEST_CREATE", null, new ArrayList<Genres>(Arrays.asList(Genres.INDIE)))};
 
     private static ObjectId idBox = null;
 
