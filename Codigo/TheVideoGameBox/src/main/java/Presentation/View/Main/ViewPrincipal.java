@@ -1,15 +1,13 @@
 package Presentation.View.Main;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
 import Presentation.Controller.ApplicationController;
 import Presentation.Controller.Context;
-import Presentation.View.IView;
-import Presentation.View.ViewAbstractFactory;
-import Presentation.View.Box.ViewCreateBox;
 import Presentation.Controller.Event;
+import Presentation.View.Box.ViewCreateBox;
+import Presentation.View.IView;
 
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

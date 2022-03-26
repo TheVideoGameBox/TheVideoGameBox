@@ -14,7 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Objects;
 
 import static org.junit.Assert.assertNotNull;
@@ -25,7 +25,7 @@ public class AddGameToBox {
     private static SABox saBox;
     private static ObjectId idBox;
     private static ObjectId idGame;
-    private static final TBox correct = new TBox("TEST_ADD_GAME", "TEST_ADD_GAME", Privacy.PRIVATE, new ArrayList<Logic.Box.Category>(List.of(Category.RACING, Category.INDIE)));
+    private static final TBox correct = new TBox("TEST_ADD_GAME", "TEST_ADD_GAME", Privacy.PRIVATE, new ArrayList<Logic.Box.Category>(Arrays.asList(Category.RACING, Category.INDIE)));
 
     @BeforeClass
     public static void init() {

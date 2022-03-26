@@ -3,8 +3,8 @@ package Presentation.Command.Game;
 import Logic.Game.SAGame;
 import Logic.Game.TGame;
 import Logic.SAAbstractFactory;
-import Presentation.Controller.Context;
 import Presentation.Command.ICommand;
+import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 
 import java.util.List;

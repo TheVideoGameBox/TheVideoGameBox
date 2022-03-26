@@ -1,7 +1,5 @@
 package Data.Game;
 
-import static com.mongodb.client.model.Filters.regex;
-
 import Data.Connection;
 import Logic.Game.Game;
 import Logic.Game.TGame;
@@ -9,13 +7,14 @@ import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.bson.types.ObjectId;
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.regex;
 
 
 public class DAOGameImp implements DAOGame {

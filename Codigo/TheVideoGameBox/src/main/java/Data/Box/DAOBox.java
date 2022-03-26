@@ -1,13 +1,7 @@
 package Data.Box;
 
-import org.bson.Document;
-import org.bson.types.ObjectId;
-
-import com.mongodb.MongoException;
-import com.mongodb.client.MongoDatabase;
-
-import Data.Connection;
 import Logic.Box.TBox;
+import org.bson.types.ObjectId;
 
 public interface DAOBox {
 
