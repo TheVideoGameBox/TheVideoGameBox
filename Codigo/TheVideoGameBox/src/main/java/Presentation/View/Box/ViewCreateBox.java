@@ -1,6 +1,6 @@
 package Presentation.View.Box;
 
-import Logic.Box.Category;
+import Logic.Box.Genres;
 import Logic.Box.Privacy;
 import Logic.Box.TBox;
 import Presentation.Controller.ApplicationController;
@@ -97,12 +97,12 @@ public class ViewCreateBox extends JFrame implements IView{
 		textFieldDescription.setBounds(81, 180, 401, 30);
 		midPanel.add(textFieldDescription);
 		
-		JLabel labelCategories = new JLabel("Categories:");
-		labelCategories.setToolTipText("Select categories");
+		JLabel labelCategories = new JLabel("Genres:");
+		labelCategories.setToolTipText("Select genres");
 		labelCategories.setForeground(Color.WHITE);
 		labelCategories.setFont(new Font("Leelawadee", Font.BOLD, 15));
 		labelCategories.setAlignmentX(0.5f);
-		labelCategories.setBounds(36, 277, 88, 19);
+		labelCategories.setBounds(62, 277, 60, 19);
 		midPanel.add(labelCategories);
 		
 		
@@ -150,16 +150,12 @@ public class ViewCreateBox extends JFrame implements IView{
 		//Capturar datos
 		String name = textFieldName.getText();
 		String description = textFieldDescription.getText();
-		List<Category> categories = getCategories();
+		List<Genres> categories = getCategories();
 		Privacy privacy = getPrivacy();
 		
 		TBox box = new TBox(name, description, privacy, categories);
 		
 		ApplicationController.getInstance().action(new Context(Event.CREATE_BOX, box));
-		
-		ViewPrincipal principal = new ViewPrincipal();
-		dispose();
-		
 	}
 
 	private Privacy getPrivacy() {
@@ -171,35 +167,35 @@ public class ViewCreateBox extends JFrame implements IView{
 			return Privacy.PUBLIC;
 	}
 
-	private List<Category> getCategories() {
-		List<Category> categories = new ArrayList<>();
+	private List<Genres> getCategories() {
+		List<Genres> categories = new ArrayList<>();
 		
 		if(checkBoxShooter.isSelected()) {
-			categories.add(Category.SHOOTER);
+			categories.add(Genres.SHOOTER);
 		}
 		if(checkBoxStrategy.isSelected()) {
-			categories.add(Category.STRATEGY);
+			categories.add(Genres.STRATEGY);
 		}
 		if(checkBoxIndie.isSelected()) {
-			categories.add(Category.INDIE);
+			categories.add(Genres.INDIE);
 		}
 		if(checkBoxRPG.isSelected()) {
-			categories.add(Category.RPG);
+			categories.add(Genres.RPG);
 		}
 		if(checkBoxRacing.isSelected()) {
-			categories.add(Category.RACING);
+			categories.add(Genres.RACING);
 		}
 		if(checkBoxSandbox.isSelected()) {
-			categories.add(Category.SANDBOX);
+			categories.add(Genres.SANDBOX);
 		}
 		if(checkBoxHorror.isSelected()) {
-			categories.add(Category.HORROR);
+			categories.add(Genres.HORROR);
 		}
 		if(checkBoxSports.isSelected()) {
-			categories.add(Category.SPORTS);
+			categories.add(Genres.SPORTS);
 		}
 		if(checkBoxSurvival.isSelected()) {
-			categories.add(Category.SURVIVAL);
+			categories.add(Genres.SURVIVAL);
 		}
 		return categories;
 	}
@@ -219,7 +215,7 @@ public class ViewCreateBox extends JFrame implements IView{
 		checkBoxShooter.setBounds(6, 7, 83, 23);
 		panelCategories.add(checkBoxShooter);
 		
-		checkBoxStrategy = new JCheckBox("Estrategia");
+		checkBoxStrategy = new JCheckBox("Strategy");
 		checkBoxStrategy.setOpaque(false);
 		checkBoxStrategy.setForeground(Color.WHITE);
 		checkBoxStrategy.setFont(new Font("Leelawadee", Font.BOLD, 13));
@@ -260,7 +256,7 @@ public class ViewCreateBox extends JFrame implements IView{
 		checkBoxSandbox.setBounds(99, 20, 83, 23);
 		panelCategories.add(checkBoxSandbox);
 		
-		checkBoxHorror = new JCheckBox("Terror");
+		checkBoxHorror = new JCheckBox("Horror");
 		checkBoxHorror.setOpaque(false);
 		checkBoxHorror.setForeground(Color.WHITE);
 		checkBoxHorror.setFont(new Font("Leelawadee", Font.BOLD, 13));
@@ -268,7 +264,7 @@ public class ViewCreateBox extends JFrame implements IView{
 		checkBoxHorror.setBounds(101, 46, 81, 23);
 		panelCategories.add(checkBoxHorror);
 		
-		checkBoxSports = new JCheckBox("Deporte");
+		checkBoxSports = new JCheckBox("Sports");
 		checkBoxSports.setOpaque(false);
 		checkBoxSports.setForeground(Color.WHITE);
 		checkBoxSports.setFont(new Font("Leelawadee", Font.BOLD, 13));
@@ -276,7 +272,7 @@ public class ViewCreateBox extends JFrame implements IView{
 		checkBoxSports.setBounds(101, 72, 81, 23);
 		panelCategories.add(checkBoxSports);
 		
-		checkBoxSurvival = new JCheckBox("Supervivencia");
+		checkBoxSurvival = new JCheckBox("Survival");
 		checkBoxSurvival.setOpaque(false);
 		checkBoxSurvival.setForeground(Color.WHITE);
 		checkBoxSurvival.setFont(new Font("Leelawadee", Font.BOLD, 13));
@@ -306,7 +302,7 @@ public class ViewCreateBox extends JFrame implements IView{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ViewPrincipal principal = new ViewPrincipal();
+				ApplicationController.getInstance().action(new Context(Event.VIEW, null));
 				dispose();
 			}
 			
@@ -319,13 +315,15 @@ public class ViewCreateBox extends JFrame implements IView{
 		
 		switch(context.getEvent()) {
 		case Event.RES_CREATE_BOX_OK:
-			JOptionPane.showMessageDialog(null, "Box creada con id: " + (String)context.getData());
+			JOptionPane.showMessageDialog(this, "Box created!","Create Box", JOptionPane.INFORMATION_MESSAGE);
+			ApplicationController.getInstance().action(new Context(Event.VIEW, null));
+			dispose();
 			break;
 		case Event.RES_CREATE_BOX_KO:
-			JOptionPane.showMessageDialog(null, "No se pudo crear la Box");
+			JOptionPane.showMessageDialog(null, "Failed to create the Box","Create Box", JOptionPane.ERROR_MESSAGE);
+			break;
 		}
+	
 		
-		ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-		dispose();
 	}
 }

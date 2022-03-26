@@ -11,7 +11,7 @@ public class Box {
     private String name;
     private String description;
     private Privacy privacy;
-    private List<Category> categories;
+    private List<Genres> genres;
     private boolean active;
 	private List<ObjectId> gameList;
 	private ObjectId gameId;
@@ -19,19 +19,19 @@ public class Box {
 
     public Box() {}
     
-	public Box(String name, String description, Privacy privacy, List<Category> categories) {
+	public Box(String name, String description, Privacy privacy, List<Genres> genres) {
 		this.name = name;
 		this.description = description;
 		this.privacy = privacy;
-		this.categories = categories;
+		this.genres = genres;
 	}
 	
-	public Box(ObjectId id, String name, String description, Privacy privacy, List<Category> categories, boolean active) {
+	public Box(ObjectId id, String name, String description, Privacy privacy, List<Genres> genres, boolean active) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.privacy = privacy;
-		this.categories = categories;
+		this.genres = genres;
 		this.active = active;
 	}
 	
@@ -40,16 +40,16 @@ public class Box {
 		this.name = box.getName();
 		this.description = box.getDescription();
 		this.privacy = box.getPrivacy();
-		this.categories = box.getCategories();
+		this.genres = box.getGenres();
 		this.active = box.isActive();
 	}
 
-	public Box(ObjectId id, String name, String description, Privacy privacy, List<Category> category, boolean active, List<ObjectId> gameList) {
+	public Box(ObjectId id, String name, String description, Privacy privacy, List<Genres> genres, boolean active, List<ObjectId> gameList) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.privacy = privacy;
-		this.categories = category;
+		this.genres = genres;
 		this.active = active;
 		this.gameList = gameList;
 	}
@@ -78,11 +78,11 @@ public class Box {
 	public void setPrivacy(Privacy privacy) {
 		this.privacy = privacy;
 	}
-	public List<Category> getCategories() {
-		return categories;
+	public List<Genres> getGenres() {
+		return genres;
 	}
-	public void setCategories(List<Category> categories) {
-		this.categories = categories;
+	public void setGenres(List<Genres> genres) {
+		this.genres = genres;
 	}
 	public boolean isActive() {
 		return active;
@@ -100,7 +100,7 @@ public class Box {
 	}
 	
 	public TBox toTransfer() {
-		return new TBox(id, name, description, privacy, categories, active);
+		return new TBox(id, name, description, privacy, genres, active);
 	}
 	
 	

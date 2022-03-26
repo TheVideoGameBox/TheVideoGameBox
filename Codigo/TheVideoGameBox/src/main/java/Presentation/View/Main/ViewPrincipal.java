@@ -121,7 +121,7 @@ public class ViewPrincipal extends JFrame implements IView{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ViewCreateBox createView = new ViewCreateBox();
+				ApplicationController.getInstance().action(new Context(Event.VIEW_CREATE_BOX, null));
 				dispose();
 			}
 			
