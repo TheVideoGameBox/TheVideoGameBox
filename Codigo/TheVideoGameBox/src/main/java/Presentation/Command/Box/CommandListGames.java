@@ -15,10 +15,9 @@ public class CommandListGames implements ICommand {
         SABox saBox = SAAbstractFactory.getInstance().createSABox();
         List<ObjectId> result = saBox.listGames((ObjectId) data);
         Context con = null;
-                                //PENDIENTE DE QUE SE AÑADAN LOS EVENTOS
-        //if(result != null && !result.isEmpty()) con = new Context(Event.RES_LIST_GAMES_FROM_BOX_OK, result);
-        //else con = new Context(Event.RES_LIST_GAMES_FROM_BOX_KO, result);
 
+        if(result != null && !result.isEmpty()) con = new Context(Event.RES_VIEW_GAMES_OF_BOX_OK, result);
+        else con = new Context(Event.RES_VIEW_GAMES_OF_BOX_KO, result);
         return con;
     }
 }
