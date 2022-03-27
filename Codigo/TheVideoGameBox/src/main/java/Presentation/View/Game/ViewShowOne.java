@@ -13,6 +13,7 @@ import org.bson.types.ObjectId;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.ScrollPaneUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -291,7 +292,7 @@ public class ViewShowOne extends JFrame implements IView {
 		}
 		
 		JScrollPane scroll = new JScrollPane(descText);
-		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scroll.setOpaque(false);
 		scroll.getViewport().setOpaque(false);
 		scroll.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 12));
@@ -300,7 +301,14 @@ public class ViewShowOne extends JFrame implements IView {
 		descPanel.add(descTitle);
 		descPanel.add(Box.createRigidArea(new Dimension(0, 5)));
 		descPanel.add(scroll);
-		
+		SwingUtilities.invokeLater(new Runnable()
+		{
+			public void run()
+			{
+				scroll.getViewport().setViewPosition( new Point(0, 0) );
+			}
+		});
+
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		gbc.gridheight = 1;
