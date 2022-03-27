@@ -14,8 +14,7 @@ public class CommandListGames implements ICommand {
     public Context execute(Object data) {
         SABox saBox = SAAbstractFactory.getInstance().createSABox();
         List<ObjectId> result = saBox.listGames((ObjectId) data);
-        Context con = null;
-
+        Context con;
         if(result != null && !result.isEmpty()) con = new Context(Event.RES_VIEW_GAMES_OF_BOX_OK, result);
         else con = new Context(Event.RES_VIEW_GAMES_OF_BOX_KO, result);
         return con;
