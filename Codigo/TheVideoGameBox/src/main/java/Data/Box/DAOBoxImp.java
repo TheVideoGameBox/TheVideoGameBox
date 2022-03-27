@@ -49,7 +49,21 @@ public class DAOBoxImp implements DAOBox {
 		return idGame;
 	}
 
-    @Override
+	@Override
+	public List<ObjectId> listGames(ObjectId idBox) {
+		List<ObjectId> gameList;
+		try {
+			MongoDatabase db = Connection.getInstance().getConnection();
+			Box box = db.getCollection("boxes", Box.class).find(eq("_id", idBox)).first();
+			gameList = box.getGameList();
+			if(box.getGameList() == null) return null;
+		} catch (MongoException e) {
+			return null;
+		}
+		return gameList;
+	}
+
+	@Override
     public void deleteFromDatabase(ObjectId id) {
         try {
             MongoDatabase db = Connection.getInstance().getConnection();
