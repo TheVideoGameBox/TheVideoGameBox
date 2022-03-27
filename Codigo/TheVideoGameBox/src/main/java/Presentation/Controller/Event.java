@@ -31,5 +31,7 @@ public class Event {
     public static final int RES_ADD_GAME_TO_BOX_OK = 505;
     public static final int RES_ADD_GAME_TO_BOX_KO = 506;
     public static final int VIEW_GAMES_OF_BOX = 507;
+    public static final int RES_SEARCH_ALL_BOXES_BY_NAME_OK= 509;
+    public static final int RES_SEARCH_ALL_BOXES_BY_NAME_KO= 510;
 
 }
