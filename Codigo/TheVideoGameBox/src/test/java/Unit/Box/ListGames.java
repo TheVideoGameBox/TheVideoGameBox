@@ -24,13 +24,12 @@ public class ListGames {
 
     private static SABox saBox;
     private static ObjectId idBox;
-    private static ObjectId idGame;
     private static final TBox correct = new TBox("TEST_LIST_GAMES", "TEST_LIST_GAMES", Privacy.PRIVATE, new ArrayList<Genres>(Arrays.asList(Genres.RACING, Genres.INDIE)));
 
     @BeforeClass
     public static void init() {
         MongoDatabase db = Connection.getInstance().getConnection();
-        idGame = Objects.requireNonNull(db.getCollection("games", Game.class).find().first()).getId();
+        ObjectId idGame = Objects.requireNonNull(db.getCollection("games", Game.class).find().first()).getId();
         saBox = SAAbstractFactory.getInstance().createSABox();
         idBox = saBox.createBox(correct);
         saBox.addGame(idBox, idGame);
