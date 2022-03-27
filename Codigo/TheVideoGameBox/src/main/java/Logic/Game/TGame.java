@@ -60,11 +60,11 @@ public class TGame {
         this.cover = cover;
     }
 
-    public List<String> getInvolvedCompanies() {
+    public List<String> getInvolved_companies() {
         return involved_companies;
     }
 
-    public void setInvolvedCompanies(List<String> involved_companies) {
+    public void setInvolved_companies(List<String> involved_companies) {
         this.involved_companies = involved_companies;
     }
 
