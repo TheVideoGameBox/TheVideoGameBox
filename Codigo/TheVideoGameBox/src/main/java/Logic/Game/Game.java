@@ -9,6 +9,7 @@ public class Game {
     private ObjectId id;
     private String name;
     private String cover;
+    private String image;
     private List<String> involved_companies;
     private List<String> genres;
     private List<String> platforms;
@@ -19,7 +20,7 @@ public class Game {
 
     }
 
-    public Game(String name, String cover, List<String> involved_companies, List<String> categories, List<String> platforms, String description, int release_dates) {
+    public Game(String name, String cover, List<String> involved_companies, List<String> categories, List<String> platforms, String description, int release_dates, String image) {
         this.name = name;
         this.cover = cover;
         this.involved_companies = involved_companies;
@@ -27,9 +28,10 @@ public class Game {
         this.platforms = platforms;
         this.summary = description;
         this.release_dates = release_dates;
+        this.image = image;
     }
 
-    public Game(ObjectId id, String name, String cover, List<String> involved_companies, List<String> categories, List<String> platforms, String description, int release_dates) {
+    public Game(ObjectId id, String name, String cover, List<String> involved_companies, List<String> categories, List<String> platforms, String description, int release_dates, String image) {
         this.id = id;
         this.name = name;
         this.cover = cover;
@@ -38,17 +40,19 @@ public class Game {
         this.platforms = platforms;
         this.summary = description;
         this.release_dates = release_dates;
+        this.image = image;
     }
 
     public Game(TGame tGame){
         this.id = tGame.getId();
         this.name = tGame.getName();
         this.cover = tGame.getCover();
-        this.involved_companies = tGame.getInvolvedCompanies();
+        this.involved_companies = tGame.getInvolved_companies();
         this.genres = tGame.getGenres();
         this.platforms = tGame.getPlatforms();
         this.summary = tGame.getSummary();
         this.release_dates = tGame.getRelease_dates();
+        this.image = tGame.getImage();
     }
 
     //Getters and setters
@@ -77,11 +81,11 @@ public class Game {
         this.cover = cover;
     }
 
-    public List<String> getInvolvedCompanies() {
+    public List<String> getInvolved_companies() {
         return involved_companies;
     }
 
-    public void setInvolvedCompanies(List<String> involved_companies) {
+    public void setInvolved_companies(List<String> involved_companies) {
         this.involved_companies = involved_companies;
     }
 
@@ -108,13 +112,21 @@ public class Game {
     public void setSummary(String summary) {
         this.summary = summary;
     }
+    
+    public String getImage() {
+    	return image;
+    }
+    
+    public void setImage(String image) {
+    	this.image = image;
+    }
 
     //Obtener todos los datos de un transfer
     public void setData(TGame tGame){
         this.id = tGame.getId();
         this.name = tGame.getName();
         this.cover = tGame.getCover();
-        this.involved_companies = tGame.getInvolvedCompanies();
+        this.involved_companies = tGame.getInvolved_companies();
         this.genres = tGame.getGenres();
         this.platforms = tGame.getPlatforms();
         this.summary = tGame.getSummary();
@@ -131,7 +143,7 @@ public class Game {
 
     //Transformar una entidad de MongoDB a un transfer
     public TGame toTransfer(){
-        return new TGame(id, name, cover, involved_companies, genres, platforms, summary, release_dates);
+        return new TGame(id, name, cover, involved_companies, genres, platforms, summary, release_dates, image);
     }
 
     @Override
@@ -145,6 +157,7 @@ public class Game {
                 ", platforms=" + platforms +
                 ", summary='" + summary + '\'' +
                 ", release_dates='" + release_dates + '\'' +
+                ", image='" + image + '\'' +
                 " }";
     }
 }

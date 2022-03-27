@@ -158,7 +158,7 @@ public class ViewPrincipal extends JFrame implements IView{
 	}
 	
 	private JPanelRound gamesPanel() {
-		JPanelRound mainPanel = new JPanelRound();
+		JPanelRound mainPanel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255));
 		mainPanel.setBackground(new Color(64, 147, 255));
 		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		mainPanel.setMaximumSize(new Dimension(1150, 275));
@@ -216,6 +216,9 @@ public class ViewPrincipal extends JFrame implements IView{
 					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BY_NAME, search));
 					dispose();
 				}
+				else if(search.length() > 50) {
+					JOptionPane.showMessageDialog(null, "Too many characters");
+				}
 				else {
 					JOptionPane.showMessageDialog(null, "There is no games with that name");
 				}
@@ -260,7 +263,7 @@ public class ViewPrincipal extends JFrame implements IView{
 	}
 	
 	private JPanelRound boxPanel() {
-		JPanelRound mainPanel = new JPanelRound();
+		JPanelRound mainPanel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255));
 		mainPanel.setBackground(new Color(64, 147, 255));
 		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		mainPanel.setMaximumSize(new Dimension(1150, 275));

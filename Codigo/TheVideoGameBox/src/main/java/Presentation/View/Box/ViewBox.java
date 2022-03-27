@@ -97,7 +97,7 @@ public class ViewBox extends JFrame implements IView {
 	}
 	
 	private JPanel createAddGamePanel() {
-		JPanel addPanel = new JPanelRound();
+		JPanel addPanel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255));
 		addPanel.setMaximumSize(new Dimension(1150, 70));
 		addPanel.setMinimumSize(new Dimension(1150, 70));
 		addPanel.setLayout(new BoxLayout(addPanel, BoxLayout.Y_AXIS));
