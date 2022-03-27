@@ -116,6 +116,10 @@ public class ViewShowOne extends JFrame implements IView {
         JPanel infoJuego = new JPanel();
         infoJuego.setLayout(new BoxLayout(infoJuego, BoxLayout.Y_AXIS));
         infoJuego.setOpaque(false);
+        infoJuego.setBorder(new EmptyBorder(0, 10, 7, 10));
+        infoJuego.setPreferredSize(new Dimension(555, 400));
+		infoJuego.setMaximumSize(new Dimension(555, 400));
+		infoJuego.setMinimumSize(new Dimension(555, 400));
         infoJuego.setAlignmentX(CENTER_ALIGNMENT);
 		
 		// Carátula del juego.
@@ -125,7 +129,7 @@ public class ViewShowOne extends JFrame implements IView {
 			Image image = null;
 			URL url;
 			try {
-				url = new URL( "https:"+ game.getCover());
+				url = new URL( "https:"+ game.getImage());
 				URLConnection connection = url.openConnection();
 				connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
 				connection.connect();
@@ -138,7 +142,7 @@ public class ViewShowOne extends JFrame implements IView {
 			}
 		}
 		else {
-			coverLabel.setIcon(new ImageIcon((getClass().getClassLoader().getResource("image.png"))));
+			coverLabel.setIcon(new ImageIcon((getClass().getClassLoader().getResource("No_Image_big.png"))));
 		}
 		
 		infoJuego.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -149,12 +153,19 @@ public class ViewShowOne extends JFrame implements IView {
 		JPanel namePanel = new JPanel();
 		namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.Y_AXIS));
 		namePanel.setOpaque(false);
+		namePanel.setBorder(new EmptyBorder(0, 10, 7, 10));
+		namePanel.setPreferredSize(new Dimension(555, 150));
+		namePanel.setMaximumSize(new Dimension(555, 150));
+		namePanel.setMinimumSize(new Dimension(555, 150));
 		namePanel.setAlignmentX(CENTER_ALIGNMENT);
 		
-		JLabel nameTitle = new JLabel(game.getName());
-		nameTitle.setAlignmentX(CENTER_ALIGNMENT);
+		JTextArea nameTitle = new JTextArea(game.getName());
 		nameTitle.setForeground(Color.white);
+		nameTitle.setOpaque(false);
 		nameTitle.setFont(new Font("sans-serif", 1, 28));
+		nameTitle.setLineWrap(true);
+		nameTitle.setWrapStyleWord(true);
+		nameTitle.setAlignmentX(CENTER_ALIGNMENT);
 		
 		namePanel.add(nameTitle);
 		
