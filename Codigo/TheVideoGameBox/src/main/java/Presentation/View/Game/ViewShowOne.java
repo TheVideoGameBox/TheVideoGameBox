@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLConnection;
 
 public class ViewShowOne extends JFrame implements IView {
 
@@ -124,12 +125,15 @@ public class ViewShowOne extends JFrame implements IView {
 			Image image = null;
 			URL url;
 			try {
-				url = new URL("https:" + game.getImage());
-				image = ImageIO.read(url);
-				coverLabel.setIcon(new ImageIcon(image));
+				url = new URL( "https:"+ game.getCover());
+				URLConnection connection = url.openConnection();
+				connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
+				connection.connect();
+				image = ImageIO.read(connection.getInputStream());
+				connection.getInputStream().close();
+				coverLabel = new JLabel(new ImageIcon(image));
 				coverLabel.setAlignmentX(CENTER_ALIGNMENT);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

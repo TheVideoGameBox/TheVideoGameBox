@@ -1,8 +1,8 @@
 package Logic.Box;
 
 public enum Privacy {
-    PRIVATE("Privado"),
-    PUBLIC("Publico");
+    PRIVATE("Private"),
+    PUBLIC("Public");
 
     private String privacy;
 

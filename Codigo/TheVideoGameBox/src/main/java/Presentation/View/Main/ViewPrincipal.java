@@ -195,6 +195,20 @@ public class ViewPrincipal extends JFrame implements IView{
 		textName.setMaximumSize(new Dimension(200, 30));
 		textName.setBorder(null);
 
+		textName.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String search = textName.getText();
+				if(search.length() <= 50 && search.length() > 0) {
+					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BY_NAME, search));
+					dispose();
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "There is no games with that name");
+				}
+			}
+		});
+
 		JButton searchName = new JButton("SEARCH");
 		searchName.setPreferredSize(new Dimension(120, 30));
 		searchName.setMaximumSize(new Dimension(120, 30));
@@ -210,7 +224,7 @@ public class ViewPrincipal extends JFrame implements IView{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String search = textName.getText();
 				if(search.length() <= 50 && search.length() > 0) {
 					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BY_NAME, search));
@@ -222,9 +236,9 @@ public class ViewPrincipal extends JFrame implements IView{
 				else {
 					JOptionPane.showMessageDialog(null, "There is no games with that name");
 				}
-				
+
 			}
-			
+
 		});
 		
 		textPanelN.add(textName);
