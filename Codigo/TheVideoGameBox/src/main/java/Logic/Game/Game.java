@@ -44,7 +44,7 @@ public class Game {
         this.id = tGame.getId();
         this.name = tGame.getName();
         this.cover = tGame.getCover();
-        this.involved_companies = tGame.getInvolvedCompanies();
+        this.involved_companies = tGame.getInvolved_companies();
         this.genres = tGame.getGenres();
         this.platforms = tGame.getPlatforms();
         this.summary = tGame.getSummary();
@@ -77,11 +77,11 @@ public class Game {
         this.cover = cover;
     }
 
-    public List<String> getInvolvedCompanies() {
+    public List<String> getInvolved_companies() {
         return involved_companies;
     }
 
-    public void setInvolvedCompanies(List<String> involved_companies) {
+    public void setInvolved_companies(List<String> involved_companies) {
         this.involved_companies = involved_companies;
     }
 
@@ -114,7 +114,7 @@ public class Game {
         this.id = tGame.getId();
         this.name = tGame.getName();
         this.cover = tGame.getCover();
-        this.involved_companies = tGame.getInvolvedCompanies();
+        this.involved_companies = tGame.getInvolved_companies();
         this.genres = tGame.getGenres();
         this.platforms = tGame.getPlatforms();
         this.summary = tGame.getSummary();

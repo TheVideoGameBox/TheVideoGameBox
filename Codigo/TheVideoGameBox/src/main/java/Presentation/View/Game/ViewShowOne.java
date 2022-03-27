@@ -161,14 +161,14 @@ public class ViewShowOne extends JFrame implements IView {
 		companyTitle.setFont(new Font("sans-serif", 1, 25));
 		companyPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 		companyPanel.add(companyTitle);
-		if(game.getInvolvedCompanies() == null) {
+		if(game.getInvolved_companies() == null) {
 			companyPanel.add(Box.createRigidArea(new Dimension(0, 5)));
 			companyPanel.add(companyLabel("There isn't any company."));
 		}
 		else {
-			for(int i = 0; game.getInvolvedCompanies() != null && !game.getInvolvedCompanies().isEmpty() && i < game.getInvolvedCompanies().size(); i++) {
+			for(int i = 0; game.getInvolved_companies() != null && !game.getInvolved_companies().isEmpty() && i < game.getInvolved_companies().size(); i++) {
 				companyPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-				companyPanel.add(companyLabel(game.getInvolvedCompanies().get(i)));
+				companyPanel.add(companyLabel(game.getInvolved_companies().get(i)));
 			}
 		}
 		
