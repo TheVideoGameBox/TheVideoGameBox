@@ -291,7 +291,7 @@ public class ViewShowOne extends JFrame implements IView {
 		}
 		
 		JScrollPane scroll = new JScrollPane(descText);
-		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scroll.setOpaque(false);
 		scroll.getViewport().setOpaque(false);
 		scroll.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 12));

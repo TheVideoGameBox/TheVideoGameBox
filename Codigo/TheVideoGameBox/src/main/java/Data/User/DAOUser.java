@@ -1,5 +1,10 @@
 package Data.User;
 
-public interface DAOUser {
+import org.bson.types.ObjectId;
 
+import Logic.User.TUser;
+
+
+public interface DAOUser {
+	public ObjectId create(TUser user);
 }
