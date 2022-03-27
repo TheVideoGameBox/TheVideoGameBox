@@ -15,15 +15,15 @@ public class CommandSearchAllBoxesByName implements ICommand {
 	public Context execute(Object data) {
 		SABox saBox = SAAbstractFactory.getInstance().createSABox();
 		String aux= (String) data;
-		/*List<TBox> result = saBox.searchAllByName(aux);
-		 Context con;
+		List<TBox> result = saBox.searchAllBoxesByName(aux);
+		Context con;
 
-        if(result != null && !result.isEmpty()) con = new Context(Event.RES_SEARCH_ALL_BOXES_BY_NAME_OK, result);
-        else con = new Context(Event.RES_SEARCH_ALL_BOXES_BY_NAME_KO, result);
-		
+        if(result != null && !result.isEmpty())
+			con = new Context(Event.RES_SEARCH_ALL_BOXES_BY_NAME_OK, result);
+        else
+			con = new Context(Event.RES_SEARCH_ALL_BOXES_BY_NAME_KO, result);
+
 		return con;
-		*/
-		return null;
 	}
 
 }
