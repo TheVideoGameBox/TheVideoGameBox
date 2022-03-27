@@ -6,6 +6,8 @@ import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
+import Presentation.View.Main.JPanelRound;
+
 import org.bson.types.ObjectId;
 
 import javax.imageio.ImageIO;
@@ -104,16 +106,17 @@ public class ViewShowOne extends JFrame implements IView {
 		midPanel.setPreferredSize(new Dimension(1150, 600));
 		midPanel.setMaximumSize(new Dimension(1150, 600));
 		midPanel.setMinimumSize(new Dimension(1150, 600));
-		midPanel.setLayout(new BoxLayout(midPanel, BoxLayout.Y_AXIS));
-		midPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
+		midPanel.setLayout(new GridBagLayout());
+		midPanel.setBorder(new EmptyBorder(0, 20, 10, 20));
 		midPanel.setOpaque(false);
-		
-		JLabel title = new JLabel("About the game");
-		title.setAlignmentX(CENTER_ALIGNMENT);
-		title.setForeground(Color.white);
-		title.setFont(new Font("sans-serif", 1, 35));
+        GridBagConstraints gbc = new GridBagConstraints();
 		
 		// INFO DEL JUEGO
+        
+        JPanel infoJuego = new JPanel();
+        infoJuego.setLayout(new BoxLayout(infoJuego, BoxLayout.Y_AXIS));
+        infoJuego.setOpaque(false);
+        infoJuego.setAlignmentX(CENTER_ALIGNMENT);
 		
 		// Carátula del juego.
 		JLabel coverLabel = new JLabel();	
@@ -135,31 +138,46 @@ public class ViewShowOne extends JFrame implements IView {
 			}
 		}
 		else {
-			coverLabel.setIcon(new ImageIcon((getClass().getClassLoader().getResource("no_image.png"))));
+			coverLabel.setIcon(new ImageIcon((getClass().getClassLoader().getResource("image.png"))));
 		}
 		
+		infoJuego.add(Box.createRigidArea(new Dimension(0, 10)));
+		infoJuego.add(coverLabel);
+		infoJuego.add(Box.createRigidArea(new Dimension(0, 20)));
+		
 		// Nombre del juego.
-		JLabel nameTitle = new JLabel("Nombre");
+		JPanel namePanel = new JPanel();
+		namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.Y_AXIS));
+		namePanel.setOpaque(false);
+		namePanel.setAlignmentX(CENTER_ALIGNMENT);
+		
+		JLabel nameTitle = new JLabel(game.getName());
 		nameTitle.setAlignmentX(CENTER_ALIGNMENT);
 		nameTitle.setForeground(Color.white);
-		nameTitle.setFont(new Font("sans-serif", 1, 25));
+		nameTitle.setFont(new Font("sans-serif", 1, 28));
 		
-		JLabel nameLabel = new JLabel(game.getName());
-		nameLabel.setAlignmentX(CENTER_ALIGNMENT);
-		nameLabel.setForeground(Color.white);
-		nameLabel.setFont(new Font("sans-serif", 1, 15));
+		namePanel.add(nameTitle);
 		
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.gridheight = 2;
+		gbc.gridwidth = 1;
+		gbc.weightx = 1.0;
+		gbc.weighty = 1.0;
+		gbc.fill = GridBagConstraints.BOTH;
+		
+		infoJuego.add(namePanel);
+		midPanel.add(infoJuego, gbc);
 		
 		// Empresas responsables del juego.
-		JPanel companyPanel = new JPanel();
+		JPanelRound companyPanel = new JPanelRound(new Color(12, 17, 21), new Color(74, 90, 151));
 		companyPanel.setLayout(new BoxLayout(companyPanel, BoxLayout.Y_AXIS));
-		companyPanel.setOpaque(false);
 		companyPanel.setAlignmentX(CENTER_ALIGNMENT);
 		JLabel companyTitle = new JLabel("Companies");
 		companyTitle.setAlignmentX(CENTER_ALIGNMENT);
 		companyTitle.setForeground(Color.white);
 		companyTitle.setFont(new Font("sans-serif", 1, 25));
-		companyPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+		companyPanel.add(Box.createRigidArea(new Dimension(0, 15)));
 		companyPanel.add(companyTitle);
 		if(game.getInvolved_companies() == null) {
 			companyPanel.add(Box.createRigidArea(new Dimension(0, 5)));
@@ -172,16 +190,23 @@ public class ViewShowOne extends JFrame implements IView {
 			}
 		}
 		
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		gbc.gridheight = 1;
+		gbc.gridwidth = 1;
+		gbc.fill = GridBagConstraints.BOTH;
+		
+		midPanel.add(companyPanel, gbc);
+		
 		// Categorías del juego.
-		JPanel categoryPanel = new JPanel();
+		JPanelRound categoryPanel = new JPanelRound(new Color(12, 17, 21), new Color(74, 90, 151));
 		categoryPanel.setLayout(new BoxLayout(categoryPanel, BoxLayout.Y_AXIS));
-		categoryPanel.setOpaque(false);
 		categoryPanel.setAlignmentX(CENTER_ALIGNMENT);
 		JLabel categoryTitle = new JLabel("Genres");
 		categoryTitle.setAlignmentX(CENTER_ALIGNMENT);
 		categoryTitle.setForeground(Color.white);
 		categoryTitle.setFont(new Font("sans-serif", 1, 25));
-		categoryPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+		categoryPanel.add(Box.createRigidArea(new Dimension(0, 15)));
 		categoryPanel.add(categoryTitle);
 		if(game.getGenres() == null) {
 			categoryPanel.add(Box.createRigidArea(new Dimension(0, 5)));
@@ -194,16 +219,23 @@ public class ViewShowOne extends JFrame implements IView {
 			}
 		}
 		
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		gbc.gridheight = 1;
+		gbc.gridwidth = 1;
+		gbc.fill = GridBagConstraints.BOTH;
+		
+		midPanel.add(categoryPanel, gbc);
+		
 		// Plataformas para las que está disponible el juego.
-		JPanel platformPanel = new JPanel();
+		JPanelRound platformPanel = new JPanelRound(new Color(12, 17, 21), new Color(74, 90, 151));
 		platformPanel.setLayout(new BoxLayout(platformPanel, BoxLayout.Y_AXIS));
-		platformPanel.setOpaque(false);
 		platformPanel.setAlignmentX(CENTER_ALIGNMENT);
 		JLabel platformTitle = new JLabel("Platforms");
 		platformTitle.setAlignmentX(CENTER_ALIGNMENT);
 		platformTitle.setForeground(Color.white);
 		platformTitle.setFont(new Font("sans-serif", 1, 25));
-		platformPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+		platformPanel.add(Box.createRigidArea(new Dimension(0, 15)));
 		platformPanel.add(platformTitle);
 		if(game.getPlatforms() == null) {
 			platformPanel.add(Box.createRigidArea(new Dimension(0, 5)));
@@ -215,39 +247,57 @@ public class ViewShowOne extends JFrame implements IView {
 				platformPanel.add(platformLabel(game.getPlatforms().get(i)));
 			}
 		}
+		
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		gbc.gridheight = 1;
+		gbc.gridwidth = 1;
+		gbc.fill = GridBagConstraints.BOTH;
+		
+		midPanel.add(platformPanel, gbc);
+		
 		// Descripción del juego.
+		JPanelRound descPanel = new JPanelRound(new Color(12, 17, 21), new Color(74, 90, 151));
+		descPanel.setBorder(new EmptyBorder(0, 10, 7, 10));
+		descPanel.setPreferredSize(new Dimension(555, 150));
+		descPanel.setMaximumSize(new Dimension(555, 150));
+		descPanel.setMinimumSize(new Dimension(555, 150));
+		descPanel.setLayout(new BoxLayout(descPanel, BoxLayout.Y_AXIS));
+		descPanel.setAlignmentX(CENTER_ALIGNMENT);
 		JLabel descTitle = new JLabel("Description");
 		descTitle.setAlignmentX(CENTER_ALIGNMENT);
 		descTitle.setForeground(Color.white);
 		descTitle.setFont(new Font("sans-serif", 1, 25));
-		JLabel descLabel = new JLabel("There isn't any description.");
-		descLabel.setAlignmentX(CENTER_ALIGNMENT);
-		descLabel.setForeground(Color.white);
-		descLabel.setFont(new Font("sans-serif", 1, 14));
+		JTextArea descText = new JTextArea("There isn't any description.");
+		descText.setAlignmentX(CENTER_ALIGNMENT);
+		descText.setForeground(Color.white);
+		descText.setOpaque(false);
+		descText.setFont(new Font("sans-serif", 1, 14));
+		descText.setLineWrap(true);
+		descText.setWrapStyleWord(true);
 		if(game.getSummary() != null) {
-			descLabel = new JLabel(game.getSummary());
-			descLabel.setAlignmentX(CENTER_ALIGNMENT);
-			descLabel.setForeground(Color.white);
-			descLabel.setFont(new Font("sans-serif", 1, 14));
+			descText.setText(game.getSummary());
 		}
 		
-		midPanel.add(title);
-		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-		midPanel.add(coverLabel);
-		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-		midPanel.add(nameTitle);
-		midPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-		midPanel.add(nameLabel);
-		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-		midPanel.add(companyPanel);
-		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-		midPanel.add(categoryPanel);
-		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-		midPanel.add(platformPanel);
-		midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-		midPanel.add(descTitle);
-		midPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-		midPanel.add(descLabel);
+		JScrollPane scroll = new JScrollPane(descText);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setOpaque(false);
+		scroll.getViewport().setOpaque(false);
+		scroll.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 12));
+		
+		descPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+		descPanel.add(descTitle);
+		descPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+		descPanel.add(scroll);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		gbc.gridheight = 1;
+		gbc.gridwidth = 1;
+		gbc.fill = GridBagConstraints.BOTH;
+		
+		midPanel.add(descPanel, gbc);
+		
 		this.pack();
 		return midPanel;
 	}
