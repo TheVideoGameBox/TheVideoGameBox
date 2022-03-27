@@ -30,5 +30,6 @@ public class Event {
     public static final int ADD_GAME_TO_BOX = 504;
     public static final int RES_ADD_GAME_TO_BOX_OK = 505;
     public static final int RES_ADD_GAME_TO_BOX_KO = 506;
+    public static final int VIEW_GAMES_OF_BOX = 507;
 
 }
