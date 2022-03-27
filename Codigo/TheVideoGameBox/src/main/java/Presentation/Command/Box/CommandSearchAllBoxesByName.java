@@ -20,7 +20,8 @@ public class CommandSearchAllBoxesByName implements ICommand {
 
         if(result != null && !result.isEmpty()) con = new Context(Event.RES_SEARCH_ALL_BOXES_BY_NAME_OK, result);
         else con = new Context(Event.RES_SEARCH_ALL_BOXES_BY_NAME_KO, result);
-
+		
+		return con;
 		*/
 		return null;
 	}
