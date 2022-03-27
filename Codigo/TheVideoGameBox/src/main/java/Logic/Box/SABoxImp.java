@@ -35,6 +35,12 @@ public class SABoxImp implements SABox {
     }
 
     @Override
+    public List<ObjectId> listGames(ObjectId idBox) {
+        DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+        return daoBox.listGames(idBox);
+    }
+
+    @Override
     public void deleteFromDatabase(ObjectId id){
         DAOAbstractFactory.getInstance().createDAOBox().deleteFromDatabase(id);
     }
