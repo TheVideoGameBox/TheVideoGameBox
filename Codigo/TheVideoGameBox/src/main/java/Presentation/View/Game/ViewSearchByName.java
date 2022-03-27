@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -149,8 +150,11 @@ public class ViewSearchByName extends JFrame implements IView{
 		if(game.getCover() != null) {
 			Image image = null;
 			URL url = new URL( "https:"+ game.getCover());
-			url.openConnection().addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-			image = ImageIO.read(url);
+			URLConnection connection = url.openConnection();
+			connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
+			connection.connect();
+			image = ImageIO.read(connection.getInputStream());
+			connection.getInputStream().close();
 			cover = new JLabel(new ImageIcon(image));
 		}
 		else {
