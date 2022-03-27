@@ -40,6 +40,8 @@ public class ViewCreateBox extends JFrame implements IView{
 	 * Create the frame.
 	 */
 	public ViewCreateBox() {
+		Image iconFrame = new ImageIcon(getClass().getClassLoader().getResource("caja_definitiva.png")).getImage();
+		setIconImage(iconFrame);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().removeAll();
 		setPreferredSize(new Dimension(900, 550));
@@ -290,11 +292,13 @@ public class ViewCreateBox extends JFrame implements IView{
 	}
 
 	private void addBackButton() {
-		JButton backButton = new JButton("Go back");
-		backButton.setForeground(Color.WHITE);
-		backButton.setFont(new Font("Leelawadee", Font.BOLD, 15));
-		backButton.setBackground(new Color(64, 147, 255));
-		backButton.setBounds(36, 11, 119, 45);
+		JButton backButton = new JButton();
+		backButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("back_icon.png")));
+		backButton.setBorderPainted(false);
+		backButton.setOpaque(false);
+		backButton.setContentAreaFilled(false);
+		backButton.setFocusPainted(false);
+		backButton.setBounds(0, 11, 119, 50);
 		backButton.setFocusable(false);
 		backButtonContainer.add(backButton);
 		
