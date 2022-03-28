@@ -8,8 +8,9 @@ public class SAUserImp implements SAUser {
 
 	@Override
 	public ObjectId createUser(TUser user) {
-		// TODO Auto-generated method stub
-		return null;
+		DAOUser daoUser = DAOAbstractFactory.getInstance().createDAOUser();
+		
+		return daoUser.create(user);
 	}
 
 	@Override
