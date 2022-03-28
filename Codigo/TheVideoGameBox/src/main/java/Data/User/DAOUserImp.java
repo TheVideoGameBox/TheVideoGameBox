@@ -22,7 +22,7 @@ public class DAOUserImp implements DAOUser {
 
 		try {
 			MongoDatabase db = Connection.getInstance().getConnection();
-			MongoCollection<User> users = db.getCollection("ujsers", User.class);
+			MongoCollection<User> users = db.getCollection("users", User.class);
 
 			User user = new User(tUser);
 
