@@ -2,7 +2,6 @@ package Data.User;
 
 import java.util.Objects;
 
-import Logic.Box.Box;
 import org.bson.types.ObjectId;
 
 import com.mongodb.MongoException;

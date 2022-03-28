@@ -7,13 +7,8 @@ import Logic.SAAbstractFactory;
 import com.mongodb.client.MongoDatabase;
 import org.bson.types.ObjectId;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -77,7 +72,7 @@ public class SignUp {
     }
     
     @AfterClass
-    public void eliminarUsuarioPrueba() {
+    public static void eliminarUsuarioPrueba() {
     	if (idUser != null) saUser.deleteFromDatabase(idUser);
     }
 
