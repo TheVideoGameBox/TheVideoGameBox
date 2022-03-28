@@ -78,9 +78,7 @@ public class SignUp {
     
     @AfterClass
     public void eliminarUsuarioPrueba() {
-
     	if (idUser != null) saUser.deleteFromDatabase(idUser);
-
     }
 
 

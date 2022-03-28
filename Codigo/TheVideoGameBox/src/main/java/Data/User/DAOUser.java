@@ -7,4 +7,6 @@ import Logic.User.TUser;
 
 public interface DAOUser {
 	public ObjectId create(TUser user);
+
+    void deleteFromDatabase(ObjectId id);
 }
