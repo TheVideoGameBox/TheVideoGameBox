@@ -17,7 +17,9 @@ public class Event {
 
 
     // Codigos de eventos para USER [300-500)
-
+    public static final int CREATE_USER = 300;
+    public static final int RES_CREATE_USER_OK = 301;
+    public static final int RES_CREATE_USER_KO = 302;
 
 
 
