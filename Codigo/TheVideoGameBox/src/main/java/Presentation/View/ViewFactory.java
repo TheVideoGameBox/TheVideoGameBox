@@ -2,13 +2,16 @@ package Presentation.View;
 
 import java.util.List;
 
+import Logic.Box.TBox;
 import Logic.Game.TGame;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 import Presentation.View.Box.ViewCreateBox;
+import Presentation.View.Box.ViewListGamesBox;
 import Presentation.View.Game.ViewSearchByName;
 import Presentation.View.Game.ViewShowOne;
 import Presentation.View.Main.ViewPrincipal;
+import org.bson.types.ObjectId;
 
 public class ViewFactory extends ViewAbstractFactory {
 
@@ -31,6 +34,8 @@ public class ViewFactory extends ViewAbstractFactory {
 			case Event.RES_CREATE_BOX_OK:
 			case Event.RES_CREATE_BOX_KO:
 				break;
+			case Event.LIST_GAMES_OF_BOX:
+				currentView = new ViewListGamesBox();
 				
         }
 
