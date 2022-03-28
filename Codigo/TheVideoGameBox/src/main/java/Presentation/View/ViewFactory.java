@@ -30,15 +30,15 @@ public class ViewFactory extends ViewAbstractFactory {
 			case Event.VIEW_CREATE_BOX:
 				currentView = new ViewCreateBox();
 				break;
-			case Event.CREATE_USER:
-				currentView = new ViewRegister();
-				break;
+			
 			case Event.RES_CREATE_BOX_OK:
 				break;
 			case Event.RES_CREATE_BOX_KO:
 				break;
-				
-        }
+			case Event.VIEW_CREATE_USER:
+				currentView = new ViewRegister();
+				break;
+		}
 
         return currentView;
     }
