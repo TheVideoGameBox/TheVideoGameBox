@@ -16,7 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import Logic.User.TUser;
 import Presentation.Controller.ApplicationController;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
@@ -27,11 +26,8 @@ public class ViewRegister extends JFrame implements IView {
 
 	private static final long serialVersionUID = 1L;
 	
-	private TUser user;
-	
-	public ViewRegister(TUser user) {
+	public ViewRegister() {
 		setTitle("Register user"); 
-		this.user = user;
 		init_GUI();
 		this.setLocationRelativeTo(null);
 	}

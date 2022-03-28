@@ -22,6 +22,7 @@ public class CommandFactory extends CommandAbstractFactory{
                 break;
             case Event.CREATE_USER:
             	command = new CommandCreateUser();
+            	break;
             default:
                 command = null;
                 break;

@@ -14,7 +14,8 @@ public class CommandCreateUser implements ICommand{
 	@Override
 	public Context execute(Object data) {
 		SAUser saUser = SAAbstractFactory.getInstance().createSAUser();
-		ObjectId result = saUser.createUser((TUser) data);
+		TUser user = (TUser) data;
+		ObjectId result = saUser.createUser(user);
 		Context con;
 	  	
 		if(result != null) con = new Context(Event.RES_CREATE_USER_OK, result);
