@@ -42,8 +42,7 @@ public class SABoxImp implements SABox {
 
         DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
 
-        //return daoBox.searchAllBoxesByName(name);
-        return new ArrayList<>();
+        return daoBox.searchAllByName(name);
     }
 
     @Override
