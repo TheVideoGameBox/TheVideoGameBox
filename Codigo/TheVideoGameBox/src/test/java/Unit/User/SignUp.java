@@ -24,20 +24,17 @@ public class SignUp {
     public static void init() {
         MongoDatabase db = Connection.getInstance().getConnection();
         saUser = SAAbstractFactory.getInstance().createSAUser();
-        idUser = saUser.createUser(correct);
     }
-    
-    
+
     @Test
     public void testCorrectSignUp() {
-    	TUser correct2 = new TUser("TEST_SIGN_UP_OK", "TEST_SIGN_UP_OK", "TEST_SIGN_UP_OK");
-    	ObjectId idUserOK = saUser.createUser(correct2);
+    	ObjectId idUser = saUser.createUser(correct);
         try {
-            assertNotNull(idUserOK);
+            assertNotNull(idUser);
         } catch (Exception ae) {
             fail(ae.getMessage());
         } finally {
-        	if (idUserOK != null) saUser.deleteFromDatabase(idUserOK);
+        	if (idUser != null) saUser.deleteFromDatabase(idUser);
         }
     }
     
