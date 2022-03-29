@@ -1,10 +1,6 @@
 package Data.Box;
 
 import Logic.Box.TBox;
-import Logic.Game.TGame;
-
-import java.util.List;
-
 import org.bson.types.ObjectId;
 
 import java.util.List;

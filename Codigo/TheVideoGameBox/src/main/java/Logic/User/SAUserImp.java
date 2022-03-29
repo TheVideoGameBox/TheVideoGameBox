@@ -2,11 +2,10 @@ package Logic.User;
 
 import Data.DAOAbstractFactory;
 import Data.User.DAOUser;
+import org.bson.types.ObjectId;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
-
-import org.bson.types.ObjectId;
 
 public class SAUserImp implements SAUser {
 

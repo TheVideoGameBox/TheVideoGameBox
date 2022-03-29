@@ -1,8 +1,5 @@
 package Unit.User;
 
-import Logic.Box.Genres;
-import Logic.Box.Privacy;
-import Logic.Box.TBox;
 import Logic.SAAbstractFactory;
 import Logic.User.SAUser;
 import Logic.User.TUser;
@@ -10,9 +7,6 @@ import org.bson.types.ObjectId;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.junit.Assert.*;
 

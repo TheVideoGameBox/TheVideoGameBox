@@ -1,10 +1,7 @@
 package Presentation.View;
 
-import java.util.List;
-
 import Logic.Box.TBox;
 import Logic.Game.TGame;
-import Logic.User.TUser;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 import Presentation.View.Box.ViewAddGameToBox;
@@ -16,6 +13,8 @@ import Presentation.View.Game.ViewShowOne;
 import Presentation.View.Main.ViewPrincipal;
 import Presentation.View.User.ViewRegister;
 import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.List;
 
 public class ViewFactory extends ViewAbstractFactory {
 

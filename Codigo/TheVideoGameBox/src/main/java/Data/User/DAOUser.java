@@ -1,8 +1,7 @@
 package Data.User;
 
-import org.bson.types.ObjectId;
-
 import Logic.User.TUser;
+import org.bson.types.ObjectId;
 
 
 public interface DAOUser {

@@ -1,13 +1,13 @@
 package Presentation.Command.Box;
 
-import java.util.List;
-
-import Logic.SAAbstractFactory;
 import Logic.Box.SABox;
 import Logic.Box.TBox;
+import Logic.SAAbstractFactory;
 import Presentation.Command.ICommand;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
+
+import java.util.List;
 
 public class CommandSearchAllBoxesByName implements ICommand {
 

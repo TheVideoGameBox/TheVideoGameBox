@@ -9,7 +9,6 @@ import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
-import com.sun.deploy.panel.ExceptionListDialog;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bson.types.ObjectId;
 import org.jdesktop.xswingx.PromptSupport;
@@ -23,7 +22,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ViewListGamesBox extends JFrame implements IView {
