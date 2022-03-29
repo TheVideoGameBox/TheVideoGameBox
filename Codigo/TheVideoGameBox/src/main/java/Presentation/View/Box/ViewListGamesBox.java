@@ -9,8 +9,10 @@ import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
+import com.sun.deploy.panel.ExceptionListDialog;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bson.types.ObjectId;
+import org.jdesktop.xswingx.PromptSupport;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -100,7 +102,8 @@ public class ViewListGamesBox extends JFrame implements IView {
             }
         });
 
-        JTextField textName = new JTextField("Add Games");
+        JTextField textName = new JTextField();
+        PromptSupport.setPrompt("Añadir juego", textName); //Libreria xswingx (se podria hacer con una clase propia sobreescribiendo paint())
         textName.setPreferredSize(new Dimension(200, 30));
         textName.setMinimumSize(new Dimension(200, 30));
         textName.setMaximumSize(new Dimension(200, 30));
@@ -159,9 +162,7 @@ public class ViewListGamesBox extends JFrame implements IView {
         contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
         if(box.getGameList() != null) {
-            List<ObjectId> games = new ArrayList<>();
-            games.add(new ObjectId("62405e81a1102f961b070eb4"));
-            for (ObjectId gameId : games) {
+            for (ObjectId gameId : box.getGameList()) {
                 try {
                     TGame game = SAAbstractFactory.getInstance().createSAGame().searchOne(gameId);
                     contentContainer.add(gamePanel(game));

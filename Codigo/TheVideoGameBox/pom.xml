@@ -41,6 +41,11 @@
             <artifactId>maven-assembly-plugin</artifactId>
             <version>3.3.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.lafouche</groupId>
+            <artifactId>xswingx</artifactId>
+            <version>0.20</version>
+        </dependency>
     </dependencies>
 
     <build>
