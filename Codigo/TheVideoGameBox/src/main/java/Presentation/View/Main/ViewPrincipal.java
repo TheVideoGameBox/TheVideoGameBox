@@ -3,7 +3,6 @@ package Presentation.View.Main;
 import Presentation.Controller.ApplicationController;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
-import Presentation.View.Box.ViewCreateBox;
 import Presentation.View.IView;
 
 import javax.swing.*;
@@ -284,12 +283,9 @@ public class ViewPrincipal extends JFrame implements IView{
 		mainPanel.setLayout(new GridLayout(2,2));
 		mainPanel.setBorder(new BorderTitle("Boxes", Color.white));
 		
-		// BUSQUEDA XXXXXXXX
-		
-		JPanel rightTopPanel = new JPanel();
-		rightTopPanel.setBorder(new EmptyBorder(10, 50, 10, 50));
-		rightTopPanel.setOpaque(false);
-		rightTopPanel.setLayout(new GridLayout(2,2));
+		// BUSQUEDA BOXES POR NOMBRE
+
+		panelBoxSearch();
 		
 		// BUSQUEDA XXXXXXXX
 		
@@ -312,12 +308,87 @@ public class ViewPrincipal extends JFrame implements IView{
 		leftBottonPanel.setOpaque(false);
 		leftBottonPanel.setLayout(new GridLayout(2,2));
 		
-		mainPanel.add(rightTopPanel);
+		mainPanel.add(panelBoxSearch());
 		mainPanel.add(leftTopPanel);
 		mainPanel.add(rightBottonPanel);
 		mainPanel.add(leftBottonPanel);
 		
 		return mainPanel;
+	}
+
+	private JPanel panelBoxSearch() {
+		JPanel rightTopPanel = new JPanel();
+		rightTopPanel.setBorder(new EmptyBorder(10, 50, 10, 50));
+		rightTopPanel.setOpaque(false);
+		rightTopPanel.setLayout(new GridLayout(2,2));
+
+		JLabel searchByName = new JLabel("Search Box by Name");
+		searchByName.setIcon(new ImageIcon(getClass().getClassLoader().getResource("lupa_icon.png")));
+		searchByName.setForeground(Color.white);
+		searchByName.setFont(new Font("Leelawadee", Font.BOLD, 25));
+
+		rightTopPanel.add(searchByName);
+
+		// PANEL CON LA BUSQUEDA
+
+		JPanel textPanelN = new JPanel();
+		textPanelN.setOpaque(false);
+		textPanelN.setLayout(new BoxLayout(textPanelN, BoxLayout.X_AXIS));
+		textPanelN.add(Box.createRigidArea(new Dimension(50, 0)));
+		textPanelN.setBorder(null);
+
+		JTextField textName = new JTextField();
+		textName.setPreferredSize(new Dimension(200, 30));
+		textName.setMinimumSize(new Dimension(200, 30));
+		textName.setMaximumSize(new Dimension(200, 30));
+		textName.setBorder(null);
+		textName.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String search = textName.getText();
+				if(search.length() <= 50 && search.length() > 0) {
+					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BOXES_BY_NAME, search));
+					dispose();
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "There is no Boxes with that name");
+				}
+			}
+		});
+
+		JButton searchName = new JButton("SEARCH");
+		searchName.setPreferredSize(new Dimension(120, 30));
+		searchName.setMaximumSize(new Dimension(120, 30));
+		searchName.setMinimumSize(new Dimension(120, 30));
+		searchName.setBackground(new Color(64, 147, 255));
+		searchName.setForeground(Color.white);
+		searchName.setFont(new Font("Leelawadee", Font.BOLD, 15));
+		//searchName.setBorder(BorderFactory.createBevelBorder(0));
+		searchName.setFocusPainted(false);
+		searchName.setToolTipText("Search a Box by Name");
+		searchName.setBorder(null);
+		searchName.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				String search = textName.getText();
+				if(search.length() <= 50 && search.length() > 0) {
+					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BOXES_BY_NAME, search));		//CAMBIAR EL EVENTO CUANDO ESTE HECHA LA VISTA
+					dispose();
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "There is no Boxes with that name");
+				}
+			}
+		});
+
+		textPanelN.add(textName);
+		textPanelN.add(Box.createRigidArea(new Dimension(10, 0)));
+		textPanelN.add(searchName);
+
+		rightTopPanel.add(textPanelN);
+		return rightTopPanel;
 	}
 
 	@Override

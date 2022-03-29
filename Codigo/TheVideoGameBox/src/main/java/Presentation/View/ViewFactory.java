@@ -2,6 +2,7 @@ package Presentation.View;
 
 import java.util.List;
 
+import Logic.Box.TBox;
 import Logic.Game.TGame;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
@@ -20,7 +21,7 @@ public class ViewFactory extends ViewAbstractFactory {
 				break;
             
 			case Event.RES_SEARCH_ALL_BY_NAME_OK:
-				currentView = new ViewSearchByName((List<TGame>) context.getData());
+				currentView = new Presentation.View.Game.ViewSearchByName((List<TGame>) context.getData());
 				break;
 			case Event.RES_SEARCH_ONE_OK:
 				currentView = new ViewShowOne((TGame) context.getData());
@@ -31,7 +32,9 @@ public class ViewFactory extends ViewAbstractFactory {
 			case Event.RES_CREATE_BOX_OK:
 			case Event.RES_CREATE_BOX_KO:
 				break;
-				
+			case Event.RES_SEARCH_ALL_BOXES_BY_NAME_OK:
+				currentView = new Presentation.View.Box.ViewSearchByName((List<TBox>) context.getData());
+				break;
         }
 
         return currentView;
