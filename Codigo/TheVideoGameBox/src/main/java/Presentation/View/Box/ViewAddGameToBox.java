@@ -221,8 +221,8 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		viewInfo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ApplicationController.getInstance().action(new Context(Event.ADD_GAME_TO_BOX, aux));
-				//SAAbstractFactory.getInstance().createSABox().addGame(box.getId(), game.getId());
+				SAAbstractFactory.getInstance().createSABox().addGame(box.getId(), game.getId());
+				ApplicationController.getInstance().action(new Context(Event.VIEW, null));
 				dispose();
 			}
 		});
