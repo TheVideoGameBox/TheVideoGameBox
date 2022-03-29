@@ -31,29 +31,29 @@ jobs:
         
       - name: Paso 3.1 - Compilar/Build el proyecto de Java con Maven
         run: |
-            cd Codigo/Prototipo_mongDB_1
-            mvn clean -B package --file pom.xml
+            cd Codigo/TheVideoGameBox
+            mvn clean -B package -Dmaven.test.skip=true
             mkdir build && cp target/*.jar build
             
       - name: Paso 3.2 - Comprobar que se ha compilado el proyecto correctamente
         run: |
-            cd Codigo/Prototipo_mongDB_1/build
+            cd Codigo/TheVideoGameBox/build
             ls | grep .jar
             
       - name: Paso 4.1 - Ejecutar tests unitarios
         run: |
-             cd Codigo/Prototipo_mongDB_1
-             mvn -Dtest=Unit -DfailIfNoTests=false test
+             cd Codigo/TheVideoGameBox
+             mvn -Dtest="Unit/**" -DfailIfNoTests=false test
              
       - name: Paso 4.2 - Ejecutar tests de integracion
         if: success()
         run: |
-             cd Codigo/Prototipo_mongDB_1
-             mvn -Dtest=Integration -DfailIfNoTests=false test
+             cd Codigo/TheVideoGameBox
+             mvn -Dtest="Integration/**" -DfailIfNoTests=false test
         
       - name: Paso 5.1 - Subir el proyecto compilado como un artefacto
         if: success()
         uses: actions/upload-artifact@v2
         with:
-          name: PrototipoMongoDB
+          name: TheVideoGameBox_Executable
           path: Codigo/TheVideoGameBox/build
