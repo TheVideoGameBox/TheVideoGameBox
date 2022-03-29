@@ -1,17 +1,16 @@
 package Data.User;
 
-import java.util.Objects;
-
-import Logic.Box.Box;
-import org.bson.types.ObjectId;
-
+import Data.Connection;
+import Logic.User.TUser;
+import Logic.User.User;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.IndexOptions;
+import com.mongodb.client.model.Indexes;
+import org.bson.types.ObjectId;
 
-import Data.Connection;
-import Logic.User.User;
-import Logic.User.TUser;
+import java.util.Objects;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -26,9 +25,12 @@ public class DAOUserImp implements DAOUser {
 
 			User insert = new User(tUser);
 
+			users.createIndex(Indexes.ascending("username"), new IndexOptions().unique(true));
+			users.createIndex(Indexes.ascending("email"), new IndexOptions().unique(true));
 			result = Objects.requireNonNull(users.insertOne(insert).getInsertedId()).asObjectId().getValue();
 		} catch (MongoException | NullPointerException e) {
 			result = null;
+			e.getMessage();
 		}
 		return result;
 	}
