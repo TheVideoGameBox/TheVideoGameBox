@@ -27,9 +27,9 @@ public class ViewListGamesBox extends JFrame implements IView {
     private List<TGame> games;
     private TBox box;
 
-    public ViewListGamesBox() {
-        //setTitle("List of Games of " + box.getName());
-        //this.box = box;
+    public ViewListGamesBox(TBox box) {
+        setTitle("List of Games");
+        this.box = box;
         init_GUI();
         this.setLocationRelativeTo(null);
     }
@@ -89,7 +89,7 @@ public class ViewListGamesBox extends JFrame implements IView {
         icon.setFocusPainted(false);
         icon.setAlignmentX(CENTER_ALIGNMENT);
         headerContainer.add(icon);
-        headerContainer.add(Box.createRigidArea(new Dimension(270, 0)));
+        headerContainer.add(Box.createRigidArea(new Dimension(120, 0)));
 
         icon.addActionListener(new ActionListener() {
             @Override
@@ -98,6 +98,29 @@ public class ViewListGamesBox extends JFrame implements IView {
                 dispose();
             }
         });
+
+        JTextField textName = new JTextField("Add Games");
+        textName.setPreferredSize(new Dimension(200, 30));
+        textName.setMinimumSize(new Dimension(200, 30));
+        textName.setMaximumSize(new Dimension(200, 30));
+        textName.setBorder(null);
+        headerContainer.add(textName);
+        headerContainer.add(Box.createRigidArea(new Dimension(0, 0)));
+        textName.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String search = textName.getText();
+                if(search.length() <= 50 && search.length() > 0) {
+                    ApplicationController.getInstance().action(new Context(Event.ADD_GAME_TO_BOX, SAAbstractFactory.getInstance().createSAGame().searchAllByName(search)));
+                    dispose();
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "There is no games with that name");
+                }
+            }
+        });
+
+
 
         // CONSTRUIR VISTA
         contentContainer.add(headerContainer);
@@ -117,7 +140,7 @@ public class ViewListGamesBox extends JFrame implements IView {
         contentContainer.add(helpPanel);
         contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        //if(box.getGameList() != null) {
+        if(box.getGameList() != null) {
             List<ObjectId> games = new ArrayList<>();
             games.add(new ObjectId("62405e81a1102f961b070eb4"));
             for (ObjectId gameId : games) {
@@ -129,7 +152,7 @@ public class ViewListGamesBox extends JFrame implements IView {
                 }
                 contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
             }
-       // }
+        }
         this.pack();
         this.setVisible(true);
     }
@@ -191,7 +214,7 @@ public class ViewListGamesBox extends JFrame implements IView {
         viewInfo.setFocusPainted(false);
         viewInfo.setAlignmentX(CENTER_ALIGNMENT);
         viewInfo.setAlignmentY(CENTER_ALIGNMENT);
-        viewInfo.setToolTipText("Games fron the Box: ");
+        viewInfo.setToolTipText("Games fron the Box");
         viewInfo.addActionListener(new ActionListener() {
 
             @Override

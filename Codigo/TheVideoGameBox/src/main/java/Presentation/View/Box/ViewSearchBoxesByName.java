@@ -33,7 +33,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 	private List<TBox> boxes;
 	
 	public ViewSearchBoxesByName(List<TBox> boxes) {
-		setTitle("Games List");
+		setTitle("Boxes List");
 		this.boxes = boxes;
 		init_GUI();
 		this.setLocationRelativeTo(null);
@@ -103,7 +103,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 				dispose();
 			}
 		});
-		
+
 		// CONSTRUIR VISTA
 		contentContainer.add(headerContainer);
 		contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -179,7 +179,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		//BUTTON PANEL
 		JPanel buttonPanel = new JPanel(new BorderLayout());
 		buttonPanel.setOpaque(false);
-		JButton viewInfo = new JButton("View Information");
+		JButton viewInfo = new JButton("View Games");
 		viewInfo.setIcon(new ImageIcon((getClass().getClassLoader().getResource("info_icon.png"))));
 		viewInfo.setPreferredSize(new Dimension(200, 45));
 		viewInfo.setMaximumSize(new Dimension(200, 45));
@@ -197,8 +197,8 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				ApplicationController.getInstance().action(new Context(Event.SEARCH_ONE, box.getId()));
-//				dispose();
+				ApplicationController.getInstance().action(new Context(Event.LIST_GAMES_OF_BOX, box));
+				dispose();
 			}
 			
 		});

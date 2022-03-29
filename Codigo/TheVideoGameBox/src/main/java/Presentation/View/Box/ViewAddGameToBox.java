@@ -18,6 +18,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 
 // Clase vista para añadir juegos a una box. Es igual que ViewSearchByName pero cambiando el Event.
@@ -59,6 +60,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		contentContainer.setAutoscrolls(true);
 		scrollFrame.setOpaque(false);
 		scrollFrame.getViewport().setOpaque(false);
+		scrollFrame.getVerticalScrollBar().setUnitIncrement(25);
 
 		mainPanel.add(scrollFrame);
 				
@@ -173,11 +175,18 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		
 		//COVER
 		JLabel cover = new JLabel();
-		if (game.getCover() != "nan") {
+		if(game.getCover() != null) {
 			Image image = null;
 			URL url = new URL( "https:"+ game.getCover());
-			image = ImageIO.read(url);
+			URLConnection connection = url.openConnection();
+			connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
+			connection.connect();
+			image = ImageIO.read(connection.getInputStream());
+			connection.getInputStream().close();
 			cover = new JLabel(new ImageIcon(image));
+		}
+		else {
+			cover.setIcon(new ImageIcon((getClass().getClassLoader().getResource("no_image.png"))));
 		}
 		
 		// CONSTRUIR NAMEPANEL
@@ -207,7 +216,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		viewInfo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ApplicationController.getInstance().action(new Context(Event.ADD_GAME_TO_BOX, game.getId()));
+				ApplicationController.getInstance().action(new Context(Event.ADD_GAME_TO_BOX, game));
 				dispose();
 			}
 		});

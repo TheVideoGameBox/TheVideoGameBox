@@ -56,11 +56,11 @@ public class DAOBoxImp implements DAOBox {
 	}
 
 	@Override
-	public List<ObjectId> listGames(ObjectId idBox) {
+	public List<ObjectId> listGames(TBox tBox) {
 		List<ObjectId> gameList;
 		try {
 			MongoDatabase db = Connection.getInstance().getConnection();
-			Box box = db.getCollection("boxes", Box.class).find(eq("_id", idBox)).first();
+			Box box = db.getCollection("boxes", Box.class).find(eq("_id", tBox.getId())).first();
 			gameList = box.getGameList();
 			if(box.getGameList() == null) return null;
 		} catch (MongoException e) {

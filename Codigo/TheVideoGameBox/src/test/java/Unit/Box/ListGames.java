@@ -38,7 +38,7 @@ public class ListGames {
     @Test
     public void testCorrectListGames() {
         try {
-            assertNotNull(saBox.listGames(idBox));
+            assertNotNull(saBox.listGames(correct));
         } catch (Exception ae) {
             fail(ae.getMessage());
         }
