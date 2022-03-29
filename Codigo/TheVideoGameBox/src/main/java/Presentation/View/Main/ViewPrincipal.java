@@ -1,13 +1,12 @@
 package Presentation.View.Main;
 
+import Presentation.Controller.ApplicationController;
+import Presentation.Controller.Context;
+import Presentation.Controller.Event;
+import Presentation.View.IView;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
-import Presentation.Controller.ApplicationController;
-import Presentation.View.IView;
-import Presentation.View.ViewAbstractFactory;
-import Presentation.Controller.Event;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -65,9 +64,10 @@ public class ViewPrincipal extends JFrame implements IView{
 		logIn.setBackground(new Color(64, 147, 255));
 		logIn.setForeground(Color.white);
 		logIn.setFont(new Font("Leelawadee", Font.BOLD, 15));
-		logIn.setBorder(BorderFactory.createBevelBorder(0));
+		//logIn.setBorder(BorderFactory.createBevelBorder(0));
 		logIn.setFocusPainted(false);
 		logIn.setToolTipText("Log In");
+		logIn.setBorder(null);
 		logIn.addActionListener(new ActionListener() {
 
 			@Override
@@ -92,14 +92,46 @@ public class ViewPrincipal extends JFrame implements IView{
 		registro.setBackground(new Color(255, 170, 0));
 		registro.setForeground(Color.white);
 		registro.setFont(new Font("Leelawadee", Font.BOLD, 15));
-		registro.setBorder(BorderFactory.createBevelBorder(0));
+		//registro.setBorder(BorderFactory.createBevelBorder(0));
 		registro.setFocusPainted(false);
 		registro.setToolTipText("Register");
+		registro.setBorder(null);
+		registro.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ApplicationController.getInstance().action(new Context(Event.VIEW_CREATE_USER, null));
+				dispose();
+			}
+		});
 		
 		//Icono de la aplicacion
 		
 		JLabel icon = new JLabel();
 		icon.setIcon(new ImageIcon(getClass().getClassLoader().getResource("logo_small_blanco.png")));
+		
+
+		//BOTON CREAR BOX
+		
+		JButton createBox = new JButton("Create Box");
+		createBox.setPreferredSize(new Dimension(120, 50));
+		createBox.setMaximumSize(new Dimension(120, 50));
+		createBox.setMinimumSize(new Dimension(120, 50));
+		createBox.setBackground(new Color(50, 170, 0));
+		createBox.setForeground(Color.white);
+		createBox.setFont(new Font("Leelawadee", Font.BOLD, 15));
+		//createBox.setBorder(BorderFactory.createBevelBorder(0));
+		createBox.setFocusPainted(false);
+		createBox.setToolTipText("Create Box");
+		createBox.setBorder(null);
+		createBox.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ApplicationController.getInstance().action(new Context(Event.VIEW_CREATE_BOX, null));
+				dispose();
+			}
+			
+		});
 		
 		topPanel.add(Box.createRigidArea(new Dimension(20,0)));
 		topPanel.add(logIn);
@@ -107,8 +139,9 @@ public class ViewPrincipal extends JFrame implements IView{
 		topPanel.add(registro);
 		topPanel.add(Box.createRigidArea(new Dimension(110,0)));
 		topPanel.add(icon);
+		topPanel.add(Box.createRigidArea(new Dimension(200,0)));
+		topPanel.add(createBox);
 
-		
 		return topPanel;
 	}
 	
@@ -131,7 +164,7 @@ public class ViewPrincipal extends JFrame implements IView{
 	}
 	
 	private JPanelRound gamesPanel() {
-		JPanelRound mainPanel = new JPanelRound();
+		JPanelRound mainPanel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255));
 		mainPanel.setBackground(new Color(64, 147, 255));
 		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		mainPanel.setMaximumSize(new Dimension(1150, 275));
@@ -160,11 +193,27 @@ public class ViewPrincipal extends JFrame implements IView{
 		textPanelN.setOpaque(false);
 		textPanelN.setLayout(new BoxLayout(textPanelN, BoxLayout.X_AXIS));
 		textPanelN.add(Box.createRigidArea(new Dimension(50, 0)));
+		textPanelN.setBorder(null);
 		
 		JTextField textName = new JTextField();
 		textName.setPreferredSize(new Dimension(200, 30));
 		textName.setMinimumSize(new Dimension(200, 30));
 		textName.setMaximumSize(new Dimension(200, 30));
+		textName.setBorder(null);
+
+		textName.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String search = textName.getText();
+				if(search.length() <= 50 && search.length() > 0) {
+					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BY_NAME, search));
+					dispose();
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "There is no games with that name");
+				}
+			}
+		});
 
 		JButton searchName = new JButton("SEARCH");
 		searchName.setPreferredSize(new Dimension(120, 30));
@@ -173,19 +222,29 @@ public class ViewPrincipal extends JFrame implements IView{
 		searchName.setBackground(new Color(64, 147, 255));
 		searchName.setForeground(Color.white);
 		searchName.setFont(new Font("Leelawadee", Font.BOLD, 15));
-		searchName.setBorder(BorderFactory.createBevelBorder(0));
+		//searchName.setBorder(BorderFactory.createBevelBorder(0));
 		searchName.setFocusPainted(false);
 		searchName.setToolTipText("Search a Game by Name");
+		searchName.setBorder(null);
 		searchName.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				String search = searchName.getText();
-				ApplicationController.getInstance().action(Event.SEARCH_ALL_BY_NAME, search);
-				
+
+				String search = textName.getText();
+				if(search.length() <= 50 && search.length() > 0) {
+					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BY_NAME, search));
+					dispose();
+				}
+				else if(search.length() > 50) {
+					JOptionPane.showMessageDialog(null, "Too many characters");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "There is no games with that name");
+				}
+
 			}
-			
+
 		});
 		
 		textPanelN.add(textName);
@@ -224,19 +283,16 @@ public class ViewPrincipal extends JFrame implements IView{
 	}
 	
 	private JPanelRound boxPanel() {
-		JPanelRound mainPanel = new JPanelRound();
+		JPanelRound mainPanel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255));
 		mainPanel.setBackground(new Color(64, 147, 255));
 		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		mainPanel.setMaximumSize(new Dimension(1150, 275));
 		mainPanel.setLayout(new GridLayout(2,2));
 		mainPanel.setBorder(new BorderTitle("Boxes", Color.white));
 		
-		// BUSQUEDA XXXXXXXX
-		
-		JPanel rightTopPanel = new JPanel();
-		rightTopPanel.setBorder(new EmptyBorder(10, 50, 10, 50));
-		rightTopPanel.setOpaque(false);
-		rightTopPanel.setLayout(new GridLayout(2,2));
+		// BUSQUEDA BOXES POR NOMBRE
+
+		panelBoxSearch();
 		
 		// BUSQUEDA XXXXXXXX
 		
@@ -259,7 +315,7 @@ public class ViewPrincipal extends JFrame implements IView{
 		leftBottonPanel.setOpaque(false);
 		leftBottonPanel.setLayout(new GridLayout(2,2));
 		
-		mainPanel.add(rightTopPanel);
+		mainPanel.add(panelBoxSearch());
 		mainPanel.add(leftTopPanel);
 		mainPanel.add(rightBottonPanel);
 		mainPanel.add(leftBottonPanel);
@@ -267,8 +323,87 @@ public class ViewPrincipal extends JFrame implements IView{
 		return mainPanel;
 	}
 
+	private JPanel panelBoxSearch() {
+		JPanel rightTopPanel = new JPanel();
+		rightTopPanel.setBorder(new EmptyBorder(10, 50, 10, 50));
+		rightTopPanel.setOpaque(false);
+		rightTopPanel.setLayout(new GridLayout(2,2));
+
+		JLabel searchByName = new JLabel("Search Box by Name");
+		searchByName.setIcon(new ImageIcon(getClass().getClassLoader().getResource("lupa_icon.png")));
+		searchByName.setForeground(Color.white);
+		searchByName.setFont(new Font("Leelawadee", Font.BOLD, 25));
+
+		rightTopPanel.add(searchByName);
+
+		// PANEL CON LA BUSQUEDA
+
+		JPanel textPanelN = new JPanel();
+		textPanelN.setOpaque(false);
+		textPanelN.setLayout(new BoxLayout(textPanelN, BoxLayout.X_AXIS));
+		textPanelN.add(Box.createRigidArea(new Dimension(50, 0)));
+		textPanelN.setBorder(null);
+
+		JTextField textName = new JTextField();
+		textName.setPreferredSize(new Dimension(200, 30));
+		textName.setMinimumSize(new Dimension(200, 30));
+		textName.setMaximumSize(new Dimension(200, 30));
+		textName.setBorder(null);
+		textName.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String search = textName.getText();
+				if(search.length() <= 50 && search.length() > 0) {
+					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BOXES_BY_NAME, search));
+					dispose();
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "There is no Boxes with that name");
+				}
+			}
+		});
+
+		JButton searchName = new JButton("SEARCH");
+		searchName.setPreferredSize(new Dimension(120, 30));
+		searchName.setMaximumSize(new Dimension(120, 30));
+		searchName.setMinimumSize(new Dimension(120, 30));
+		searchName.setBackground(new Color(64, 147, 255));
+		searchName.setForeground(Color.white);
+		searchName.setFont(new Font("Leelawadee", Font.BOLD, 15));
+		//searchName.setBorder(BorderFactory.createBevelBorder(0));
+		searchName.setFocusPainted(false);
+		searchName.setToolTipText("Search a Box by Name");
+		searchName.setBorder(null);
+		searchName.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				String search = textName.getText();
+				if(search.length() <= 50 && search.length() > 0) {
+					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BOXES_BY_NAME, search));		//CAMBIAR EL EVENTO CUANDO ESTE HECHA LA VISTA
+					dispose();
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "There is no Boxes with that name");
+				}
+			}
+		});
+
+		textPanelN.add(textName);
+		textPanelN.add(Box.createRigidArea(new Dimension(10, 0)));
+		textPanelN.add(searchName);
+
+		rightTopPanel.add(textPanelN);
+		return rightTopPanel;
+	}
+
 	@Override
-	public void update(int event, Object data) {
-				
+	public void update(Context context) {
+		if(context.getEvent() == Event.RES_SEARCH_ALL_BY_NAME_KO) {
+			JOptionPane.showMessageDialog(null, "There isn't any game with that name");
+		}
+		ApplicationController.getInstance().action(new Context(Event.VIEW, null));
+		dispose();
 	}
 }

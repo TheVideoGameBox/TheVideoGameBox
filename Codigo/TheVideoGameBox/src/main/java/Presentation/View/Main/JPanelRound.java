@@ -1,20 +1,22 @@
 package Presentation.View.Main;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 
 public class JPanelRound extends JPanel{
 
-    private Color colorPrimario = new Color(26, 59, 160);
-    private Color colorSecundario = new Color(64, 147, 255);
-    private Color colorContorno = new Color(64, 147, 255);
+    private Color colorPrimario;
+    private Color colorSecundario;
+    private Color colorContorno;
     private int arcw=20;
     private int arch=20;
    
-    public JPanelRound() {
+    public JPanelRound(Color a, Color b) {
         super();
+        colorPrimario = a;
+        colorSecundario = b;
+        colorContorno = b;
         setOpaque(false);
     }
    
