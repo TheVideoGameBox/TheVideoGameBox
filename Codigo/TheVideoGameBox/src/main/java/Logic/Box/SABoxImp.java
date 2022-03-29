@@ -36,6 +36,12 @@ public class SABoxImp implements SABox {
     }
 
     @Override
+    public List<ObjectId> listGames(ObjectId idBox) {
+        DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+        return daoBox.listGames(idBox);
+    }
+
+    @Override
     public List<TBox> searchAllBoxesByName(String name) {
         if(!correctName(name))
             return null;
@@ -49,6 +55,10 @@ public class SABoxImp implements SABox {
     public void deleteFromDatabase(ObjectId id){
         DAOAbstractFactory.getInstance().createDAOBox().deleteFromDatabase(id);
     }
+
+	private boolean correctPrivacy(boolean privacy) {
+		return !Objects.isNull(privacy);
+	}
 
     private boolean correctGenres(List<Genres> categories) {
         return categories != null && !categories.isEmpty();
