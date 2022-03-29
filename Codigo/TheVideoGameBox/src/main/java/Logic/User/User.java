@@ -12,7 +12,6 @@ public class User {
 	    private String email;
 	    private String username;
 	    private String password;
-	
 
 	    public User() {
 	    	
@@ -30,14 +29,13 @@ public class User {
 	        this.username = username;
 	        this.password = password;
 	    }
+
 	    public User(TUser tUser){
 	        this.id = tUser.getId();
 	        this.email = tUser.getEmail();
 	        this.username = tUser.getUsername();
 	        this.password = tUser.getPassword();
 	    }
-
-	    //Getters and setters
 
 	    public ObjectId getId() {
 	        return id;
@@ -62,14 +60,14 @@ public class User {
 	    public void setUsername(String username) {
 	        this.username = username;
 	    }
-	    public String getPassword() {
+
+		public String getPassword() {
 	        return password;
 	    }
 
 	    public void setPassword(String password) {
 	        this.password = password;
 	    }
-	    
 
 	    //Obtener todos los datos de un transfer
 	    public void setData(TUser tUser){
@@ -78,7 +76,6 @@ public class User {
 		        this.username = tUser.getUsername();
 		        this.password = tUser.getPassword();
 	    }
-
 
 	    //Transformar una entidad de MongoDB a un transfer
 	    public TUser toTransfer(){

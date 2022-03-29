@@ -14,15 +14,12 @@ public class SAUserImp implements SAUser {
 	public ObjectId createUser(TUser user) {
 		if(!correctEmail(user.getEmail()))
 			return null;
-		
 		if(!correctUsername(user.getUsername()))
 			return null;
-		
 		if(!correctPassword(user.getPassword()))
 			return null;
 			
 		DAOUser daoUser = DAOAbstractFactory.getInstance().createDAOUser();
-		
 		return daoUser.create(user);
 	}
 

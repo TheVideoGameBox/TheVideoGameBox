@@ -2,6 +2,7 @@ package Data.User;
 
 import java.util.Objects;
 
+import Logic.Box.Box;
 import org.bson.types.ObjectId;
 
 import com.mongodb.MongoException;
@@ -19,18 +20,16 @@ public class DAOUserImp implements DAOUser {
 	@Override
 	public ObjectId create(TUser tUser) {
 		ObjectId result;
-
 		try {
 			MongoDatabase db = Connection.getInstance().getConnection();
 			MongoCollection<User> users = db.getCollection("users", User.class);
 
-			User user = new User(tUser);
+			User insert = new User(tUser);
 
-			result = Objects.requireNonNull(users.insertOne(user).getInsertedId(), "Fail to create the user").asObjectId().getValue();
+			result = Objects.requireNonNull(users.insertOne(insert).getInsertedId()).asObjectId().getValue();
 		} catch (MongoException | NullPointerException e) {
 			result = null;
 		}
-
 		return result;
 	}
 
@@ -44,4 +43,5 @@ public class DAOUserImp implements DAOUser {
 
 		}
 	}
+
 }
