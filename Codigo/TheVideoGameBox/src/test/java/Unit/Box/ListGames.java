@@ -32,6 +32,7 @@ public class ListGames {
         ObjectId idGame = Objects.requireNonNull(db.getCollection("games", Game.class).find().first()).getId();
         saBox = SAAbstractFactory.getInstance().createSABox();
         idBox = saBox.createBox(correct);
+        correct.setId((idBox));
         saBox.addGame(idBox, idGame);
     }
 

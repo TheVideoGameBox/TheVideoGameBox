@@ -46,7 +46,6 @@ public class ViewFactory extends ViewAbstractFactory {
 				break;
 			case Event.RES_CREATE_USER_KO:
 				break;
-		}
 			case Event.RES_SEARCH_ALL_BOXES_BY_NAME_OK:
 				currentView = new ViewSearchBoxesByName((List<TBox>) context.getData());
 				break;
@@ -56,8 +55,7 @@ public class ViewFactory extends ViewAbstractFactory {
 			case Event.ADD_GAME_TO_BOX:
 				currentView = new ViewAddGameToBox((Pair<List<TGame>, TBox>) context.getData());
 				break;
-
-        }
+		}
 
         return currentView;
     }
