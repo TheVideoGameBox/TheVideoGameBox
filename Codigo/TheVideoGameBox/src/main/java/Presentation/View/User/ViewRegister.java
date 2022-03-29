@@ -282,8 +282,11 @@ private JPanel createMidPanel() {
 						TUser user = new TUser(email, username, password);
 						ApplicationController.getInstance().action(new Context(Event.CREATE_USER, user));;
 					}
+					else {
+						JOptionPane.showMessageDialog(null, "Incorrect password");
+					}
 				} catch(Exception e1) {
-					JOptionPane.showMessageDialog(null, "Incorrect password");
+					JOptionPane.showMessageDialog(null, "Error");
 				}
 			}
 		});
