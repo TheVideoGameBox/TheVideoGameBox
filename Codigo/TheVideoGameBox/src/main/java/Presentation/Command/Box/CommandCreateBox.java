@@ -17,8 +17,8 @@ public class CommandCreateBox implements ICommand{
 		ObjectId result = saBox.createBox(box);
 		Context con;
 		
-		if(result!=null) con = new Context(Event.RES_CREATE_BOX_OK,result);
-		else con = new Context(Event.RES_CREATE_BOX_KO,result);
+		if(result!=null) con = new Context(Event.RES_CREATE_BOX_OK, result);
+		else con = new Context(Event.RES_CREATE_BOX_KO, null);
 		
 		return con;
 	}

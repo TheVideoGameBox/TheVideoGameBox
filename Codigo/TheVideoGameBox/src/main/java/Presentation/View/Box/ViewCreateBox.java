@@ -8,7 +8,6 @@ import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
-import Presentation.View.Main.ViewPrincipal;
 
 import javax.swing.*;
 import java.awt.*;

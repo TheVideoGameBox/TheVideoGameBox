@@ -14,16 +14,15 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
-public class ViewSearchByName extends JFrame implements IView{
+public class ViewSearchGamesByName extends JFrame implements IView{
 	private List<TGame> games;
 
-	public ViewSearchByName(List<TGame> games) {
+	public ViewSearchGamesByName(List<TGame> games) {
 		setTitle("Games List");
 		this.games = games;
 		init_GUI();

@@ -33,5 +33,11 @@ public class Event {
     public static final int ADD_GAME_TO_BOX = 504;
     public static final int RES_ADD_GAME_TO_BOX_OK = 505;
     public static final int RES_ADD_GAME_TO_BOX_KO = 506;
+    public static final int LIST_GAMES_OF_BOX = 507;
+    public static final int RES_LIST_GAMES_OF_BOX_OK = 508;
+    public static final int RES_LIST_GAMES_OF_BOX_KO = 509;
+    public static final int SEARCH_ALL_BOXES_BY_NAME = 510;
+    public static final int RES_SEARCH_ALL_BOXES_BY_NAME_OK= 511;
+    public static final int RES_SEARCH_ALL_BOXES_BY_NAME_KO= 512;
 
 }

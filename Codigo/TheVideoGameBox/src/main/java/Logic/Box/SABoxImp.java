@@ -4,6 +4,7 @@ import Data.Box.DAOBox;
 import Data.DAOAbstractFactory;
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,6 +33,22 @@ public class SABoxImp implements SABox {
     public ObjectId addGame(ObjectId idBox, ObjectId gameId) {
         DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
         return daoBox.addGame(idBox, gameId);
+    }
+
+    @Override
+    public List<ObjectId> listGames(TBox box) {
+        DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+        return daoBox.listGames(box);
+    }
+
+    @Override
+    public List<TBox> searchAllBoxesByName(String name) {
+        if(!correctName(name))
+            return null;
+
+        DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+
+        return daoBox.searchAllByName(name);
     }
 
     @Override

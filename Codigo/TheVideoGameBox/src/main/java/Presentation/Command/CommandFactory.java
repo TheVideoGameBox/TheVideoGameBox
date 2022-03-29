@@ -1,6 +1,7 @@
 package Presentation.Command;
 
 import Presentation.Command.Box.CommandCreateBox;
+import Presentation.Command.Box.CommandSearchAllBoxesByName;
 import Presentation.Command.Game.CommandSearchAllByName;
 import Presentation.Command.Game.CommandSearchOne;
 import Presentation.Command.User.CommandCreateUser;
@@ -19,6 +20,9 @@ public class CommandFactory extends CommandAbstractFactory{
                 break;
             case Event.CREATE_BOX:
                 command = new CommandCreateBox();
+                break;
+            case Event.SEARCH_ALL_BOXES_BY_NAME:
+                command = new CommandSearchAllBoxesByName();
                 break;
             case Event.CREATE_USER:
             	command = new CommandCreateUser();

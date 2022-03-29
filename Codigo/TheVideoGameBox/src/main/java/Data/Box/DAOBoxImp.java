@@ -3,7 +3,11 @@ package Data.Box;
 import Data.Connection;
 import Logic.Box.Box;
 import Logic.Box.TBox;
+import Logic.Game.Game;
+import Logic.Game.TGame;
+
 import com.mongodb.MongoException;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Updates;
@@ -12,8 +16,10 @@ import org.bson.types.ObjectId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.regex;
 
 public class DAOBoxImp implements DAOBox {
 
@@ -49,7 +55,21 @@ public class DAOBoxImp implements DAOBox {
 		return idGame;
 	}
 
-    @Override
+	@Override
+	public List<ObjectId> listGames(TBox tBox) {
+		List<ObjectId> gameList;
+		try {
+			MongoDatabase db = Connection.getInstance().getConnection();
+			Box box = db.getCollection("boxes", Box.class).find(eq("_id", tBox.getId())).first();
+			gameList = box.getGameList();
+			if(box.getGameList() == null) return null;
+		} catch (MongoException e) {
+			return null;
+		}
+		return gameList;
+	}
+
+	@Override
     public void deleteFromDatabase(ObjectId id) {
         try {
             MongoDatabase db = Connection.getInstance().getConnection();
@@ -60,4 +80,19 @@ public class DAOBoxImp implements DAOBox {
 
         }
     }
+
+	@Override
+	public List<TBox> searchAllByName(String name) {
+		List<TBox> result = new ArrayList<>();
+			try {
+				MongoDatabase db = Connection.getInstance().getConnection();
+				FindIterable<Box> iter = db.getCollection("boxes", Box.class).find(regex("name", Pattern.compile(name, Pattern.CASE_INSENSITIVE)));
+		        for (Box box : iter)
+		        	result.add(box.toTransfer());
+		    } catch (MongoException e) {
+		    	result = null;
+		    }
+			
+		return result;
+	}
 }
