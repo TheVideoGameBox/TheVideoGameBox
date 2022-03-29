@@ -2,11 +2,14 @@ package Presentation.View.User;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -14,17 +17,21 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import Logic.User.TUser;
 import Presentation.Controller.ApplicationController;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Main.BorderTitle;
 import Presentation.View.Main.JPanelConFondo;
+import Presentation.View.Main.JPanelRound;
 
 public class ViewRegister extends JFrame implements IView {
 
@@ -80,13 +87,225 @@ private JPanel createTopPanel() {
 
 private JPanel createMidPanel() {
 	JPanel midPanel = new JPanel();
-
+	midPanel.setPreferredSize(new Dimension(1150, 600));
+	midPanel.setMaximumSize(new Dimension(1150, 600));
+	midPanel.setMinimumSize(new Dimension(1150, 600));
+	midPanel.setLayout(new BoxLayout(midPanel, BoxLayout.Y_AXIS));
+	midPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
+	midPanel.setBackground(new Color(64, 147, 255));
+	midPanel.setBorder(new BorderTitle("Sign Up - Join us today", Color.black));
+	
+	// Create account label
+	JLabel createLabel = new JLabel("Create your account");
+	createLabel.setHorizontalAlignment(SwingConstants.CENTER);
+	createLabel.setFont(new Font("Leelawadee", Font.BOLD, 30));
+	createLabel.setForeground(Color.WHITE);
+	
+	midPanel.add(Box.createRigidArea(new Dimension(0,10)));
+	midPanel.add(createLabel);
+	midPanel.add(Box.createRigidArea(new Dimension(0,15)));
+	midPanel.add(registerPanel());
+	
 	return midPanel;
-}
+	}
+
+	private Component registerPanel() {
+		JPanel registerPanel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255));
+		registerPanel.setMaximumSize(new Dimension(1150, 550));
+		registerPanel.setMinimumSize(new Dimension(1150, 550));
+		registerPanel.setLayout(new BoxLayout(registerPanel, BoxLayout.Y_AXIS));
+		registerPanel.add(Box.createRigidArea(new Dimension(0,10)));
+		
+		// BACK BUTTON
+		JButton backButton = new JButton();
+		backButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("back_icon.png")));
+		backButton.setBorderPainted(false);
+		backButton.setOpaque(false);
+		backButton.setContentAreaFilled(false);
+		backButton.setFocusPainted(false);
+		backButton.setBounds(0, 11, 119, 50);
+		backButton.setFocusable(false);		
+		backButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ApplicationController.getInstance().action(new Context(Event.VIEW, null));
+				dispose();
+			}
+		});
+		
+		registerPanel.add(backButton);
+		
+		// EMAIL LABEL
+		JLabel emailLabel = new JLabel("  Email Adress");
+		emailLabel.setFont(new Font("Comic Sans", Font.ITALIC, 20));
+		emailLabel.setForeground(Color.WHITE);
+		registerPanel.add(emailLabel);
+		
+		// Input para el email
+		JPanel emailPanel = new JPanel();
+		emailPanel.setLayout(new BoxLayout(emailPanel, BoxLayout.X_AXIS));
+		emailPanel.setOpaque(false);
+		
+		JTextField emailUser = new JTextField();
+		emailUser.setMaximumSize(new Dimension(600, 40));
+		emailUser.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				emailUser.setText(null);
+				emailUser.setForeground(Color.DARK_GRAY);
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+		});
+		registerPanel.add(emailPanel);
+		emailPanel.add(Box.createRigidArea(new Dimension(15, 10)));
+		emailPanel.add(emailUser);
+		
+		// USERNAME LABEL
+		JLabel usernameLabel = new JLabel("  Username");
+		usernameLabel.setFont(new Font("Comic Sans", Font.ITALIC, 20));
+		usernameLabel.setForeground(Color.WHITE);
+		registerPanel.add(usernameLabel);
+		
+		// Input para el username
+		JPanel usernamePanel = new JPanel();
+		usernamePanel.setLayout(new BoxLayout(usernamePanel, BoxLayout.X_AXIS));
+		usernamePanel.setOpaque(false);
+				
+		JTextField usernameUser = new JTextField();
+		usernameUser.setMaximumSize(new Dimension(600, 40));
+		usernameUser.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				usernameUser.setText(null);
+				usernameUser.setForeground(Color.DARK_GRAY);
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+		});
+		registerPanel.add(usernamePanel);
+		usernamePanel.add(Box.createRigidArea(new Dimension(15, 10)));
+		usernamePanel.add(usernameUser);
+
+		// PASSWORD LABEL
+		JLabel passwordLabel = new JLabel("  Password");
+		passwordLabel.setFont(new Font("Comic Sans", Font.ITALIC, 20));
+		passwordLabel.setForeground(Color.WHITE);
+		registerPanel.add(passwordLabel);
+				
+		// Input para la password
+		JPanel passwordPanel = new JPanel();
+		passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
+		passwordPanel.setOpaque(false);
+						
+		JTextField passwordUser = new JTextField();
+		passwordUser.setMaximumSize(new Dimension(600, 40));
+		passwordUser.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				passwordUser.setText(null);
+				passwordUser.setForeground(Color.DARK_GRAY);
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+		});
+		registerPanel.add(passwordPanel);
+		passwordPanel.add(Box.createRigidArea(new Dimension(15, 10)));
+		passwordPanel.add(passwordUser);
+		
+		// CONFIRM PASSWORD LABEL
+		JLabel confirmPasswordLabel = new JLabel("Confirm Password");
+		confirmPasswordLabel.setFont(new Font("Comic Sans", Font.ITALIC, 20));
+		confirmPasswordLabel.setForeground(Color.WHITE);
+		registerPanel.add(confirmPasswordLabel);
+						
+		// Input para la confirm password
+		JPanel confirmPasswordPanel = new JPanel();
+		confirmPasswordPanel.setLayout(new BoxLayout(confirmPasswordPanel, BoxLayout.X_AXIS));
+		confirmPasswordPanel.setOpaque(false);
+								
+		JTextField confirmPasswordUser = new JTextField();
+		confirmPasswordUser.setMaximumSize(new Dimension(600, 40));
+		confirmPasswordUser.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				confirmPasswordUser.setText(null);
+				confirmPasswordUser.setForeground(Color.DARK_GRAY);
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+		});
+		registerPanel.add(confirmPasswordPanel);
+		confirmPasswordPanel.add(Box.createRigidArea(new Dimension(15, 10)));
+		confirmPasswordPanel.add(confirmPasswordUser);
+				
+		// SIGN UP BUTTON
+		JButton signUpButton = new JButton();
+		signUpButton.setPreferredSize(new Dimension(80, 40));
+		signUpButton.setMaximumSize(new Dimension(80, 40));
+		signUpButton.setMinimumSize(new Dimension(80, 40));
+		signUpButton.setText("Sign Up");
+		signUpButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String email = emailUser.getText();
+					String username = usernameUser.getText();
+					String password = passwordUser.getText();
+					String confirmPassword = confirmPasswordUser.getText();
+					
+					if (password.equals(confirmPassword)) {
+						TUser user = new TUser(email, username, password);
+						ApplicationController.getInstance().action(new Context(Event.CREATE_USER, user));;
+					}
+				} catch(Exception e1) {
+					JOptionPane.showMessageDialog(null, "Incorrect password");
+				}
+			}
+		});
+		
+		registerPanel.add(Box.createRigidArea(new Dimension(100,5)));
+		registerPanel.add(signUpButton);
+		
+		return registerPanel;
+	}
 
 	@Override
 	public void update(Context context) {
-		// TODO Auto-generated method stub
+		switch(context.getEvent()) {
+		case Event.RES_CREATE_USER_OK:
+			JOptionPane.showMessageDialog(this, "Signed Up!","Sign Up", JOptionPane.INFORMATION_MESSAGE);
+			ApplicationController.getInstance().action(new Context(Event.VIEW, null));
+			dispose();
+			break;
+		case Event.RES_CREATE_USER_KO:
+			JOptionPane.showMessageDialog(null, "Failed to Sign Up","Sign Up", JOptionPane.ERROR_MESSAGE);
+			break;
+		}
 	}
 
 }

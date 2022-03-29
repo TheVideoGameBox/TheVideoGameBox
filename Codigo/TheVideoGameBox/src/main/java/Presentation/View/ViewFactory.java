@@ -38,6 +38,10 @@ public class ViewFactory extends ViewAbstractFactory {
 			case Event.VIEW_CREATE_USER:
 				currentView = new ViewRegister();
 				break;
+			case Event.RES_CREATE_USER_OK:
+				break;
+			case Event.RES_CREATE_USER_KO:
+				break;
 		}
 
         return currentView;
