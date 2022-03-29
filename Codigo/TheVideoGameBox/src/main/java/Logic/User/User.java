@@ -7,6 +7,7 @@ public class User {
     private String email;
     private String username;
     private String password;
+    private Boolean active;
 
     public User() {
 
@@ -18,11 +19,12 @@ public class User {
         this.password = password;
     }
 
-    public User(ObjectId id, String email, String username, String password) {
+    public User(ObjectId id, String email, String username, String password, Boolean active) {
         this.id = id;
         this.email = email;
         this.username = username;
         this.password = password;
+        this.active = active;
     }
 
     public User(TUser tUser) {
@@ -62,6 +64,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     //Obtener todos los datos de un transfer
