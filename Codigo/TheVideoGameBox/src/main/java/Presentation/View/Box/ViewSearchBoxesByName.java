@@ -104,6 +104,10 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 			}
 		});
 		
+		// CONSTRUIR VISTA
+		contentContainer.add(headerContainer);
+		contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+		
 		// HELP
 		JPanel helpPanel = new JPanel();
 		JLabel help = new JLabel("Push the TVGB logo to go back the main window");
@@ -151,7 +155,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		JLabel name = new JLabel(box.getName());
 		name.setForeground(Color.white);
 		name.setFont(new Font("Leelawadee", Font.BOLD, 20));
-		JLabel cover = new JLabel();
+//		JLabel cover = new JLabel();
 //		if(box.getCover() != null) {
 //			Image image = null;
 //			URL url = new URL( "https:"+ box.getCover());
@@ -168,7 +172,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		
 		// CONSTRUIR NAMEPANEL
 		namePanel.add(Box.createRigidArea(new Dimension(10, 0)));
-		namePanel.add(cover);
+//		namePanel.add(cover);
 		namePanel.add(Box.createRigidArea(new Dimension(55, 0)));
 		namePanel.add(name);
 
@@ -193,8 +197,8 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ApplicationController.getInstance().action(new Context(Event.SEARCH_ONE, box.getId()));
-				dispose();
+//				ApplicationController.getInstance().action(new Context(Event.SEARCH_ONE, box.getId()));
+//				dispose();
 			}
 			
 		});
