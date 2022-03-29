@@ -13,7 +13,7 @@ import Presentation.View.Box.ViewSearchBoxesByName;
 import Presentation.View.Game.ViewSearchGamesByName;
 import Presentation.View.Game.ViewShowOne;
 import Presentation.View.Main.ViewPrincipal;
-import org.bson.types.ObjectId;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class ViewFactory extends ViewAbstractFactory {
 
@@ -42,7 +42,7 @@ public class ViewFactory extends ViewAbstractFactory {
 				currentView = new ViewListGamesBox((TBox) context.getData());
 				break;
 			case Event.ADD_GAME_TO_BOX:
-				currentView = new ViewAddGameToBox((ObjectId) context.getData());
+				currentView = new ViewAddGameToBox((Pair<List<TGame>, TBox>) context.getData());
 				break;
 
         }

@@ -9,6 +9,7 @@ import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
+import org.apache.commons.lang3.tuple.Pair;
 import org.bson.types.ObjectId;
 
 import javax.imageio.ImageIO;
@@ -111,7 +112,24 @@ public class ViewListGamesBox extends JFrame implements IView {
             public void actionPerformed(ActionEvent e) {
                 String search = textName.getText();
                 if(search.length() <= 50 && search.length() > 0) {
-                    ApplicationController.getInstance().action(new Context(Event.ADD_GAME_TO_BOX, SAAbstractFactory.getInstance().createSAGame().searchAllByName(search)));
+
+                    Pair<List<TGame>, TBox> aux = new Pair<List<TGame>, TBox>() {
+                        @Override
+                        public List<TGame> getLeft() {
+                            return SAAbstractFactory.getInstance().createSAGame().searchAllByName(search);
+                        }
+
+                        @Override
+                        public TBox getRight() {
+                            return box;
+                        }
+
+                        @Override
+                        public TBox setValue(TBox value) {
+                            return null;
+                        }
+                    };
+                    ApplicationController.getInstance().action(new Context(Event.ADD_GAME_TO_BOX, aux));
                     dispose();
                 }
                 else {

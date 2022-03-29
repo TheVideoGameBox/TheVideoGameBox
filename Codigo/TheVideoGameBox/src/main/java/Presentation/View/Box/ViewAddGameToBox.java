@@ -1,12 +1,15 @@
 package Presentation.View.Box;
 
+import Logic.Box.TBox;
 import Logic.Game.TGame;
+import Logic.SAAbstractFactory;
 import Presentation.Controller.ApplicationController;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
+import org.apache.commons.lang3.tuple.Pair;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -27,15 +30,17 @@ public class ViewAddGameToBox extends JFrame implements IView {
 	private static final long serialVersionUID = 1L;
 	
 	private List<TGame> games;
+	private TBox box;
 	
-	public ViewAddGameToBox(List<TGame> games) {
-		setTitle("Add a game to box"); 
-		this.games = games;
-		init_GUI();
+	public ViewAddGameToBox(Pair<List<TGame>, TBox> aux) {
+		setTitle("Add a game to box");
+		games = aux.getLeft();
+		box = aux.getRight();
+		init_GUI(aux);
 		this.setLocationRelativeTo(null);
 	}
-	
-	private void init_GUI() {
+
+	private void init_GUI(Pair<List<TGame>, TBox> aux) {
 		this.setPreferredSize(new Dimension(1150, 750));
 		this.setLocation(400, 100);
 		
@@ -120,7 +125,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 				
 		for (TGame game : games) {
 			try {
-				contentContainer.add(gamePanel(game));
+				contentContainer.add(gamePanel(game, box, aux));
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
@@ -131,7 +136,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		this.setVisible(true);
 	}
 	
-	private JPanelRound gamePanel(TGame game) throws IOException {
+	private JPanelRound gamePanel(TGame game, TBox box, Pair<List<TGame>, TBox> aux) throws IOException {
 
 		JPanelRound panel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255));
 		panel.setLayout(new BorderLayout());
@@ -154,7 +159,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		name.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ApplicationController.getInstance().action(new Context(Event.ADD_GAME_TO_BOX, game.getId()));
+				ApplicationController.getInstance().action(new Context(Event.ADD_GAME_TO_BOX, aux));
 				dispose();
 			}
 
@@ -216,7 +221,8 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		viewInfo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ApplicationController.getInstance().action(new Context(Event.ADD_GAME_TO_BOX, game));
+				ApplicationController.getInstance().action(new Context(Event.ADD_GAME_TO_BOX, aux));
+				//SAAbstractFactory.getInstance().createSABox().addGame(box.getId(), game.getId());
 				dispose();
 			}
 		});
@@ -231,7 +237,16 @@ public class ViewAddGameToBox extends JFrame implements IView {
 
 	@Override
 	public void update(Context context) {
-		// TODO Auto-generated method stub
+		switch(context.getEvent()) {
+			case Event.RES_ADD_GAME_TO_BOX_OK:
+				JOptionPane.showMessageDialog(this, "Game added!","Add Game", JOptionPane.INFORMATION_MESSAGE);
+				ApplicationController.getInstance().action(new Context(Event.VIEW, null));
+				dispose();
+				break;
+			case Event.RES_ADD_GAME_TO_BOX_KO:
+				JOptionPane.showMessageDialog(null, "Failed to add the game","Add Game", JOptionPane.ERROR_MESSAGE);
+				break;
+		}
 		
 	}
 
