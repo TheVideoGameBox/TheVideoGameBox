@@ -291,10 +291,15 @@ public class ViewShowOne extends JFrame implements IView {
 		}
 		
 		JScrollPane scroll = new JScrollPane(descText);
-		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scroll.setOpaque(false);
 		scroll.getViewport().setOpaque(false);
 		scroll.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 12));
+		SwingUtilities.invokeLater(new Runnable() {
+			   public void run() { 
+			       scroll.getVerticalScrollBar().setValue(0);
+			   }
+		});
 		
 		descPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 		descPanel.add(descTitle);

@@ -97,6 +97,13 @@ public class ViewPrincipal extends JFrame implements IView{
 		registro.setFocusPainted(false);
 		registro.setToolTipText("Register");
 		registro.setBorder(null);
+		registro.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ApplicationController.getInstance().action(new Context(Event.VIEW_CREATE_USER, null));
+				dispose();
+			}
+		});
 		
 		//Icono de la aplicacion
 		
