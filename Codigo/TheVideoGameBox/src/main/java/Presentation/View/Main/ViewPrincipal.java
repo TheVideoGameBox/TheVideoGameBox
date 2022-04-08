@@ -60,7 +60,8 @@ public class ViewPrincipal extends JFrame implements IView{
 		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
 
 		//BOTON DE LOGUEO
-		Button buttonLogIn = new Button("Log In", "user_icon.png", Color.white, new Color(64, 147, 255), new Dimension(120, 50));
+		Button buttonLogIn = new Button("Log In", "user_icon.png", new Color(64, 147, 255));
+		new Button("Register", "user_icon.png", new Color(64, 147, 255));
 		JButton logIn = buttonLogIn.buttonIcon();
 		logIn.addActionListener(new ActionListener() {
 			@Override
@@ -76,7 +77,8 @@ public class ViewPrincipal extends JFrame implements IView{
 		});
 		
 		//BOTON DE REGISTRARSE
-		Button buttonRegister = new Button("Register", Color.white, new Color(255, 170, 0), new Dimension(120, 50));
+		Button buttonRegister =new Button("Register", new Color(255, 170, 0));
+		new Button("Register", new Color(255, 170, 0));
 		JButton registry = buttonRegister.button();
 		registry.addActionListener(new ActionListener() {
 			@Override
@@ -88,10 +90,10 @@ public class ViewPrincipal extends JFrame implements IView{
 		
 		//Icono de la aplicacion
 		JLabel icon = new JLabel();
-		icon.setIcon(new ImageIcon(getClass().getClassLoader().getResource("logo_small_blanco.png")));
+		icon.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo_small_blanco.png"))));
 
 		//BOTON CREAR BOX
-		Button buttonCreate = new Button("Create Box", Color.white, new Color(50, 170, 0), new Dimension(120, 50));
+		Button buttonCreate = new Button("Create Box", new Color(50, 170, 0));
 		JButton createBox = buttonCreate.button();
 		createBox.addActionListener(new ActionListener() {
 			@Override

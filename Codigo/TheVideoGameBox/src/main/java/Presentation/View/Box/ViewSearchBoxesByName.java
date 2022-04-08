@@ -7,6 +7,7 @@ import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
+import Presentation.View.Utils.Button;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -170,28 +171,17 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		//BUTTON PANEL
 		JPanel buttonPanel = new JPanel(new BorderLayout());
 		buttonPanel.setOpaque(false);
-		JButton viewInfo = new JButton("View Games");
-		viewInfo.setIcon(new ImageIcon((getClass().getClassLoader().getResource("info_icon.png"))));
-		viewInfo.setPreferredSize(new Dimension(200, 45));
-		viewInfo.setMaximumSize(new Dimension(200, 45));
-		viewInfo.setMinimumSize(new Dimension(200, 45));
-		viewInfo.setForeground(Color.white);
-		viewInfo.setFont(new Font("Leelawadee", Font.BOLD, 15));
+		Button buttonInfo = new Button("View Games", "info_icon.png", new Color(50, 170, 0), new Dimension(200, 45));
+		JButton viewInfo = buttonInfo.buttonIcon();
 		viewInfo.setBorderPainted(false);
-		viewInfo.setOpaque(false);
 		viewInfo.setContentAreaFilled(false);
-		viewInfo.setFocusPainted(false);
-		viewInfo.setAlignmentX(CENTER_ALIGNMENT);
-		viewInfo.setAlignmentY(CENTER_ALIGNMENT);
 		viewInfo.setToolTipText("Search a Box by Name");
 		viewInfo.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ApplicationController.getInstance().action(new Context(Event.LIST_GAMES_OF_BOX, box));
 				dispose();
 			}
-			
 		});
 		buttonPanel.add(viewInfo, BorderLayout.CENTER);
 		

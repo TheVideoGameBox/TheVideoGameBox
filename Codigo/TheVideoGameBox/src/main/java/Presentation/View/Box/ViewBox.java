@@ -157,7 +157,7 @@ public class ViewBox extends JFrame implements IView {
 		addGameButton.setPreferredSize(new Dimension(40,40));
 		addGameButton.setMaximumSize(new Dimension(40, 40));
 		addGameButton.setMinimumSize(new Dimension(40, 40));
-		addGameButton.setIcon(new ImageIcon((getClass().getClassLoader().getResource("search_icon.png"))));
+		addGameButton.setIcon(new ImageIcon((Objects.requireNonNull(getClass().getClassLoader().getResource("search_icon.png")))));
 		addGameButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

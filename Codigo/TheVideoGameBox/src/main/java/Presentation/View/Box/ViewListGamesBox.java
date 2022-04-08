@@ -9,6 +9,7 @@ import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
+import Presentation.View.Utils.Button;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bson.types.ObjectId;
 import org.jdesktop.xswingx.PromptSupport;
@@ -223,28 +224,16 @@ public class ViewListGamesBox extends JFrame implements IView {
         //BUTTON PANEL
         JPanel buttonPanel = new JPanel(new BorderLayout());
         buttonPanel.setOpaque(false);
-        JButton viewInfo = new JButton("View Information");
-        viewInfo.setIcon(new ImageIcon((getClass().getClassLoader().getResource("info_icon.png"))));
-        viewInfo.setPreferredSize(new Dimension(200, 45));
-        viewInfo.setMaximumSize(new Dimension(200, 45));
-        viewInfo.setMinimumSize(new Dimension(200, 45));
-        viewInfo.setForeground(Color.white);
-        viewInfo.setFont(new Font("Leelawadee", Font.BOLD, 15));
+        Button buttonInfo = new Button("View Information", "info_icon.png", new Color(50, 170, 0), new Dimension(200, 45));
+        JButton viewInfo = buttonInfo.buttonIcon();
         viewInfo.setBorderPainted(false);
-        viewInfo.setOpaque(false);
         viewInfo.setContentAreaFilled(false);
-        viewInfo.setFocusPainted(false);
-        viewInfo.setAlignmentX(CENTER_ALIGNMENT);
-        viewInfo.setAlignmentY(CENTER_ALIGNMENT);
-        viewInfo.setToolTipText("Games fron the Box");
         viewInfo.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 ApplicationController.getInstance().action(new Context(Event.SEARCH_ONE, game.getId()));
                 dispose();
             }
-
         });
         buttonPanel.add(viewInfo, BorderLayout.CENTER);
 

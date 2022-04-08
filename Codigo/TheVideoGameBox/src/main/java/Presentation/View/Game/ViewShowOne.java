@@ -73,7 +73,7 @@ public class ViewShowOne extends JFrame implements IView {
 		//BOTON DE LOGUEO
 		JButton backButton = new JButton();
 		backButton.setPreferredSize(new Dimension(50, 50));
-		backButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("back_icon.png")));
+		backButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("back_icon.png"))));
 		backButton.setMaximumSize(new Dimension(50, 50));
 		backButton.setMinimumSize(new Dimension(50, 50));
 		backButton.setBorderPainted(false);
@@ -92,7 +92,7 @@ public class ViewShowOne extends JFrame implements IView {
 		
 		//ICONO DE LA APLICACION
 		JLabel icon = new JLabel();
-		icon.setIcon(new ImageIcon(getClass().getClassLoader().getResource("logo_small_blanco.png")));
+		icon.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo_small_blanco.png"))));
 				
 		topPanel.add(Box.createRigidArea(new Dimension(20,0)));
 		topPanel.add(backButton);

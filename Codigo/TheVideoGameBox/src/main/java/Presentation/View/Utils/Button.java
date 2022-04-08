@@ -8,22 +8,46 @@ public class Button {
 
     String name;
     String icon;
-    Color foregroundColor;
-    Color backgroudColor;
-    Dimension dimension;
+    Color foregroundColor = Color.white;        //Color por defecto de TODOS los botones
+    Color backgroundColor;
+    Dimension dimension = new Dimension(120, 50);       //Dimension por defecto de la vista principal
 
     public Button(String name, String icon, Color foregroundColor, Color backgroundColor, Dimension dimension) {
         this.name = name;
         this.icon = icon;
         this.foregroundColor = foregroundColor;
-        this.backgroudColor = backgroundColor;
+        this.backgroundColor = backgroundColor;
         this.dimension = dimension;
+    }
+
+    public Button(String name, String icon, Color backgroundColor, Dimension dimension) {
+        this.name = name;
+        this.icon = icon;
+        this.backgroundColor = backgroundColor;
+        this.dimension = dimension;
+    }
+
+    public Button(String name, String icon, Color backgroundColor) {
+        this.name = name;
+        this.icon = icon;
+        this.backgroundColor = backgroundColor;
+    }
+
+    public Button(String name, Color backgroundColor) {
+        this.name = name;
+        this.backgroundColor = backgroundColor;
     }
 
     public Button(String name, Color foregroundColor, Color backgroundColor, Dimension dimension) {
         this.name = name;
         this.foregroundColor = foregroundColor;
-        this.backgroudColor = backgroundColor;
+        this.backgroundColor = backgroundColor;
+        this.dimension = dimension;
+    }
+
+    public Button(String name, Color backgroundColor, Dimension dimension) {
+        this.name = name;
+        this.backgroundColor = backgroundColor;
         this.dimension = dimension;
     }
 
@@ -36,7 +60,7 @@ public class Button {
         button.setPreferredSize(dimension);
         button.setMaximumSize(dimension);
         button.setMinimumSize(dimension);
-        button.setBackground(backgroudColor);
+        button.setBackground(backgroundColor);
         button.setForeground(foregroundColor);
         button.setFont(new Font("Leelawadee", Font.BOLD, 15));
         button.setFocusPainted(false);
@@ -51,7 +75,7 @@ public class Button {
         button.setPreferredSize(dimension);
         button.setMaximumSize(dimension);
         button.setMinimumSize(dimension);
-        button.setBackground(backgroudColor);
+        button.setBackground(backgroundColor);
         button.setForeground(foregroundColor);
         button.setFont(new Font("Leelawadee", Font.BOLD, 15));
         button.setFocusPainted(false);

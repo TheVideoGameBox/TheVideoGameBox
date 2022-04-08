@@ -9,6 +9,7 @@ import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
+import Presentation.View.Utils.Button;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.imageio.ImageIO;
@@ -210,18 +211,9 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		buttonPanel.setMaximumSize(new Dimension(300, 135));
 		buttonPanel.setPreferredSize(new Dimension(300, 135));
 		buttonPanel.setMinimumSize(new Dimension(300, 135));
-		JButton viewInfo = new JButton("Add game");
-		viewInfo.setPreferredSize(new Dimension(170, 45));
-		viewInfo.setMaximumSize(new Dimension(170, 45));
-		viewInfo.setMinimumSize(new Dimension(170, 45));
-		viewInfo.setBackground(new Color(64, 147, 255));
-		viewInfo.setForeground(Color.white);
-		viewInfo.setFont(new Font("Leelawadee", Font.BOLD, 15));
-		viewInfo.setBorder(BorderFactory.createBevelBorder(0));
-		viewInfo.setFocusPainted(false);
-		viewInfo.setAlignmentX(CENTER_ALIGNMENT);
-		viewInfo.setAlignmentY(CENTER_ALIGNMENT);
-		viewInfo.setToolTipText("Search a Game by Name");
+
+		Button buttonInfo = new Button("Add Game", "info_icon.png", new Color(64, 147, 255), new Dimension(170, 45));
+		JButton viewInfo = buttonInfo.button();
 		viewInfo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

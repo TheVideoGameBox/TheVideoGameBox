@@ -8,6 +8,7 @@ import Presentation.View.IView;
 import Presentation.View.Main.BorderTitle;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
+import Presentation.View.Utils.Button;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -252,11 +253,8 @@ private JPanel createMidPanel() {
 		confirmPasswordPanel.add(confirmPasswordUser);
 				
 		// SIGN UP BUTTON
-		JButton signUpButton = new JButton();
-		signUpButton.setPreferredSize(new Dimension(80, 40));
-		signUpButton.setMaximumSize(new Dimension(80, 40));
-		signUpButton.setMinimumSize(new Dimension(80, 40));
-		signUpButton.setText("Sign Up");
+		Button buttonSingUp = new Button("Sing Up", new Color(50, 170, 0), new Dimension(80, 40));
+		JButton signUpButton = buttonSingUp.button();
 		signUpButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
