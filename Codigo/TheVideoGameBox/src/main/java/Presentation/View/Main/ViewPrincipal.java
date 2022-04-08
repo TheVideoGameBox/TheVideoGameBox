@@ -78,7 +78,6 @@ public class ViewPrincipal extends JFrame implements IView{
 		
 		//BOTON DE REGISTRARSE
 		Button buttonRegister =new Button("Register", new Color(255, 170, 0));
-		new Button("Register", new Color(255, 170, 0));
 		JButton registry = buttonRegister.button();
 		registry.addActionListener(new ActionListener() {
 			@Override

@@ -38,13 +38,6 @@ public class Button {
         this.backgroundColor = backgroundColor;
     }
 
-    public Button(String name, Color foregroundColor, Color backgroundColor, Dimension dimension) {
-        this.name = name;
-        this.foregroundColor = foregroundColor;
-        this.backgroundColor = backgroundColor;
-        this.dimension = dimension;
-    }
-
     public Button(String name, Color backgroundColor, Dimension dimension) {
         this.name = name;
         this.backgroundColor = backgroundColor;
