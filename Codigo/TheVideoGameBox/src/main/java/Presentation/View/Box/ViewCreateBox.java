@@ -8,6 +8,7 @@ import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
+import Presentation.View.Utils.Button;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,9 +36,6 @@ public class ViewCreateBox extends JFrame implements IView{
 	private JPanel midPanel;
 	private JComboBox comboBoxPrivacy;
 
-	/**
-	 * Create the frame.
-	 */
 	public ViewCreateBox() {
 		Image iconFrame = new ImageIcon(getClass().getClassLoader().getResource("caja_definitiva.png")).getImage();
 		setIconImage(iconFrame);
@@ -57,9 +55,7 @@ public class ViewCreateBox extends JFrame implements IView{
 		midPanel.setOpaque(false);
 		mainPanel.add(midPanel);
 		midPanel.setLayout(null);
-		
-	
-		
+
 		JLabel titleLabel = new JLabel("Create Box");
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		titleLabel.setAlignmentX(CENTER_ALIGNMENT);
@@ -113,13 +109,10 @@ public class ViewCreateBox extends JFrame implements IView{
 		comboBoxPrivacy.setFont(new Font("Leelawadee", Font.PLAIN, 14));
 		comboBoxPrivacy.setBounds(395, 276, 87, 22);
 		midPanel.add(comboBoxPrivacy);
-		
-		JButton btnCreate = new JButton("CREATE");
-		btnCreate.setForeground(Color.WHITE);
-		btnCreate.setFont(new Font("Leelawadee", Font.BOLD, 15));
+
+		Button buttonCreate = new Button("CREATE", null, Color.white, new Color(64, 147, 255), new Dimension(120, 30));
+		JButton btnCreate = buttonCreate.button();
 		btnCreate.setBounds(232, 378, 127, 39);
-		btnCreate.setBackground(new Color(64, 147, 255));
-		btnCreate.setFocusable(false);
 		btnCreate.addActionListener(new ActionListener() {
 			
 			@Override
@@ -131,17 +124,13 @@ public class ViewCreateBox extends JFrame implements IView{
 		
 		addPanelCheckboxes();
 		
-		
 		backButtonContainer = new JPanel();
 		backButtonContainer.setLayout(null);
 		backButtonContainer.setOpaque(false);
 		backButtonContainer.setBounds(10, 11, 196, 67);
 		addBackButton();
 		mainPanel.add(backButtonContainer);
-		
-		
-		
-		
+
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
@@ -291,31 +280,23 @@ public class ViewCreateBox extends JFrame implements IView{
 	}
 
 	private void addBackButton() {
-		JButton backButton = new JButton();
-		backButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("back_icon.png")));
+		Button buttonBack = new Button(null, "back_icon.png", null, null, null);
+		JButton backButton = buttonBack.buttonIcon();
 		backButton.setBorderPainted(false);
-		backButton.setOpaque(false);
 		backButton.setContentAreaFilled(false);
-		backButton.setFocusPainted(false);
 		backButton.setBounds(0, 11, 119, 50);
-		backButton.setFocusable(false);
 		backButtonContainer.add(backButton);
-		
 		backButton.addActionListener(new ActionListener(){
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ApplicationController.getInstance().action(new Context(Event.VIEW, null));
 				dispose();
 			}
-			
 		});
-		
 	}
 
 	@Override
 	public void update(Context context) {
-		
 		switch(context.getEvent()) {
 		case Event.RES_CREATE_BOX_OK:
 			JOptionPane.showMessageDialog(this, "Box created!","Create Box", JOptionPane.INFORMATION_MESSAGE);

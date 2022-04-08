@@ -95,6 +95,7 @@ public class ViewListGamesBox extends JFrame implements IView {
         icon.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 ApplicationController.getInstance().action(new Context(Event.VIEW, null));
                 dispose();
             }

@@ -1,0 +1,64 @@
+package Presentation.View.Utils;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Objects;
+
+public class Button {
+
+    String name;
+    String icon;
+    Color foregroundColor;
+    Color backgroudColor;
+    Dimension dimension;
+
+    public Button(String name, String icon, Color foregroundColor, Color backgroundColor, Dimension dimension) {
+        this.name = name;
+        this.icon = icon;
+        this.foregroundColor = foregroundColor;
+        this.backgroudColor = backgroundColor;
+        this.dimension = dimension;
+    }
+
+    public Button(String name, Color foregroundColor, Color backgroundColor, Dimension dimension) {
+        this.name = name;
+        this.foregroundColor = foregroundColor;
+        this.backgroudColor = backgroundColor;
+        this.dimension = dimension;
+    }
+
+    public Button(String name){
+        this.name = name;
+    }
+
+    public JButton button(){
+        JButton button = new JButton(name);
+        button.setPreferredSize(dimension);
+        button.setMaximumSize(dimension);
+        button.setMinimumSize(dimension);
+        button.setBackground(backgroudColor);
+        button.setForeground(foregroundColor);
+        button.setFont(new Font("Leelawadee", Font.BOLD, 15));
+        button.setFocusPainted(false);
+        button.setBorder(null);
+
+        return button;
+    }
+
+    public JButton buttonIcon(){
+        JButton button = new JButton(name);
+        button.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(icon))));
+        button.setPreferredSize(dimension);
+        button.setMaximumSize(dimension);
+        button.setMinimumSize(dimension);
+        button.setBackground(backgroudColor);
+        button.setForeground(foregroundColor);
+        button.setFont(new Font("Leelawadee", Font.BOLD, 15));
+        button.setFocusPainted(false);
+        button.setBorder(null);
+
+        return button;
+    }
+
+
+}

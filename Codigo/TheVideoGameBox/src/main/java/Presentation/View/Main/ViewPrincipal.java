@@ -4,6 +4,8 @@ import Presentation.Controller.ApplicationController;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 import Presentation.View.IView;
+import Presentation.View.Utils.*;
+import Presentation.View.Utils.Button;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -55,21 +57,9 @@ public class ViewPrincipal extends JFrame implements IView{
 		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
 
 		//BOTON DE LOGUEO
-		
-		JButton logIn = new JButton("Log In");
-		logIn.setPreferredSize(new Dimension(120, 50));
-		logIn.setIcon(new ImageIcon(getClass().getClassLoader().getResource("user_icon.png")));
-		logIn.setMaximumSize(new Dimension(120, 50));
-		logIn.setMinimumSize(new Dimension(120, 50));
-		logIn.setBackground(new Color(64, 147, 255));
-		logIn.setForeground(Color.white);
-		logIn.setFont(new Font("Leelawadee", Font.BOLD, 15));
-		//logIn.setBorder(BorderFactory.createBevelBorder(0));
-		logIn.setFocusPainted(false);
-		logIn.setToolTipText("Log In");
-		logIn.setBorder(null);
+		Button buttonLogIn = new Button("Log In", "user_icon.png", Color.white, new Color(64, 147, 255), new Dimension(120, 50));
+		JButton logIn = buttonLogIn.buttonIcon();
 		logIn.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -80,23 +70,12 @@ public class ViewPrincipal extends JFrame implements IView{
 					JOptionPane.showMessageDialog(null, "Invalid data entered","Connection error", JOptionPane.NO_OPTION);;
 				}
 			}
-			
 		});
 		
 		//BOTON DE REGISTRARSE
-		
-		JButton registro = new JButton("Register");
-		registro.setPreferredSize(new Dimension(120, 50));
-		registro.setMaximumSize(new Dimension(120, 50));
-		registro.setMinimumSize(new Dimension(120, 50));
-		registro.setBackground(new Color(255, 170, 0));
-		registro.setForeground(Color.white);
-		registro.setFont(new Font("Leelawadee", Font.BOLD, 15));
-		//registro.setBorder(BorderFactory.createBevelBorder(0));
-		registro.setFocusPainted(false);
-		registro.setToolTipText("Register");
-		registro.setBorder(null);
-		registro.addActionListener(new ActionListener() {
+		Button buttonRegister = new Button("Register", Color.white, new Color(255, 170, 0), new Dimension(120, 50));
+		JButton registry = buttonRegister.button();
+		registry.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ApplicationController.getInstance().action(new Context(Event.VIEW_CREATE_USER, null));
@@ -111,18 +90,8 @@ public class ViewPrincipal extends JFrame implements IView{
 		
 
 		//BOTON CREAR BOX
-		
-		JButton createBox = new JButton("Create Box");
-		createBox.setPreferredSize(new Dimension(120, 50));
-		createBox.setMaximumSize(new Dimension(120, 50));
-		createBox.setMinimumSize(new Dimension(120, 50));
-		createBox.setBackground(new Color(50, 170, 0));
-		createBox.setForeground(Color.white);
-		createBox.setFont(new Font("Leelawadee", Font.BOLD, 15));
-		//createBox.setBorder(BorderFactory.createBevelBorder(0));
-		createBox.setFocusPainted(false);
-		createBox.setToolTipText("Create Box");
-		createBox.setBorder(null);
+		Button buttonCreate = new Button("Create Box", Color.white, new Color(50, 170, 0), new Dimension(120, 50));
+		JButton createBox = buttonCreate.button();
 		createBox.addActionListener(new ActionListener() {
 
 			@Override
@@ -136,7 +105,7 @@ public class ViewPrincipal extends JFrame implements IView{
 		topPanel.add(Box.createRigidArea(new Dimension(20,0)));
 		topPanel.add(logIn);
 		topPanel.add(Box.createRigidArea(new Dimension(10,0)));
-		topPanel.add(registro);
+		topPanel.add(registry);
 		topPanel.add(Box.createRigidArea(new Dimension(110,0)));
 		topPanel.add(icon);
 		topPanel.add(Box.createRigidArea(new Dimension(200,0)));
@@ -214,23 +183,12 @@ public class ViewPrincipal extends JFrame implements IView{
 				}
 			}
 		});
-
-		JButton searchName = new JButton("SEARCH");
-		searchName.setPreferredSize(new Dimension(120, 30));
-		searchName.setMaximumSize(new Dimension(120, 30));
-		searchName.setMinimumSize(new Dimension(120, 30));
-		searchName.setBackground(new Color(64, 147, 255));
-		searchName.setForeground(Color.white);
-		searchName.setFont(new Font("Leelawadee", Font.BOLD, 15));
-		//searchName.setBorder(BorderFactory.createBevelBorder(0));
-		searchName.setFocusPainted(false);
-		searchName.setToolTipText("Search a Game by Name");
-		searchName.setBorder(null);
+		Button buttonSearch = new Button("SEARCH", null, Color.white, new Color(64, 147, 255), new Dimension(120, 30));
+		JButton searchName = buttonSearch.button();
+		searchName.setToolTipText("Search a Box by Name");
 		searchName.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				String search = textName.getText();
 				if(search.length() <= 50 && search.length() > 0) {
 					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BY_NAME, search));
@@ -242,9 +200,7 @@ public class ViewPrincipal extends JFrame implements IView{
 				else {
 					JOptionPane.showMessageDialog(null, "There is no games with that name");
 				}
-
 			}
-
 		});
 		
 		textPanelN.add(textName);
@@ -357,23 +313,18 @@ public class ViewPrincipal extends JFrame implements IView{
 					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BOXES_BY_NAME, search));
 					dispose();
 				}
+				else if(search.length() > 50) {
+					JOptionPane.showMessageDialog(null, "Too many characters");
+				}
 				else {
 					JOptionPane.showMessageDialog(null, "There is no Boxes with that name");
 				}
 			}
 		});
 
-		JButton searchName = new JButton("SEARCH");
-		searchName.setPreferredSize(new Dimension(120, 30));
-		searchName.setMaximumSize(new Dimension(120, 30));
-		searchName.setMinimumSize(new Dimension(120, 30));
-		searchName.setBackground(new Color(64, 147, 255));
-		searchName.setForeground(Color.white);
-		searchName.setFont(new Font("Leelawadee", Font.BOLD, 15));
-		//searchName.setBorder(BorderFactory.createBevelBorder(0));
-		searchName.setFocusPainted(false);
+		Button buttonSearch = new Button("SEARCH", null, Color.white, new Color(64, 147, 255), new Dimension(120, 30));
+		JButton searchName = buttonSearch.button();
 		searchName.setToolTipText("Search a Box by Name");
-		searchName.setBorder(null);
 		searchName.addActionListener(new ActionListener() {
 
 			@Override
