@@ -8,6 +8,7 @@ import Presentation.View.IView;
 import Presentation.View.Main.BorderTitle;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
+import Presentation.View.Utils.TextField;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -124,10 +125,8 @@ public class ViewBox extends JFrame implements IView {
 		textButtonPanel.setLayout(new BoxLayout(textButtonPanel, BoxLayout.X_AXIS));
 		textButtonPanel.setOpaque(false);
 		
-		JTextField nameGame = new JTextField();
-		nameGame.setText("name of game");
-		nameGame.setForeground(Color.LIGHT_GRAY);
-		nameGame.setMaximumSize(new Dimension(600, 40));
+		TextField nameGame = new TextField(new Dimension(200, 30), "Name of Game");
+		nameGame.textField();
 		nameGame.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

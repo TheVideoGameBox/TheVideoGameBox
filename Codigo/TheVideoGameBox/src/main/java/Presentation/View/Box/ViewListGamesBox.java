@@ -10,6 +10,8 @@ import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
 import Presentation.View.Utils.Button;
+import Presentation.View.Utils.TextField;
+
 import org.apache.commons.lang3.tuple.Pair;
 import org.bson.types.ObjectId;
 import org.jdesktop.xswingx.PromptSupport;
@@ -83,19 +85,15 @@ public class ViewListGamesBox extends JFrame implements IView {
         title.setForeground(Color.white);
         title.setFont(new Font("sans-serif", 1, 20));
         headerContainer.add(title);
-        headerContainer.add(Box.createRigidArea(new Dimension(130, 0)));
+        headerContainer.add(Box.createRigidArea(new Dimension(100, 0)));
 
         // ICONO DE MENU
-        JButton icon = new JButton();
-        icon.setIcon(new ImageIcon((getClass().getClassLoader().getResource("logo_small_blanco.png"))));
-        icon.setToolTipText("Back to main window");
-        icon.setBorderPainted(false);
-        icon.setOpaque(false);
-        icon.setContentAreaFilled(false);
-        icon.setFocusPainted(false);
-        icon.setAlignmentX(CENTER_ALIGNMENT);
+        Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
+		icon.buttonIcon();
+		icon.setToolTipText("Back to main window");
+		icon.setAlignmentX(CENTER_ALIGNMENT);
         headerContainer.add(icon);
-        headerContainer.add(Box.createRigidArea(new Dimension(120, 0)));
+        headerContainer.add(Box.createRigidArea(new Dimension(70, 0)));
 
         icon.addActionListener(new ActionListener() {
             @Override
@@ -106,12 +104,8 @@ public class ViewListGamesBox extends JFrame implements IView {
             }
         });
 
-        JTextField textName = new JTextField();
-        PromptSupport.setPrompt("Añadir juego", textName); //Libreria xswingx (se podria hacer con una clase propia sobreescribiendo paint())
-        textName.setPreferredSize(new Dimension(200, 30));
-        textName.setMinimumSize(new Dimension(200, 30));
-        textName.setMaximumSize(new Dimension(200, 30));
-        textName.setBorder(null);
+        TextField textName = new TextField(new Dimension(180, 30), "Add Games");
+        textName.textField();
         headerContainer.add(textName);
         headerContainer.add(Box.createRigidArea(new Dimension(0, 0)));
         textName.addActionListener(new ActionListener() {

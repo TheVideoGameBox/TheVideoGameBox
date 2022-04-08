@@ -195,7 +195,7 @@ private JPanel createMidPanel() {
 		confirmPasswordPanel.add(confirmPasswordUser);
 				
 		// SIGN UP BUTTON
-		Button signUpButton = new Button("Sing Up", new Color(50, 170, 0), new Dimension(80, 40));
+		Button signUpButton = new Button("Sign Up", new Color(50, 170, 0), new Dimension(80, 40));
 		signUpButton.button();
 
 		signUpButton.addActionListener(new ActionListener() {

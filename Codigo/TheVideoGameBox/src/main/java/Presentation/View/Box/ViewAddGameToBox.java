@@ -135,7 +135,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 
 		JPanelRound panel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255));
 		panel.setLayout(new BorderLayout());
-		panel.setBorder(new EmptyBorder(10, 10, 10, 20));
+		panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panel.setMaximumSize(new Dimension(1000, 135));
 		panel.setPreferredSize(new Dimension(1000, 135));
 		panel.setMinimumSize(new Dimension(1000, 135));
@@ -201,9 +201,12 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		buttonPanel.setMaximumSize(new Dimension(300, 135));
 		buttonPanel.setPreferredSize(new Dimension(300, 135));
 		buttonPanel.setMinimumSize(new Dimension(300, 135));
+		
 
-		Button viewInfo = new Button("Add Game", new Color(64, 147, 255), new Dimension(170, 45));
-		viewInfo.button();
+		Button viewInfo = new Button("Add Game", "add_icon.png", new Dimension(170, 45));
+		viewInfo.buttonIcon();
+		viewInfo.setAlignmentX(CENTER_ALIGNMENT);
+		viewInfo.setAlignmentY(CENTER_ALIGNMENT);
 		viewInfo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -212,6 +215,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 				dispose();
 			}
 		});
+
 		buttonPanel.add(viewInfo, BorderLayout.CENTER);
 		
 		//CONSTRUIR PANEL
