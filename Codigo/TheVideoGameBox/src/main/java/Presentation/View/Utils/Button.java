@@ -63,6 +63,8 @@ public class Button {
         button.setBackground(backgroundColor);
         button.setForeground(foregroundColor);
         button.setFont(new Font("Leelawadee", Font.BOLD, 15));
+        //button.setBorderPainted(false);
+        //button.setContentAreaFilled(false);
         button.setFocusPainted(false);
         button.setBorder(null);
 
@@ -78,7 +80,10 @@ public class Button {
         button.setBackground(backgroundColor);
         button.setForeground(foregroundColor);
         button.setFont(new Font("Leelawadee", Font.BOLD, 15));
+        //button.setBorderPainted(false);
+        //button.setContentAreaFilled(false);
         button.setFocusPainted(false);
+
         button.setBorder(null);
 
         return button;
