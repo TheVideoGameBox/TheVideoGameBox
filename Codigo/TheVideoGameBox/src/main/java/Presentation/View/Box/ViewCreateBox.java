@@ -114,8 +114,8 @@ public class ViewCreateBox extends JFrame implements IView{
 		comboBoxPrivacy.setBounds(395, 276, 87, 22);
 		midPanel.add(comboBoxPrivacy);
 
-		Button buttonCreate = new Button("CREATE", new Color(64, 147, 255), new Dimension(120, 30));
-		JButton btnCreate = buttonCreate.button();
+		Button btnCreate = new Button("CREATE", new Color(64, 147, 255), new Dimension(120, 30));
+		btnCreate.button();
 		btnCreate.setBounds(232, 378, 127, 39);
 		btnCreate.addActionListener(new ActionListener() {
 			
@@ -284,10 +284,8 @@ public class ViewCreateBox extends JFrame implements IView{
 	}
 
 	private void addBackButton() {
-		Button buttonBack = new Button(null, "back_icon.png", null, null, null);
-		JButton backButton = buttonBack.buttonIcon();
-		backButton.setBorderPainted(false);
-		backButton.setContentAreaFilled(false);
+		Button backButton = new Button("back_icon.png");
+		backButton.buttonIcon();
 		backButton.setBounds(0, 11, 119, 50);
 		backButtonContainer.add(backButton);
 		backButton.addActionListener(new ActionListener(){

@@ -212,8 +212,8 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		buttonPanel.setPreferredSize(new Dimension(300, 135));
 		buttonPanel.setMinimumSize(new Dimension(300, 135));
 
-		Button buttonInfo = new Button("Add Game", "info_icon.png", new Color(64, 147, 255), new Dimension(170, 45));
-		JButton viewInfo = buttonInfo.button();
+		Button viewInfo = new Button("Add Game", "info_icon.png", new Color(64, 147, 255), new Dimension(170, 45));
+		viewInfo.button();
 		viewInfo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

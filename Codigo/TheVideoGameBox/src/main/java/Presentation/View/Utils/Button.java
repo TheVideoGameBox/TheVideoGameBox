@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
-public class Button {
+public class Button extends JButton{
 
     String name;
     String icon;
@@ -32,6 +32,14 @@ public class Button {
         this.icon = icon;
         this.backgroundColor = backgroundColor;
     }
+    
+    public Button(String name, String icon, Dimension dimension) {
+        this.name = name;
+        this.icon = icon;
+        this.dimension = dimension;
+        this.setBorderPainted(false);
+        this.setContentAreaFilled(false);
+    }
 
     public Button(String name, Color backgroundColor) {
         this.name = name;
@@ -47,43 +55,41 @@ public class Button {
     public Button(String name, String icon){
         this.name = name;
         this.icon = icon;
+        this.setBorderPainted(false);
+        this.setContentAreaFilled(false);
     }
 
-    public Button(String name){
-        this.name = name;
+    public Button(String icon){
+        this.icon = name;
+        this.setBorderPainted(false);
+        this.setContentAreaFilled(false);
     }
 
-    public JButton button(){
-        JButton button = new JButton(name);
-        button.setPreferredSize(dimension);
-        button.setMaximumSize(dimension);
-        button.setMinimumSize(dimension);
-        button.setBackground(backgroundColor);
-        button.setForeground(foregroundColor);
-        button.setFont(new Font("Leelawadee", Font.BOLD, 15));
-        //button.setBorderPainted(false);
-        //button.setContentAreaFilled(false);
-        button.setFocusPainted(false);
-        button.setBorder(null);
+    public void button(){
+    	this.setText(name);
+        this.setPreferredSize(dimension);
+        this.setMaximumSize(dimension);
+        this.setMinimumSize(dimension);
+        this.setBackground(backgroundColor);
+        this.setForeground(foregroundColor);
+        this.setFont(new Font("Leelawadee", Font.BOLD, 15));
+        this.setFocusPainted(false);
+        this.setBorder(null);
 
-        return button;
     }
 
-    public JButton buttonIcon(){
-        JButton button = new JButton(name);
-        button.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(icon))));
-        button.setPreferredSize(dimension);
-        button.setMaximumSize(dimension);
-        button.setMinimumSize(dimension);
-        button.setBackground(backgroundColor);
-        button.setForeground(foregroundColor);
-        button.setFont(new Font("Leelawadee", Font.BOLD, 15));
-        //button.setBorderPainted(false);
-        //button.setContentAreaFilled(false);
-        button.setFocusPainted(false);
-        button.setBorder(null);
+    public void buttonIcon(){
+        this.setText(name);
+        this.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(icon))));
+        this.setPreferredSize(dimension);
+        this.setMaximumSize(dimension);
+        this.setMinimumSize(dimension);
+        this.setBackground(backgroundColor);
+        this.setForeground(foregroundColor);
+        this.setFont(new Font("Leelawadee", Font.BOLD, 15));
+        this.setFocusPainted(false);
+        this.setBorder(null);
 
-        return button;
     }
 
 

@@ -224,8 +224,8 @@ public class ViewListGamesBox extends JFrame implements IView {
         //BUTTON PANEL
         JPanel buttonPanel = new JPanel(new BorderLayout());
         buttonPanel.setOpaque(false);
-        Button buttonInfo = new Button("View Information", "info_icon.png", new Color(50, 170, 0), new Dimension(200, 45));
-        JButton viewInfo = buttonInfo.buttonIcon();
+        Button viewInfo = new Button("View Information", "info_icon.png", new Color(50, 170, 0), new Dimension(200, 45));
+        viewInfo.buttonIcon();
         viewInfo.setBorderPainted(false);
         viewInfo.setContentAreaFilled(false);
         viewInfo.addActionListener(new ActionListener() {

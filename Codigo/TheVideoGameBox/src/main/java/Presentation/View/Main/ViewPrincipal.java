@@ -61,9 +61,9 @@ public class ViewPrincipal extends JFrame implements IView{
 		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
 
 		//BOTON DE LOGUEO
-		Button buttonLogIn = new Button("Log In", "user_icon.png", new Color(64, 147, 255));
-		new Button("Register", "user_icon.png", new Color(64, 147, 255));
-		JButton logIn = buttonLogIn.buttonIcon();
+		Button logIn = new Button("Log In", "user_icon.png", new Color(64, 147, 255));
+		//new Button("Register", "user_icon.png", new Color(64, 147, 255));
+		logIn.buttonIcon();
 		logIn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -78,8 +78,8 @@ public class ViewPrincipal extends JFrame implements IView{
 		});
 		
 		//BOTON DE REGISTRARSE
-		Button buttonRegister =new Button("Register", new Color(255, 170, 0));
-		JButton registry = buttonRegister.button();
+		Button registry =new Button("Register", new Color(255, 170, 0));
+		registry.button();
 		registry.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -93,8 +93,8 @@ public class ViewPrincipal extends JFrame implements IView{
 		icon.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo_small_blanco.png"))));
 
 		//BOTON CREAR BOX
-		Button buttonCreate = new Button("Create Box", new Color(50, 170, 0));
-		JButton createBox = buttonCreate.button();
+		Button createBox = new Button("Create Box", new Color(50, 170, 0));
+		createBox.button();
 		createBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -180,8 +180,8 @@ public class ViewPrincipal extends JFrame implements IView{
 				}
 			}
 		});
-		Button buttonSearch = new Button("SEARCH", null, Color.white, new Color(64, 147, 255), new Dimension(120, 30));
-		JButton searchName = buttonSearch.button();
+		Button searchName = new Button("SEARCH", null, Color.white, new Color(64, 147, 255), new Dimension(120, 30));
+		searchName.button();
 		searchName.setToolTipText("Search a Box by Name");
 		searchName.addActionListener(new ActionListener() {
 			@Override
@@ -310,8 +310,8 @@ public class ViewPrincipal extends JFrame implements IView{
 			}
 		});
 
-		Button buttonSearch = new Button("SEARCH", null, Color.white, new Color(64, 147, 255), new Dimension(120, 30));
-		JButton searchName = buttonSearch.button();
+		Button searchName = new Button("SEARCH", null, Color.white, new Color(64, 147, 255), new Dimension(120, 30));
+		searchName.button();
 		searchName.setToolTipText("Search a Box by Name");
 		searchName.addActionListener(new ActionListener() {
 

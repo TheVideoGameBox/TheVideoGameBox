@@ -171,8 +171,8 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		//BUTTON PANEL
 		JPanel buttonPanel = new JPanel(new BorderLayout());
 		buttonPanel.setOpaque(false);
-		Button buttonInfo = new Button("View Games", "info_icon.png", new Color(50, 170, 0), new Dimension(200, 45));
-		JButton viewInfo = buttonInfo.buttonIcon();
+		Button viewInfo = new Button("View Games", "info_icon.png", new Color(50, 170, 0), new Dimension(200, 45));
+		viewInfo.buttonIcon();
 		viewInfo.setBorderPainted(false);
 		viewInfo.setContentAreaFilled(false);
 		viewInfo.setToolTipText("Search a Box by Name");

@@ -107,8 +107,8 @@ private JPanel createMidPanel() {
 		registerPanel.add(Box.createRigidArea(new Dimension(0,10)));
 		
 		// BACK BUTTON
-		Button buttonBack = new Button(null, "back_icon.png");
-		JButton backButton = buttonBack.buttonIcon();
+		Button backButton = new Button(null, "back_icon.png");
+		backButton.buttonIcon();
 		backButton.setBorderPainted(false);
 		backButton.setContentAreaFilled(false);
 		backButton.setBounds(0, 11, 119, 50);
@@ -195,8 +195,8 @@ private JPanel createMidPanel() {
 		confirmPasswordPanel.add(confirmPasswordUser);
 				
 		// SIGN UP BUTTON
-		Button buttonSingUp = new Button("Sing Up", new Color(50, 170, 0), new Dimension(80, 40));
-		JButton signUpButton = buttonSingUp.button();
+		Button signUpButton = new Button("Sing Up", new Color(50, 170, 0), new Dimension(80, 40));
+		signUpButton.button();
 
 		signUpButton.addActionListener(new ActionListener() {
 			@Override
