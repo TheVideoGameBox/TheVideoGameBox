@@ -5,6 +5,7 @@ import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Utils.Button;
+import Presentation.View.Utils.TextField;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -157,19 +158,15 @@ public class ViewPrincipal extends JFrame implements IView{
 		rightTopPanel.add(searchByName);
 		
 		// PANEL CON LA BUSQUEDA
-		
+
 		JPanel textPanelN = new JPanel();
 		textPanelN.setOpaque(false);
 		textPanelN.setLayout(new BoxLayout(textPanelN, BoxLayout.X_AXIS));
 		textPanelN.add(Box.createRigidArea(new Dimension(50, 0)));
 		textPanelN.setBorder(null);
-		
-		JTextField textName = new JTextField();
-		textName.setPreferredSize(new Dimension(200, 30));
-		textName.setMinimumSize(new Dimension(200, 30));
-		textName.setMaximumSize(new Dimension(200, 30));
-		textName.setBorder(null);
 
+		TextField textField = new TextField(new Dimension(200, 30), "Search Games");
+		JTextField textName = textField.textField();
 		textName.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -286,7 +283,7 @@ public class ViewPrincipal extends JFrame implements IView{
 		rightTopPanel.setLayout(new GridLayout(2,2));
 
 		JLabel searchByName = new JLabel("Search Box by Name");
-		searchByName.setIcon(new ImageIcon(getClass().getClassLoader().getResource("lupa_icon.png")));
+		searchByName.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("lupa_icon.png"))));
 		searchByName.setForeground(Color.white);
 		searchByName.setFont(new Font("Leelawadee", Font.BOLD, 25));
 
@@ -300,11 +297,8 @@ public class ViewPrincipal extends JFrame implements IView{
 		textPanelN.add(Box.createRigidArea(new Dimension(50, 0)));
 		textPanelN.setBorder(null);
 
-		JTextField textName = new JTextField();
-		textName.setPreferredSize(new Dimension(200, 30));
-		textName.setMinimumSize(new Dimension(200, 30));
-		textName.setMaximumSize(new Dimension(200, 30));
-		textName.setBorder(null);
+		TextField textField = new TextField(new Dimension(200, 30), "Search Boxes");
+		JTextField textName = textField.textField();
 		textName.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

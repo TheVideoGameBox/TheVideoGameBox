@@ -106,14 +106,11 @@ private JPanel createMidPanel() {
 		registerPanel.add(Box.createRigidArea(new Dimension(0,10)));
 		
 		// BACK BUTTON
-		JButton backButton = new JButton();
-		backButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("back_icon.png")));
+		Button buttonBack = new Button(null, "back_icon.png");
+		JButton backButton = buttonBack.buttonIcon();
 		backButton.setBorderPainted(false);
-		backButton.setOpaque(false);
 		backButton.setContentAreaFilled(false);
-		backButton.setFocusPainted(false);
 		backButton.setBounds(0, 11, 119, 50);
-		backButton.setFocusable(false);		
 		backButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {

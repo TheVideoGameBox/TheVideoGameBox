@@ -44,6 +44,11 @@ public class Button {
         this.dimension = dimension;
     }
 
+    public Button(String name, String icon){
+        this.name = name;
+        this.icon = icon;
+    }
+
     public Button(String name){
         this.name = name;
     }
