@@ -133,8 +133,8 @@ private JPanel createMidPanel() {
 		emailPanel.setLayout(new BoxLayout(emailPanel, BoxLayout.X_AXIS));
 		emailPanel.setOpaque(false);
 
-		TextField email = new TextField(new Dimension(600, 40));
-		JTextField emailUser = email.textField();
+		TextField emailUser = new TextField(new Dimension(600, 40));
+		emailUser.textField();
 
 		registerPanel.add(emailPanel);
 		emailPanel.add(Box.createRigidArea(new Dimension(15, 10)));
@@ -151,8 +151,8 @@ private JPanel createMidPanel() {
 		usernamePanel.setLayout(new BoxLayout(usernamePanel, BoxLayout.X_AXIS));
 		usernamePanel.setOpaque(false);
 
-		TextField username = new TextField(new Dimension(600, 40));
-		JTextField usernameUser = username.textField();
+		TextField usernameUser = new TextField(new Dimension(600, 40));
+		usernameUser.textField();
 
 		registerPanel.add(usernamePanel);
 		usernamePanel.add(Box.createRigidArea(new Dimension(15, 10)));
@@ -169,8 +169,8 @@ private JPanel createMidPanel() {
 		passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
 		passwordPanel.setOpaque(false);
 
-		TextField password = new TextField(new Dimension(600, 40));
-		JTextField passwordUser = password.textField();
+		TextField passwordUser = new TextField(new Dimension(600, 40));
+		passwordUser.textField();
 
 		registerPanel.add(passwordPanel);
 		passwordPanel.add(Box.createRigidArea(new Dimension(15, 10)));
@@ -187,8 +187,8 @@ private JPanel createMidPanel() {
 		confirmPasswordPanel.setLayout(new BoxLayout(confirmPasswordPanel, BoxLayout.X_AXIS));
 		confirmPasswordPanel.setOpaque(false);
 
-		TextField confirmPassword = new TextField(new Dimension(600, 40));
-		JTextField confirmPasswordUser = confirmPassword.textField();
+		TextField confirmPasswordUser = new TextField(new Dimension(600, 40));
+		confirmPasswordUser.textField();
 
 		registerPanel.add(confirmPasswordPanel);
 		confirmPasswordPanel.add(Box.createRigidArea(new Dimension(15, 10)));

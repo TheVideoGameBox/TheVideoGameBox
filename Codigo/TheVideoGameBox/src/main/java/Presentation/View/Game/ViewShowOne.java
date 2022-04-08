@@ -7,6 +7,8 @@ import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
+import Presentation.View.Utils.Button;
+
 import org.bson.types.ObjectId;
 
 import javax.imageio.ImageIO;
@@ -71,15 +73,9 @@ public class ViewShowOne extends JFrame implements IView {
 		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
 		
 		//BOTON DE LOGUEO
-		JButton backButton = new JButton();
-		backButton.setPreferredSize(new Dimension(50, 50));
-		backButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("back_icon.png"))));
-		backButton.setMaximumSize(new Dimension(50, 50));
-		backButton.setMinimumSize(new Dimension(50, 50));
-		backButton.setBorderPainted(false);
-		backButton.setOpaque(false);
-		backButton.setContentAreaFilled(false);
-		backButton.setFocusPainted(false);
+		Button backButton = new Button(null, "back_icon.png");
+		backButton.buttonIcon();
+		backButton.setBounds(0, 11, 119, 50);
 		backButton.setToolTipText("Back to the main window");
 		backButton.addActionListener(new ActionListener() {
 

@@ -66,13 +66,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		contentContainer.setAlignmentX(CENTER_ALIGNMENT);
 		contentContainer.setOpaque(false);
 
-		JScrollPane scrollFrame = new JScrollPane(contentContainer);
-		contentContainer.setAutoscrolls(true);
-		scrollFrame.setOpaque(false);
-		scrollFrame.getViewport().setOpaque(false);
-		scrollFrame.getVerticalScrollBar().setUnitIncrement(25);
-
-		mainPanel.add(scrollFrame);
+		mainPanel.add(contentContainer);
 				
 		// HEADER
 		JPanel headerContainer = new JPanel();
@@ -88,16 +82,12 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		title.setForeground(Color.white);
 		title.setFont(new Font("sans-serif", 1, 20));
 		headerContainer.add(title);
-		headerContainer.add(Box.createRigidArea(new Dimension(190, 0)));
+		headerContainer.add(Box.createRigidArea(new Dimension(80, 0)));
 		
 		// ICONO DE MENU
-		JButton icon = new JButton();
-		icon.setIcon(new ImageIcon((getClass().getClassLoader().getResource("logo_small_blanco.png"))));
+		Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
+		icon.buttonIcon();
 		icon.setToolTipText("Back to main window");
-		icon.setBorderPainted(false);
-		icon.setOpaque(false);
-		icon.setContentAreaFilled(false);
-		icon.setFocusPainted(false);
 		icon.setAlignmentX(CENTER_ALIGNMENT);
 		headerContainer.add(icon);
 		headerContainer.add(Box.createRigidArea(new Dimension(270, 0)));
@@ -202,7 +192,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		// CONSTRUIR NAMEPANEL
 		namePanel.add(Box.createRigidArea(new Dimension(10, 0)));
 		namePanel.add(cover);
-		namePanel.add(Box.createRigidArea(new Dimension(70, 0)));
+		namePanel.add(Box.createRigidArea(new Dimension(15, 0)));
 		namePanel.add(name);
 		
 		//BUTTON PANEL
@@ -212,7 +202,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		buttonPanel.setPreferredSize(new Dimension(300, 135));
 		buttonPanel.setMinimumSize(new Dimension(300, 135));
 
-		Button viewInfo = new Button("Add Game", "info_icon.png", new Color(64, 147, 255), new Dimension(170, 45));
+		Button viewInfo = new Button("Add Game", new Color(64, 147, 255), new Dimension(170, 45));
 		viewInfo.button();
 		viewInfo.addActionListener(new ActionListener() {
 			@Override

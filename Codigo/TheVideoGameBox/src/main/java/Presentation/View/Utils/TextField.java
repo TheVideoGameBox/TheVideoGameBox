@@ -5,7 +5,7 @@ import org.jdesktop.xswingx.PromptSupport;
 import javax.swing.*;
 import java.awt.*;
 
-public class TextField {
+public class TextField extends JTextField{
 
     Dimension dimension;
     String prompt = null;
@@ -19,15 +19,13 @@ public class TextField {
         this.dimension = dimension;
     }
 
-    public JTextField textField(){
-        JTextField aux = new JTextField();
-        PromptSupport.setPrompt(prompt, aux);
-        aux.setPreferredSize(dimension);
-        aux.setMinimumSize(dimension);
-        aux.setMaximumSize(dimension);
-        aux.setBorder(null);
+    public void textField(){
+        PromptSupport.setPrompt(prompt, this);
+        this.setPreferredSize(dimension);
+        this.setMinimumSize(dimension);
+        this.setMaximumSize(dimension);
+        this.setBorder(null);
 
-        return aux;
     }
 
 }

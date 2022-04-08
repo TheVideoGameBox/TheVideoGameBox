@@ -45,6 +45,7 @@ public class Button extends JButton{
         this.name = name;
         this.backgroundColor = backgroundColor;
     }
+   
 
     public Button(String name, Color backgroundColor, Dimension dimension) {
         this.name = name;
@@ -59,8 +60,8 @@ public class Button extends JButton{
         this.setContentAreaFilled(false);
     }
 
-    public Button(String icon){
-        this.icon = name;
+    public Button(String name){
+        this.name = name;
         this.setBorderPainted(false);
         this.setContentAreaFilled(false);
     }

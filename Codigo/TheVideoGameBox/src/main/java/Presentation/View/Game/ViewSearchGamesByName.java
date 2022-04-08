@@ -80,13 +80,9 @@ public class ViewSearchGamesByName extends JFrame implements IView{
 		headerContainer.add(Box.createRigidArea(new Dimension(130, 0)));
 
 		// ICONO DE MENU
-		JButton icon = new JButton();
-		icon.setIcon(new ImageIcon((Objects.requireNonNull(getClass().getClassLoader().getResource("logo_small_blanco.png")))));
+		Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
+		icon.buttonIcon();
 		icon.setToolTipText("Back to main window");
-		icon.setBorderPainted(false);
-		icon.setOpaque(false);
-		icon.setContentAreaFilled(false);
-		icon.setFocusPainted(false);
 		icon.setAlignmentX(CENTER_ALIGNMENT);
 		headerContainer.add(icon);
 		headerContainer.add(Box.createRigidArea(new Dimension(270, 0)));
@@ -176,8 +172,6 @@ public class ViewSearchGamesByName extends JFrame implements IView{
 		buttonPanel.setOpaque(false);
 		Button viewInfo = new Button("View Games", "info_icon.png", new Dimension(200, 45));
 		viewInfo.buttonIcon();
-		viewInfo.setBorderPainted(false);
-		viewInfo.setContentAreaFilled(false);
 		viewInfo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

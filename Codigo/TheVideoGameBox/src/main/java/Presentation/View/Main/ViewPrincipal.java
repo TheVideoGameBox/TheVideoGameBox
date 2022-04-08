@@ -165,8 +165,8 @@ public class ViewPrincipal extends JFrame implements IView{
 		textPanelN.add(Box.createRigidArea(new Dimension(50, 0)));
 		textPanelN.setBorder(null);
 
-		TextField textField = new TextField(new Dimension(200, 30), "Search Games");
-		JTextField textName = textField.textField();
+		TextField textName = new TextField(new Dimension(200, 30), "Search Games");
+		textName.textField();
 		textName.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -294,8 +294,8 @@ public class ViewPrincipal extends JFrame implements IView{
 		textPanelN.add(Box.createRigidArea(new Dimension(50, 0)));
 		textPanelN.setBorder(null);
 
-		TextField textField = new TextField(new Dimension(200, 30), "Search Boxes");
-		JTextField textName = textField.textField();
+		TextField textName = new TextField(new Dimension(200, 30), "Search Boxes");
+		textName.textField();
 		textName.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
