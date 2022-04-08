@@ -194,9 +194,6 @@ public class ViewPrincipal extends JFrame implements IView{
 				else if(search.length() > 50) {
 					JOptionPane.showMessageDialog(null, "Too many characters");
 				}
-				else {
-					JOptionPane.showMessageDialog(null, "There is no games with that name");
-				}
 			}
 		});
 		
@@ -309,9 +306,6 @@ public class ViewPrincipal extends JFrame implements IView{
 				}
 				else if(search.length() > 50) {
 					JOptionPane.showMessageDialog(null, "Too many characters");
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "There is no boxes with that name");
 				}
 			}
 		});
