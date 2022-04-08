@@ -16,6 +16,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Objects;
+
+import static Presentation.View.Utils.BackGround.backGround;
 
 public class ViewBox extends JFrame implements IView {
 
@@ -33,12 +36,12 @@ public class ViewBox extends JFrame implements IView {
     	
     	this.setPreferredSize(new Dimension(1150, 750));
 		this.setLocation(400,100);
-		Image iconFrame = new ImageIcon(getClass().getClassLoader().getResource("caja_definitiva.png")).getImage();
+		Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("caja_definitiva.png"))).getImage();
 		this.setIconImage(iconFrame);
 		
 		JPanelConFondo mainpanel = new JPanelConFondo();
 		mainpanel.setLayout(new BorderLayout());
-		mainpanel.setImagen(new ImageIcon(getClass().getClassLoader().getResource("fondo_triangular.png")).getImage());
+		mainpanel.setImagen(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(backGround))).getImage());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(mainpanel);
 		

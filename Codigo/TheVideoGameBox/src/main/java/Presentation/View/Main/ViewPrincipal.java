@@ -4,7 +4,6 @@ import Presentation.Controller.ApplicationController;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 import Presentation.View.IView;
-import Presentation.View.Utils.*;
 import Presentation.View.Utils.Button;
 
 import javax.swing.*;
@@ -12,6 +11,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
+
+import static Presentation.View.Utils.BackGround.backGround;
 
 public class ViewPrincipal extends JFrame implements IView{
 
@@ -32,7 +34,7 @@ public class ViewPrincipal extends JFrame implements IView{
 		
 		JPanelConFondo mainpanel = new JPanelConFondo();
 		mainpanel.setLayout(new BorderLayout());
-		mainpanel.setImagen(new ImageIcon(getClass().getClassLoader().getResource("fondo_triangular.png")).getImage());
+		mainpanel.setImagen(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(backGround))).getImage());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(mainpanel);
 		
@@ -84,22 +86,18 @@ public class ViewPrincipal extends JFrame implements IView{
 		});
 		
 		//Icono de la aplicacion
-		
 		JLabel icon = new JLabel();
 		icon.setIcon(new ImageIcon(getClass().getClassLoader().getResource("logo_small_blanco.png")));
-		
 
 		//BOTON CREAR BOX
 		Button buttonCreate = new Button("Create Box", Color.white, new Color(50, 170, 0), new Dimension(120, 50));
 		JButton createBox = buttonCreate.button();
 		createBox.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ApplicationController.getInstance().action(new Context(Event.VIEW_CREATE_BOX, null));
 				dispose();
 			}
-			
 		});
 		
 		topPanel.add(Box.createRigidArea(new Dimension(20,0)));

@@ -16,6 +16,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import static Presentation.View.Utils.BackGround.backGround;
 
 public class ViewCreateBox extends JFrame implements IView{
 
@@ -37,7 +40,7 @@ public class ViewCreateBox extends JFrame implements IView{
 	private JComboBox comboBoxPrivacy;
 
 	public ViewCreateBox() {
-		Image iconFrame = new ImageIcon(getClass().getClassLoader().getResource("caja_definitiva.png")).getImage();
+		Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("caja_definitiva.png"))).getImage();
 		setIconImage(iconFrame);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().removeAll();
@@ -46,7 +49,7 @@ public class ViewCreateBox extends JFrame implements IView{
 		setBounds(100, 100, 887, 536);
 		mainPanel = new JPanelConFondo();
 		mainPanel.setBorder(null);
-		mainPanel.setImagen(new ImageIcon(getClass().getClassLoader().getResource("fondo_triangular.png")).getImage());
+		mainPanel.setImagen(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(backGround))).getImage());
 		getContentPane().add(mainPanel);
 		mainPanel.setLayout(null);
 		
