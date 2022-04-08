@@ -151,7 +151,7 @@ public class ViewPrincipal extends JFrame implements IView{
 		// TEXTO E ICONO
 		
 		JLabel searchByName = new JLabel("Search by Name");
-		searchByName.setIcon(new ImageIcon(getClass().getClassLoader().getResource("lupa_icon.png")));
+		searchByName.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("lupa_icon.png"))));
 		searchByName.setForeground(Color.white);
 		searchByName.setFont(new Font("Leelawadee", Font.BOLD, 25));
 		

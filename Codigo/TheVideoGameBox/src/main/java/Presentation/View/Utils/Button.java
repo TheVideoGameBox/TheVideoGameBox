@@ -81,7 +81,6 @@ public class Button {
         //button.setBorderPainted(false);
         //button.setContentAreaFilled(false);
         button.setFocusPainted(false);
-
         button.setBorder(null);
 
         return button;
