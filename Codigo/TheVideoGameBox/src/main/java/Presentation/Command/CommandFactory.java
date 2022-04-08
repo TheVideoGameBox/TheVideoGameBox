@@ -10,7 +10,7 @@ import Presentation.Controller.Event;
 public class CommandFactory extends CommandAbstractFactory{
     @Override
     public ICommand createCommand(int event) {
-        ICommand command;
+        ICommand command = null;
         switch (event) {
             case Event.SEARCH_ALL_BY_NAME:
                 command = new CommandSearchAllByName();

@@ -23,7 +23,9 @@ public class ViewPrincipal extends JFrame implements IView{
 	
 	public ViewPrincipal() {
 		super();
+
 		logged = -1;
+		ApplicationController.getInstance().clearViewStack();
 		initGUI();
 	}
 	
@@ -339,6 +341,8 @@ public class ViewPrincipal extends JFrame implements IView{
 
 	@Override
 	public void update(Context context) {
+		ApplicationController.getInstance().clearViewStack();
+
 		if(context.getEvent() == Event.RES_SEARCH_ALL_BY_NAME_KO) {
 			JOptionPane.showMessageDialog(null, "There isn't any game with that name");
 		}
