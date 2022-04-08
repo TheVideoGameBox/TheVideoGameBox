@@ -18,7 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static Presentation.View.Utils.BackGround.backGround;
+import static Presentation.View.Utils.Images.backGround;
+import static Presentation.View.Utils.Images.logo;
 
 public class ViewCreateBox extends JFrame implements IView{
 
@@ -40,7 +41,7 @@ public class ViewCreateBox extends JFrame implements IView{
 	private JComboBox comboBoxPrivacy;
 
 	public ViewCreateBox() {
-		Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("caja_definitiva.png"))).getImage();
+		Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
 		setIconImage(iconFrame);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().removeAll();

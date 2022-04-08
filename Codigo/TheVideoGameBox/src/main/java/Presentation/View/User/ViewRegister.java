@@ -16,6 +16,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Objects;
+
+import static Presentation.View.Utils.Images.backGround;
+import static Presentation.View.Utils.Images.logo;
 
 public class ViewRegister extends JFrame implements IView {
 
@@ -30,12 +34,12 @@ public class ViewRegister extends JFrame implements IView {
 	private void init_GUI() {
 		this.setPreferredSize(new Dimension(1150, 750));
 		this.setLocation(400, 100);
-		Image iconFrame = new ImageIcon(getClass().getClassLoader().getResource("caja_definitiva.png")).getImage();
+		Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
 		this.setIconImage(iconFrame);
 		
 		JPanelConFondo mainpanel = new JPanelConFondo();
 		mainpanel.setLayout(new BorderLayout());
-		mainpanel.setImagen(new ImageIcon(getClass().getClassLoader().getResource("fondo_triangular.png")).getImage());
+		mainpanel.setImagen(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(backGround))).getImage());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(mainpanel);
 		
@@ -62,7 +66,7 @@ private JPanel createTopPanel() {
 		
 		//ICONO DE LA APLICACION
 		JLabel icon = new JLabel();
-		icon.setIcon(new ImageIcon(getClass().getClassLoader().getResource("logo_small_blanco.png")));		
+		icon.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo_small_blanco.png"))));
 		topPanel.add(Box.createRigidArea(new Dimension(110,0)));
 		topPanel.add(icon);
 		

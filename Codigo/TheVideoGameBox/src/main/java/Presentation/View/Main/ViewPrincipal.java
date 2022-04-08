@@ -13,7 +13,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-import static Presentation.View.Utils.BackGround.backGround;
+import static Presentation.View.Utils.Images.backGround;
+import static Presentation.View.Utils.Images.logo;
 
 public class ViewPrincipal extends JFrame implements IView{
 
@@ -27,7 +28,7 @@ public class ViewPrincipal extends JFrame implements IView{
 	
 	public void initGUI() {
 		
-		Image iconFrame = new ImageIcon(getClass().getClassLoader().getResource("caja_definitiva.png")).getImage();
+		Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
 		this.setIconImage(iconFrame);
 		this.setPreferredSize(new Dimension(1150, 750));
 		this.setLocation(400,100);

@@ -25,7 +25,8 @@ import java.net.URLConnection;
 import java.util.List;
 import java.util.Objects;
 
-import static Presentation.View.Utils.BackGround.backGround;
+import static Presentation.View.Utils.Images.backGround;
+import static Presentation.View.Utils.Images.logo;
 
 public class ViewListGamesBox extends JFrame implements IView {
     private List<TGame> games;
@@ -42,7 +43,7 @@ public class ViewListGamesBox extends JFrame implements IView {
         this.setPreferredSize(new Dimension(1150, 750));
         this.setLocation(400, 100);
 
-        Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("caja_definitiva.png"))).getImage();
+        Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
         this.setIconImage(iconFrame);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
