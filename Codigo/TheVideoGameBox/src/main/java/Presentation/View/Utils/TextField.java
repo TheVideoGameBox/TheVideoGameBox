@@ -8,11 +8,15 @@ import java.awt.*;
 public class TextField {
 
     Dimension dimension;
-    String prompt;
+    String prompt = null;
 
     public TextField(Dimension dimension, String prompt){
         this.dimension = dimension;
         this.prompt = prompt;
+    }
+
+    public TextField(Dimension dimension){
+        this.dimension = dimension;
     }
 
     public JTextField textField(){

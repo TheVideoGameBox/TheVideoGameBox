@@ -9,6 +9,7 @@ import Presentation.View.Main.BorderTitle;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
 import Presentation.View.Utils.Button;
+import Presentation.View.Utils.TextField;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -131,24 +132,10 @@ private JPanel createMidPanel() {
 		JPanel emailPanel = new JPanel();
 		emailPanel.setLayout(new BoxLayout(emailPanel, BoxLayout.X_AXIS));
 		emailPanel.setOpaque(false);
-		
-		JTextField emailUser = new JTextField();
-		emailUser.setMaximumSize(new Dimension(600, 40));
-		emailUser.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				emailUser.setText(null);
-				emailUser.setForeground(Color.DARK_GRAY);
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {}
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-			@Override
-			public void mouseExited(MouseEvent e) {}
-		});
+
+		TextField email = new TextField(new Dimension(600, 40));
+		JTextField emailUser = email.textField();
+
 		registerPanel.add(emailPanel);
 		emailPanel.add(Box.createRigidArea(new Dimension(15, 10)));
 		emailPanel.add(emailUser);
@@ -163,24 +150,10 @@ private JPanel createMidPanel() {
 		JPanel usernamePanel = new JPanel();
 		usernamePanel.setLayout(new BoxLayout(usernamePanel, BoxLayout.X_AXIS));
 		usernamePanel.setOpaque(false);
-				
-		JTextField usernameUser = new JTextField();
-		usernameUser.setMaximumSize(new Dimension(600, 40));
-		usernameUser.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				usernameUser.setText(null);
-				usernameUser.setForeground(Color.DARK_GRAY);
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {}
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-			@Override
-			public void mouseExited(MouseEvent e) {}
-		});
+
+		TextField username = new TextField(new Dimension(600, 40));
+		JTextField usernameUser = username.textField();
+
 		registerPanel.add(usernamePanel);
 		usernamePanel.add(Box.createRigidArea(new Dimension(15, 10)));
 		usernamePanel.add(usernameUser);
@@ -195,24 +168,10 @@ private JPanel createMidPanel() {
 		JPanel passwordPanel = new JPanel();
 		passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
 		passwordPanel.setOpaque(false);
-						
-		JTextField passwordUser = new JTextField();
-		passwordUser.setMaximumSize(new Dimension(600, 40));
-		passwordUser.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				passwordUser.setText(null);
-				passwordUser.setForeground(Color.DARK_GRAY);
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {}
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-			@Override
-			public void mouseExited(MouseEvent e) {}
-		});
+
+		TextField password = new TextField(new Dimension(600, 40));
+		JTextField passwordUser = password.textField();
+
 		registerPanel.add(passwordPanel);
 		passwordPanel.add(Box.createRigidArea(new Dimension(15, 10)));
 		passwordPanel.add(passwordUser);
@@ -227,24 +186,10 @@ private JPanel createMidPanel() {
 		JPanel confirmPasswordPanel = new JPanel();
 		confirmPasswordPanel.setLayout(new BoxLayout(confirmPasswordPanel, BoxLayout.X_AXIS));
 		confirmPasswordPanel.setOpaque(false);
-								
-		JTextField confirmPasswordUser = new JTextField();
-		confirmPasswordUser.setMaximumSize(new Dimension(600, 40));
-		confirmPasswordUser.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				confirmPasswordUser.setText(null);
-				confirmPasswordUser.setForeground(Color.DARK_GRAY);
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {}
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-			@Override
-			public void mouseExited(MouseEvent e) {}
-		});
+
+		TextField confirmPassword = new TextField(new Dimension(600, 40));
+		JTextField confirmPasswordUser = confirmPassword.textField();
+
 		registerPanel.add(confirmPasswordPanel);
 		confirmPasswordPanel.add(Box.createRigidArea(new Dimension(15, 10)));
 		confirmPasswordPanel.add(confirmPasswordUser);
@@ -252,6 +197,7 @@ private JPanel createMidPanel() {
 		// SIGN UP BUTTON
 		Button buttonSingUp = new Button("Sing Up", new Color(50, 170, 0), new Dimension(80, 40));
 		JButton signUpButton = buttonSingUp.button();
+
 		signUpButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
