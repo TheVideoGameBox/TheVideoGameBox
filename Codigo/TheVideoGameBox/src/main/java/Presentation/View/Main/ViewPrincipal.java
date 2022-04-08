@@ -311,7 +311,7 @@ public class ViewPrincipal extends JFrame implements IView{
 					JOptionPane.showMessageDialog(null, "Too many characters");
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "There is no Boxes with that name");
+					JOptionPane.showMessageDialog(null, "There is no boxes with that name");
 				}
 			}
 		});
@@ -347,6 +347,9 @@ public class ViewPrincipal extends JFrame implements IView{
 	public void update(Context context) {
 		if(context.getEvent() == Event.RES_SEARCH_ALL_BY_NAME_KO) {
 			JOptionPane.showMessageDialog(null, "There isn't any game with that name");
+		}
+		else if(context.getEvent() == Event.RES_SEARCH_ALL_BOXES_BY_NAME_KO) {
+			JOptionPane.showMessageDialog(null, "There isn't any box with that name");
 		}
 		ApplicationController.getInstance().action(new Context(Event.VIEW, null));
 		dispose();
