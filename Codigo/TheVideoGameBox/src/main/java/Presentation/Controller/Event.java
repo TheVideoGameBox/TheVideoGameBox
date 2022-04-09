@@ -4,6 +4,7 @@ public class Event {
 
     // Codigos de eventos para la UI [0-100)
     public static final int VIEW = 0;
+    public static final int BACK = 1;
     
     
     //  Codigos de eventos para GAME [100-300)

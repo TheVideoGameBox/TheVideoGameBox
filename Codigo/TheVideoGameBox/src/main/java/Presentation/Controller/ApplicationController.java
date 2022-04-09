@@ -22,4 +22,6 @@ public abstract class ApplicationController {
     public void clearViewStack(){
         viewStack.clear();
     }
+
+    public void back() { viewStack.pop().update(new Context(Event.BACK, null));}
 }
