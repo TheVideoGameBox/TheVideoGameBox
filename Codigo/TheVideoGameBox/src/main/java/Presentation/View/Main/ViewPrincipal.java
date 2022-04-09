@@ -182,7 +182,7 @@ public class ViewPrincipal extends JFrame implements IView{
 				}
 			}
 		});
-		Button searchName = new Button("SEARCH", null, Color.white, new Color(64, 147, 255), new Dimension(120, 30));
+		Button searchName = new Button("SEARCH", new Color(64, 147, 255), new Dimension(120, 30));
 		searchName.button();
 		searchName.setToolTipText("Search a Box by Name");
 		searchName.addActionListener(new ActionListener() {
@@ -312,7 +312,7 @@ public class ViewPrincipal extends JFrame implements IView{
 			}
 		});
 
-		Button searchName = new Button("SEARCH", null, Color.white, new Color(64, 147, 255), new Dimension(120, 30));
+		Button searchName = new Button("SEARCH", new Color(64, 147, 255), new Dimension(120, 30));
 		searchName.button();
 		searchName.setToolTipText("Search a Box by Name");
 		searchName.addActionListener(new ActionListener() {
