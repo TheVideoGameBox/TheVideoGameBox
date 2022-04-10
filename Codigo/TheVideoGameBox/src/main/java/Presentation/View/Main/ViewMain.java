@@ -17,19 +17,34 @@ import java.util.Objects;
 import static Presentation.View.Utils.Images.backGround;
 import static Presentation.View.Utils.Images.logo;
 
-public class ViewPrincipal extends JFrame implements IView{
+public class ViewMain extends JFrame implements IView{
 
 	private static int logged;
 	
-	public ViewPrincipal() {
+	public ViewMain() {
 		super();
 
 		logged = -1;
 		ApplicationController.getInstance().clearViewStack();
 		initGUI();
+		refreshView();
 	}
-	
-	public void initGUI() {
+
+	@Override
+	public void update(Context context) {
+		ApplicationController.getInstance().clearViewStack();
+
+		if(context.getEvent() == Event.RES_SEARCH_ALL_BY_NAME_KO) {
+			JOptionPane.showMessageDialog(null, "There isn't any game with that name");
+		}
+		else if(context.getEvent() == Event.RES_SEARCH_ALL_BOXES_BY_NAME_KO) {
+			JOptionPane.showMessageDialog(null, "There isn't any box with that name");
+		}
+
+		refreshView();
+	}
+
+	private void initGUI() {
 		
 		Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
 		this.setIconImage(iconFrame);
@@ -50,8 +65,6 @@ public class ViewPrincipal extends JFrame implements IView{
 		
 		this.pack();
 		this.setResizable(true);
-		setLocationRelativeTo(null);
-		this.setVisible(true);
 	}
 	
 	private JPanel createTopPanel() {
@@ -152,7 +165,7 @@ public class ViewPrincipal extends JFrame implements IView{
 		
 		// TEXTO E ICONO
 		
-		JLabel searchByName = new JLabel("Search by Name");
+		JLabel searchByName = new JLabel("Search Games by Name");
 		searchByName.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("lupa_icon.png"))));
 		searchByName.setForeground(Color.white);
 		searchByName.setFont(new Font("Leelawadee", Font.BOLD, 25));
@@ -174,24 +187,26 @@ public class ViewPrincipal extends JFrame implements IView{
 			public void actionPerformed(ActionEvent e) {
 				String search = textName.getText();
 				if(search.length() <= 50 && search.length() > 0) {
+					textName.setText(null);
 					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BY_NAME, search));
-					dispose();
+					setVisible(false);
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "There is no games with that name");
+					JOptionPane.showMessageDialog(null, "Too many characters");
 				}
 			}
 		});
 		Button searchName = new Button("SEARCH", new Color(64, 147, 255), new Dimension(120, 30));
 		searchName.button();
-		searchName.setToolTipText("Search a Box by Name");
+		searchName.setToolTipText("Search a Game by Name");
 		searchName.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String search = textName.getText();
 				if(search.length() <= 50 && search.length() > 0) {
+					textName.setText(null);
 					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BY_NAME, search));
-					dispose();
+					setVisible(false);
 				}
 				else if(search.length() > 50) {
 					JOptionPane.showMessageDialog(null, "Too many characters");
@@ -339,17 +354,8 @@ public class ViewPrincipal extends JFrame implements IView{
 		return rightTopPanel;
 	}
 
-	@Override
-	public void update(Context context) {
-		ApplicationController.getInstance().clearViewStack();
-
-		if(context.getEvent() == Event.RES_SEARCH_ALL_BY_NAME_KO) {
-			JOptionPane.showMessageDialog(null, "There isn't any game with that name");
-		}
-		else if(context.getEvent() == Event.RES_SEARCH_ALL_BOXES_BY_NAME_KO) {
-			JOptionPane.showMessageDialog(null, "There isn't any box with that name");
-		}
-		ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-		dispose();
+	private void refreshView(){
+		setLocationRelativeTo(null);
+		this.setVisible(true);
 	}
 }

@@ -23,12 +23,24 @@ import static Presentation.View.Utils.Images.logo;
 
 public class ViewRegister extends JFrame implements IView {
 
-    private static final long serialVersionUID = 1L;
-
     public ViewRegister() {
         setTitle("Register user");
         init_GUI();
-        this.setLocationRelativeTo(null);
+        refreshView();
+    }
+
+    @Override
+    public void update(Context context) {
+        switch (context.getEvent()) {
+            case Event.RES_CREATE_USER_OK:
+                JOptionPane.showMessageDialog(this, "Signed Up!", "Sign Up", JOptionPane.INFORMATION_MESSAGE);
+                setVisible(false);
+                ApplicationController.getInstance().action(new Context(Event.VIEW, null));
+                break;
+            case Event.RES_CREATE_USER_KO:
+                JOptionPane.showMessageDialog(null, "Failed to Sign Up", "Sign Up", JOptionPane.ERROR_MESSAGE);
+                break;
+        }
     }
 
     private void init_GUI() {
@@ -50,9 +62,6 @@ public class ViewRegister extends JFrame implements IView {
         mainpanel.add(midPanel, BorderLayout.SOUTH);
 
         this.pack();
-        this.setResizable(true);
-        setLocationRelativeTo(null);
-        this.setVisible(true);
     }
 
     private JPanel createTopPanel() {
@@ -218,7 +227,6 @@ public class ViewRegister extends JFrame implements IView {
                 if (password.equals(confirmPassword)) {
                     TUser user = new TUser(email, username, password);
                     ApplicationController.getInstance().action(new Context(Event.CREATE_USER, user));
-                    ;
                 } else JOptionPane.showMessageDialog(null, "Incorrect password");
             }
         });
@@ -229,18 +237,8 @@ public class ViewRegister extends JFrame implements IView {
         return registerPanel;
     }
 
-    @Override
-    public void update(Context context) {
-        switch (context.getEvent()) {
-            case Event.RES_CREATE_USER_OK:
-                JOptionPane.showMessageDialog(this, "Signed Up!", "Sign Up", JOptionPane.INFORMATION_MESSAGE);
-                ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-                setVisible(false);
-                break;
-            case Event.RES_CREATE_USER_KO:
-                JOptionPane.showMessageDialog(null, "Failed to Sign Up", "Sign Up", JOptionPane.ERROR_MESSAGE);
-                break;
-        }
+    private void refreshView(){
+        setLocationRelativeTo(null);
+        this.setVisible(true);
     }
-
 }

@@ -17,8 +17,10 @@ public class ApplicationControllerImp extends ApplicationController {
 
             currentView = ViewAbstractFactory.getInstance().createView(res.getEvent());
 
-            if(currentView == null)
-                viewStack.pop().update(res);
+            if(currentView == null){
+                currentView = viewStack.pop();
+                currentView.update(res);
+            }
             else
                 currentView.update(res);
         }else

@@ -2,7 +2,8 @@ package Presentation.View;
 
 import Presentation.Controller.Event;
 import Presentation.View.Box.ViewCreateBox;
-import Presentation.View.Main.ViewPrincipal;
+import Presentation.View.Game.ViewSearchGamesByName;
+import Presentation.View.Main.ViewMain;
 import Presentation.View.User.ViewRegister;
 
 public class ViewFactory extends ViewAbstractFactory {
@@ -13,11 +14,11 @@ public class ViewFactory extends ViewAbstractFactory {
 
         switch (event) {
             case Event.VIEW:
-                view = new ViewPrincipal();
+                view = new ViewMain();
 				break;
-//			case Event.RES_SEARCH_ALL_BY_NAME_OK:
-//				view = new ViewSearchGamesByName();
-//				break;
+			case Event.RES_SEARCH_ALL_BY_NAME_OK:
+				view = new ViewSearchGamesByName();
+				break;
 //			case Event.RES_SEARCH_ONE_OK:
 //				view = new ViewShowOne();
 //				break;

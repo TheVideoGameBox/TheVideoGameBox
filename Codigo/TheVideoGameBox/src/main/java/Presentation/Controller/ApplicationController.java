@@ -23,5 +23,8 @@ public abstract class ApplicationController {
         viewStack.clear();
     }
 
-    public void back() { viewStack.pop().update(new Context(Event.BACK, null));}
+    public void back() {
+        currentView = viewStack.pop();
+        currentView.update(new Context(Event.BACK, null));
+    }
 }
