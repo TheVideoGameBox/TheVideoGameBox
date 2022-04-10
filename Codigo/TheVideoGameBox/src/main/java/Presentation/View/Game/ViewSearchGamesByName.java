@@ -32,7 +32,6 @@ public class ViewSearchGamesByName extends JFrame implements IView {
     @Override
     public void update(Context context) {
         if (context.getEvent() == Event.RES_SEARCH_ALL_BY_NAME_OK) {
-            setTitle("Games List");
             this.games = (List<TGame>) context.getData();
             init_GUI();
         }
@@ -41,6 +40,7 @@ public class ViewSearchGamesByName extends JFrame implements IView {
     }
 
     private void init_GUI() {
+        this.setTitle("Games List");
         this.setPreferredSize(new Dimension(1150, 750));
         this.setLocation(400, 100);
 
@@ -78,6 +78,7 @@ public class ViewSearchGamesByName extends JFrame implements IView {
         // BACK BUTTON
         Button backButton = new Button(null, "back_icon.png");
         backButton.buttonIcon();
+        backButton.setToolTipText("Go back");
         backButton.setBorderPainted(false);
         backButton.setContentAreaFilled(false);
         backButton.setBounds(0, 11, 119, 50);
@@ -105,16 +106,16 @@ public class ViewSearchGamesByName extends JFrame implements IView {
         icon.buttonIcon();
         icon.setToolTipText("Back to main window");
         icon.setAlignmentX(CENTER_ALIGNMENT);
-        headerContainer.add(icon);
-        headerContainer.add(Box.createRigidArea(new Dimension(270, 0)));
-
         icon.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-                dispose();
+                setVisible(false);
             }
         });
+
+        headerContainer.add(icon);
+        headerContainer.add(Box.createRigidArea(new Dimension(270, 0)));
 
         // CONSTRUIR VISTA
         contentContainer.add(headerContainer);
@@ -195,7 +196,7 @@ public class ViewSearchGamesByName extends JFrame implements IView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ApplicationController.getInstance().action(new Context(Event.SEARCH_ONE, game.getId()));
-                dispose();
+                setVisible(false);
             }
         });
         buttonPanel.add(viewInfo, BorderLayout.CENTER);

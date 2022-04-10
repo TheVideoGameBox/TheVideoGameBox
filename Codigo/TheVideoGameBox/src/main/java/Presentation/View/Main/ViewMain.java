@@ -64,7 +64,6 @@ public class ViewMain extends JFrame implements IView{
 		mainpanel.add(midPanel, BorderLayout.SOUTH);
 		
 		this.pack();
-		this.setResizable(true);
 	}
 	
 	private JPanel createTopPanel() {
@@ -99,7 +98,7 @@ public class ViewMain extends JFrame implements IView{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ApplicationController.getInstance().action(new Context(Event.VIEW_CREATE_USER, null));
-				dispose();
+				setVisible(false);
 			}
 		});
 		
@@ -114,7 +113,7 @@ public class ViewMain extends JFrame implements IView{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ApplicationController.getInstance().action(new Context(Event.VIEW_CREATE_BOX, null));
-				dispose();
+				setVisible(false);
 			}
 		});
 		
@@ -319,7 +318,7 @@ public class ViewMain extends JFrame implements IView{
 				String search = textName.getText();
 				if(search.length() <= 50 && search.length() > 0) {
 					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BOXES_BY_NAME, search));
-					dispose();
+					setVisible(false);
 				}
 				else if(search.length() > 50) {
 					JOptionPane.showMessageDialog(null, "Too many characters");
@@ -338,7 +337,7 @@ public class ViewMain extends JFrame implements IView{
 				String search = textName.getText();
 				if(search.length() <= 50 && search.length() > 0) {
 					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BOXES_BY_NAME, search));		//CAMBIAR EL EVENTO CUANDO ESTE HECHA LA VISTA
-					dispose();
+					setVisible(false);
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "There is no Boxes with that name");
