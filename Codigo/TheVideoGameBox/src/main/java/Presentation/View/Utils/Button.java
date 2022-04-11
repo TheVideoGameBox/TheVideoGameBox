@@ -6,7 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Objects;
 
-public class Button extends JButton{
+public class Button extends JButton {
 
     String name;
     String icon;
@@ -22,7 +22,7 @@ public class Button extends JButton{
         this.backgroundColor = backgroundColor;
         this.dimension = dimension;
     }
-    
+
     public Button(String name, String icon, Color foregroundColor, Color backgroundColor, Dimension dimension, Color pressColor) {
         this.name = name;
         this.icon = icon;
@@ -44,7 +44,7 @@ public class Button extends JButton{
         this.icon = icon;
         this.backgroundColor = backgroundColor;
     }
-    
+
     public Button(String name, String icon, Dimension dimension) {
         this.name = name;
         this.icon = icon;
@@ -52,7 +52,7 @@ public class Button extends JButton{
         this.setBorderPainted(false);
         this.setContentAreaFilled(false);
     }
-    
+
     public Button(String name, String icon, Dimension dimension, Color pressColor) {
         this.name = name;
         this.icon = icon;
@@ -66,7 +66,7 @@ public class Button extends JButton{
         this.name = name;
         this.backgroundColor = backgroundColor;
     }
-   
+
 
     public Button(String name, Color backgroundColor, Dimension dimension) {
         this.name = name;
@@ -74,7 +74,7 @@ public class Button extends JButton{
         this.dimension = dimension;
     }
 
-    public Button(String name, String icon, Color foregroundColor, Color pressColor){
+    public Button(String name, String icon, Color foregroundColor, Color pressColor) {
         this.name = name;
         this.icon = icon;
         this.pressColor = pressColor;
@@ -82,14 +82,14 @@ public class Button extends JButton{
         this.setContentAreaFilled(false);
     }
 
-    public Button(String name, Color foregroundColor, Color pressColor){
+    public Button(String name, Color foregroundColor, Color pressColor) {
         this.name = name;
         this.setBorderPainted(false);
         this.setContentAreaFilled(false);
     }
 
-    public void button(){
-    	setText(name);
+    public void button() {
+        setText(name);
         setPreferredSize(dimension);
         setMaximumSize(dimension);
         setMinimumSize(dimension);
@@ -101,16 +101,17 @@ public class Button extends JButton{
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent arg0) {
-            	setForeground(pressColor);
+                setForeground(pressColor);
             }
+
             @Override
             public void mouseExited(MouseEvent e) {
-            	setForeground(foregroundColor);
+                setForeground(foregroundColor);
             }
         });
     }
 
-    public void buttonIcon(){
+    public void buttonIcon() {
         setText(name);
         setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(icon))));
         setPreferredSize(dimension);
@@ -124,14 +125,18 @@ public class Button extends JButton{
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent arg0) {
-            	setForeground(pressColor);
-            	String iconOrange = icon.replace("_", "orange_");
-            	setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(iconOrange))));
+                setForeground(pressColor);
+                String iconHover = icon.substring(0, icon.length() - 4) + "_hover.png";
+                try {
+                    setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(iconHover))));
+                } catch (NullPointerException e) {
+                }
             }
+
             @Override
             public void mouseExited(MouseEvent e) {
-            	setForeground(foregroundColor);
-            	setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(icon))));
+                setForeground(foregroundColor);
+                setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(icon))));
             }
         });
     }

@@ -211,6 +211,6 @@ public class ViewSearchGamesByName extends JFrame implements IView {
 
     private void refreshView(){
         setLocationRelativeTo(null);
-        this.setVisible(true);
+        setVisible(true);
     }
 }
