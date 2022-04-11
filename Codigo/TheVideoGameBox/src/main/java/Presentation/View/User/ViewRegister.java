@@ -49,17 +49,17 @@ public class ViewRegister extends JFrame implements IView {
         Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
         this.setIconImage(iconFrame);
 
-        JPanelConFondo mainpanel = new JPanelConFondo();
-        mainpanel.setLayout(new BorderLayout());
-        mainpanel.setImagen(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(backGround))).getImage());
+        JPanelConFondo mainPanel = new JPanelConFondo();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.setImagen(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(backGround))).getImage());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.add(mainpanel);
+        this.add(mainPanel);
 
         JPanel topPanel = createTopPanel();
         JPanel midPanel = createMidPanel();
 
-        mainpanel.add(topPanel, BorderLayout.NORTH);
-        mainpanel.add(midPanel, BorderLayout.SOUTH);
+        mainPanel.add(topPanel, BorderLayout.NORTH);
+        mainPanel.add(midPanel, BorderLayout.SOUTH);
 
         this.pack();
     }
@@ -87,12 +87,10 @@ public class ViewRegister extends JFrame implements IView {
             }
         });
 
-
         // ICONO DE MENU
         Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
         icon.buttonIcon();
         icon.setToolTipText("Back to main window");
-        icon.setAlignmentX(CENTER_ALIGNMENT);
 
         icon.addActionListener(new ActionListener() {
             @Override
@@ -101,9 +99,8 @@ public class ViewRegister extends JFrame implements IView {
                 setVisible(false);
             }
         });
-
 		topPanel.add(backButton);
-        topPanel.add(Box.createRigidArea(new Dimension(120, 0)));
+        topPanel.add(Box.createRigidArea(new Dimension(175, 0)));
         topPanel.add(icon);
 
         return topPanel;
@@ -115,17 +112,15 @@ public class ViewRegister extends JFrame implements IView {
         midPanel.setMaximumSize(new Dimension(1150, 600));
         midPanel.setMinimumSize(new Dimension(1150, 600));
         midPanel.setLayout(new BoxLayout(midPanel, BoxLayout.Y_AXIS));
-        midPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
-        midPanel.setBackground(new Color(64, 147, 255));
-        midPanel.setBorder(new BorderTitle("Sign Up - Join us today", Color.black));
+        midPanel.setOpaque(false);
 
         // Create account label
         JLabel createLabel = new JLabel("Create your account");
-        createLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        createLabel.setHorizontalAlignment((SwingConstants.LEFT));
         createLabel.setFont(new Font("Leelawadee", Font.BOLD, 30));
         createLabel.setForeground(Color.WHITE);
+        createLabel.setAlignmentX(CENTER_ALIGNMENT);
 
-        midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         midPanel.add(createLabel);
         midPanel.add(Box.createRigidArea(new Dimension(0, 15)));
         midPanel.add(registerPanel());
@@ -133,88 +128,75 @@ public class ViewRegister extends JFrame implements IView {
         return midPanel;
     }
 
-    private Component registerPanel() {
-        JPanel registerPanel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255));
-        registerPanel.setMaximumSize(new Dimension(1150, 550));
-        registerPanel.setMinimumSize(new Dimension(1150, 550));
-        registerPanel.setLayout(new BoxLayout(registerPanel, BoxLayout.Y_AXIS));
-        registerPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+    private JPanel registerPanel() {
+        JPanel auxPanel = new JPanel();
+        auxPanel.setMaximumSize(new Dimension(1150, 550));
+        auxPanel.setMinimumSize(new Dimension(1150, 550));
+        auxPanel.setLayout(new BoxLayout(auxPanel, BoxLayout.Y_AXIS));
+        auxPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        auxPanel.setOpaque(false);
 
         // EMAIL LABEL
         JLabel emailLabel = new JLabel("Email Adress");
-        emailLabel.setFont(new Font("Comic Sans", Font.ITALIC, 20));
+        emailLabel.setFont(new Font("Leelawadee", Font.BOLD, 20));
         emailLabel.setForeground(Color.WHITE);
-        registerPanel.add(emailLabel);
+        emailLabel.setAlignmentX(CENTER_ALIGNMENT);
+        auxPanel.add(emailLabel);
 
         // Input para el email
-        JPanel emailPanel = new JPanel();
-        emailPanel.setLayout(new BoxLayout(emailPanel, BoxLayout.X_AXIS));
-        emailPanel.setOpaque(false);
-
-        TextField emailUser = new TextField(new Dimension(600, 40));
+        TextField emailUser = new TextField(new Dimension(500, 40));
+        emailUser.setAlignmentX(CENTER_ALIGNMENT);
         emailUser.textField();
-
-        registerPanel.add(emailPanel);
-        emailPanel.add(Box.createRigidArea(new Dimension(15, 10)));
-        emailPanel.add(emailUser);
+        auxPanel.add(emailUser);
+        auxPanel.add(Box.createRigidArea(new Dimension(50, 15)));
 
         // USERNAME LABEL
         JLabel usernameLabel = new JLabel("Username");
-        usernameLabel.setFont(new Font("Comic Sans", Font.ITALIC, 20));
+        usernameLabel.setFont(new Font("Leelawadee", Font.BOLD, 20));
         usernameLabel.setForeground(Color.WHITE);
-        registerPanel.add(usernameLabel);
+        usernameLabel.setAlignmentX(CENTER_ALIGNMENT);
+        auxPanel.add(usernameLabel);
 
         // Input para el username
-        JPanel usernamePanel = new JPanel();
-        usernamePanel.setLayout(new BoxLayout(usernamePanel, BoxLayout.X_AXIS));
-        usernamePanel.setOpaque(false);
 
-        TextField usernameUser = new TextField(new Dimension(600, 40));
+        TextField usernameUser = new TextField(new Dimension(500, 40));
         usernameUser.textField();
-
-        registerPanel.add(usernamePanel);
-        usernamePanel.add(Box.createRigidArea(new Dimension(15, 10)));
-        usernamePanel.add(usernameUser);
+        usernameUser.setAlignmentX(CENTER_ALIGNMENT);
+        auxPanel.add(usernameUser);
+        auxPanel.add(Box.createRigidArea(new Dimension(50, 15)));
 
         // PASSWORD LABEL
         JLabel passwordLabel = new JLabel("Password");
-        passwordLabel.setFont(new Font("Comic Sans", Font.ITALIC, 20));
+        passwordLabel.setFont(new Font("Leelawadee", Font.BOLD, 20));
         passwordLabel.setForeground(Color.WHITE);
-        registerPanel.add(passwordLabel);
+        passwordLabel.setAlignmentX(CENTER_ALIGNMENT);
+        auxPanel.add(passwordLabel);
 
         // Input para la password
-        JPanel passwordPanel = new JPanel();
-        passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
-        passwordPanel.setOpaque(false);
-
-        TextField passwordUser = new TextField(new Dimension(600, 40));
+        TextField passwordUser = new TextField(new Dimension(500, 40));
         passwordUser.textField();
-
-        registerPanel.add(passwordPanel);
-        passwordPanel.add(Box.createRigidArea(new Dimension(15, 10)));
-        passwordPanel.add(passwordUser);
+        passwordUser.setAlignmentX(CENTER_ALIGNMENT);
+        auxPanel.add(passwordUser);
+        auxPanel.add(Box.createRigidArea(new Dimension(50, 15)));
 
         // CONFIRM PASSWORD LABEL
         JLabel confirmPasswordLabel = new JLabel("Confirm Password");
-        confirmPasswordLabel.setFont(new Font("Comic Sans", Font.ITALIC, 20));
+        confirmPasswordLabel.setFont(new Font("Leelawadee", Font.BOLD, 20));
         confirmPasswordLabel.setForeground(Color.WHITE);
-        registerPanel.add(confirmPasswordLabel);
+        confirmPasswordLabel.setAlignmentX(CENTER_ALIGNMENT);
+        auxPanel.add(confirmPasswordLabel);
 
         // Input para la confirm password
-        JPanel confirmPasswordPanel = new JPanel();
-        confirmPasswordPanel.setLayout(new BoxLayout(confirmPasswordPanel, BoxLayout.X_AXIS));
-        confirmPasswordPanel.setOpaque(false);
-
-        TextField confirmPasswordUser = new TextField(new Dimension(600, 40));
+        TextField confirmPasswordUser = new TextField(new Dimension(500, 40));
         confirmPasswordUser.textField();
-
-        registerPanel.add(confirmPasswordPanel);
-        confirmPasswordPanel.add(Box.createRigidArea(new Dimension(15, 10)));
-        confirmPasswordPanel.add(confirmPasswordUser);
+        confirmPasswordLabel.setAlignmentX(CENTER_ALIGNMENT);
+        auxPanel.add(confirmPasswordUser);
+        auxPanel.add(Box.createRigidArea(new Dimension(50, 15)));
 
         // SIGN UP BUTTON
         Button signUpButton = new Button("Sign Up", new Color(50, 170, 0), new Dimension(80, 40));
         signUpButton.button();
+        signUpButton.setAlignmentX(CENTER_ALIGNMENT);
 
         signUpButton.addActionListener(new ActionListener() {
             @Override
@@ -231,14 +213,15 @@ public class ViewRegister extends JFrame implements IView {
             }
         });
 
-        registerPanel.add(Box.createRigidArea(new Dimension(100, 5)));
-        registerPanel.add(signUpButton);
+        auxPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        auxPanel.add(signUpButton);
 
-        return registerPanel;
+        return auxPanel;
     }
 
     private void refreshView(){
         setLocationRelativeTo(null);
-        this.setVisible(true);
+        pack();
+        setVisible(true);
     }
 }

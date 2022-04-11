@@ -76,7 +76,6 @@ public class Button extends JButton{
         this.setFont(new Font("Leelawadee", Font.BOLD, 15));
         this.setFocusPainted(false);
         this.setBorder(null);
-
     }
 
     public void buttonIcon(){
