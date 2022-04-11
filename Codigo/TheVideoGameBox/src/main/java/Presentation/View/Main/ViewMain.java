@@ -148,7 +148,7 @@ public class ViewMain extends JFrame implements IView{
 	}
 	
 	private JPanelRound gamesPanel() {
-		JPanelRound mainPanel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255));
+		JPanelRound mainPanel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255), new Color(26, 59, 160));
 		mainPanel.setBackground(new Color(64, 147, 255));
 		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		mainPanel.setMaximumSize(new Dimension(1150, 275));
@@ -249,7 +249,7 @@ public class ViewMain extends JFrame implements IView{
 	}
 	
 	private JPanelRound boxPanel() {
-		JPanelRound mainPanel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255));
+		JPanelRound mainPanel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255), new Color(26, 59, 160));
 		mainPanel.setBackground(new Color(64, 147, 255));
 		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		mainPanel.setMaximumSize(new Dimension(1150, 275));

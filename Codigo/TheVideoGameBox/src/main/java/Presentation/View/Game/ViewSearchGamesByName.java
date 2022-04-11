@@ -76,7 +76,7 @@ public class ViewSearchGamesByName extends JFrame implements IView {
         headerContainer.setOpaque(false);
 
         // BACK BUTTON
-        Button backButton = new Button(null, "back_icon.png");
+        Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
         backButton.buttonIcon();
         backButton.setToolTipText("Go back");
         backButton.setBorderPainted(false);
@@ -149,7 +149,7 @@ public class ViewSearchGamesByName extends JFrame implements IView {
 
     private JPanelRound gamePanel(TGame game) throws IOException {
 
-        JPanelRound panel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255));
+        JPanelRound panel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255), new Color(26, 59, 160));
         panel.setLayout(new BorderLayout());
         panel.setBorder(new EmptyBorder(10, 10, 10, 20));
         panel.setMaximumSize(new Dimension(1000, 135));

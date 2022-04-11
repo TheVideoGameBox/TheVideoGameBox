@@ -133,7 +133,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 	
 	private JPanelRound gamePanel(TGame game, TBox box, Pair<List<TGame>, TBox> aux) throws IOException {
 
-		JPanelRound panel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255));
+		JPanelRound panel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255), new Color(26, 59, 160));
 		panel.setLayout(new BorderLayout());
 		panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panel.setMaximumSize(new Dimension(1000, 135));

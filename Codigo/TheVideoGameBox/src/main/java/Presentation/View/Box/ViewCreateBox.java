@@ -284,7 +284,7 @@ public class ViewCreateBox extends JFrame implements IView{
 	}
 
 	private void addBackButton() {
-		Button backButton = new Button(null, "back_icon.png");
+		Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
 		backButton.buttonIcon();
 		backButton.setBounds(0, 11, 119, 50);
 		backButton.setToolTipText("Back to the main window");

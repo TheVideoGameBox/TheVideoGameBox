@@ -68,7 +68,7 @@ public class ViewShowOne extends JFrame implements IView {
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
 
         //BOTON DE BACK
-        Button backButton = new Button(null, "back_icon.png");
+        Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
         backButton.buttonIcon();
         backButton.setBounds(0, 11, 119, 50);
         backButton.setToolTipText("Go back");
@@ -182,7 +182,7 @@ public class ViewShowOne extends JFrame implements IView {
         midPanel.add(infoJuego, gbc);
 
         // Empresas responsables del juego.
-        JPanelRound companyPanel = new JPanelRound(new Color(12, 17, 21), new Color(74, 90, 151));
+        JPanelRound companyPanel = new JPanelRound(new Color(12, 17, 21), new Color(74, 90, 151), new Color(12, 17, 21));
         companyPanel.setLayout(new BoxLayout(companyPanel, BoxLayout.Y_AXIS));
         companyPanel.setAlignmentX(CENTER_ALIGNMENT);
         JLabel companyTitle = new JLabel("Companies");
@@ -210,7 +210,7 @@ public class ViewShowOne extends JFrame implements IView {
         midPanel.add(companyPanel, gbc);
 
         // Categorías del juego.
-        JPanelRound categoryPanel = new JPanelRound(new Color(12, 17, 21), new Color(74, 90, 151));
+        JPanelRound categoryPanel = new JPanelRound(new Color(12, 17, 21), new Color(74, 90, 151), new Color(12, 17, 21));
         categoryPanel.setLayout(new BoxLayout(categoryPanel, BoxLayout.Y_AXIS));
         categoryPanel.setAlignmentX(CENTER_ALIGNMENT);
         JLabel categoryTitle = new JLabel("Genres");
@@ -238,7 +238,7 @@ public class ViewShowOne extends JFrame implements IView {
         midPanel.add(categoryPanel, gbc);
 
         // Plataformas para las que está disponible el juego.
-        JPanelRound platformPanel = new JPanelRound(new Color(12, 17, 21), new Color(74, 90, 151));
+        JPanelRound platformPanel = new JPanelRound(new Color(12, 17, 21), new Color(74, 90, 151), new Color(12, 17, 21));
         platformPanel.setLayout(new BoxLayout(platformPanel, BoxLayout.Y_AXIS));
         platformPanel.setAlignmentX(CENTER_ALIGNMENT);
         JLabel platformTitle = new JLabel("Platforms");
@@ -266,7 +266,7 @@ public class ViewShowOne extends JFrame implements IView {
         midPanel.add(platformPanel, gbc);
 
         // Descripción del juego.
-        JPanelRound descPanel = new JPanelRound(new Color(12, 17, 21), new Color(74, 90, 151));
+        JPanelRound descPanel = new JPanelRound(new Color(12, 17, 21), new Color(74, 90, 151), new Color(12, 17, 21));
         descPanel.setBorder(new EmptyBorder(0, 10, 7, 10));
         descPanel.setPreferredSize(new Dimension(555, 150));
         descPanel.setMaximumSize(new Dimension(555, 150));

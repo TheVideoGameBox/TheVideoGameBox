@@ -59,7 +59,7 @@ public class ViewRegister extends JFrame implements IView {
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
 
         // BACK BUTTON
-        Button backButton = new Button(null, "back_icon.png");
+        Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
         backButton.buttonIcon();
         backButton.setBorderPainted(false);
         backButton.setContentAreaFilled(false);
