@@ -94,8 +94,6 @@ public class ViewRegister extends JFrame implements IView {
     private JPanel createMidPanel() {
         JPanel midPanel = new JPanel();
         midPanel.setPreferredSize(new Dimension(1150, 550));
-        midPanel.setMaximumSize(new Dimension(1150, 550));
-        midPanel.setMinimumSize(new Dimension(1150, 550));
         midPanel.setLayout(new BoxLayout(midPanel, BoxLayout.Y_AXIS));
         midPanel.setOpaque(false);
 
@@ -115,9 +113,6 @@ public class ViewRegister extends JFrame implements IView {
 
     private JPanel registerPanel() {
         JPanel auxPanel = new JPanel();
-        auxPanel.setMaximumSize(new Dimension(1150, 550));
-        auxPanel.setPreferredSize(new Dimension(1150, 550));
-        auxPanel.setMinimumSize(new Dimension(1150, 550));
         auxPanel.setLayout(new BoxLayout(auxPanel, BoxLayout.Y_AXIS));
         auxPanel.setOpaque(false);
 
