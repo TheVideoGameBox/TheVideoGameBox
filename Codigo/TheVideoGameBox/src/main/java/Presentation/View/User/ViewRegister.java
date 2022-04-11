@@ -30,8 +30,7 @@ public class ViewRegister extends JFrame implements IView {
     }
 
     private void init_GUI() {
-        this.setPreferredSize(new Dimension(1150, 750));
-        this.setLocation(400, 100);
+        this.setPreferredSize(new Dimension(900, 700));
         Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
         this.setIconImage(iconFrame);
 
@@ -86,7 +85,7 @@ public class ViewRegister extends JFrame implements IView {
             }
         });
 		topPanel.add(backButton);
-        topPanel.add(Box.createRigidArea(new Dimension(175, 0)));
+        topPanel.add(Box.createRigidArea(new Dimension(50, 0)));
         topPanel.add(icon);
 
         return topPanel;
@@ -94,9 +93,9 @@ public class ViewRegister extends JFrame implements IView {
 
     private JPanel createMidPanel() {
         JPanel midPanel = new JPanel();
-        midPanel.setPreferredSize(new Dimension(1150, 600));
-        midPanel.setMaximumSize(new Dimension(1150, 600));
-        midPanel.setMinimumSize(new Dimension(1150, 600));
+        midPanel.setPreferredSize(new Dimension(1150, 550));
+        midPanel.setMaximumSize(new Dimension(1150, 550));
+        midPanel.setMinimumSize(new Dimension(1150, 550));
         midPanel.setLayout(new BoxLayout(midPanel, BoxLayout.Y_AXIS));
         midPanel.setOpaque(false);
 
@@ -117,6 +116,7 @@ public class ViewRegister extends JFrame implements IView {
     private JPanel registerPanel() {
         JPanel auxPanel = new JPanel();
         auxPanel.setMaximumSize(new Dimension(1150, 550));
+        auxPanel.setPreferredSize(new Dimension(1150, 550));
         auxPanel.setMinimumSize(new Dimension(1150, 550));
         auxPanel.setLayout(new BoxLayout(auxPanel, BoxLayout.Y_AXIS));
         auxPanel.setOpaque(false);
