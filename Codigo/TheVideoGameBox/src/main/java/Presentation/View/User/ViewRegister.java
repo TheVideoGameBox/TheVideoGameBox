@@ -29,20 +29,6 @@ public class ViewRegister extends JFrame implements IView {
         refreshView();
     }
 
-    @Override
-    public void update(Context context) {
-        switch (context.getEvent()) {
-            case Event.RES_CREATE_USER_OK:
-                JOptionPane.showMessageDialog(this, "Signed Up!", "Sign Up", JOptionPane.INFORMATION_MESSAGE);
-                setVisible(false);
-                ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-                break;
-            case Event.RES_CREATE_USER_KO:
-                JOptionPane.showMessageDialog(null, "Failed to Sign Up", "Sign Up", JOptionPane.ERROR_MESSAGE);
-                break;
-        }
-    }
-
     private void init_GUI() {
         this.setPreferredSize(new Dimension(1150, 750));
         this.setLocation(400, 100);
@@ -133,63 +119,37 @@ public class ViewRegister extends JFrame implements IView {
         auxPanel.setMaximumSize(new Dimension(1150, 550));
         auxPanel.setMinimumSize(new Dimension(1150, 550));
         auxPanel.setLayout(new BoxLayout(auxPanel, BoxLayout.Y_AXIS));
-        auxPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         auxPanel.setOpaque(false);
 
         // EMAIL LABEL
-        JLabel emailLabel = new JLabel("Email Adress");
-        emailLabel.setFont(new Font("Leelawadee", Font.BOLD, 20));
-        emailLabel.setForeground(Color.WHITE);
-        emailLabel.setAlignmentX(CENTER_ALIGNMENT);
-        auxPanel.add(emailLabel);
+        auxPanel.add(label("Email"));
 
         // Input para el email
-        TextField emailUser = new TextField(new Dimension(500, 40));
-        emailUser.setAlignmentX(CENTER_ALIGNMENT);
-        emailUser.textField();
+        TextField emailUser = textField();
         auxPanel.add(emailUser);
         auxPanel.add(Box.createRigidArea(new Dimension(50, 15)));
 
         // USERNAME LABEL
-        JLabel usernameLabel = new JLabel("Username");
-        usernameLabel.setFont(new Font("Leelawadee", Font.BOLD, 20));
-        usernameLabel.setForeground(Color.WHITE);
-        usernameLabel.setAlignmentX(CENTER_ALIGNMENT);
-        auxPanel.add(usernameLabel);
+        auxPanel.add(label("Username"));
 
         // Input para el username
-
-        TextField usernameUser = new TextField(new Dimension(500, 40));
-        usernameUser.textField();
-        usernameUser.setAlignmentX(CENTER_ALIGNMENT);
+        TextField usernameUser = textField();
         auxPanel.add(usernameUser);
         auxPanel.add(Box.createRigidArea(new Dimension(50, 15)));
 
         // PASSWORD LABEL
-        JLabel passwordLabel = new JLabel("Password");
-        passwordLabel.setFont(new Font("Leelawadee", Font.BOLD, 20));
-        passwordLabel.setForeground(Color.WHITE);
-        passwordLabel.setAlignmentX(CENTER_ALIGNMENT);
-        auxPanel.add(passwordLabel);
+        auxPanel.add(label("Password"));
 
         // Input para la password
-        TextField passwordUser = new TextField(new Dimension(500, 40));
-        passwordUser.textField();
-        passwordUser.setAlignmentX(CENTER_ALIGNMENT);
+        TextField passwordUser = textField();
         auxPanel.add(passwordUser);
         auxPanel.add(Box.createRigidArea(new Dimension(50, 15)));
 
         // CONFIRM PASSWORD LABEL
-        JLabel confirmPasswordLabel = new JLabel("Confirm Password");
-        confirmPasswordLabel.setFont(new Font("Leelawadee", Font.BOLD, 20));
-        confirmPasswordLabel.setForeground(Color.WHITE);
-        confirmPasswordLabel.setAlignmentX(CENTER_ALIGNMENT);
-        auxPanel.add(confirmPasswordLabel);
+        auxPanel.add(label("Confirm Password"));
 
         // Input para la confirm password
-        TextField confirmPasswordUser = new TextField(new Dimension(500, 40));
-        confirmPasswordUser.textField();
-        confirmPasswordLabel.setAlignmentX(CENTER_ALIGNMENT);
+        TextField confirmPasswordUser = textField();
         auxPanel.add(confirmPasswordUser);
         auxPanel.add(Box.createRigidArea(new Dimension(50, 15)));
 
@@ -223,5 +183,34 @@ public class ViewRegister extends JFrame implements IView {
         setLocationRelativeTo(null);
         pack();
         setVisible(true);
+    }
+
+    private JLabel label(String name) {
+        JLabel aux = new JLabel(name);
+        aux.setFont(new Font("Leelawadee", Font.BOLD, 20));
+        aux.setForeground(Color.WHITE);
+        aux.setAlignmentX(CENTER_ALIGNMENT);
+        return aux;
+    }
+
+    private TextField textField() {
+        TextField aux = new TextField(new Dimension(500, 40));
+        aux.textField();
+        aux.setAlignmentX(CENTER_ALIGNMENT);
+        return aux;
+    }
+
+    @Override
+    public void update(Context context) {
+        switch (context.getEvent()) {
+            case Event.RES_CREATE_USER_OK:
+                JOptionPane.showMessageDialog(this, "Signed Up!", "Sign Up", JOptionPane.INFORMATION_MESSAGE);
+                setVisible(false);
+                ApplicationController.getInstance().action(new Context(Event.VIEW, null));
+                break;
+            case Event.RES_CREATE_USER_KO:
+                JOptionPane.showMessageDialog(null, "Failed to Sign Up", "Sign Up", JOptionPane.ERROR_MESSAGE);
+                break;
+        }
     }
 }
