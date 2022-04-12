@@ -12,11 +12,11 @@ public class JPanelRound extends JPanel{
     private int arcw=20;
     private int arch=20;
    
-    public JPanelRound(Color a, Color b) {
+    public JPanelRound(Color a, Color b, Color c) {
         super();
         colorPrimario = a;
         colorSecundario = b;
-        colorContorno = b;
+        colorContorno = c;
         setOpaque(false);
     }
    

@@ -1,66 +1,47 @@
 package Presentation.View;
 
-import Logic.Box.TBox;
-import Logic.Game.TGame;
-import Presentation.Controller.Context;
 import Presentation.Controller.Event;
-import Presentation.View.Box.ViewAddGameToBox;
 import Presentation.View.Box.ViewCreateBox;
-import Presentation.View.Box.ViewListGamesBox;
-import Presentation.View.Box.ViewSearchBoxesByName;
 import Presentation.View.Game.ViewSearchGamesByName;
 import Presentation.View.Game.ViewShowOne;
-import Presentation.View.Main.ViewPrincipal;
+import Presentation.View.Main.ViewMain;
 import Presentation.View.User.ViewRegister;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.List;
 
 public class ViewFactory extends ViewAbstractFactory {
 
     @Override
-    public IView createView(Context context) {
-        switch (context.getEvent()) {
+    public IView createView(int event) {
+		IView view = null;
+
+        switch (event) {
             case Event.VIEW:
-                currentView = new ViewPrincipal();
+                view = new ViewMain();
 				break;
-            
 			case Event.RES_SEARCH_ALL_BY_NAME_OK:
-				currentView = new ViewSearchGamesByName((List<TGame>) context.getData());
+				view = new ViewSearchGamesByName();
 				break;
 			case Event.RES_SEARCH_ONE_OK:
-				currentView = new ViewShowOne((TGame) context.getData());
+				view = new ViewShowOne();
 				break;
 			case Event.VIEW_CREATE_BOX:
-				currentView = new ViewCreateBox();
-				break;
-			case Event.RES_CREATE_BOX_OK:
-				break;
-			case Event.RES_CREATE_BOX_KO:
+				view = new ViewCreateBox();
 				break;
 			case Event.VIEW_CREATE_USER:
-				currentView = new ViewRegister();
+				view = new ViewRegister();
 				break;
-			case Event.RES_CREATE_USER_OK:
-				break;
-			case Event.RES_CREATE_USER_KO:
-				break;
-			case Event.RES_SEARCH_ALL_BOXES_BY_NAME_OK:
-				currentView = new ViewSearchBoxesByName((List<TBox>) context.getData());
-				break;
-			case Event.LIST_GAMES_OF_BOX:
-				currentView = new ViewListGamesBox((TBox) context.getData());
-				break;
-			case Event.ADD_GAME_TO_BOX:
-				currentView = new ViewAddGameToBox((Pair<List<TGame>, TBox>) context.getData());
+//			case Event.RES_SEARCH_ALL_BOXES_BY_NAME_OK:
+//				view = new ViewSearchBoxesByName();
+//				break;
+//			case Event.LIST_GAMES_OF_BOX:
+//				view = new ViewListGamesBox();
+//				break;
+//			case Event.ADD_GAME_TO_BOX:
+//				view = new ViewAddGameToBox();
+//				break;
+			default:
 				break;
 		}
 
-        return currentView;
-    }
-
-    @Override
-    public IView getCurrentIView() {
-        return currentView;
+		return view;
     }
 }
