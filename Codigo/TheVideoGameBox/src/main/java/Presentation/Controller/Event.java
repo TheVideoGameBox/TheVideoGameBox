@@ -25,6 +25,7 @@ public class Event {
     public static final int LOGIN_USER = 304;
     public static final int RES_LOGIN_USER_OK = 305;
     public static final int RES_LOGIN_USER_KO = 306;
+    public static final int VIEW_LOGIN = 307;
 
 
     // Codigos de eventos para BOX [500-700)

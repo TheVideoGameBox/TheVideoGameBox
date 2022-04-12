@@ -14,7 +14,7 @@ public class CommandLogIn implements ICommand {
     public Context execute(Object data) {
         SAUser saUser = SAAbstractFactory.getInstance().createSAUser();
         TUser user = (TUser) data;
-        ObjectId result = saUser.createUser(user);
+        ObjectId result = saUser.logIn(user);
         Context con;
 
         if(result != null) con = new Context(Event.RES_LOGIN_USER_OK, result);

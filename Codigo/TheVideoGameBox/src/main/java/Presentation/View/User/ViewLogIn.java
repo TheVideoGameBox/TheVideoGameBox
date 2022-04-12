@@ -1,0 +1,132 @@
+package Presentation.View.User;
+
+import Logic.User.TUser;
+import Presentation.Controller.ApplicationController;
+import Presentation.Controller.Context;
+import Presentation.Controller.Event;
+import Presentation.View.IView;
+import Presentation.View.Main.JPanelConFondo;
+import Presentation.View.Utils.Button;
+import Presentation.View.Utils.PasswordField;
+import Presentation.View.Utils.TextField;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Objects;
+
+import static Presentation.View.Main.ViewMain.LOGGED;
+import static Presentation.View.Utils.Images.backGround;
+import static Presentation.View.Utils.Images.logo;
+
+public class ViewLogIn extends JFrame implements IView {
+
+    public ViewLogIn() {
+        setTitle("Log In");
+        init_GUI();
+        refreshView();
+    }
+
+    @Override
+    public void update(Context context) {
+        switch (context.getEvent()) {
+            case Event.RES_LOGIN_USER_OK:
+                JOptionPane.showMessageDialog(this, "Logged In!", "Log In", JOptionPane.INFORMATION_MESSAGE);
+                LOGGED = true;
+                setVisible(false);
+                ApplicationController.getInstance().action(new Context(Event.VIEW, null));
+                break;
+            case Event.RES_LOGIN_USER_KO:
+                JOptionPane.showMessageDialog(null, "Incorrect Email/Password", "Log In", JOptionPane.ERROR_MESSAGE);
+                break;
+        }
+    }
+
+    private void init_GUI() {
+        this.setPreferredSize(new Dimension(500, 275));
+        Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
+        this.setIconImage(iconFrame);
+
+        JPanelConFondo mainPanel = new JPanelConFondo();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.setImagen(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(backGround))).getImage());
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.add(mainPanel);
+
+        JPanel auxPanel = createAuxPanel();
+        mainPanel.add(auxPanel, BorderLayout.NORTH);
+
+    }
+
+    private JPanel createAuxPanel() {
+        JPanel auxPanel = new JPanel();
+        auxPanel.setLayout(new BoxLayout(auxPanel, BoxLayout.Y_AXIS));
+        auxPanel.setOpaque(false);
+        auxPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        // EMAIL LABEL
+        auxPanel.add(label("Email"));
+
+        // Input para el email
+        TextField emailUser = textField();
+        auxPanel.add(emailUser);
+        auxPanel.add(Box.createRigidArea(new Dimension(50, 15)));
+
+        // PASSWORD LABEL
+        auxPanel.add(label("Password"));
+
+        // Input para la password
+        PasswordField passwordUser = passwordField();
+        auxPanel.add(passwordUser);
+        auxPanel.add(Box.createRigidArea(new Dimension(50, 15)));
+
+        Button signUpButton = new Button("Log In", new Color(50, 170, 0), new Dimension(80, 40));
+        signUpButton.button();
+        signUpButton.setAlignmentX(CENTER_ALIGNMENT);
+
+        signUpButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String email = emailUser.getText();
+                String password = String.valueOf(passwordUser.getPassword());
+
+                TUser user = new TUser(email, password);
+                ApplicationController.getInstance().action(new Context(Event.LOGIN_USER, user));
+            }
+        });
+
+        auxPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        auxPanel.add(signUpButton);
+        return auxPanel;
+    }
+
+    private JLabel label(String name) {
+        JLabel aux = new JLabel(name);
+        aux.setFont(new Font("Leelawadee", Font.BOLD, 18));
+        aux.setForeground(Color.WHITE);
+        aux.setAlignmentX(CENTER_ALIGNMENT);
+        return aux;
+    }
+
+    private TextField textField() {
+        TextField aux = new TextField(new Dimension(350, 30));
+        aux.textField();
+        aux.setAlignmentX(CENTER_ALIGNMENT);
+        return aux;
+    }
+
+    private PasswordField passwordField() {
+        PasswordField aux = new PasswordField(new Dimension(350, 30));
+        aux.textField();
+        aux.setAlignmentX(CENTER_ALIGNMENT);
+        return aux;
+    }
+
+    private void refreshView() {
+        pack();
+        setResizable(true);
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+}

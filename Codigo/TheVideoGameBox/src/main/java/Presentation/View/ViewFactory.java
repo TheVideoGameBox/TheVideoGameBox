@@ -9,6 +9,7 @@ import Presentation.View.Box.ViewSearchBoxesByName;
 import Presentation.View.Game.ViewSearchGamesByName;
 import Presentation.View.Game.ViewShowOne;
 import Presentation.View.Main.ViewMain;
+import Presentation.View.User.ViewLogIn;
 import Presentation.View.User.ViewRegister;
 
 public class ViewFactory extends ViewAbstractFactory {
@@ -42,6 +43,9 @@ public class ViewFactory extends ViewAbstractFactory {
 //			case Event.ADD_GAME_TO_BOX:
 //				view = new ViewAddGameToBox();
 //				break;
+			case Event.VIEW_LOGIN:
+				view = new ViewLogIn();
+				break;
 			default:
 				break;
 		}
