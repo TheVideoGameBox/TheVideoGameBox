@@ -5,6 +5,7 @@ import Presentation.Command.Box.CommandSearchAllBoxesByName;
 import Presentation.Command.Game.CommandSearchAllByName;
 import Presentation.Command.Game.CommandSearchOne;
 import Presentation.Command.User.CommandCreateUser;
+import Presentation.Command.User.CommandLogIn;
 import Presentation.Controller.Event;
 
 public class CommandFactory extends CommandAbstractFactory{
@@ -27,8 +28,10 @@ public class CommandFactory extends CommandAbstractFactory{
             case Event.CREATE_USER:
             	command = new CommandCreateUser();
             	break;
+            case Event.LOGIN_USER:
+                command = new CommandLogIn();
+                break;
             default:
-                command = null;
                 break;
         }
 
