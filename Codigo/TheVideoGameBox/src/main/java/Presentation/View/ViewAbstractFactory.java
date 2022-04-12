@@ -1,5 +1,7 @@
 package Presentation.View;
 
+import Presentation.Controller.Context;
+
 public abstract class ViewAbstractFactory {
     private static ViewAbstractFactory instance;
     
@@ -10,5 +12,5 @@ public abstract class ViewAbstractFactory {
         return instance;
     }
 
-    public abstract IView createView(int event);
+    public abstract IView createView(Context context);
 }
