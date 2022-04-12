@@ -1,7 +1,6 @@
 package Presentation.View.Utils;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -24,7 +23,7 @@ public class Button extends JButton {
         this.backgroundColor = backgroundColor;
         this.dimension = dimension;
     }
-    
+
     public Button(String name, String icon, Color foregroundColor, Color backgroundColor, Dimension dimension, Boolean press) {
         this.name = name;
         this.icon = icon;
@@ -63,7 +62,7 @@ public class Button extends JButton {
         this.setBorderPainted(false);
         this.setContentAreaFilled(false);
     }
-    
+
     public Button(String name, String icon, Dimension dimension, Boolean press) {
         this.name = name;
         this.icon = icon;
@@ -145,15 +144,17 @@ public class Button extends JButton {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent arg0) {
-            	setForeground(pressColor);
-            	String iconOrange = icon.replace("_", "orange_");
-            	if(press) setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(iconOrange))));
+                setForeground(pressColor);
+                String iconOrange = icon.replace("_", "orange_");
+                if (press)
+                    setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(iconOrange))));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-            	setForeground(foregroundColor);
-            	if(press) setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(icon))));
+                setForeground(foregroundColor);
+                if (press)
+                    setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(icon))));
             }
         });
     }

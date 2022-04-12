@@ -14,7 +14,6 @@ import Presentation.View.Utils.TextField;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.bson.types.ObjectId;
-import org.jdesktop.xswingx.PromptSupport;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -33,13 +32,19 @@ import static Presentation.View.Utils.Images.logo;
 
 public class ViewListGamesBox extends JFrame implements IView {
     private List<TGame> games;
-    private TBox box;
+    private TBox tBox;
+    private JPanel contentContainer;
 
-    public ViewListGamesBox(TBox box) {
+    public ViewListGamesBox(TBox tBox) {
         setTitle("List of Games");
-        this.box = box;
+        this.tBox = tBox;
         init_GUI();
-        this.setLocationRelativeTo(null);
+        refreshView();
+    }
+
+    @Override
+    public void update(Context context) {
+
     }
 
     public void init_GUI() {
@@ -58,7 +63,7 @@ public class ViewListGamesBox extends JFrame implements IView {
 
         // CONTENT CONTAINER
 
-        JPanel contentContainer = new JPanel();
+        contentContainer = new JPanel();
         contentContainer.setLayout(new BoxLayout(contentContainer, BoxLayout.Y_AXIS));
         contentContainer.setAlignmentX(CENTER_ALIGNMENT);
         contentContainer.setOpaque(false);
@@ -100,7 +105,7 @@ public class ViewListGamesBox extends JFrame implements IView {
             public void actionPerformed(ActionEvent e) {
 
                 ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-                dispose();
+                setVisible(false);
             }
         });
 
@@ -122,7 +127,7 @@ public class ViewListGamesBox extends JFrame implements IView {
 
                         @Override
                         public TBox getRight() {
-                            return box;
+                            return tBox;
                         }
 
                         @Override
@@ -131,7 +136,7 @@ public class ViewListGamesBox extends JFrame implements IView {
                         }
                     };
                     ApplicationController.getInstance().action(new Context(Event.ADD_GAME_TO_BOX, aux));
-                    dispose();
+                    setVisible(false);
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "There is no games with that name");
@@ -158,20 +163,6 @@ public class ViewListGamesBox extends JFrame implements IView {
         contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
         contentContainer.add(helpPanel);
         contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
-
-        if(box.getGameList() != null) {
-            for (ObjectId gameId : box.getGameList()) {
-                try {
-                    TGame game = SAAbstractFactory.getInstance().createSAGame().searchOne(gameId);
-                    contentContainer.add(gamePanel(game));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-                contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
-            }
-        }
-        this.pack();
-        this.setVisible(true);
     }
 
     private JPanelRound gamePanel(TGame game) throws IOException {
@@ -226,7 +217,7 @@ public class ViewListGamesBox extends JFrame implements IView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ApplicationController.getInstance().action(new Context(Event.SEARCH_ONE, game.getId()));
-                dispose();
+                setVisible(false);
             }
         });
         buttonPanel.add(viewInfo, BorderLayout.CENTER);
@@ -239,8 +230,21 @@ public class ViewListGamesBox extends JFrame implements IView {
         return panel;
     }
 
-    @Override
-    public void update(Context context) {
+    private void refreshView(){
+        if(tBox.getGameList() != null) {
+            for (ObjectId gameId : tBox.getGameList()) {
+                try {
+                    TGame game = SAAbstractFactory.getInstance().createSAGame().searchOne(gameId);
+                    contentContainer.add(gamePanel(game));
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+            }
+        }
 
+        this.pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 }
