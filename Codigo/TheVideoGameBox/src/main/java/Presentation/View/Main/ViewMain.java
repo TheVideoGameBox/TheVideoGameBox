@@ -217,13 +217,13 @@ public class ViewMain extends JFrame implements IView{
 			box.setVisible(true);
 			user.setVisible(true);
 		}
-		else {
+		else {							//Cambios para probar que funciona... Deben adaptarse a los criterios de PO
 			logIn.setVisible(true);
 			registry.setVisible(true);
 			logout.setVisible(false);
-			game.setVisible(false);
-			box.setVisible(false);
-			user.setVisible(false);
+			game.setVisible(true);
+			box.setVisible(true);
+			user.setVisible(true);
 		}
 		
 		top.add(logout);
