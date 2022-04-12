@@ -1,6 +1,7 @@
 package Presentation.View.Box;
 
 import Logic.Box.TBox;
+import Logic.Game.TGame;
 import Presentation.Controller.ApplicationController;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
@@ -23,15 +24,18 @@ import static Presentation.View.Utils.Images.logo;
 
 public class ViewSearchBoxesByName extends JFrame implements IView {
 	private List<TBox> boxes;
-	
-	public ViewSearchBoxesByName(List<TBox> boxes) {
-		setTitle("Boxes List");
-		this.boxes = boxes;
-		init_GUI();
-		this.setLocationRelativeTo(null);
+
+	@Override
+	public void update(Context context) {
+		if(context.getEvent() == Event.RES_SEARCH_ALL_BOXES_BY_NAME_OK){
+			this.boxes = (List<TBox>) context.getData();
+			init_GUI();
+			refreshView();
+		}
 	}
 	
-	public void init_GUI() {
+	private void init_GUI() {
+		setTitle("Boxes List");
 		this.setPreferredSize(new Dimension(1150, 750));
 		this.setLocation(400, 100);
 		
@@ -88,7 +92,8 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-				dispose();
+				setVisible(false
+				);
 			}
 		});
 
@@ -120,7 +125,6 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		}
 
 		this.pack();
-		this.setVisible(true);
 	}
 	
 	private Component boxPanel(TBox box) throws IOException {
@@ -176,7 +180,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ApplicationController.getInstance().action(new Context(Event.LIST_GAMES_OF_BOX, box));
-				dispose();
+				setVisible(false);
 			}
 		});
 		buttonPanel.add(viewInfo, BorderLayout.CENTER);
@@ -189,9 +193,8 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		return panel;
 	}
 
-	@Override
-	public void update(Context context) {
-		// TODO Auto-generated method stub
+	private void refreshView(){
+		setLocationRelativeTo(null);
+		setVisible(true);
 	}
-
 }
