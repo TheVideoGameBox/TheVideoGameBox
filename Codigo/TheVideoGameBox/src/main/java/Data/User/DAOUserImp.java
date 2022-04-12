@@ -37,7 +37,6 @@ public class DAOUserImp implements DAOUser {
 
 	@Override
 	public TUser logIn(String email) {
-		System.out.println("sadasd");
 		TUser tUser;
 		try {
 			MongoDatabase db = Connection.getInstance().getConnection();

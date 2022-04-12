@@ -35,15 +35,17 @@ import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Utils.Button;
 import Presentation.View.Utils.TextField;
+import org.bson.types.ObjectId;
 
 public class ViewMain extends JFrame implements IView{
 
-	public static boolean LOGGED;
+	public static boolean logged;
+	public static ObjectId id_logged;
 	private boolean desplegado;
 
 	public ViewMain() {
 		super();
-		LOGGED = false;
+		logged = false;
 		desplegado = true;
 		initGUI();
 	}
@@ -202,14 +204,14 @@ public class ViewMain extends JFrame implements IView{
 				game.setVisible(false);
 				box.setVisible(false);
 				user.setVisible(false);
-				LOGGED = false;
+				logged = false;
 			}
 
 		});
 		logout.setBorder(BorderFactory.createBevelBorder(0));
 		logout.setToolTipText("Log out");
 		//En función de si esta logueado se ve visible o no
-		if (LOGGED) {
+		if (logged) {
 			logIn.setVisible(false);
 			registry.setVisible(false);
 			logout.setVisible(true);

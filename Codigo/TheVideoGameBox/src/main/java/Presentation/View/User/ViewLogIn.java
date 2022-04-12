@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-import static Presentation.View.Main.ViewMain.LOGGED;
+import static Presentation.View.Main.ViewMain.logged;
 import static Presentation.View.Utils.Images.backGround;
 import static Presentation.View.Utils.Images.logo;
 
@@ -33,12 +33,13 @@ public class ViewLogIn extends JFrame implements IView {
         switch (context.getEvent()) {
             case Event.RES_LOGIN_USER_OK:
                 JOptionPane.showMessageDialog(this, "Logged In!", "Log In", JOptionPane.INFORMATION_MESSAGE);
-                LOGGED = true;
+                logged = true;
                 setVisible(false);
                 ApplicationController.getInstance().action(new Context(Event.VIEW, null));
                 break;
             case Event.RES_LOGIN_USER_KO:
                 JOptionPane.showMessageDialog(null, "Incorrect Email/Password", "Log In", JOptionPane.ERROR_MESSAGE);
+                refreshView();
                 break;
         }
     }
@@ -71,7 +72,7 @@ public class ViewLogIn extends JFrame implements IView {
         // Input para el email
         TextField emailUser = textField();
         auxPanel.add(emailUser);
-        auxPanel.add(Box.createRigidArea(new Dimension(50, 15)));
+        auxPanel.add(Box.createRigidArea(new Dimension(0, 15)));
 
         // PASSWORD LABEL
         auxPanel.add(label("Password"));
@@ -79,13 +80,13 @@ public class ViewLogIn extends JFrame implements IView {
         // Input para la password
         PasswordField passwordUser = passwordField();
         auxPanel.add(passwordUser);
-        auxPanel.add(Box.createRigidArea(new Dimension(50, 15)));
+        auxPanel.add(Box.createRigidArea(new Dimension(0, 15)));
 
-        Button signUpButton = new Button("Log In", new Color(50, 170, 0), new Dimension(80, 40));
-        signUpButton.button();
-        signUpButton.setAlignmentX(CENTER_ALIGNMENT);
+        Button logInButton = new Button("Log In", new Color(50, 170, 0), new Dimension(80, 40));
+        logInButton.button();
+        logInButton.setAlignmentX(CENTER_ALIGNMENT);
 
-        signUpButton.addActionListener(new ActionListener() {
+        logInButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String email = emailUser.getText();
@@ -97,7 +98,7 @@ public class ViewLogIn extends JFrame implements IView {
         });
 
         auxPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        auxPanel.add(signUpButton);
+        auxPanel.add(logInButton);
         return auxPanel;
     }
 
