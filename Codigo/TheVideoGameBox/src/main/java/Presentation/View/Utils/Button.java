@@ -7,7 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Objects;
 
-public class Button extends JButton{
+public class Button extends JButton {
 
     String name;
     String icon;
@@ -24,6 +24,7 @@ public class Button extends JButton{
         this.backgroundColor = backgroundColor;
         this.dimension = dimension;
     }
+<<<<<<< HEAD
     
     public Button(String name, String icon, Color foregroundColor, Color backgroundColor, Dimension dimension, Boolean press) {
         this.name = name;
@@ -34,6 +35,9 @@ public class Button extends JButton{
         this.press = press;
     }
     
+=======
+
+>>>>>>> branch 'refactorizacionVistas' of https://github.com/TheVideoGameBox/TheVideoGameBox.git
     public Button(String name, String icon, Color foregroundColor, Color backgroundColor, Dimension dimension, Color pressColor) {
         this.name = name;
         this.icon = icon;
@@ -55,7 +59,7 @@ public class Button extends JButton{
         this.icon = icon;
         this.backgroundColor = backgroundColor;
     }
-    
+
     public Button(String name, String icon, Dimension dimension) {
         this.name = name;
         this.icon = icon;
@@ -63,6 +67,7 @@ public class Button extends JButton{
         this.setBorderPainted(false);
         this.setContentAreaFilled(false);
     }
+<<<<<<< HEAD
     
     public Button(String name, String icon, Dimension dimension, Boolean press) {
         this.name = name;
@@ -73,6 +78,9 @@ public class Button extends JButton{
         this.setContentAreaFilled(false);
     }
     
+=======
+
+>>>>>>> branch 'refactorizacionVistas' of https://github.com/TheVideoGameBox/TheVideoGameBox.git
     public Button(String name, String icon, Dimension dimension, Color pressColor) {
         this.name = name;
         this.icon = icon;
@@ -86,7 +94,7 @@ public class Button extends JButton{
         this.name = name;
         this.backgroundColor = backgroundColor;
     }
-   
+
 
     public Button(String name, Color backgroundColor, Dimension dimension) {
         this.name = name;
@@ -94,7 +102,7 @@ public class Button extends JButton{
         this.dimension = dimension;
     }
 
-    public Button(String name, String icon, Color foregroundColor, Color pressColor){
+    public Button(String name, String icon, Color foregroundColor, Color pressColor) {
         this.name = name;
         this.icon = icon;
         this.pressColor = pressColor;
@@ -102,14 +110,14 @@ public class Button extends JButton{
         this.setContentAreaFilled(false);
     }
 
-    public Button(String name, Color foregroundColor, Color pressColor){
+    public Button(String name, Color foregroundColor, Color pressColor) {
         this.name = name;
         this.setBorderPainted(false);
         this.setContentAreaFilled(false);
     }
 
-    public void button(){
-    	setText(name);
+    public void button() {
+        setText(name);
         setPreferredSize(dimension);
         setMaximumSize(dimension);
         setMinimumSize(dimension);
@@ -121,16 +129,17 @@ public class Button extends JButton{
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent arg0) {
-            	setForeground(pressColor);
+                setForeground(pressColor);
             }
+
             @Override
             public void mouseExited(MouseEvent e) {
-            	setForeground(foregroundColor);
+                setForeground(foregroundColor);
             }
         });
     }
 
-    public void buttonIcon(){
+    public void buttonIcon() {
         setText(name);
         setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(icon))));
         setPreferredSize(dimension);
@@ -144,14 +153,29 @@ public class Button extends JButton{
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent arg0) {
+<<<<<<< HEAD
             	setForeground(pressColor);
             	String iconOrange = icon.replace("_", "orange_");
             	if(press) setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(iconOrange))));
+=======
+                setForeground(pressColor);
+                String iconHover = icon.substring(0, icon.length() - 4) + "_hover.png";
+                try {
+                    setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(iconHover))));
+                } catch (NullPointerException e) {
+                }
+>>>>>>> branch 'refactorizacionVistas' of https://github.com/TheVideoGameBox/TheVideoGameBox.git
             }
+
             @Override
             public void mouseExited(MouseEvent e) {
+<<<<<<< HEAD
             	setForeground(foregroundColor);
             	if(press) setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(icon))));
+=======
+                setForeground(foregroundColor);
+                setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(icon))));
+>>>>>>> branch 'refactorizacionVistas' of https://github.com/TheVideoGameBox/TheVideoGameBox.git
             }
         });
     }

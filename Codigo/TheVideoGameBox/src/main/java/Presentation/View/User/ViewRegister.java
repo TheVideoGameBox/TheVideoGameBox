@@ -29,6 +29,20 @@ public class ViewRegister extends JFrame implements IView {
         refreshView();
     }
 
+    @Override
+    public void update(Context context) {
+        switch (context.getEvent()) {
+            case Event.RES_CREATE_USER_OK:
+                JOptionPane.showMessageDialog(this, "Signed Up!", "Sign Up", JOptionPane.INFORMATION_MESSAGE);
+                setVisible(false);
+                ApplicationController.getInstance().action(new Context(Event.VIEW, null));
+                break;
+            case Event.RES_CREATE_USER_KO:
+                JOptionPane.showMessageDialog(null, "Failed to Sign Up", "Sign Up", JOptionPane.ERROR_MESSAGE);
+                break;
+        }
+    }
+
     private void init_GUI() {
         this.setPreferredSize(new Dimension(900, 700));
         Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
@@ -174,12 +188,6 @@ public class ViewRegister extends JFrame implements IView {
         return auxPanel;
     }
 
-    private void refreshView(){
-        setLocationRelativeTo(null);
-        pack();
-        setVisible(true);
-    }
-
     private JLabel label(String name) {
         JLabel aux = new JLabel(name);
         aux.setFont(new Font("Leelawadee", Font.BOLD, 20));
@@ -195,17 +203,8 @@ public class ViewRegister extends JFrame implements IView {
         return aux;
     }
 
-    @Override
-    public void update(Context context) {
-        switch (context.getEvent()) {
-            case Event.RES_CREATE_USER_OK:
-                JOptionPane.showMessageDialog(this, "Signed Up!", "Sign Up", JOptionPane.INFORMATION_MESSAGE);
-                setVisible(false);
-                ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-                break;
-            case Event.RES_CREATE_USER_KO:
-                JOptionPane.showMessageDialog(null, "Failed to Sign Up", "Sign Up", JOptionPane.ERROR_MESSAGE);
-                break;
-        }
+    private void refreshView(){
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 }
