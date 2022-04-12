@@ -77,7 +77,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		headerContainer.add(Box.createRigidArea(new Dimension(130, 0)));
 
 		// ICONO DE MENU
-		Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
+		Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80), false);
 		icon.buttonIcon();
 		icon.setToolTipText("Back to main window");
 		icon.setAlignmentX(CENTER_ALIGNMENT);
@@ -167,7 +167,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		//BUTTON PANEL
 		JPanel buttonPanel = new JPanel(new BorderLayout());
 		buttonPanel.setOpaque(false);
-		Button viewInfo = new Button("View Games", "info_icon.png", new Color(50, 170, 0), new Dimension(200, 45));
+		Button viewInfo = new Button("View Games", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(200, 45), Color.orange);
 		viewInfo.buttonIcon();
 		viewInfo.setBorderPainted(false);
 		viewInfo.setContentAreaFilled(false);

@@ -85,7 +85,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		headerContainer.add(Box.createRigidArea(new Dimension(80, 0)));
 		
 		// ICONO DE MENU
-		Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
+		Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80), false);
 		icon.buttonIcon();
 		icon.setToolTipText("Back to main window");
 		icon.setAlignmentX(CENTER_ALIGNMENT);
@@ -203,7 +203,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		buttonPanel.setMinimumSize(new Dimension(300, 135));
 		
 
-		Button viewInfo = new Button("Add Game", "add_icon.png", new Dimension(170, 45));
+		Button viewInfo = new Button("Add Game", "add_icon.png", new Dimension(170, 45), false);
 		viewInfo.buttonIcon();
 		viewInfo.setAlignmentX(CENTER_ALIGNMENT);
 		viewInfo.setAlignmentY(CENTER_ALIGNMENT);
