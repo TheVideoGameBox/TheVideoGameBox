@@ -24,7 +24,6 @@ public class Button extends JButton {
         this.backgroundColor = backgroundColor;
         this.dimension = dimension;
     }
-<<<<<<< HEAD
     
     public Button(String name, String icon, Color foregroundColor, Color backgroundColor, Dimension dimension, Boolean press) {
         this.name = name;
@@ -34,10 +33,7 @@ public class Button extends JButton {
         this.dimension = dimension;
         this.press = press;
     }
-    
-=======
 
->>>>>>> branch 'refactorizacionVistas' of https://github.com/TheVideoGameBox/TheVideoGameBox.git
     public Button(String name, String icon, Color foregroundColor, Color backgroundColor, Dimension dimension, Color pressColor) {
         this.name = name;
         this.icon = icon;
@@ -67,7 +63,6 @@ public class Button extends JButton {
         this.setBorderPainted(false);
         this.setContentAreaFilled(false);
     }
-<<<<<<< HEAD
     
     public Button(String name, String icon, Dimension dimension, Boolean press) {
         this.name = name;
@@ -77,10 +72,7 @@ public class Button extends JButton {
         this.setBorderPainted(false);
         this.setContentAreaFilled(false);
     }
-    
-=======
 
->>>>>>> branch 'refactorizacionVistas' of https://github.com/TheVideoGameBox/TheVideoGameBox.git
     public Button(String name, String icon, Dimension dimension, Color pressColor) {
         this.name = name;
         this.icon = icon;
@@ -153,29 +145,15 @@ public class Button extends JButton {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent arg0) {
-<<<<<<< HEAD
             	setForeground(pressColor);
             	String iconOrange = icon.replace("_", "orange_");
             	if(press) setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(iconOrange))));
-=======
-                setForeground(pressColor);
-                String iconHover = icon.substring(0, icon.length() - 4) + "_hover.png";
-                try {
-                    setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(iconHover))));
-                } catch (NullPointerException e) {
-                }
->>>>>>> branch 'refactorizacionVistas' of https://github.com/TheVideoGameBox/TheVideoGameBox.git
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-<<<<<<< HEAD
             	setForeground(foregroundColor);
             	if(press) setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(icon))));
-=======
-                setForeground(foregroundColor);
-                setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(icon))));
->>>>>>> branch 'refactorizacionVistas' of https://github.com/TheVideoGameBox/TheVideoGameBox.git
             }
         });
     }
