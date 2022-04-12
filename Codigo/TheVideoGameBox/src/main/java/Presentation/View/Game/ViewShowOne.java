@@ -12,6 +12,10 @@ import Presentation.View.Utils.Button;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -126,6 +130,7 @@ public class ViewShowOne extends JFrame implements IView {
 
         // Carátula del juego.
         JLabel coverLabel = new JLabel();
+        coverLabel.setPreferredSize(new Dimension(264, 350));
         coverLabel.setAlignmentX(CENTER_ALIGNMENT);
         if (game.getCover() != null) {
             Image image = null;
@@ -148,25 +153,25 @@ public class ViewShowOne extends JFrame implements IView {
 
         infoJuego.add(Box.createRigidArea(new Dimension(0, 10)));
         infoJuego.add(coverLabel);
-        infoJuego.add(Box.createRigidArea(new Dimension(0, 20)));
 
         // Nombre del juego.
         JPanel namePanel = new JPanel();
         namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.Y_AXIS));
         namePanel.setOpaque(false);
         namePanel.setBorder(new EmptyBorder(0, 10, 7, 10));
-        namePanel.setPreferredSize(new Dimension(555, 150));
-        namePanel.setMaximumSize(new Dimension(555, 150));
-        namePanel.setMinimumSize(new Dimension(555, 150));
-        namePanel.setAlignmentX(CENTER_ALIGNMENT);
+        namePanel.setMaximumSize(new Dimension(555, 50));
+        namePanel.setMinimumSize(new Dimension(555, 50));
+        namePanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
 
-        JTextArea nameTitle = new JTextArea(game.getName());
+        JTextPane nameTitle = new JTextPane();
         nameTitle.setForeground(Color.white);
         nameTitle.setOpaque(false);
         nameTitle.setFont(new Font("sans-serif", 1, 28));
-        nameTitle.setLineWrap(true);
-        nameTitle.setWrapStyleWord(true);
-        nameTitle.setAlignmentX(CENTER_ALIGNMENT);
+        nameTitle.setText(game.getName());
+        StyledDocument doc = nameTitle.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);       
 
         namePanel.add(nameTitle);
 

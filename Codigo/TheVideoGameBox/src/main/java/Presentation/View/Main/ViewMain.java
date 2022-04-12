@@ -38,8 +38,12 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import Logic.Game.TGame;
 import Presentation.Controller.ApplicationController;
@@ -695,13 +699,17 @@ public class ViewMain extends JFrame implements IView{
 		JPanel namePanel = new JPanel();
 		namePanel.setOpaque(false);
 		
-		JLabel name = new JLabel(g.getName());
-		name.setForeground(Color.white);
-        name.setFont(new Font("Leelawadee", Font.BOLD, 17));
-        name.setAlignmentX(JPanel.CENTER_ALIGNMENT);
-        name.setAlignmentY(JPanel.TOP_ALIGNMENT);
+		JTextPane nameTitle = new JTextPane();
+        nameTitle.setForeground(Color.white);
+        nameTitle.setOpaque(false);
+        nameTitle.setFont(new Font("sans-serif", 1, 18));
+        nameTitle.setText(g.getName());
+        StyledDocument doc = nameTitle.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false); 
 		
-        namePanel.add(name);
+        namePanel.add(nameTitle);
         
 		main.add(coverLabel, BorderLayout.NORTH);
 		main.add(namePanel, BorderLayout.SOUTH);
