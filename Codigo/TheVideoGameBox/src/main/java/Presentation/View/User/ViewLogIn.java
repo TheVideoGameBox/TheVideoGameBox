@@ -39,7 +39,6 @@ public class ViewLogIn extends JFrame implements IView {
                 break;
             case Event.RES_LOGIN_USER_KO:
                 JOptionPane.showMessageDialog(null, "Incorrect Email/Password", "Log In", JOptionPane.ERROR_MESSAGE);
-                refreshView();
                 break;
         }
     }
@@ -57,7 +56,6 @@ public class ViewLogIn extends JFrame implements IView {
 
         JPanel auxPanel = createAuxPanel();
         mainPanel.add(auxPanel, BorderLayout.NORTH);
-
     }
 
     private JPanel createAuxPanel() {
@@ -79,6 +77,17 @@ public class ViewLogIn extends JFrame implements IView {
 
         // Input para la password
         PasswordField passwordUser = passwordField();
+        passwordUser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String email = emailUser.getText();
+                String password = String.valueOf(passwordUser.getPassword());
+
+                TUser user = new TUser(email, password);
+                ApplicationController.getInstance().action(new Context(Event.LOGIN_USER, user));
+            }
+        });
+
         auxPanel.add(passwordUser);
         auxPanel.add(Box.createRigidArea(new Dimension(0, 15)));
 
