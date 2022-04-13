@@ -74,4 +74,9 @@ public class SABoxImp implements SABox {
     private boolean correctName(String name) {
         return name != null && name.length() > 0 && name.length() <= 50;
     }
+
+	@Override
+	public TBox showBox(ObjectId _id) {
+		return DAOAbstractFactory.getInstance().createDAOBox().searchOne(_id);
+	}
 }
