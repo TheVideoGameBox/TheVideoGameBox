@@ -92,4 +92,26 @@ public class DAOBoxImp implements DAOBox {
 			
 		return result;
 	}
+
+	@Override
+	public TBox searchOne(ObjectId _id) {
+		Box box = null;
+		try {
+			MongoDatabase db = Connection.getInstance().getConnection();
+			MongoCollection<Box> collection = db.getCollection("boxes", Box.class);
+
+			List<Box> boxes = new ArrayList<Box>();
+			collection.find(eq("_id", _id)).into(boxes);
+
+			if (boxes.size() == 1) {
+				box = new Box(boxes.get(0).toTransfer());
+			}
+		}
+		catch(MongoException e) {
+			return null;
+		}
+		
+		
+		return box.toTransfer();
+	}
 }
