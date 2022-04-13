@@ -4,17 +4,20 @@ import Data.Connection;
 import Logic.Game.Game;
 import Logic.Game.TGame;
 import com.mongodb.MongoException;
+import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Aggregates;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.regex;
+import static com.mongodb.client.model.Filters.*;
 
 
 public class DAOGameImp implements DAOGame {
@@ -57,7 +60,7 @@ public class DAOGameImp implements DAOGame {
         List<TGame> result = new ArrayList<>();
         try {
             MongoDatabase db = Connection.getInstance().getConnection();
-            FindIterable<Game> iter = db.getCollection("games", Game.class).find().limit(3);
+            AggregateIterable<Game> iter = db.getCollection("games", Game.class).aggregate(Collections.singletonList(Aggregates.sample(3)));
             for(Game game : iter)
                 result.add(game.toTransfer());
         } catch (MongoException e) {
