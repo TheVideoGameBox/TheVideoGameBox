@@ -1,5 +1,6 @@
 package Presentation.View.Main;
 
+import static Presentation.View.Utils.Images.backGround;
 import static Presentation.View.Utils.Images.logo;
 
 import java.awt.BorderLayout;
@@ -88,7 +89,7 @@ public class ViewMain extends JFrame implements IView{
 		
 		JPanelConFondo mainpanel = new JPanelConFondo();
 		mainpanel.setLayout(new BorderLayout());
-		mainpanel.setImagen(new ImageIcon(getClass().getClassLoader().getResource("fondo_triangular.png")).getImage());
+		mainpanel.setImagen(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(backGround))).getImage());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(mainpanel);
 		
