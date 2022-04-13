@@ -59,7 +59,6 @@ public class ViewMain extends JFrame implements IView{
 
 	private static int logged;
 	private boolean desplegado;
-	private List<TGame> listRandom = new ArrayList<>();
 
 	public ViewMain() {
 		super();
@@ -78,16 +77,11 @@ public class ViewMain extends JFrame implements IView{
 		else if(context.getEvent() == Event.RES_SEARCH_ALL_BOXES_BY_NAME_KO) {
 			JOptionPane.showMessageDialog(null, "There isn't any box with that name");
 		}
-		else if(context.getEvent() == Event.RES_RANDOM_GAMES_OK) {
-			listRandom = (List<TGame>) context.getData();
-		}
 
 		refreshView();
 	}
 
 	public void initGUI() {
-		ApplicationController.getInstance().action(new Context(Event.RANDOM_GAMES, null));
-		
 		Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
 		this.setIconImage(iconFrame);
 		this.setPreferredSize(new Dimension(1150, 750));
@@ -650,29 +644,13 @@ public class ViewMain extends JFrame implements IView{
 		randomPanel.add(panel1);
 		
 		//Falta funcion para coger 3 juegos randoms
+		//TODO REVISAR ESTO
+		List<TGame> randomGames = new ArrayList<>();
+		randomGames = SAAbstractFactory.getInstance().createSAGame().random();
 
-		//ist<TGame> randomGames = new ArrayList<>();
-		//randomGames = SAAbstractFactory.getInstance().createSAGame().random();
-
-		for(TGame g : listRandom) {
+		for(TGame g : randomGames) {
 			panel1.add(gamePanel(g));
 		}
-
-		/*List<TGame> games = new ArrayList<TGame>();
-		List<String> dev = new ArrayList<String>();
-		dev.add("deve1"); dev.add("deve2");
-		List<String> cat = new ArrayList<String>();
-		cat.add("cate1"); cat.add("cate2");
-		List<String> plat = new ArrayList<String>();
-		plat.add("plat1"); plat.add("plat2");
-		TGame game1 = new TGame("Game1", "//images.igdb.com/igdb/image/upload/t_cover_big/co2rld.jpg", dev, cat, plat, "Descripcion del juego");
-		TGame game2 = new TGame("Game2", "//images.igdb.com/igdb/image/upload/t_cover_big/co2rld.jpg", dev, cat, plat, "Descripcion del juego");
-		TGame game3 = new TGame("Game3", "//images.igdb.com/igdb/image/upload/t_cover_big/co2rld.jpg", dev, cat, plat, "Descripcion del juego");
-		games.add(game1);
-		games.add(game2);
-		games.add(game3);
-		
-		for(TGame g : games) panel1.add(gamePanel(g));*/
 		
 		midpanel.add(topPanel);
 		midpanel.add(Box.createRigidArea(new Dimension(0,20)));
@@ -694,7 +672,7 @@ public class ViewMain extends JFrame implements IView{
 			Image image = null;
 			URL url;
 			try {
-				url = new URL( "https:"+ g.getCover());
+				url = new URL( "https:"+ g.getImage());
 				URLConnection connection = url.openConnection();
 				connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
 				connection.connect();
