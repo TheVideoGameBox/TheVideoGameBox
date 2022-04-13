@@ -80,7 +80,23 @@ public class ViewListGamesBox extends JFrame implements IView {
         headerContainer.setMaximumSize(new Dimension(1200, 100));
         headerContainer.setLayout(new BoxLayout(headerContainer, BoxLayout.X_AXIS));
         headerContainer.setOpaque(false);
-        headerContainer.add(Box.createRigidArea(new Dimension(60, 0)));
+        headerContainer.add(Box.createRigidArea(new Dimension(15, 0)));
+        
+        //BOTON DE BACK
+        Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
+        backButton.buttonIcon();
+        backButton.setBounds(0, 11, 119, 50);
+        backButton.setToolTipText("Go back");
+        backButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ApplicationController.getInstance().back();
+                setVisible(false);
+            }
+        });
+        
+        headerContainer.add(backButton);
 
         // TITLE
         JLabel title = new JLabel("Games of Box: ");
@@ -89,7 +105,7 @@ public class ViewListGamesBox extends JFrame implements IView {
         title.setForeground(Color.white);
         title.setFont(new Font("sans-serif", 1, 20));
         headerContainer.add(title);
-        headerContainer.add(Box.createRigidArea(new Dimension(100, 0)));
+        headerContainer.add(Box.createRigidArea(new Dimension(30, 0)));
 
         // ICONO DE MENU
         Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));

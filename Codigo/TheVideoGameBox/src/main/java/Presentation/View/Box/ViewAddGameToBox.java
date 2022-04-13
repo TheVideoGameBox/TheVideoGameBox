@@ -79,7 +79,24 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		headerContainer.setMaximumSize(new Dimension(1200, 100));
 		headerContainer.setLayout(new BoxLayout(headerContainer, BoxLayout.X_AXIS));
 		headerContainer.setOpaque(false);
-		headerContainer.add(Box.createRigidArea(new Dimension(60, 0)));
+		headerContainer.add(Box.createRigidArea(new Dimension(15, 0)));
+		
+		//BOTON DE BACK
+        Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
+        backButton.buttonIcon();
+        backButton.setBounds(0, 11, 119, 50);
+        backButton.setToolTipText("Go back");
+        backButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ApplicationController.getInstance().back();
+                setVisible(false);
+            }
+        });
+        
+        headerContainer.add(backButton);
+        headerContainer.add(Box.createRigidArea(new Dimension(7,0)));
 				
 		// TITLE
 		JLabel title = new JLabel("Select a game to add");
@@ -88,7 +105,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		title.setForeground(Color.white);
 		title.setFont(new Font("sans-serif", 1, 20));
 		headerContainer.add(title);
-		headerContainer.add(Box.createRigidArea(new Dimension(80, 0)));
+		//headerContainer.add(Box.createRigidArea(new Dimension(, 0)));
 		
 		// ICONO DE MENU
 		Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
@@ -209,8 +226,10 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		buttonPanel.setMinimumSize(new Dimension(300, 135));
 		
 
-		Button viewInfo = new Button("Add Game", "add_icon.png", new Dimension(170, 45));
+		Button viewInfo = new Button("Add Game", "add_icon.png", Color.white, null, new Dimension(200, 45), Color.orange);
 		viewInfo.buttonIcon();
+		viewInfo.setBorderPainted(false);
+        viewInfo.setContentAreaFilled(false);
 		viewInfo.setAlignmentX(CENTER_ALIGNMENT);
 		viewInfo.setAlignmentY(CENTER_ALIGNMENT);
 		viewInfo.addActionListener(new ActionListener() {

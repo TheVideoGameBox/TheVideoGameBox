@@ -687,6 +687,7 @@ public class ViewMain extends JFrame implements IView{
         nameTitle.setOpaque(false);
         nameTitle.setFont(new Font("sans-serif", 1, 18));
         nameTitle.setText(g.getName());
+        nameTitle.setEditable(false);
         StyledDocument doc = nameTitle.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);

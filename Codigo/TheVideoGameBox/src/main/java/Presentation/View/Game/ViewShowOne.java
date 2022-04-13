@@ -12,6 +12,7 @@ import Presentation.View.Utils.Button;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -99,7 +100,7 @@ public class ViewShowOne extends JFrame implements IView {
 
         topPanel.add(Box.createRigidArea(new Dimension(20, 0)));
         topPanel.add(backButton);
-        topPanel.add(Box.createRigidArea(new Dimension(270, 0)));
+        topPanel.add(Box.createRigidArea(new Dimension(180, 0)));
         topPanel.add(icon);
 
 
@@ -168,6 +169,7 @@ public class ViewShowOne extends JFrame implements IView {
         nameTitle.setOpaque(false);
         nameTitle.setFont(new Font("sans-serif", 1, 28));
         nameTitle.setText(game.getName());
+        nameTitle.setEditable(false);
         StyledDocument doc = nameTitle.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
@@ -196,15 +198,51 @@ public class ViewShowOne extends JFrame implements IView {
         companyTitle.setFont(new Font("sans-serif", 1, 25));
         companyPanel.add(Box.createRigidArea(new Dimension(0, 15)));
         companyPanel.add(companyTitle);
-        if (game.getInvolved_companies() == null) {
-            companyPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-            companyPanel.add(companyLabel("There isn't any company."));
-        } else {
+        JTextPane companyText = new JTextPane();
+        companyText.setForeground(Color.white);
+        companyText.setOpaque(false);
+        companyText.setFont(new Font("sans-serif", 1, 15));
+        companyText.setText("There isn't any company.");
+        companyText.setEditable(false);
+        StyledDocument doc2 = companyText.getStyledDocument();
+        SimpleAttributeSet center2 = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center2, StyleConstants.ALIGN_CENTER);
+        doc2.setParagraphAttributes(0, doc2.getLength(), center2, false); 
+        if (game.getInvolved_companies() != null){
+        	Boolean first = true;
             for (int i = 0; game.getInvolved_companies() != null && !game.getInvolved_companies().isEmpty() && i < game.getInvolved_companies().size(); i++) {
-                companyPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-                companyPanel.add(companyLabel(game.getInvolved_companies().get(i)));
+            	if(first) {
+            		companyText.setText(game.getInvolved_companies().get(i));
+            		first = false;
+            	}
+            	else {
+            		String s = "\n" + game.getInvolved_companies().get(i);
+                	try {
+						companyText.getStyledDocument().insertString(companyText.getStyledDocument().getLength(),s, null);
+					} catch (BadLocationException e) {
+						e.printStackTrace();
+					}
+            	}
             }
         }
+        JScrollPane companyScroll = new JScrollPane(companyText);
+        companyScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        companyScroll.setOpaque(false);
+        companyScroll.getViewport().setOpaque(false);
+        companyScroll.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 12));
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+            	companyScroll.getVerticalScrollBar().setValue(0);
+            }
+        });
+        companyPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        companyPanel.add(companyScroll);
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+            	companyScroll.getViewport().setViewPosition(new Point(0, 0));
+            }
+        });
+
 
         gbc.gridx = 1;
         gbc.gridy = 2;
@@ -285,6 +323,7 @@ public class ViewShowOne extends JFrame implements IView {
         JTextArea descText = new JTextArea("There isn't any description.");
         descText.setAlignmentX(CENTER_ALIGNMENT);
         descText.setForeground(Color.white);
+        descText.setEditable(false);
         descText.setOpaque(false);
         descText.setFont(new Font("sans-serif", 1, 14));
         descText.setLineWrap(true);
@@ -324,14 +363,6 @@ public class ViewShowOne extends JFrame implements IView {
 
         this.pack();
         return midPanel;
-    }
-
-    private JLabel companyLabel(String company) {
-        JLabel comp = new JLabel(company);
-        comp.setAlignmentX(CENTER_ALIGNMENT);
-        comp.setForeground(Color.white);
-        comp.setFont(new Font("sans-serif", 1, 15));
-        return comp;
     }
 
     private JLabel categoryLabel(String category) {
