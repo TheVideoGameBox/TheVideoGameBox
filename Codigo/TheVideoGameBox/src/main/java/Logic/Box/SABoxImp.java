@@ -77,6 +77,6 @@ public class SABoxImp implements SABox {
 
 	@Override
 	public TBox showBox(ObjectId _id) {
-		return DAOAbstractFactory.getInstance().createDAOBox().searchOne(_id);
+		return DAOAbstractFactory.getInstance().createDAOBox().showBox(_id);
 	}
 }

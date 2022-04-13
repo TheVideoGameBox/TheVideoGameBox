@@ -94,7 +94,7 @@ public class DAOBoxImp implements DAOBox {
 	}
 
 	@Override
-	public TBox searchOne(ObjectId _id) {
+	public TBox showBox(ObjectId _id) {
 		Box box = null;
 		try {
 			MongoDatabase db = Connection.getInstance().getConnection();

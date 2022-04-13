@@ -6,6 +6,7 @@ import Presentation.Controller.Event;
 import Presentation.View.Box.ViewCreateBox;
 import Presentation.View.Box.ViewListGamesBox;
 import Presentation.View.Box.ViewSearchBoxesByName;
+import Presentation.View.Box.ViewShowBox;
 import Presentation.View.Game.ViewSearchGamesByName;
 import Presentation.View.Game.ViewShowOne;
 import Presentation.View.Main.ViewMain;
@@ -38,6 +39,9 @@ public class ViewFactory extends ViewAbstractFactory {
 				break;
 			case Event.LIST_GAMES_OF_BOX:
 				view = new ViewListGamesBox((TBox) context.getData());
+				break;
+			case Event.RES_SHOW_BOX_OK:
+				view = new ViewShowBox();
 				break;
 //			case Event.ADD_GAME_TO_BOX:
 //				view = new ViewAddGameToBox();

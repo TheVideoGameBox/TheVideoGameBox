@@ -11,5 +11,5 @@ public interface DAOBox {
 	public List<ObjectId> listGames(TBox box);
 	public void deleteFromDatabase(ObjectId id);
 	public List<TBox> searchAllByName(String name);
-	public TBox searchOne(ObjectId id);
+	public TBox showBox(ObjectId id);
 }
