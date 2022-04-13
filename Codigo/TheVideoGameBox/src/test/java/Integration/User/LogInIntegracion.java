@@ -1,4 +1,4 @@
-package Unit.User;
+package Integration.User;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
