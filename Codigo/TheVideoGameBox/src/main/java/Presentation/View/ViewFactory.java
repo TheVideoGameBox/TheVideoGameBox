@@ -1,6 +1,7 @@
 package Presentation.View;
 
 import Logic.Box.TBox;
+import Logic.Game.TGame;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 import Presentation.View.Box.ViewCreateBox;
@@ -10,6 +11,8 @@ import Presentation.View.Game.ViewSearchGamesByName;
 import Presentation.View.Game.ViewShowOne;
 import Presentation.View.Main.ViewMain;
 import Presentation.View.User.ViewRegister;
+
+import java.util.List;
 
 public class ViewFactory extends ViewAbstractFactory {
 
@@ -45,7 +48,6 @@ public class ViewFactory extends ViewAbstractFactory {
 			default:
 				break;
 		}
-
 		return view;
     }
 }

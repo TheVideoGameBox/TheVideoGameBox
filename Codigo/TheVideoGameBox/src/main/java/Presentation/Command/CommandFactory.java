@@ -2,6 +2,7 @@ package Presentation.Command;
 
 import Presentation.Command.Box.CommandCreateBox;
 import Presentation.Command.Box.CommandSearchAllBoxesByName;
+import Presentation.Command.Game.CommandRandomGames;
 import Presentation.Command.Game.CommandSearchAllByName;
 import Presentation.Command.Game.CommandSearchOne;
 import Presentation.Command.User.CommandCreateUser;
@@ -27,11 +28,12 @@ public class CommandFactory extends CommandAbstractFactory{
             case Event.CREATE_USER:
             	command = new CommandCreateUser();
             	break;
+            case Event.RANDOM_GAMES:
+                command = new CommandRandomGames();
+                break;
             default:
-                command = null;
                 break;
         }
-
         return command;
     }
 }

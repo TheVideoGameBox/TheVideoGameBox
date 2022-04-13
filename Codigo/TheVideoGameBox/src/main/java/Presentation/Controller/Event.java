@@ -14,6 +14,9 @@ public class Event {
     public static final int SEARCH_ONE = 103;
     public static final int RES_SEARCH_ONE_OK = 104;
     public static final int RES_SEARCH_ONE_KO = 105;
+    public static final int RANDOM_GAMES = 106;
+    public static final int RES_RANDOM_GAMES_OK = 107;
+    public static final int RES_RANDOM_GAMES_KO = 108;
 
 
 

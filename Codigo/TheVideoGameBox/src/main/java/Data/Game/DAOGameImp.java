@@ -51,4 +51,18 @@ public class DAOGameImp implements DAOGame {
 		}
     	return game.toTransfer();
     }
+
+    @Override
+    public List<TGame> random() {
+        List<TGame> result = new ArrayList<>();
+        try {
+            MongoDatabase db = Connection.getInstance().getConnection();
+            FindIterable<Game> iter = db.getCollection("games", Game.class).find().limit(3);
+            for(Game game : iter)
+                result.add(game.toTransfer());
+        } catch (MongoException e) {
+            result = null;
+        }
+        return result;
+    }
 }

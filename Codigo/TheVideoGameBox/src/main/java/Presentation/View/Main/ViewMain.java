@@ -18,12 +18,10 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import javax.imageio.ImageIO;
+import javax.naming.ldap.ControlFactory;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -47,6 +45,9 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import Logic.Game.TGame;
+import Logic.SAAbstractFactory;
+import Presentation.Command.CommandAbstractFactory;
+import Presentation.Command.CommandFactory;
 import Presentation.Controller.ApplicationController;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
@@ -58,6 +59,7 @@ public class ViewMain extends JFrame implements IView{
 
 	private static int logged;
 	private boolean desplegado;
+	private List<TGame> listRandom = new ArrayList<>();
 
 	public ViewMain() {
 		super();
@@ -76,11 +78,15 @@ public class ViewMain extends JFrame implements IView{
 		else if(context.getEvent() == Event.RES_SEARCH_ALL_BOXES_BY_NAME_KO) {
 			JOptionPane.showMessageDialog(null, "There isn't any box with that name");
 		}
+		else if(context.getEvent() == Event.RES_RANDOM_GAMES_OK) {
+			listRandom = (List<TGame>) context.getData();
+		}
 
 		refreshView();
 	}
 
 	public void initGUI() {
+		ApplicationController.getInstance().action(new Context(Event.RANDOM_GAMES, null));
 		
 		Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
 		this.setIconImage(iconFrame);
@@ -644,7 +650,14 @@ public class ViewMain extends JFrame implements IView{
 		randomPanel.add(panel1);
 		
 		//Falta funcion para coger 3 juegos randoms
-		
+
+		//ist<TGame> randomGames = new ArrayList<>();
+		//randomGames = SAAbstractFactory.getInstance().createSAGame().random();
+
+		for(TGame g : listRandom) {
+			panel1.add(gamePanel(g));
+		}
+
 		/*List<TGame> games = new ArrayList<TGame>();
 		List<String> dev = new ArrayList<String>();
 		dev.add("deve1"); dev.add("deve2");
@@ -694,7 +707,7 @@ public class ViewMain extends JFrame implements IView{
 			}
 		}
 		else {
-			coverLabel.setIcon(new ImageIcon((getClass().getClassLoader().getResource("No_Image_big.png"))));
+			coverLabel.setIcon(new ImageIcon((Objects.requireNonNull(getClass().getClassLoader().getResource("No_Image_big.png")))));
 		}
 		
 		JPanel namePanel = new JPanel();
