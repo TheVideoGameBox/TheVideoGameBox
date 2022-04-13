@@ -81,7 +81,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		headerContainer.add(Box.createRigidArea(new Dimension(130, 0)));
 
 		// ICONO DE MENU
-		Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80), false);
+		Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
 		icon.buttonIcon();
 		icon.setToolTipText("Back to main window");
 		icon.setAlignmentX(CENTER_ALIGNMENT);
@@ -92,8 +92,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-				setVisible(false
-				);
+				setVisible(false);
 			}
 		});
 

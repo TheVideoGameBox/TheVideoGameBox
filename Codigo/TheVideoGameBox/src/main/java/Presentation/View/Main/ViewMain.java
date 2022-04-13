@@ -1,53 +1,7 @@
 package Presentation.View.Main;
 
-import static Presentation.View.Utils.Images.backGround;
-import static Presentation.View.Utils.Images.logo;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GraphicsEnvironment;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.*;
-
-import javax.imageio.ImageIO;
-import javax.naming.ldap.ControlFactory;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextPane;
-import javax.swing.KeyStroke;
-import javax.swing.border.EmptyBorder;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-
 import Logic.Game.TGame;
 import Logic.SAAbstractFactory;
-import Presentation.Command.CommandAbstractFactory;
-import Presentation.Command.CommandFactory;
 import Presentation.Controller.ApplicationController;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
@@ -55,30 +9,59 @@ import Presentation.View.IView;
 import Presentation.View.Utils.Button;
 import Presentation.View.Utils.TextField;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.List;
+
+import static Presentation.View.Utils.Images.backGround;
+import static Presentation.View.Utils.Images.logo;
+
 public class ViewMain extends JFrame implements IView{
 
 	private static int logged;
 	private boolean desplegado;
+	private List<TGame> listRandom = new ArrayList<>();
+	private boolean hideView;		//Para poder controlar si la vista se ve o no desde el update
 
 	public ViewMain() {
 		super();
 		logged = 4;
 		desplegado = true;
+		hideView = true;
 		initGUI();
+		refreshView();
 	}
 	
 	@Override
 	public void update(Context context) {
 		ApplicationController.getInstance().clearViewStack();
 
-		if(context.getEvent() == Event.RES_SEARCH_ALL_BY_NAME_KO) {
+		if(context.getEvent() == Event.RES_SEARCH_ALL_BY_NAME_KO){
 			JOptionPane.showMessageDialog(null, "There isn't any game with that name");
+			hideView = false;
 		}
-		else if(context.getEvent() == Event.RES_SEARCH_ALL_BOXES_BY_NAME_KO) {
+		else if(context.getEvent() == Event.RES_SEARCH_ALL_BOXES_BY_NAME_KO){
 			JOptionPane.showMessageDialog(null, "There isn't any box with that name");
+			hideView = false;
 		}
-
-		refreshView();
+		else if(context.getEvent() == Event.RES_RANDOM_GAMES_OK) {
+			listRandom = (List<TGame>) context.getData();
+			refreshView();
+		}
+		else if(context.getEvent() == Event.BACK)
+			refreshView();
 	}
 
 	public void initGUI() {
@@ -100,10 +83,6 @@ public class ViewMain extends JFrame implements IView{
 		
 		mainpanel.add(topPanel, BorderLayout.WEST);
 		mainpanel.add(midPanel, BorderLayout.CENTER);
-
-		this.pack();
-		this.setResizable(true);
-		this.setVisible(true);
 	}
 
 
@@ -134,7 +113,7 @@ public class ViewMain extends JFrame implements IView{
 		
 		//BOTON DESPEGABLE
 		
-		Button despleg = new Button(null, "desplegable_icon.png", Color.white, new Color(62, 80, 90), new Dimension(50, 50), false);
+		Button despleg = new Button(null, "desplegable_icon.png", Color.white, new Color(62, 80, 90), new Dimension(50, 50));
 		despleg.buttonIcon();
 		despleg.setBorder(BorderFactory.createBevelBorder(0));
 		despleg.setToolTipText("Desplegar el menu");
@@ -172,7 +151,7 @@ public class ViewMain extends JFrame implements IView{
 		
 		//LOGUEO DEL USUARIO
 		
-		Button logIn = new Button(null, "user_icon.png", Color.white, new Color(62, 80, 90), new Dimension(50, 50), false);
+		Button logIn = new Button(null, "user_icon.png", Color.white, new Color(62, 80, 90), new Dimension(50, 50));
 		logIn.buttonIcon();
 		despleg.setBorder(BorderFactory.createBevelBorder(0));
 		logIn.addActionListener(new ActionListener() {
@@ -194,7 +173,7 @@ public class ViewMain extends JFrame implements IView{
 		
 		//REGISTRO DEL USUARIO
 		
-		Button registry = new Button(null, "register_icon.png", Color.white, new Color(62, 80, 90), new Dimension(50, 50), false);
+		Button registry = new Button(null, "register_icon.png", Color.white, new Color(62, 80, 90), new Dimension(50, 50));
 		registry.buttonIcon();
 		registry.setBorder(BorderFactory.createBevelBorder(0));
 		registry.addActionListener(new ActionListener() {
@@ -211,7 +190,7 @@ public class ViewMain extends JFrame implements IView{
 		
 		//CIERRE DE SESION DEL USUARIO
 		
-		Button logout = new Button(null, "logout_icon.png", Color.white, new Color(252, 147, 3), new Dimension(50, 50), false);
+		Button logout = new Button(null, "logout_icon.png", Color.white, new Color(252, 147, 3), new Dimension(50, 50));
 		logout.buttonIcon();
 		logout.setBorder(BorderFactory.createBevelBorder(0));
 		logout.setVisible(false);
@@ -318,7 +297,10 @@ public class ViewMain extends JFrame implements IView{
 				if(search.length() <= 50 && search.length() > 0) {
 					textGame.setText(null);
 					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BY_NAME, search));
-					setVisible(false);
+					if(hideView)
+						setVisible(false);
+
+					hideView = true;
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Too many characters");
@@ -342,7 +324,10 @@ public class ViewMain extends JFrame implements IView{
 				if(search.length() <= 50 && search.length() > 0) {
 					textGame.setText(null);
 					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BY_NAME, search));
-					setVisible(false);
+					if(hideView)
+						setVisible(false);
+
+					hideView = true;
 				}
 				else if(search.length() > 50) {
 					JOptionPane.showMessageDialog(null, "Too many characters");
@@ -423,7 +408,10 @@ public class ViewMain extends JFrame implements IView{
 				if(search.length() <= 50 && search.length() > 0) {
 					textBox.setText(null);
 					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BOXES_BY_NAME, search));
-					setVisible(false);
+					if(hideView)
+						setVisible(false);
+
+					hideView = true;
 				}
 				else if(search.length() > 50) {
 					JOptionPane.showMessageDialog(null, "Too many characters");
@@ -449,8 +437,11 @@ public class ViewMain extends JFrame implements IView{
 				String search = textBox.getText();
 				if(search.length() <= 50 && search.length() > 0) {
 					textBox.setText(null);
-					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BOXES_BY_NAME, search));		//CAMBIAR EL EVENTO CUANDO ESTE HECHA LA VISTA
-					setVisible(false);
+					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BOXES_BY_NAME, search));        //CAMBIAR EL EVENTO CUANDO ESTE HECHA LA VISTA
+					if(hideView)
+						setVisible(false);
+
+					hideView = true;
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "There is no Boxes with that name");
@@ -651,7 +642,7 @@ public class ViewMain extends JFrame implements IView{
 		for(TGame g : randomGames) {
 			panel1.add(gamePanel(g));
 		}
-		
+
 		midpanel.add(topPanel);
 		midpanel.add(Box.createRigidArea(new Dimension(0,20)));
 		midpanel.add(randomPanel);
@@ -710,8 +701,8 @@ public class ViewMain extends JFrame implements IView{
 	}
 	
 	private void refreshView(){
+		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
-
 }

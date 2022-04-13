@@ -11,9 +11,7 @@ import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
 import Presentation.View.Utils.Button;
 import Presentation.View.Utils.TextField;
-
 import org.apache.commons.lang3.tuple.Pair;
-import org.bson.types.ObjectId;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -35,16 +33,17 @@ public class ViewListGamesBox extends JFrame implements IView {
     private TBox tBox;
     private JPanel contentContainer;
 
-    public ViewListGamesBox(TBox tBox) {
+    public ViewListGamesBox(Pair<TBox, List<TGame>> pair) {
         setTitle("List of Games");
-        this.tBox = tBox;
+        this.tBox = pair.getLeft();
+        this.games = pair.getRight();
         init_GUI();
         refreshView();
     }
 
     @Override
     public void update(Context context) {
-
+        refreshView();
     }
 
     public void init_GUI() {
@@ -93,7 +92,7 @@ public class ViewListGamesBox extends JFrame implements IView {
         headerContainer.add(Box.createRigidArea(new Dimension(100, 0)));
 
         // ICONO DE MENU
-        Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80), false);
+        Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
 		icon.buttonIcon();
 		icon.setToolTipText("Back to main window");
 		icon.setAlignmentX(CENTER_ALIGNMENT);
@@ -231,19 +230,26 @@ public class ViewListGamesBox extends JFrame implements IView {
     }
 
     private void refreshView(){
-        if(tBox.getGameList() != null) {
-            for (ObjectId gameId : tBox.getGameList()) {
+        JPanel panel = new JPanel();
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setAlignmentX(CENTER_ALIGNMENT);
+        panel.setOpaque(false);
+
+        if(games != null && !games.isEmpty()) {
+            for (TGame game : games) {
                 try {
-                    TGame game = SAAbstractFactory.getInstance().createSAGame().searchOne(gameId);
-                    contentContainer.add(gamePanel(game));
+                    panel.add(gamePanel(game));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
-                contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+                panel.add(Box.createRigidArea(new Dimension(0, 10)));
             }
         }
 
-        this.pack();
+        contentContainer.add(panel);
+
+        pack();
         setLocationRelativeTo(null);
         setVisible(true);
     }

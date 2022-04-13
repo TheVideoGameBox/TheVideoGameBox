@@ -34,8 +34,9 @@ public class ViewSearchGamesByName extends JFrame implements IView {
         if (context.getEvent() == Event.RES_SEARCH_ALL_BY_NAME_OK) {
             this.games = (List<TGame>) context.getData();
             init_GUI();
-            refreshView();
         }
+
+        refreshView();
     }
 
     private void init_GUI() {
@@ -101,7 +102,7 @@ public class ViewSearchGamesByName extends JFrame implements IView {
         headerContainer.add(Box.createRigidArea(new Dimension(130, 0)));
 
         // ICONO DE MENU
-        Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80), false);
+        Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
         icon.buttonIcon();
         icon.setToolTipText("Back to main window");
         icon.setAlignmentX(CENTER_ALIGNMENT);

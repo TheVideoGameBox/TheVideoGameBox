@@ -86,7 +86,7 @@ public class ViewShowOne extends JFrame implements IView {
         });
 
         //ICONO DE LA APLICACION
-        Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80), false);
+        Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
         icon.buttonIcon();
         icon.setToolTipText("Back to main window");
         icon.addActionListener(new ActionListener() {
