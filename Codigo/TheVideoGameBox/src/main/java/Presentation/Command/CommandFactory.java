@@ -35,6 +35,7 @@ public class CommandFactory extends CommandAbstractFactory{
                 break;
             case Event.RANDOM_GAMES:
                 command = new CommandRandomGames();
+                break;
             case Event.LOGIN_USER:
                 command = new CommandLogIn();
                 break;

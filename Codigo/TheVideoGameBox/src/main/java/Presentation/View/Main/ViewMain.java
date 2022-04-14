@@ -8,6 +8,7 @@ import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Utils.Button;
 import Presentation.View.Utils.TextField;
+import org.bson.types.ObjectId;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,44 +17,17 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.List;
+import java.util.Objects;
 
 import static Presentation.View.Utils.Images.backGround;
 import static Presentation.View.Utils.Images.logo;
-import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import Logic.Game.TGame;
-import Presentation.Controller.ApplicationController;
-import Presentation.Controller.Context;
-import Presentation.Controller.Event;
-import Presentation.View.IView;
-import Presentation.View.Utils.Button;
-import Presentation.View.Utils.TextField;
-import org.bson.types.ObjectId;
 
 public class ViewMain extends JFrame implements IView{
 
