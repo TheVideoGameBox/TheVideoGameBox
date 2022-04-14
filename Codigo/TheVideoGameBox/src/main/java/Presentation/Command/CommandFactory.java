@@ -7,6 +7,7 @@ import Presentation.Command.Game.CommandRandomGames;
 import Presentation.Command.Game.CommandSearchAllByName;
 import Presentation.Command.Game.CommandSearchOne;
 import Presentation.Command.User.CommandCreateUser;
+import Presentation.Command.User.CommandLogIn;
 import Presentation.Controller.Event;
 
 public class CommandFactory extends CommandAbstractFactory{
@@ -34,6 +35,8 @@ public class CommandFactory extends CommandAbstractFactory{
                 break;
             case Event.RANDOM_GAMES:
                 command = new CommandRandomGames();
+            case Event.LOGIN_USER:
+                command = new CommandLogIn();
                 break;
             default:
                 break;

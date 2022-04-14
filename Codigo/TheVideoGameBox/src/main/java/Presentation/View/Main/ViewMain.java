@@ -16,6 +16,12 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -27,17 +33,39 @@ import java.util.List;
 
 import static Presentation.View.Utils.Images.backGround;
 import static Presentation.View.Utils.Images.logo;
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import Logic.Game.TGame;
+import Presentation.Controller.ApplicationController;
+import Presentation.Controller.Context;
+import Presentation.Controller.Event;
+import Presentation.View.IView;
+import Presentation.View.Utils.Button;
+import Presentation.View.Utils.TextField;
+import org.bson.types.ObjectId;
 
 public class ViewMain extends JFrame implements IView{
 
-	private static int logged;
+	public static boolean logged;
+	public static ObjectId id_logged;
 	private boolean desplegado;
 	private List<TGame> listRandom = new ArrayList<>();
 	private boolean hideView;		//Para poder controlar si la vista se ve o no desde el update
 
 	public ViewMain() {
 		super();
-		logged = 4;
+		logged = false;
 		desplegado = true;
 		hideView = true;
 		initGUI();
@@ -157,13 +185,8 @@ public class ViewMain extends JFrame implements IView{
 		logIn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					logged = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your user name:", "Access to the user aplication", JOptionPane.YES_NO_CANCEL_OPTION));
-					//Se metería a la vista de una vez estás conectado
-					
-				}catch(Exception e1) {
-					JOptionPane.showMessageDialog(null, "Invalid data entered","Connection error", JOptionPane.NO_OPTION);;
-				}
+				ApplicationController.getInstance().action(new Context(Event.VIEW_LOGIN, null));
+				setVisible(false);
 			}
 		});
 		logIn.setBorder(BorderFactory.createBevelBorder(0));
@@ -204,14 +227,14 @@ public class ViewMain extends JFrame implements IView{
 				game.setVisible(false);
 				box.setVisible(false);
 				user.setVisible(false);
-				logged = 0;
+				logged = false;
 			}
 
 		});
 		logout.setBorder(BorderFactory.createBevelBorder(0));
 		logout.setToolTipText("Log out");
 		//En función de si esta logueado se ve visible o no
-		/*if (logged==4) {
+		if (logged) {
 			logIn.setVisible(false);
 			registry.setVisible(false);
 			logout.setVisible(true);
@@ -219,14 +242,14 @@ public class ViewMain extends JFrame implements IView{
 			box.setVisible(true);
 			user.setVisible(true);
 		}
-		else {
+		else {							//Cambios para probar que funciona... Deben adaptarse a los criterios de PO
 			logIn.setVisible(true);
 			registry.setVisible(true);
 			logout.setVisible(false);
-			game.setVisible(false);
-			box.setVisible(false);
-			user.setVisible(false);
-		}*/
+			game.setVisible(true);
+			box.setVisible(true);
+			user.setVisible(true);
+		}
 		
 		top.add(logout);
 		

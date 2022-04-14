@@ -17,6 +17,11 @@ public class TUser {
         this.password = password;
     }
 
+    public TUser(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
     public TUser(ObjectId id, String email, String username, String password) {
         this.id = id;
         this.email = email;
