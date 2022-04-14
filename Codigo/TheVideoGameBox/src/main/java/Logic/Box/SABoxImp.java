@@ -54,6 +54,12 @@ public class SABoxImp implements SABox {
     public void deleteFromDatabase(ObjectId id){
         DAOAbstractFactory.getInstance().createDAOBox().deleteFromDatabase(id);
     }
+    
+    @Override
+	public ObjectId deleteGame(ObjectId idBox, ObjectId gameId) {
+		DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+		return daoBox.deleteGame(idBox, gameId);
+	}
 
 	private boolean correctPrivacy(boolean privacy) {
 		return !Objects.isNull(privacy);
