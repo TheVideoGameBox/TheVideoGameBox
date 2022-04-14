@@ -40,5 +40,8 @@ public class Event {
     public static final int SEARCH_ALL_BOXES_BY_NAME = 510;
     public static final int RES_SEARCH_ALL_BOXES_BY_NAME_OK= 511;
     public static final int RES_SEARCH_ALL_BOXES_BY_NAME_KO= 512;
+    public static final int MODIFY_BOX = 513;
+    public static final int RES_MODIFY_BOX_OK = 514;
+    public static final int RES_MODIFY_BOX_KO = 515;
 
 }

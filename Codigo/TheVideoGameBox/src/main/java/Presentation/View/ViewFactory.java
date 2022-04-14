@@ -5,6 +5,7 @@ import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 import Presentation.View.Box.ViewCreateBox;
 import Presentation.View.Box.ViewListGamesBox;
+import Presentation.View.Box.ViewModifyBox;
 import Presentation.View.Box.ViewSearchBoxesByName;
 import Presentation.View.Game.ViewSearchGamesByName;
 import Presentation.View.Game.ViewShowOne;
@@ -42,6 +43,9 @@ public class ViewFactory extends ViewAbstractFactory {
 //			case Event.ADD_GAME_TO_BOX:
 //				view = new ViewAddGameToBox();
 //				break;
+			case Event.MODIFY_BOX:
+				view = new ViewModifyBox((TBox) context.getData());
+				break;
 			default:
 				break;
 		}
