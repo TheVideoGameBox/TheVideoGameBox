@@ -12,6 +12,7 @@ import Presentation.View.Main.JPanelRound;
 import Presentation.View.Utils.Button;
 import Presentation.View.Utils.TextField;
 
+import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bson.types.ObjectId;
 
@@ -36,7 +37,7 @@ public class ViewListGamesBox extends JFrame implements IView {
     private JPanel contentContainer;
 
     public ViewListGamesBox(TBox tBox) {
-        setTitle("List of Games");
+        setTitle("List of Games: " + tBox.getName());
         this.tBox = tBox;
         init_GUI();
         refreshView();
@@ -44,7 +45,9 @@ public class ViewListGamesBox extends JFrame implements IView {
 
     @Override
     public void update(Context context) {
-
+        if (context.getEvent() == Event.RES_DELETE_GAME_FROM_BOX_OK) {
+            ApplicationController.getInstance().action(new Context(Event.LIST_GAMES_OF_BOX, this.tBox));
+        }
     }
 
     public void init_GUI() {
@@ -84,11 +87,11 @@ public class ViewListGamesBox extends JFrame implements IView {
         headerContainer.add(Box.createRigidArea(new Dimension(60, 0)));
 
         // TITLE
-        JLabel title = new JLabel("Games of Box: ");
+        JLabel title = new JLabel("Games of Box: " + tBox.getName());
         title.setFont(new Font(title.getFont().getName(), Font.PLAIN, 25));
         title.setAlignmentX(CENTER_ALIGNMENT);
         title.setForeground(Color.white);
-        title.setFont(new Font("sans-serif", 1, 20));
+        title.setFont(new Font("sans-serif", Font.BOLD, 20));
         headerContainer.add(title);
         headerContainer.add(Box.createRigidArea(new Dimension(100, 0)));
 
@@ -103,7 +106,6 @@ public class ViewListGamesBox extends JFrame implements IView {
         icon.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 ApplicationController.getInstance().action(new Context(Event.VIEW, null));
                 setVisible(false);
             }
@@ -197,7 +199,7 @@ public class ViewListGamesBox extends JFrame implements IView {
             cover = new JLabel(new ImageIcon(image));
         }
         else {
-            cover.setIcon(new ImageIcon((getClass().getClassLoader().getResource("no_image.png"))));
+            cover.setIcon(new ImageIcon((Objects.requireNonNull(getClass().getClassLoader().getResource("no_image.png")))));
         }
 
         // CONSTRUIR NAMEPANEL
@@ -220,12 +222,29 @@ public class ViewListGamesBox extends JFrame implements IView {
                 setVisible(false);
             }
         });
-        buttonPanel.add(viewInfo, BorderLayout.CENTER);
+        buttonPanel.add(viewInfo);
+
+        JPanel deletePanel = new JPanel(new BorderLayout());
+        deletePanel.setOpaque(false);
+        Button deleteButton = new Button(null, "delete_icon.png", new Dimension(60, 45), Color.orange);
+        deleteButton.buttonIcon();
+        deleteButton.setBorderPainted(false);
+        deleteButton.setContentAreaFilled(false);
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Pair<ObjectId, ObjectId> aux = new MutablePair<>(tBox.getId(), game.getId());
+                ApplicationController.getInstance().action(new Context(Event.DELETE_GAME_FROM_BOX, aux));
+                setVisible(false);
+            }
+        });
+        deletePanel.add(deleteButton);
 
         //CONSTRUIR PANEL
 
         panel.add(namePanel, BorderLayout.WEST);
-        panel.add(buttonPanel, BorderLayout.EAST);
+        panel.add(buttonPanel, BorderLayout.CENTER);
+        panel.add(deletePanel, BorderLayout.EAST);
 
         return panel;
     }

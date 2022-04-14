@@ -53,8 +53,6 @@ public class DAOBoxImp implements DAOBox {
 		}
 		return idGame;
 	}
-	
-	
 
 	@Override
 	public ObjectId deleteGame(ObjectId idBox, ObjectId idGame) {

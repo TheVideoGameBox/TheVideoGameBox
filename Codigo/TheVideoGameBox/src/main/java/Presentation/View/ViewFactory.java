@@ -10,6 +10,7 @@ import Presentation.View.Game.ViewSearchGamesByName;
 import Presentation.View.Game.ViewShowOne;
 import Presentation.View.Main.ViewMain;
 import Presentation.View.User.ViewRegister;
+import org.bson.types.ObjectId;
 
 public class ViewFactory extends ViewAbstractFactory {
 
@@ -37,9 +38,10 @@ public class ViewFactory extends ViewAbstractFactory {
 				view = new ViewSearchBoxesByName();
 				break;
 			case Event.LIST_GAMES_OF_BOX:
+			case Event.RES_DELETE_GAME_FROM_BOX_OK:
 				view = new ViewListGamesBox((TBox) context.getData());
 				break;
-//			case Event.ADD_GAME_TO_BOX:
+			//			case Event.ADD_GAME_TO_BOX:
 //				view = new ViewAddGameToBox();
 //				break;
 			default:

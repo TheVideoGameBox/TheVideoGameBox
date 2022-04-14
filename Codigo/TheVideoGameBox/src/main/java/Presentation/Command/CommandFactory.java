@@ -30,6 +30,7 @@ public class CommandFactory extends CommandAbstractFactory{
             	break;
             case Event.DELETE_GAME_FROM_BOX:
             	command = new CommandDeleteGame();
+                break;
             default:
                 command = null;
                 break;
