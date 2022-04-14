@@ -8,6 +8,8 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Updates;
+
+import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
@@ -47,6 +49,25 @@ public class DAOBoxImp implements DAOBox {
 			gameList.add(idGame);
 			db.getCollection("boxes", Box.class).updateOne(eq("_id", idBox), Updates.set("gameList", gameList));
 		} catch (MongoException e) {
+			return null;
+		}
+		return idGame;
+	}
+	
+	
+
+	@Override
+	public ObjectId deleteGame(ObjectId idBox, ObjectId idGame) {
+		List<ObjectId> gameList = new ArrayList<>();
+		try {
+			MongoDatabase db = Connection.getInstance().getConnection();
+			Box box = db.getCollection("boxes", Box.class).find(eq("_id",idBox)).first();
+			if(box.getGameList() !=null) 
+				gameList = box.getGameList();
+			gameList.remove(idGame);
+			db.getCollection("boxes", Box.class).updateOne(eq("_id", idBox), Updates.set("gameList", gameList));
+		}
+		catch(MongoException e) {
 			return null;
 		}
 		return idGame;
