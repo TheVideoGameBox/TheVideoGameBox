@@ -129,4 +129,4 @@ for n in num:
 
 dataBase = pd.concat([data1, data2, data3, data4, data5, data6])
 
-dataBase.to_json("games.json", orient='index')
+dataBase.to_json("games1.json", orient='index')
