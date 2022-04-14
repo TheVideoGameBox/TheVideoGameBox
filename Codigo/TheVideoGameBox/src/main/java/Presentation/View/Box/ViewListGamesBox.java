@@ -38,7 +38,6 @@ public class ViewListGamesBox extends JFrame implements IView {
         this.tBox = pair.getLeft();
         this.games = pair.getRight();
         init_GUI();
-        refreshView();
     }
 
     @Override
@@ -118,7 +117,6 @@ public class ViewListGamesBox extends JFrame implements IView {
         icon.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 ApplicationController.getInstance().action(new Context(Event.VIEW, null));
                 setVisible(false);
             }
@@ -150,6 +148,7 @@ public class ViewListGamesBox extends JFrame implements IView {
                             return null;
                         }
                     };
+                    textName.setText(null);
                     ApplicationController.getInstance().action(new Context(Event.ADD_GAME_TO_BOX, aux));
                     setVisible(false);
                 }
@@ -178,6 +177,29 @@ public class ViewListGamesBox extends JFrame implements IView {
         contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
         contentContainer.add(helpPanel);
         contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        JPanel panel = new JPanel();
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setAlignmentX(CENTER_ALIGNMENT);
+        panel.setOpaque(false);
+
+        if(games != null && !games.isEmpty()) {
+            for (TGame game : games) {
+                try {
+                    panel.add(gamePanel(game));
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                panel.add(Box.createRigidArea(new Dimension(0, 10)));
+            }
+        }
+
+        contentContainer.add(panel);
+
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     private JPanelRound gamePanel(TGame game) throws IOException {
@@ -246,6 +268,8 @@ public class ViewListGamesBox extends JFrame implements IView {
     }
 
     private void refreshView(){
+        contentContainer.remove(contentContainer.getComponentCount() - 1);
+
         JPanel panel = new JPanel();
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));

@@ -30,8 +30,9 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		if(context.getEvent() == Event.RES_SEARCH_ALL_BOXES_BY_NAME_OK){
 			this.boxes = (List<TBox>) context.getData();
 			init_GUI();
-			refreshView();
 		}
+
+		refreshView();
 	}
 	
 	private void init_GUI() {
