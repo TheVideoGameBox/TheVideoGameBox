@@ -130,17 +130,17 @@ public class ViewShowBox extends JFrame implements IView {
         // Nombre de la box.
         JPanel namePanel = new JPanel();
         namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.Y_AXIS));
+        namePanel.setPreferredSize(new Dimension(500, 40));
+        namePanel.setMaximumSize(new Dimension(500, 40));
+        namePanel.setMinimumSize(new Dimension(500, 40));
         namePanel.setOpaque(false);
         namePanel.setBorder(new EmptyBorder(0, 10, 7, 10));
         namePanel.setAlignmentX(CENTER_ALIGNMENT);
 
-        JTextArea nameTitle = new JTextArea(box.getName());
+        JLabel nameTitle = new JLabel(box.getName());
+        nameTitle.setAlignmentX(LEFT_ALIGNMENT);
         nameTitle.setForeground(Color.white);
-        nameTitle.setOpaque(false);
-        nameTitle.setFont(new Font("sans-serif", 1, 28));
-        nameTitle.setLineWrap(true);
-        nameTitle.setWrapStyleWord(true);
-        nameTitle.setAlignmentX(CENTER_ALIGNMENT);
+        nameTitle.setFont(new Font("sans-serif", 1, 25));
 
         namePanel.add(nameTitle);
         
@@ -149,6 +149,9 @@ public class ViewShowBox extends JFrame implements IView {
         // Privacidad de la box.
         JPanel privacyPanel = new JPanel();
         privacyPanel.setLayout(new BoxLayout(privacyPanel, BoxLayout.Y_AXIS));
+        privacyPanel.setPreferredSize(new Dimension(500, 80));
+        privacyPanel.setMaximumSize(new Dimension(500, 80));
+        privacyPanel.setMinimumSize(new Dimension(500, 80));
         privacyPanel.setOpaque(false);
         privacyPanel.setBorder(new EmptyBorder(0, 10, 7, 10));
         privacyPanel.setAlignmentX(CENTER_ALIGNMENT);
@@ -157,13 +160,12 @@ public class ViewShowBox extends JFrame implements IView {
         privacyTitle.setAlignmentX(LEFT_ALIGNMENT);
         privacyTitle.setForeground(Color.white);
         privacyTitle.setFont(new Font("sans-serif", 1, 25));
-        JTextArea privacyText = new JTextArea("There isn't any privacy info.");
+        
+        JLabel privacyText = new JLabel("There isn't any privacy info.");
         privacyText.setAlignmentX(LEFT_ALIGNMENT);
         privacyText.setForeground(Color.white);
         privacyText.setOpaque(false);
         privacyText.setFont(new Font("sans-serif", 1, 14));
-        privacyText.setLineWrap(true);
-        privacyText.setWrapStyleWord(true);
         if (box.getPrivacy() != null) {
         	privacyText.setText(box.getPrivacy().toString());
         }
@@ -222,6 +224,7 @@ public class ViewShowBox extends JFrame implements IView {
         descText.setFont(new Font("sans-serif", 1, 14));
         descText.setLineWrap(true);
         descText.setWrapStyleWord(true);
+        descText.setEditable(false);
         if (box.getDescription() != null) {
             descText.setText(box.getDescription());
         }
