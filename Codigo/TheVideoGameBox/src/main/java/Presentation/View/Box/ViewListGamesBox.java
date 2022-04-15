@@ -11,7 +11,9 @@ import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
 import Presentation.View.Utils.Button;
 import Presentation.View.Utils.TextField;
+import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.bson.types.ObjectId;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -271,6 +273,7 @@ public class ViewListGamesBox extends JFrame implements IView {
                 Pair<ObjectId, ObjectId> aux = new MutablePair<>(tBox.getId(), game.getId());
                 ApplicationController.getInstance().action(new Context(Event.DELETE_GAME_FROM_BOX, aux));
                 setVisible(false);
+                ApplicationController.getInstance().action(new Context(Event.LIST_GAMES_OF_BOX, tBox));
             }
         });
         deletePanel.add(deleteButton);

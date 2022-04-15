@@ -18,10 +18,8 @@ public class CommandDeleteGame implements ICommand {
 		ObjectId result = saBox.deleteGame(args.getLeft(), args.getRight());
 		Context con;
 
-		if (result != null)
-			con = new Context(Event.RES_DELETE_GAME_FROM_BOX_OK, result);
-		else
-			con = new Context(Event.RES_DELETE_GAME_FROM_BOX_KO, null);
+		if (result != null) con = new Context(Event.RES_DELETE_GAME_FROM_BOX_OK, result);
+		else con = new Context(Event.RES_DELETE_GAME_FROM_BOX_KO, null);
 
 		return con;
 	}
