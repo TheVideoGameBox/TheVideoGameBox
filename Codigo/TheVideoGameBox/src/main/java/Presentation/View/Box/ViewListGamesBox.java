@@ -9,9 +9,9 @@ import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
+import Presentation.View.Utils.Button;
+import Presentation.View.Utils.TextField;
 import org.apache.commons.lang3.tuple.Pair;
-import org.bson.types.ObjectId;
-import org.jdesktop.xswingx.PromptSupport;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -23,35 +23,45 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
+import java.util.Objects;
+
+import static Presentation.View.Utils.Images.backGround;
+import static Presentation.View.Utils.Images.logo;
 
 public class ViewListGamesBox extends JFrame implements IView {
     private List<TGame> games;
-    private TBox box;
+    private TBox tBox;
+    private JPanel contentContainer;
 
-    public ViewListGamesBox(TBox box) {
+    public ViewListGamesBox(Pair<TBox, List<TGame>> pair) {
         setTitle("List of Games");
-        this.box = box;
+        this.tBox = pair.getLeft();
+        this.games = pair.getRight();
         init_GUI();
-        this.setLocationRelativeTo(null);
+    }
+
+    @Override
+    public void update(Context context) {
+        refreshView();
     }
 
     public void init_GUI() {
         this.setPreferredSize(new Dimension(1150, 750));
         this.setLocation(400, 100);
 
-        Image iconFrame = new ImageIcon(getClass().getClassLoader().getResource("caja_definitiva.png")).getImage();
+        Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
         this.setIconImage(iconFrame);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanelConFondo mainPanel = new JPanelConFondo();
-        mainPanel.setImagen(new ImageIcon(getClass().getClassLoader().getResource("fondo_triangular.png")).getImage());
+        mainPanel.setImagen(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(backGround))).getImage());
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setPreferredSize(new Dimension(500, 500));
         this.add(mainPanel);
 
         // CONTENT CONTAINER
 
-        JPanel contentContainer = new JPanel();
+        contentContainer = new JPanel();
         contentContainer.setLayout(new BoxLayout(contentContainer, BoxLayout.Y_AXIS));
         contentContainer.setAlignmentX(CENTER_ALIGNMENT);
         contentContainer.setOpaque(false);
@@ -69,7 +79,23 @@ public class ViewListGamesBox extends JFrame implements IView {
         headerContainer.setMaximumSize(new Dimension(1200, 100));
         headerContainer.setLayout(new BoxLayout(headerContainer, BoxLayout.X_AXIS));
         headerContainer.setOpaque(false);
-        headerContainer.add(Box.createRigidArea(new Dimension(60, 0)));
+        headerContainer.add(Box.createRigidArea(new Dimension(15, 0)));
+        
+        //BOTON DE BACK
+        Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
+        backButton.buttonIcon();
+        backButton.setBounds(0, 11, 119, 50);
+        backButton.setToolTipText("Go back");
+        backButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ApplicationController.getInstance().back();
+                setVisible(false);
+            }
+        });
+        
+        headerContainer.add(backButton);
 
         // TITLE
         JLabel title = new JLabel("Games of Box: ");
@@ -78,34 +104,26 @@ public class ViewListGamesBox extends JFrame implements IView {
         title.setForeground(Color.white);
         title.setFont(new Font("sans-serif", 1, 20));
         headerContainer.add(title);
-        headerContainer.add(Box.createRigidArea(new Dimension(130, 0)));
+        headerContainer.add(Box.createRigidArea(new Dimension(30, 0)));
 
         // ICONO DE MENU
-        JButton icon = new JButton();
-        icon.setIcon(new ImageIcon((getClass().getClassLoader().getResource("logo_small_blanco.png"))));
-        icon.setToolTipText("Back to main window");
-        icon.setBorderPainted(false);
-        icon.setOpaque(false);
-        icon.setContentAreaFilled(false);
-        icon.setFocusPainted(false);
-        icon.setAlignmentX(CENTER_ALIGNMENT);
+        Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
+		icon.buttonIcon();
+		icon.setToolTipText("Back to main window");
+		icon.setAlignmentX(CENTER_ALIGNMENT);
         headerContainer.add(icon);
-        headerContainer.add(Box.createRigidArea(new Dimension(120, 0)));
+        headerContainer.add(Box.createRigidArea(new Dimension(70, 0)));
 
         icon.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-                dispose();
+                setVisible(false);
             }
         });
 
-        JTextField textName = new JTextField();
-        PromptSupport.setPrompt("Añadir juego", textName); //Libreria xswingx (se podria hacer con una clase propia sobreescribiendo paint())
-        textName.setPreferredSize(new Dimension(200, 30));
-        textName.setMinimumSize(new Dimension(200, 30));
-        textName.setMaximumSize(new Dimension(200, 30));
-        textName.setBorder(null);
+        TextField textName = new TextField(new Dimension(180, 30), "Add Games");
+        textName.textField();
         headerContainer.add(textName);
         headerContainer.add(Box.createRigidArea(new Dimension(0, 0)));
         textName.addActionListener(new ActionListener() {
@@ -122,7 +140,7 @@ public class ViewListGamesBox extends JFrame implements IView {
 
                         @Override
                         public TBox getRight() {
-                            return box;
+                            return tBox;
                         }
 
                         @Override
@@ -130,8 +148,9 @@ public class ViewListGamesBox extends JFrame implements IView {
                             return null;
                         }
                     };
+                    textName.setText(null);
                     ApplicationController.getInstance().action(new Context(Event.ADD_GAME_TO_BOX, aux));
-                    dispose();
+                    setVisible(false);
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "There is no games with that name");
@@ -159,24 +178,33 @@ public class ViewListGamesBox extends JFrame implements IView {
         contentContainer.add(helpPanel);
         contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        if(box.getGameList() != null) {
-            for (ObjectId gameId : box.getGameList()) {
+        JPanel panel = new JPanel();
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setAlignmentX(CENTER_ALIGNMENT);
+        panel.setOpaque(false);
+
+        if(games != null && !games.isEmpty()) {
+            for (TGame game : games) {
                 try {
-                    TGame game = SAAbstractFactory.getInstance().createSAGame().searchOne(gameId);
-                    contentContainer.add(gamePanel(game));
+                    panel.add(gamePanel(game));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
-                contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+                panel.add(Box.createRigidArea(new Dimension(0, 10)));
             }
         }
+
+        contentContainer.add(panel);
+
         this.pack();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
     private JPanelRound gamePanel(TGame game) throws IOException {
 
-        JPanelRound panel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255));
+        JPanelRound panel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255), new Color(26, 59, 160));
         panel.setLayout(new BorderLayout());
         panel.setBorder(new EmptyBorder(10, 10, 10, 20));
         panel.setMaximumSize(new Dimension(1000, 135));
@@ -218,28 +246,16 @@ public class ViewListGamesBox extends JFrame implements IView {
         //BUTTON PANEL
         JPanel buttonPanel = new JPanel(new BorderLayout());
         buttonPanel.setOpaque(false);
-        JButton viewInfo = new JButton("View Information");
-        viewInfo.setIcon(new ImageIcon((getClass().getClassLoader().getResource("info_icon.png"))));
-        viewInfo.setPreferredSize(new Dimension(200, 45));
-        viewInfo.setMaximumSize(new Dimension(200, 45));
-        viewInfo.setMinimumSize(new Dimension(200, 45));
-        viewInfo.setForeground(Color.white);
-        viewInfo.setFont(new Font("Leelawadee", Font.BOLD, 15));
+        Button viewInfo = new Button("View Information", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(200, 45), Color.orange);
+        viewInfo.buttonIcon();
         viewInfo.setBorderPainted(false);
-        viewInfo.setOpaque(false);
         viewInfo.setContentAreaFilled(false);
-        viewInfo.setFocusPainted(false);
-        viewInfo.setAlignmentX(CENTER_ALIGNMENT);
-        viewInfo.setAlignmentY(CENTER_ALIGNMENT);
-        viewInfo.setToolTipText("Games fron the Box");
         viewInfo.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 ApplicationController.getInstance().action(new Context(Event.SEARCH_ONE, game.getId()));
-                dispose();
+                setVisible(false);
             }
-
         });
         buttonPanel.add(viewInfo, BorderLayout.CENTER);
 
@@ -251,8 +267,30 @@ public class ViewListGamesBox extends JFrame implements IView {
         return panel;
     }
 
-    @Override
-    public void update(Context context) {
+    private void refreshView(){
+        contentContainer.remove(contentContainer.getComponentCount() - 1);
 
+        JPanel panel = new JPanel();
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setAlignmentX(CENTER_ALIGNMENT);
+        panel.setOpaque(false);
+
+        if(games != null && !games.isEmpty()) {
+            for (TGame game : games) {
+                try {
+                    panel.add(gamePanel(game));
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                panel.add(Box.createRigidArea(new Dimension(0, 10)));
+            }
+        }
+
+        contentContainer.add(panel);
+
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 }

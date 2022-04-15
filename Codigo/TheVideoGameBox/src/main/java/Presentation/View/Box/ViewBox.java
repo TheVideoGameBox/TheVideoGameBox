@@ -8,6 +8,7 @@ import Presentation.View.IView;
 import Presentation.View.Main.BorderTitle;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
+import Presentation.View.Utils.TextField;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -16,6 +17,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Objects;
+
+import static Presentation.View.Utils.Images.backGround;
+import static Presentation.View.Utils.Images.logo;
 
 public class ViewBox extends JFrame implements IView {
 
@@ -33,12 +38,12 @@ public class ViewBox extends JFrame implements IView {
     	
     	this.setPreferredSize(new Dimension(1150, 750));
 		this.setLocation(400,100);
-		Image iconFrame = new ImageIcon(getClass().getClassLoader().getResource("caja_definitiva.png")).getImage();
+		Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
 		this.setIconImage(iconFrame);
 		
 		JPanelConFondo mainpanel = new JPanelConFondo();
 		mainpanel.setLayout(new BorderLayout());
-		mainpanel.setImagen(new ImageIcon(getClass().getClassLoader().getResource("fondo_triangular.png")).getImage());
+		mainpanel.setImagen(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(backGround))).getImage());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(mainpanel);
 		
@@ -97,7 +102,7 @@ public class ViewBox extends JFrame implements IView {
 	}
 	
 	private JPanel createAddGamePanel() {
-		JPanel addPanel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255));
+		JPanel addPanel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255), new Color(26, 59, 160));
 		addPanel.setMaximumSize(new Dimension(1150, 70));
 		addPanel.setMinimumSize(new Dimension(1150, 70));
 		addPanel.setLayout(new BoxLayout(addPanel, BoxLayout.Y_AXIS));
@@ -120,10 +125,8 @@ public class ViewBox extends JFrame implements IView {
 		textButtonPanel.setLayout(new BoxLayout(textButtonPanel, BoxLayout.X_AXIS));
 		textButtonPanel.setOpaque(false);
 		
-		JTextField nameGame = new JTextField();
-		nameGame.setText("name of game");
-		nameGame.setForeground(Color.LIGHT_GRAY);
-		nameGame.setMaximumSize(new Dimension(600, 40));
+		TextField nameGame = new TextField(new Dimension(200, 30), "Name of Game");
+		nameGame.textField();
 		nameGame.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -153,7 +156,7 @@ public class ViewBox extends JFrame implements IView {
 		addGameButton.setPreferredSize(new Dimension(40,40));
 		addGameButton.setMaximumSize(new Dimension(40, 40));
 		addGameButton.setMinimumSize(new Dimension(40, 40));
-		addGameButton.setIcon(new ImageIcon((getClass().getClassLoader().getResource("search_icon.png"))));
+		addGameButton.setIcon(new ImageIcon((Objects.requireNonNull(getClass().getClassLoader().getResource("search_icon.png")))));
 		addGameButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

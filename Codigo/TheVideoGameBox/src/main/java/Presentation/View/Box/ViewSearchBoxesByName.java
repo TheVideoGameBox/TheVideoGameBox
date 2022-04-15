@@ -1,12 +1,14 @@
 package Presentation.View.Box;
 
 import Logic.Box.TBox;
+import Logic.Game.TGame;
 import Presentation.Controller.ApplicationController;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
+import Presentation.View.Utils.Button;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -15,27 +17,35 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
+
+import static Presentation.View.Utils.Images.backGround;
+import static Presentation.View.Utils.Images.logo;
 
 public class ViewSearchBoxesByName extends JFrame implements IView {
 	private List<TBox> boxes;
-	
-	public ViewSearchBoxesByName(List<TBox> boxes) {
-		setTitle("Boxes List");
-		this.boxes = boxes;
-		init_GUI();
-		this.setLocationRelativeTo(null);
+
+	@Override
+	public void update(Context context) {
+		if(context.getEvent() == Event.RES_SEARCH_ALL_BOXES_BY_NAME_OK){
+			this.boxes = (List<TBox>) context.getData();
+			init_GUI();
+		}
+
+		refreshView();
 	}
 	
-	public void init_GUI() {
+	private void init_GUI() {
+		setTitle("Boxes List");
 		this.setPreferredSize(new Dimension(1150, 750));
 		this.setLocation(400, 100);
 		
-		Image iconFrame = new ImageIcon(getClass().getClassLoader().getResource("caja_definitiva.png")).getImage();
+		Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
 		this.setIconImage(iconFrame);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanelConFondo mainPanel = new JPanelConFondo();
-		mainPanel.setImagen(new ImageIcon(getClass().getClassLoader().getResource("fondo_triangular.png")).getImage());
+		mainPanel.setImagen(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(backGround))).getImage());
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.setPreferredSize(new Dimension(500, 500));
 		this.add(mainPanel);
@@ -60,7 +70,22 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		headerContainer.setMaximumSize(new Dimension(1200, 100));
 		headerContainer.setLayout(new BoxLayout(headerContainer, BoxLayout.X_AXIS));
 		headerContainer.setOpaque(false);
-		headerContainer.add(Box.createRigidArea(new Dimension(60, 0)));
+		headerContainer.add(Box.createRigidArea(new Dimension(15, 0)));
+		
+		// BACK BUTTON
+        Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
+        backButton.buttonIcon();
+        backButton.setToolTipText("Go back");
+        backButton.setBounds(0, 11, 119, 50);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ApplicationController.getInstance().back();
+                setVisible(false);
+            }
+        });
+
+        headerContainer.add(backButton);
 		
 		// TITLE
 		JLabel title = new JLabel("Boxes Results");
@@ -69,16 +94,12 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		title.setForeground(Color.white);
 		title.setFont(new Font("sans-serif", 1, 20));
 		headerContainer.add(title);
-		headerContainer.add(Box.createRigidArea(new Dimension(130, 0)));
+		headerContainer.add(Box.createRigidArea(new Dimension(50, 0)));
 
 		// ICONO DE MENU
-		JButton icon = new JButton();
-		icon.setIcon(new ImageIcon((getClass().getClassLoader().getResource("logo_small_blanco.png"))));
+		Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
+		icon.buttonIcon();
 		icon.setToolTipText("Back to main window");
-		icon.setBorderPainted(false);
-		icon.setOpaque(false);
-		icon.setContentAreaFilled(false);
-		icon.setFocusPainted(false);
 		icon.setAlignmentX(CENTER_ALIGNMENT);
 		headerContainer.add(icon);
 		headerContainer.add(Box.createRigidArea(new Dimension(270, 0)));
@@ -87,7 +108,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-				dispose();
+				setVisible(false);
 			}
 		});
 
@@ -119,12 +140,11 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		}
 
 		this.pack();
-		this.setVisible(true);
 	}
 	
 	private Component boxPanel(TBox box) throws IOException {
 		
-		JPanelRound panel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255));
+		JPanelRound panel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255), new Color(26, 59, 160));
 		panel.setLayout(new BorderLayout());
 		panel.setBorder(new EmptyBorder(10, 10, 10, 20));
 		panel.setMaximumSize(new Dimension(1000, 135));
@@ -166,28 +186,17 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		//BUTTON PANEL
 		JPanel buttonPanel = new JPanel(new BorderLayout());
 		buttonPanel.setOpaque(false);
-		JButton viewInfo = new JButton("View Games");
-		viewInfo.setIcon(new ImageIcon((getClass().getClassLoader().getResource("info_icon.png"))));
-		viewInfo.setPreferredSize(new Dimension(200, 45));
-		viewInfo.setMaximumSize(new Dimension(200, 45));
-		viewInfo.setMinimumSize(new Dimension(200, 45));
-		viewInfo.setForeground(Color.white);
-		viewInfo.setFont(new Font("Leelawadee", Font.BOLD, 15));
+		Button viewInfo = new Button("View Games", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(200, 45), Color.orange);
+		viewInfo.buttonIcon();
 		viewInfo.setBorderPainted(false);
-		viewInfo.setOpaque(false);
 		viewInfo.setContentAreaFilled(false);
-		viewInfo.setFocusPainted(false);
-		viewInfo.setAlignmentX(CENTER_ALIGNMENT);
-		viewInfo.setAlignmentY(CENTER_ALIGNMENT);
 		viewInfo.setToolTipText("Search a Box by Name");
 		viewInfo.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ApplicationController.getInstance().action(new Context(Event.LIST_GAMES_OF_BOX, box));
-				dispose();
+				setVisible(false);
 			}
-			
 		});
 		buttonPanel.add(viewInfo, BorderLayout.CENTER);
 		
@@ -199,9 +208,8 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		return panel;
 	}
 
-	@Override
-	public void update(Context context) {
-		// TODO Auto-generated method stub
+	private void refreshView(){
+		setLocationRelativeTo(null);
+		setVisible(true);
 	}
-
 }

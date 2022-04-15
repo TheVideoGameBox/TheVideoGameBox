@@ -9,6 +9,7 @@ import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
+import Presentation.View.Utils.Button;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.imageio.ImageIO;
@@ -23,6 +24,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
+import java.util.Objects;
+
+import static Presentation.View.Utils.Images.backGround;
+import static Presentation.View.Utils.Images.logo;
 
 // Clase vista para añadir juegos a una box. Es igual que ViewSearchByName pero cambiando el Event.
 public class ViewAddGameToBox extends JFrame implements IView {
@@ -44,12 +49,12 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		this.setPreferredSize(new Dimension(1150, 750));
 		this.setLocation(400, 100);
 		
-		Image iconFrame = new ImageIcon(getClass().getClassLoader().getResource("caja_definitiva.png")).getImage();
+		Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
 		this.setIconImage(iconFrame);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanelConFondo mainPanel = new JPanelConFondo();
-		mainPanel.setImagen(new ImageIcon(getClass().getClassLoader().getResource("fondo_triangular.png")).getImage());
+		mainPanel.setImagen(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(backGround))).getImage());
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.setPreferredSize(new Dimension(500, 500));
 		this.add(mainPanel);
@@ -63,9 +68,9 @@ public class ViewAddGameToBox extends JFrame implements IView {
 
 		JScrollPane scrollFrame = new JScrollPane(contentContainer);
 		contentContainer.setAutoscrolls(true);
+		scrollFrame.getVerticalScrollBar().setUnitIncrement(25);
 		scrollFrame.setOpaque(false);
 		scrollFrame.getViewport().setOpaque(false);
-		scrollFrame.getVerticalScrollBar().setUnitIncrement(25);
 
 		mainPanel.add(scrollFrame);
 				
@@ -74,7 +79,24 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		headerContainer.setMaximumSize(new Dimension(1200, 100));
 		headerContainer.setLayout(new BoxLayout(headerContainer, BoxLayout.X_AXIS));
 		headerContainer.setOpaque(false);
-		headerContainer.add(Box.createRigidArea(new Dimension(60, 0)));
+		headerContainer.add(Box.createRigidArea(new Dimension(15, 0)));
+		
+		//BOTON DE BACK
+        Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
+        backButton.buttonIcon();
+        backButton.setBounds(0, 11, 119, 50);
+        backButton.setToolTipText("Go back");
+        backButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ApplicationController.getInstance().back();
+                setVisible(false);
+            }
+        });
+        
+        headerContainer.add(backButton);
+        headerContainer.add(Box.createRigidArea(new Dimension(7,0)));
 				
 		// TITLE
 		JLabel title = new JLabel("Select a game to add");
@@ -83,16 +105,12 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		title.setForeground(Color.white);
 		title.setFont(new Font("sans-serif", 1, 20));
 		headerContainer.add(title);
-		headerContainer.add(Box.createRigidArea(new Dimension(190, 0)));
+		//headerContainer.add(Box.createRigidArea(new Dimension(, 0)));
 		
 		// ICONO DE MENU
-		JButton icon = new JButton();
-		icon.setIcon(new ImageIcon((getClass().getClassLoader().getResource("logo_small_blanco.png"))));
+		Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
+		icon.buttonIcon();
 		icon.setToolTipText("Back to main window");
-		icon.setBorderPainted(false);
-		icon.setOpaque(false);
-		icon.setContentAreaFilled(false);
-		icon.setFocusPainted(false);
 		icon.setAlignmentX(CENTER_ALIGNMENT);
 		headerContainer.add(icon);
 		headerContainer.add(Box.createRigidArea(new Dimension(270, 0)));
@@ -101,7 +119,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-				dispose();
+				setVisible(false);
 	 		}
 		});
 				
@@ -138,9 +156,9 @@ public class ViewAddGameToBox extends JFrame implements IView {
 	
 	private JPanelRound gamePanel(TGame game, TBox box, Pair<List<TGame>, TBox> aux) throws IOException {
 
-		JPanelRound panel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255));
+		JPanelRound panel = new JPanelRound(new Color(26, 59, 160), new Color(64, 147, 255), new Color(26, 59, 160));
 		panel.setLayout(new BorderLayout());
-		panel.setBorder(new EmptyBorder(10, 10, 10, 20));
+		panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panel.setMaximumSize(new Dimension(1000, 135));
 		panel.setPreferredSize(new Dimension(1000, 135));
 		panel.setMinimumSize(new Dimension(1000, 135));
@@ -160,7 +178,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ApplicationController.getInstance().action(new Context(Event.ADD_GAME_TO_BOX, aux));
-				dispose();
+				setVisible(false);
 			}
 
 			public void mousePressed(MouseEvent e) {
@@ -197,7 +215,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		// CONSTRUIR NAMEPANEL
 		namePanel.add(Box.createRigidArea(new Dimension(10, 0)));
 		namePanel.add(cover);
-		namePanel.add(Box.createRigidArea(new Dimension(70, 0)));
+		namePanel.add(Box.createRigidArea(new Dimension(15, 0)));
 		namePanel.add(name);
 		
 		//BUTTON PANEL
@@ -206,26 +224,23 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		buttonPanel.setMaximumSize(new Dimension(300, 135));
 		buttonPanel.setPreferredSize(new Dimension(300, 135));
 		buttonPanel.setMinimumSize(new Dimension(300, 135));
-		JButton viewInfo = new JButton("Add game");
-		viewInfo.setPreferredSize(new Dimension(170, 45));
-		viewInfo.setMaximumSize(new Dimension(170, 45));
-		viewInfo.setMinimumSize(new Dimension(170, 45));
-		viewInfo.setBackground(new Color(64, 147, 255));
-		viewInfo.setForeground(Color.white);
-		viewInfo.setFont(new Font("Leelawadee", Font.BOLD, 15));
-		viewInfo.setBorder(BorderFactory.createBevelBorder(0));
-		viewInfo.setFocusPainted(false);
+		
+
+		Button viewInfo = new Button("Add Game", "add_icon.png", Color.white, null, new Dimension(200, 45), Color.orange);
+		viewInfo.buttonIcon();
+		viewInfo.setBorderPainted(false);
+        viewInfo.setContentAreaFilled(false);
 		viewInfo.setAlignmentX(CENTER_ALIGNMENT);
 		viewInfo.setAlignmentY(CENTER_ALIGNMENT);
-		viewInfo.setToolTipText("Search a Game by Name");
 		viewInfo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SAAbstractFactory.getInstance().createSABox().addGame(box.getId(), game.getId());
 				ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-				dispose();
+				setVisible(false);
 			}
 		});
+
 		buttonPanel.add(viewInfo, BorderLayout.CENTER);
 		
 		//CONSTRUIR PANEL
@@ -240,8 +255,6 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		switch(context.getEvent()) {
 			case Event.RES_ADD_GAME_TO_BOX_OK:
 				JOptionPane.showMessageDialog(this, "Game added!","Add Game", JOptionPane.INFORMATION_MESSAGE);
-				ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-				dispose();
 				break;
 			case Event.RES_ADD_GAME_TO_BOX_KO:
 				JOptionPane.showMessageDialog(null, "Failed to add the game","Add Game", JOptionPane.ERROR_MESSAGE);
