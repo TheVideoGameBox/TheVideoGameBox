@@ -92,4 +92,23 @@ public class DAOBoxImp implements DAOBox {
 			
 		return result;
 	}
+	
+	public int modify(TBox tBox) {
+		int result = 0;
+		
+		try {
+			MongoDatabase db = Connection.getInstance().getConnection();
+			
+			if (tBox.getName() != null && tBox.getDescription() != null && tBox.getGenres() != null && tBox.getPrivacy() != null) {
+				db.getCollection("boxes", Box.class).updateOne(eq("_id", tBox.getId()), Updates.combine(Updates.set("name", tBox.getName()), Updates.set("description", tBox.getDescription()), 
+						Updates.set("genres", tBox.getGenres()), Updates.set("privacy", tBox.getPrivacy())));
+				result = 1;
+			}
+		} catch (MongoException e) {
+			result = -1;
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
