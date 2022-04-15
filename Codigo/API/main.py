@@ -6,8 +6,11 @@ if __name__ == '__main__':
     db = client['TVGB']
     games = db.get_collection('games')
 
-    with open('games.json') as file:
+    with open('games3.json') as file:
         file_data = load(file)
 
         for data in file_data:
-            games.insert_one(file_data.get(data))
+            values = file_data.get(data)
+
+            if len(values["name"]) <= 25 and "hentai" not in str(values["name"]).lower() and values["image"] and values["cover"]:
+                games.insert_one(values)

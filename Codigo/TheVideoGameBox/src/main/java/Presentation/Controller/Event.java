@@ -14,6 +14,9 @@ public class Event {
     public static final int SEARCH_ONE = 103;
     public static final int RES_SEARCH_ONE_OK = 104;
     public static final int RES_SEARCH_ONE_KO = 105;
+    public static final int RANDOM_GAMES = 106;
+    public static final int RES_RANDOM_GAMES_OK = 107;
+    public static final int RES_RANDOM_GAMES_KO = 108;
 
 
 
@@ -22,8 +25,10 @@ public class Event {
     public static final int RES_CREATE_USER_OK = 301;
     public static final int RES_CREATE_USER_KO = 302;
     public static final int VIEW_CREATE_USER = 303;
-
-
+    public static final int LOGIN_USER = 304;
+    public static final int RES_LOGIN_USER_OK = 305;
+    public static final int RES_LOGIN_USER_KO = 306;
+    public static final int VIEW_LOGIN = 307;
 
 
     // Codigos de eventos para BOX [500-700)
@@ -40,5 +45,4 @@ public class Event {
     public static final int SEARCH_ALL_BOXES_BY_NAME = 510;
     public static final int RES_SEARCH_ALL_BOXES_BY_NAME_OK= 511;
     public static final int RES_SEARCH_ALL_BOXES_BY_NAME_KO= 512;
-
 }

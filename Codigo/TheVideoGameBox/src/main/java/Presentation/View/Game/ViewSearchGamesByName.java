@@ -34,8 +34,9 @@ public class ViewSearchGamesByName extends JFrame implements IView {
         if (context.getEvent() == Event.RES_SEARCH_ALL_BY_NAME_OK) {
             this.games = (List<TGame>) context.getData();
             init_GUI();
-            refreshView();
         }
+
+        refreshView();
     }
 
     private void init_GUI() {
@@ -78,8 +79,6 @@ public class ViewSearchGamesByName extends JFrame implements IView {
         Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
         backButton.buttonIcon();
         backButton.setToolTipText("Go back");
-        backButton.setBorderPainted(false);
-        backButton.setContentAreaFilled(false);
         backButton.setBounds(0, 11, 119, 50);
         backButton.addActionListener(new ActionListener() {
             @Override
@@ -98,10 +97,10 @@ public class ViewSearchGamesByName extends JFrame implements IView {
         title.setForeground(Color.white);
         title.setFont(new Font("sans-serif", 1, 20));
         headerContainer.add(title);
-        headerContainer.add(Box.createRigidArea(new Dimension(130, 0)));
+        headerContainer.add(Box.createRigidArea(new Dimension(60, 0)));
 
         // ICONO DE MENU
-        Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80), false);
+        Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
         icon.buttonIcon();
         icon.setToolTipText("Back to main window");
         icon.setAlignmentX(CENTER_ALIGNMENT);

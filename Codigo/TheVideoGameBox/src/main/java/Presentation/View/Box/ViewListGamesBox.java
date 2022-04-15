@@ -11,9 +11,7 @@ import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
 import Presentation.View.Utils.Button;
 import Presentation.View.Utils.TextField;
-
 import org.apache.commons.lang3.tuple.Pair;
-import org.bson.types.ObjectId;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -35,16 +33,16 @@ public class ViewListGamesBox extends JFrame implements IView {
     private TBox tBox;
     private JPanel contentContainer;
 
-    public ViewListGamesBox(TBox tBox) {
+    public ViewListGamesBox(Pair<TBox, List<TGame>> pair) {
         setTitle("List of Games");
-        this.tBox = tBox;
+        this.tBox = pair.getLeft();
+        this.games = pair.getRight();
         init_GUI();
-        refreshView();
     }
 
     @Override
     public void update(Context context) {
-
+        refreshView();
     }
 
     public void init_GUI() {
@@ -81,7 +79,23 @@ public class ViewListGamesBox extends JFrame implements IView {
         headerContainer.setMaximumSize(new Dimension(1200, 100));
         headerContainer.setLayout(new BoxLayout(headerContainer, BoxLayout.X_AXIS));
         headerContainer.setOpaque(false);
-        headerContainer.add(Box.createRigidArea(new Dimension(60, 0)));
+        headerContainer.add(Box.createRigidArea(new Dimension(15, 0)));
+        
+        //BOTON DE BACK
+        Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
+        backButton.buttonIcon();
+        backButton.setBounds(0, 11, 119, 50);
+        backButton.setToolTipText("Go back");
+        backButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ApplicationController.getInstance().back();
+                setVisible(false);
+            }
+        });
+        
+        headerContainer.add(backButton);
 
         // TITLE
         JLabel title = new JLabel("Games of Box: ");
@@ -90,10 +104,10 @@ public class ViewListGamesBox extends JFrame implements IView {
         title.setForeground(Color.white);
         title.setFont(new Font("sans-serif", 1, 20));
         headerContainer.add(title);
-        headerContainer.add(Box.createRigidArea(new Dimension(100, 0)));
+        headerContainer.add(Box.createRigidArea(new Dimension(30, 0)));
 
         // ICONO DE MENU
-        Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80), false);
+        Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
 		icon.buttonIcon();
 		icon.setToolTipText("Back to main window");
 		icon.setAlignmentX(CENTER_ALIGNMENT);
@@ -103,7 +117,6 @@ public class ViewListGamesBox extends JFrame implements IView {
         icon.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 ApplicationController.getInstance().action(new Context(Event.VIEW, null));
                 setVisible(false);
             }
@@ -135,6 +148,7 @@ public class ViewListGamesBox extends JFrame implements IView {
                             return null;
                         }
                     };
+                    textName.setText(null);
                     ApplicationController.getInstance().action(new Context(Event.ADD_GAME_TO_BOX, aux));
                     setVisible(false);
                 }
@@ -163,6 +177,29 @@ public class ViewListGamesBox extends JFrame implements IView {
         contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
         contentContainer.add(helpPanel);
         contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        JPanel panel = new JPanel();
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setAlignmentX(CENTER_ALIGNMENT);
+        panel.setOpaque(false);
+
+        if(games != null && !games.isEmpty()) {
+            for (TGame game : games) {
+                try {
+                    panel.add(gamePanel(game));
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                panel.add(Box.createRigidArea(new Dimension(0, 10)));
+            }
+        }
+
+        contentContainer.add(panel);
+
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     private JPanelRound gamePanel(TGame game) throws IOException {
@@ -231,19 +268,28 @@ public class ViewListGamesBox extends JFrame implements IView {
     }
 
     private void refreshView(){
-        if(tBox.getGameList() != null) {
-            for (ObjectId gameId : tBox.getGameList()) {
+        contentContainer.remove(contentContainer.getComponentCount() - 1);
+
+        JPanel panel = new JPanel();
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setAlignmentX(CENTER_ALIGNMENT);
+        panel.setOpaque(false);
+
+        if(games != null && !games.isEmpty()) {
+            for (TGame game : games) {
                 try {
-                    TGame game = SAAbstractFactory.getInstance().createSAGame().searchOne(gameId);
-                    contentContainer.add(gamePanel(game));
+                    panel.add(gamePanel(game));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
-                contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+                panel.add(Box.createRigidArea(new Dimension(0, 10)));
             }
         }
 
-        this.pack();
+        contentContainer.add(panel);
+
+        pack();
         setLocationRelativeTo(null);
         setVisible(true);
     }
