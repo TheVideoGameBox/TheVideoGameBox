@@ -93,7 +93,8 @@ public class DAOBoxImp implements DAOBox {
 		return result;
 	}
 	
-	public int modify(TBox tBox) {
+	@Override
+	public int modifyBox(TBox tBox) {
 		int result = 0;
 		
 		try {
@@ -111,4 +112,5 @@ public class DAOBoxImp implements DAOBox {
 		
 		return result;
 	}
+
 }
