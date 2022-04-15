@@ -36,6 +36,18 @@ public class DAOUserImp implements DAOUser {
 	}
 
 	@Override
+	public TUser logIn(String email) {
+		TUser tUser;
+		try {
+			MongoDatabase db = Connection.getInstance().getConnection();
+			tUser = Objects.requireNonNull(db.getCollection("users", User.class).find(eq("email", email)).first()).toTransfer();
+		} catch (MongoException e) {
+			tUser = null;
+		}
+		return tUser;
+	}
+
+	@Override
 	public void deleteFromDatabase(ObjectId id) {
 		try {
 			MongoDatabase db = Connection.getInstance().getConnection();

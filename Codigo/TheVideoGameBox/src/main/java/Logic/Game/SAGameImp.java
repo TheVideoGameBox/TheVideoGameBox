@@ -22,4 +22,10 @@ public class SAGameImp implements SAGame {
         return DAOAbstractFactory.getInstance().createDAOGame().searchOne(_id);
     }
 
+    @Override
+    public List<TGame> random() {
+        List<TGame> result = new ArrayList<>();
+        return result = DAOAbstractFactory.getInstance().createDAOGame().random();
+    }
+
 }
