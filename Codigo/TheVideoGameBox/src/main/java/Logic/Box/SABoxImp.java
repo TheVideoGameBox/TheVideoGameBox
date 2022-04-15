@@ -54,6 +54,17 @@ public class SABoxImp implements SABox {
     public void deleteFromDatabase(ObjectId id){
         DAOAbstractFactory.getInstance().createDAOBox().deleteFromDatabase(id);
     }
+    
+	@Override
+	public int modifyBox(TBox tBox) {
+		if (!correctName(tBox.getName()) || !correctDescription(tBox.getDescription()) || !correctGenres(tBox.getGenres()) || !correctPrivacy(tBox.getPrivacy())) {
+			return -1;
+		}
+		else {
+			DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+			return daoBox.modifyBox(tBox);
+		}
+	}
 
 	private boolean correctPrivacy(boolean privacy) {
 		return !Objects.isNull(privacy);
@@ -74,4 +85,6 @@ public class SABoxImp implements SABox {
     private boolean correctName(String name) {
         return name != null && name.length() > 0 && name.length() <= 50;
     }
+
+
 }

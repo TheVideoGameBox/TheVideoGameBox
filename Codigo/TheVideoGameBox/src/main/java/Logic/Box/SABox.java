@@ -11,5 +11,5 @@ public interface SABox {
 	public List<ObjectId> listGames(TBox box);
 	public void deleteFromDatabase(ObjectId id);
 	public List<TBox> searchAllBoxesByName(String name);
-
+	public int modifyBox(TBox tBox);
 }
