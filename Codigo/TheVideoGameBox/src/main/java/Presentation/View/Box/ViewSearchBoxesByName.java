@@ -30,8 +30,9 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		if(context.getEvent() == Event.RES_SEARCH_ALL_BOXES_BY_NAME_OK){
 			this.boxes = (List<TBox>) context.getData();
 			init_GUI();
-			refreshView();
 		}
+
+		refreshView();
 	}
 	
 	private void init_GUI() {
@@ -69,7 +70,22 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		headerContainer.setMaximumSize(new Dimension(1200, 100));
 		headerContainer.setLayout(new BoxLayout(headerContainer, BoxLayout.X_AXIS));
 		headerContainer.setOpaque(false);
-		headerContainer.add(Box.createRigidArea(new Dimension(60, 0)));
+		headerContainer.add(Box.createRigidArea(new Dimension(15, 0)));
+		
+		// BACK BUTTON
+        Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
+        backButton.buttonIcon();
+        backButton.setToolTipText("Go back");
+        backButton.setBounds(0, 11, 119, 50);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ApplicationController.getInstance().back();
+                setVisible(false);
+            }
+        });
+
+        headerContainer.add(backButton);
 		
 		// TITLE
 		JLabel title = new JLabel("Boxes Results");
@@ -78,10 +94,10 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		title.setForeground(Color.white);
 		title.setFont(new Font("sans-serif", 1, 20));
 		headerContainer.add(title);
-		headerContainer.add(Box.createRigidArea(new Dimension(130, 0)));
+		headerContainer.add(Box.createRigidArea(new Dimension(50, 0)));
 
 		// ICONO DE MENU
-		Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80), false);
+		Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
 		icon.buttonIcon();
 		icon.setToolTipText("Back to main window");
 		icon.setAlignmentX(CENTER_ALIGNMENT);
@@ -92,8 +108,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-				setVisible(false
-				);
+				setVisible(false);
 			}
 		});
 
@@ -168,6 +183,25 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		namePanel.add(Box.createRigidArea(new Dimension(55, 0)));
 		namePanel.add(name);
 
+		//
+		
+		// MODIFY BOX BUTTON
+		JPanel modifyButtonPanel = new JPanel(new BorderLayout());
+		modifyButtonPanel.setOpaque(false);
+		Button modifyInfo = new Button("Modify Box Info", "modify_icon.png", Color.white, new Color(50,170,9), new Dimension(200, 45), Color.orange);
+		modifyInfo.buttonIcon();
+		modifyInfo.setBorderPainted(false);
+		modifyInfo.setContentAreaFilled(false);
+		modifyInfo.setToolTipText("Modify the info of box");
+		modifyInfo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ApplicationController.getInstance().action(new Context(Event.MODIFY_BOX, box));		
+				setVisible(false);
+			}
+		});
+		modifyButtonPanel.add(modifyInfo, BorderLayout.CENTER);
+		
 		//BUTTON PANEL
 		JPanel buttonPanel = new JPanel(new BorderLayout());
 		buttonPanel.setOpaque(false);
@@ -189,6 +223,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		
 		panel.add(namePanel, BorderLayout.WEST);
 		panel.add(buttonPanel, BorderLayout.EAST);
+		panel.add(modifyButtonPanel, BorderLayout.CENTER);
 				
 		return panel;
 	}
