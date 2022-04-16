@@ -1,16 +1,22 @@
 package Presentation.View;
 
 import Logic.Box.TBox;
+import Logic.Game.TGame;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
+import Presentation.View.Box.ViewAddGameToBox;
 import Presentation.View.Box.ViewCreateBox;
 import Presentation.View.Box.ViewListGamesBox;
 import Presentation.View.Box.ViewSearchBoxesByName;
 import Presentation.View.Game.ViewSearchGamesByName;
 import Presentation.View.Game.ViewShowOne;
 import Presentation.View.Main.ViewMain;
+import Presentation.View.User.ViewLogIn;
 import Presentation.View.User.ViewRegister;
 import org.bson.types.ObjectId;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.List;
 
 public class ViewFactory extends ViewAbstractFactory {
 
@@ -37,17 +43,21 @@ public class ViewFactory extends ViewAbstractFactory {
 			case Event.RES_SEARCH_ALL_BOXES_BY_NAME_OK:
 				view = new ViewSearchBoxesByName();
 				break;
-			case Event.LIST_GAMES_OF_BOX:
-			case Event.RES_DELETE_GAME_FROM_BOX_OK:
-				view = new ViewListGamesBox((TBox) context.getData());
+			case Event.RES_LIST_GAMES_OF_BOX_OK:
+				view = new ViewListGamesBox((Pair<TBox, List<TGame>>) context.getData());
 				break;
-			//			case Event.ADD_GAME_TO_BOX:
+			case Event.ADD_GAME_TO_BOX:
+				view = new ViewAddGameToBox((Pair<List<TGame>, TBox>) context.getData());
+				break;
+			//case Event.ADD_GAME_TO_BOX:
 //				view = new ViewAddGameToBox();
 //				break;
+			case Event.VIEW_LOGIN:
+				view = new ViewLogIn();
+				break;
 			default:
 				break;
 		}
-
 		return view;
     }
 }

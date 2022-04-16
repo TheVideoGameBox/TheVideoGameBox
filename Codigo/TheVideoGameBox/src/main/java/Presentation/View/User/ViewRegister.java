@@ -9,6 +9,7 @@ import Presentation.View.Main.BorderTitle;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
 import Presentation.View.Utils.Button;
+import Presentation.View.Utils.PasswordField;
 import Presentation.View.Utils.TextField;
 
 import javax.swing.*;
@@ -150,7 +151,7 @@ public class ViewRegister extends JFrame implements IView {
         auxPanel.add(label("Password"));
 
         // Input para la password
-        TextField passwordUser = textField();
+        PasswordField passwordUser = passwordField();
         auxPanel.add(passwordUser);
         auxPanel.add(Box.createRigidArea(new Dimension(50, 15)));
 
@@ -158,7 +159,7 @@ public class ViewRegister extends JFrame implements IView {
         auxPanel.add(label("Confirm Password"));
 
         // Input para la confirm password
-        TextField confirmPasswordUser = textField();
+        PasswordField confirmPasswordUser = passwordField();
         auxPanel.add(confirmPasswordUser);
         auxPanel.add(Box.createRigidArea(new Dimension(50, 15)));
 
@@ -172,8 +173,8 @@ public class ViewRegister extends JFrame implements IView {
             public void actionPerformed(ActionEvent e) {
                 String email = emailUser.getText();
                 String username = usernameUser.getText();
-                String password = passwordUser.getText();
-                String confirmPassword = confirmPasswordUser.getText();
+                String password = String.valueOf(passwordUser.getPassword());
+                String confirmPassword = String.valueOf(confirmPasswordUser.getPassword());
 
                 if (password.equals(confirmPassword)) {
                     TUser user = new TUser(email, username, password);
@@ -198,6 +199,13 @@ public class ViewRegister extends JFrame implements IView {
 
     private TextField textField() {
         TextField aux = new TextField(new Dimension(500, 40));
+        aux.textField();
+        aux.setAlignmentX(CENTER_ALIGNMENT);
+        return aux;
+    }
+
+    private PasswordField passwordField() {
+        PasswordField aux = new PasswordField(new Dimension(500, 40));
         aux.textField();
         aux.setAlignmentX(CENTER_ALIGNMENT);
         return aux;
