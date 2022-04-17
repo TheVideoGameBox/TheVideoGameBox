@@ -14,6 +14,7 @@ import Presentation.View.Game.ViewShowOne;
 import Presentation.View.Main.ViewMain;
 import Presentation.View.User.ViewLogIn;
 import Presentation.View.User.ViewRegister;
+import org.bson.types.ObjectId;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
@@ -54,6 +55,9 @@ public class ViewFactory extends ViewAbstractFactory {
 			case Event.RES_SHOW_BOX_OK:
 				view = new ViewShowBox();
 				break;
+			//case Event.ADD_GAME_TO_BOX:
+//				view = new ViewAddGameToBox();
+//				break;
 			case Event.VIEW_LOGIN:
 				view = new ViewLogIn();
 				break;

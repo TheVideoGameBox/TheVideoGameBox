@@ -11,7 +11,9 @@ import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
 import Presentation.View.Utils.Button;
 import Presentation.View.Utils.TextField;
+import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.bson.types.ObjectId;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -80,7 +82,7 @@ public class ViewListGamesBox extends JFrame implements IView {
         headerContainer.setLayout(new BoxLayout(headerContainer, BoxLayout.X_AXIS));
         headerContainer.setOpaque(false);
         headerContainer.add(Box.createRigidArea(new Dimension(15, 0)));
-        
+
         //BOTON DE BACK
         Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
         backButton.buttonIcon();
@@ -94,15 +96,15 @@ public class ViewListGamesBox extends JFrame implements IView {
                 setVisible(false);
             }
         });
-        
+
         headerContainer.add(backButton);
 
         // TITLE
-        JLabel title = new JLabel("Games of Box: ");
+        JLabel title = new JLabel("Games of Box: " + tBox.getName());
         title.setFont(new Font(title.getFont().getName(), Font.PLAIN, 25));
         title.setAlignmentX(CENTER_ALIGNMENT);
         title.setForeground(Color.white);
-        title.setFont(new Font("sans-serif", 1, 20));
+        title.setFont(new Font("sans-serif", Font.BOLD, 20));
         headerContainer.add(title);
         headerContainer.add(Box.createRigidArea(new Dimension(30, 0)));
 
@@ -234,7 +236,7 @@ public class ViewListGamesBox extends JFrame implements IView {
             cover = new JLabel(new ImageIcon(image));
         }
         else {
-            cover.setIcon(new ImageIcon((getClass().getClassLoader().getResource("no_image.png"))));
+            cover.setIcon(new ImageIcon((Objects.requireNonNull(getClass().getClassLoader().getResource("no_image.png")))));
         }
 
         // CONSTRUIR NAMEPANEL
@@ -257,12 +259,30 @@ public class ViewListGamesBox extends JFrame implements IView {
                 setVisible(false);
             }
         });
-        buttonPanel.add(viewInfo, BorderLayout.CENTER);
+        buttonPanel.add(viewInfo);
+
+        JPanel deletePanel = new JPanel(new BorderLayout());
+        deletePanel.setOpaque(false);
+        Button deleteButton = new Button(null, "delete_icon.png", new Dimension(60, 45), Color.orange);
+        deleteButton.buttonIcon();
+        deleteButton.setBorderPainted(false);
+        deleteButton.setContentAreaFilled(false);
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Pair<ObjectId, ObjectId> aux = new MutablePair<>(tBox.getId(), game.getId());
+                ApplicationController.getInstance().action(new Context(Event.DELETE_GAME_FROM_BOX, aux));
+                setVisible(false);
+                ApplicationController.getInstance().action(new Context(Event.LIST_GAMES_OF_BOX, tBox));
+            }
+        });
+        deletePanel.add(deleteButton);
 
         //CONSTRUIR PANEL
 
         panel.add(namePanel, BorderLayout.WEST);
-        panel.add(buttonPanel, BorderLayout.EAST);
+        panel.add(buttonPanel, BorderLayout.CENTER);
+        panel.add(deletePanel, BorderLayout.EAST);
 
         return panel;
     }

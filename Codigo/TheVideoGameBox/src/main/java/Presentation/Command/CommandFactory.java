@@ -2,6 +2,7 @@ package Presentation.Command;
 
 import Presentation.Command.Box.CommandCreateBox;
 import Presentation.Command.Box.CommandDeleteBox;
+import Presentation.Command.Box.CommandDeleteGame;
 import Presentation.Command.Box.CommandListGames;
 import Presentation.Command.Box.CommandSearchAllBoxesByName;
 import Presentation.Command.Box.CommandShowBox;
@@ -44,14 +45,15 @@ public class CommandFactory extends CommandAbstractFactory{
             case Event.LOGIN_USER:
                 command = new CommandLogIn();
                 break;
+            case Event.DELETE_GAME_FROM_BOX:
+            	command = new CommandDeleteGame();
+                break;
             case Event.DELETE_BOX:
                 command = new CommandDeleteBox();
                 break;
             default:
-                command = null;
                 break;
         }
-
         return command;
     }
 }

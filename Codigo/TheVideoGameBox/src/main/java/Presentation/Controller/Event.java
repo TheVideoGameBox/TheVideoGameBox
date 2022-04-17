@@ -51,4 +51,8 @@ public class Event {
     public static final int DELETE_BOX = 516;
     public static final int RES_DELETE_BOX_OK= 517;
     public static final int RES_DELETE_BOX_KO= 518;
+    public static final int DELETE_GAME_FROM_BOX = 519;
+    public static final int RES_DELETE_GAME_FROM_BOX_OK = 520;
+    public static final int RES_DELETE_GAME_FROM_BOX_KO = 521;
+
 }
