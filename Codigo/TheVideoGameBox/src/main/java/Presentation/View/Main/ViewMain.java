@@ -578,27 +578,42 @@ public class ViewMain extends JFrame implements IView{
 		JPanel topPanel = new JPanel(new BorderLayout());
 		topPanel.setOpaque(false);
 		topPanel.setMaximumSize(new Dimension(1150, 172));
-		topPanel.setMinimumSize(new Dimension(950, 172));
+		topPanel.setMinimumSize(new Dimension(1150, 172));
 		
 		JPanel iconPanel = new JPanel();
 		iconPanel.setOpaque(false);
 		
 		JLabel icono = new JLabel();
-		icono.setIcon(new ImageIcon(getClass().getClassLoader().getResource("logo_medium_blanco.png")));
+		icono.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo_medium_blanco.png"))));
 		icono.setAlignmentX(JPanel.CENTER_ALIGNMENT);
 		icono.setAlignmentY(JPanel.CENTER_ALIGNMENT);
 		
-		iconPanel.add(icono);
+		//iconPanel.add(icono);
 		
 		JPanel buttonPanel = new JPanel();
-		buttonPanel.setOpaque(false);
+		buttonPanel.setOpaque(true);
+		buttonPanel.setMaximumSize(new Dimension(230, 20));
+		buttonPanel.setMinimumSize(new Dimension(230, 20));
+		buttonPanel.setPreferredSize(new Dimension(230, 20));
 		
-		Button myBox = new Button("Create Box", null, Color.white, null, new Dimension(120, 50), Color.orange);
+		Button createBox = new Button("Create Box", null, Color.white, null, new Dimension(100, 20), Color.orange);
+		createBox.button();
+		createBox.setBorderPainted(false);
+		createBox.setContentAreaFilled(false);
+		createBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ApplicationController.getInstance().action(new Context(Event.VIEW_CREATE_BOX, null));
+				setVisible(false);
+			}
+		});
+		
+		buttonPanel.add(createBox);
+
+		Button myBox = new Button("My Boxes", null, Color.BLUE, null, new Dimension(100, 20), Color.orange);
 		myBox.button();
 		myBox.setBorderPainted(false);
 		myBox.setContentAreaFilled(false);
-		myBox.setAlignmentX(JPanel.RIGHT_ALIGNMENT);
-		myBox.setAlignmentY(JPanel.TOP_ALIGNMENT);
 		myBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -607,12 +622,11 @@ public class ViewMain extends JFrame implements IView{
 				setVisible(false);
 			}
 		});
-		
 		buttonPanel.add(myBox);
 		
-		topPanel.add(iconPanel, BorderLayout.CENTER);
+		topPanel.add(icono, BorderLayout.CENTER);
 		topPanel.add(buttonPanel, BorderLayout.EAST);
-		
+
 		//JPanelRound randomPanel = new JPanelRound(new Color(0, 0, 128), new Color(47, 79, 79), new Color(0, 0, 128)); //Azul-gris
 		//JPanelRound randomPanel = new JPanelRound(new Color(46, 56, 90), new Color(107, 113, 144), new Color(46, 56, 90)); //Grises
 		//JPanelRound randomPanel = new JPanelRound(new Color(0, 0, 0), new Color(107, 113, 144), new Color(0, 0, 0)); //Negro-Gris
