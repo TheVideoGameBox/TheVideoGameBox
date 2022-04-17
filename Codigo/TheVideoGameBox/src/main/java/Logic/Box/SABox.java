@@ -10,7 +10,9 @@ public interface SABox {
 	public ObjectId createBox(TBox box);
 	public ObjectId addGame(ObjectId idBox, ObjectId gameId);
 	public List<TGame> listGames(TBox box);
-	public void deleteFromDatabase(ObjectId id);
 	public List<TBox> searchAllBoxesByName(String name);
+	public ObjectId deleteBox(TBox box);
+	public void deleteFromDatabase(ObjectId id);
+
 
 }
