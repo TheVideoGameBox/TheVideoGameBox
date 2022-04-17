@@ -209,7 +209,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		viewAttributes.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ApplicationController.getInstance().action(new Context(Event.SHOW_BOX, box.getId()));
+				ApplicationController.getInstance().action(new Context(Event.SHOW_BOX, box));
 				setVisible(false);
 			}
 		});

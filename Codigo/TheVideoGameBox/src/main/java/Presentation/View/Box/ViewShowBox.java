@@ -7,6 +7,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -22,9 +25,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import Logic.Box.TBox;
 import Presentation.Controller.ApplicationController;
@@ -53,7 +60,7 @@ public class ViewShowBox extends JFrame implements IView {
 	}
 	
     private void initGUI() {
-        this.setPreferredSize(new Dimension(600, 600));
+    	this.setPreferredSize(new Dimension(1150, 750));
         this.setLocation(400, 100);
         Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
         this.setIconImage(iconFrame);
@@ -68,18 +75,18 @@ public class ViewShowBox extends JFrame implements IView {
         JPanel midPanel = createMidPanel();
 
         mainpanel.add(topPanel, BorderLayout.NORTH);
-        mainpanel.add(midPanel, BorderLayout.CENTER);
+        mainpanel.add(midPanel, BorderLayout.SOUTH);
 
         this.pack();
     }
     
     private JPanel createTopPanel() {
-        JPanel topPanel = new JPanel();
-        topPanel.setPreferredSize(new Dimension(600, 100));
-        topPanel.setMaximumSize(new Dimension(600, 100));
-        topPanel.setMinimumSize(new Dimension(600, 100));
-        topPanel.setOpaque(false);
-        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
+		JPanel topPanel = new JPanel();
+	    topPanel.setPreferredSize(new Dimension(1150, 100));
+	    topPanel.setMaximumSize(new Dimension(1150, 100));
+	    topPanel.setMinimumSize(new Dimension(1150, 100));
+	    topPanel.setOpaque(false);
+	    topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
 
         //BOTON DE BACK
         Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
@@ -109,7 +116,7 @@ public class ViewShowBox extends JFrame implements IView {
 
         topPanel.add(Box.createRigidArea(new Dimension(20, 0)));
         topPanel.add(backButton);
-        topPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+        topPanel.add(Box.createRigidArea(new Dimension(200, 0)));
         topPanel.add(icon);
 
 
@@ -118,33 +125,52 @@ public class ViewShowBox extends JFrame implements IView {
     
     private JPanel createMidPanel() {
         JPanel midPanel = new JPanel();
-        midPanel.setPreferredSize(new Dimension(500, 400));
-        midPanel.setMaximumSize(new Dimension(500, 400));
-        midPanel.setMinimumSize(new Dimension(500, 400));
-        midPanel.setLayout(new BoxLayout(midPanel, BoxLayout.Y_AXIS));
-        midPanel.setAlignmentX(CENTER_ALIGNMENT);
+        midPanel.setPreferredSize(new Dimension(1150, 600));
+        midPanel.setMaximumSize(new Dimension(1150, 600));
+        midPanel.setMinimumSize(new Dimension(1150, 600));
+        midPanel.setLayout(new GridBagLayout());
         midPanel.setBorder(new EmptyBorder(0, 20, 10, 20));
         midPanel.setOpaque(false);
-
+        GridBagConstraints gbc = new GridBagConstraints();
 
         // Nombre de la box.
         JPanel namePanel = new JPanel();
-        namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.Y_AXIS));
         namePanel.setPreferredSize(new Dimension(500, 40));
         namePanel.setMaximumSize(new Dimension(500, 40));
         namePanel.setMinimumSize(new Dimension(500, 40));
         namePanel.setOpaque(false);
-        namePanel.setBorder(new EmptyBorder(0, 10, 7, 10));
-        namePanel.setAlignmentX(CENTER_ALIGNMENT);
+        namePanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+        namePanel.setAlignmentY(JPanel.CENTER_ALIGNMENT);
+        
 
         JLabel nameTitle = new JLabel(box.getName());
-        nameTitle.setAlignmentX(LEFT_ALIGNMENT);
         nameTitle.setForeground(Color.white);
-        nameTitle.setFont(new Font("sans-serif", 1, 25));
+        nameTitle.setFont(new Font("sans-serif", 1, 35));
+        nameTitle.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+        nameTitle.setAlignmentY(JPanel.CENTER_ALIGNMENT);
 
         namePanel.add(nameTitle);
         
-        midPanel.add(namePanel);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        
+        midPanel.add(namePanel, gbc);
+        
+        // Panel de privacidad y número de juegos contenidos
+        
+        JPanel privNumPanel = new JPanel();
+        privNumPanel.setLayout(new GridLayout(2,1));
+        privNumPanel.setPreferredSize(new Dimension(500, 80));
+        privNumPanel.setMaximumSize(new Dimension(500, 80));
+        privNumPanel.setMinimumSize(new Dimension(500, 80));
+        privNumPanel.setOpaque(false);
+        privNumPanel.setBorder(new EmptyBorder(0, 10, 7, 10));
+        privNumPanel.setAlignmentX(CENTER_ALIGNMENT);
         
         // Privacidad de la box.
         JPanel privacyPanel = new JPanel();
@@ -153,29 +179,61 @@ public class ViewShowBox extends JFrame implements IView {
         privacyPanel.setMaximumSize(new Dimension(500, 80));
         privacyPanel.setMinimumSize(new Dimension(500, 80));
         privacyPanel.setOpaque(false);
-        privacyPanel.setBorder(new EmptyBorder(0, 10, 7, 10));
         privacyPanel.setAlignmentX(CENTER_ALIGNMENT);
 
         JLabel privacyTitle = new JLabel("Privacy");
-        privacyTitle.setAlignmentX(LEFT_ALIGNMENT);
+        privacyTitle.setAlignmentX(JPanel.CENTER_ALIGNMENT);
         privacyTitle.setForeground(Color.white);
-        privacyTitle.setFont(new Font("sans-serif", 1, 25));
+        privacyTitle.setFont(new Font("sans-serif", 1, 27));
         
         JLabel privacyText = new JLabel("There isn't any privacy info.");
-        privacyText.setAlignmentX(LEFT_ALIGNMENT);
+        privacyText.setAlignmentX(JPanel.CENTER_ALIGNMENT);
         privacyText.setForeground(Color.white);
         privacyText.setOpaque(false);
-        privacyText.setFont(new Font("sans-serif", 1, 14));
+        privacyText.setFont(new Font("sans-serif", 1, 23));
         if (box.getPrivacy() != null) {
         	privacyText.setText(box.getPrivacy().toString());
+        	if(box.getPrivacy().toString() == "Public") privacyText.setForeground(Color.green);
+        	else privacyText.setForeground(Color.red);
         }
 
         privacyPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         privacyPanel.add(privacyTitle);
         privacyPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         privacyPanel.add(privacyText);
+        
+        privNumPanel.add(privacyPanel);
+        
+        // Número de juegos de la box
+        
+        JPanel numGamePanel = new JPanel();
+        numGamePanel.setPreferredSize(new Dimension(500, 80));
+        numGamePanel.setMaximumSize(new Dimension(500, 80));
+        numGamePanel.setMinimumSize(new Dimension(500, 80));
+        numGamePanel.setOpaque(false);
+        numGamePanel.setAlignmentX(CENTER_ALIGNMENT);
+        
+        JLabel numGames = new JLabel();
+        numGames.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+        numGames.setForeground(Color.white);
+        numGames.setFont(new Font("sans-serif", 1, 27));
+        System.out.print(box.getGameList().size());
+        if(box.getGameList() != null) numGames.setText("Number of Games inside the box: " + box.getGameList().size());
+        else numGames.setText("Number of Games inside the box: 0");
+        
+        numGamePanel.add(numGames);
+        
+        privNumPanel.add(numGamePanel);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 1;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
 
-        midPanel.add(privacyPanel);
+        midPanel.add(privNumPanel, gbc);
 
 
         // Generos de la box.
@@ -200,31 +258,41 @@ public class ViewShowBox extends JFrame implements IView {
             	genrePanel.add(genreLabel(box.getGenres().get(i).toString()));
             }
         }
-
-        midPanel.add(genrePanel);
-
-        midPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         
-        // Descripción de la box.
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 1;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        
+        midPanel.add(genrePanel, gbc);
+
+        
+        // Descripción del juego.
         JPanelRound descPanel = new JPanelRound(new Color(12, 17, 21), new Color(74, 90, 151), new Color(12, 17, 21));
         descPanel.setBorder(new EmptyBorder(0, 10, 7, 10));
-        descPanel.setPreferredSize(new Dimension(600, 150));
-        descPanel.setMaximumSize(new Dimension(500, 150));
-        descPanel.setMinimumSize(new Dimension(500, 150));
+        descPanel.setPreferredSize(new Dimension(555, 150));
+        descPanel.setMaximumSize(new Dimension(555, 150));
+        descPanel.setMinimumSize(new Dimension(555, 150));
         descPanel.setLayout(new BoxLayout(descPanel, BoxLayout.Y_AXIS));
         descPanel.setAlignmentX(CENTER_ALIGNMENT);
         JLabel descTitle = new JLabel("Description");
         descTitle.setAlignmentX(CENTER_ALIGNMENT);
         descTitle.setForeground(Color.white);
         descTitle.setFont(new Font("sans-serif", 1, 25));
-        JTextArea descText = new JTextArea("There isn't any description.");
+        JTextPane descText = new JTextPane();
+        descText.setText("There isn't any description.");
         descText.setAlignmentX(CENTER_ALIGNMENT);
         descText.setForeground(Color.white);
-        descText.setOpaque(false);
-        descText.setFont(new Font("sans-serif", 1, 14));
-        descText.setLineWrap(true);
-        descText.setWrapStyleWord(true);
         descText.setEditable(false);
+        descText.setOpaque(false);
+        descText.setFont(new Font("sans-serif", 1, 17));
+        StyledDocument doc2 = descText.getStyledDocument();
+        SimpleAttributeSet center2 = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center2, StyleConstants.ALIGN_CENTER);
+        doc2.setParagraphAttributes(0, doc2.getLength(), center2, false); 
         if (box.getDescription() != null) {
             descText.setText(box.getDescription());
         }
@@ -250,9 +318,15 @@ public class ViewShowBox extends JFrame implements IView {
             }
         });
 
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridheight = 1;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
 
-
-        midPanel.add(descPanel);
+        midPanel.add(descPanel, gbc);
 
         this.pack();
         return midPanel;
@@ -262,7 +336,7 @@ public class ViewShowBox extends JFrame implements IView {
         JLabel comp = new JLabel(genre);
         comp.setAlignmentX(CENTER_ALIGNMENT);
         comp.setForeground(Color.white);
-        comp.setFont(new Font("sans-serif", 1, 15));
+        comp.setFont(new Font("sans-serif", 1, 18));
         return comp;
     }
 
