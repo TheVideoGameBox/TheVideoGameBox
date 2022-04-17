@@ -7,16 +7,17 @@ import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Updates;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.regex;
+import static com.mongodb.client.model.Filters.*;
 
 public class DAOBoxImp implements DAOBox {
 
@@ -67,29 +68,44 @@ public class DAOBoxImp implements DAOBox {
 	}
 
 	@Override
-    public void deleteFromDatabase(ObjectId id) {
-        try {
-            MongoDatabase db = Connection.getInstance().getConnection();
-            MongoCollection<Box> boxes = db.getCollection("boxes", Box.class);
-
-            boxes.deleteOne(eq("_id", id));
-        } catch (MongoException e) {
-
-        }
-    }
-
-	@Override
 	public List<TBox> searchAllByName(String name) {
 		List<TBox> result = new ArrayList<>();
 			try {
 				MongoDatabase db = Connection.getInstance().getConnection();
 				FindIterable<Box> iter = db.getCollection("boxes", Box.class).find(regex("name", Pattern.compile(name, Pattern.CASE_INSENSITIVE)));
 		        for (Box box : iter)
-		        	result.add(box.toTransfer());
+					if(box.isActive()) result.add(box.toTransfer());
 		    } catch (MongoException e) {
 		    	result = null;
 		    }
 			
 		return result;
 	}
+
+	@Override
+	public ObjectId deleteBox(TBox id) {
+		ObjectId result;
+		try {
+			MongoDatabase db = Connection.getInstance().getConnection();
+			Box box = db.getCollection("boxes", Box.class).findOneAndUpdate(eq("_id",  id), Updates.set("active", false));
+			result = box.getId();
+
+		} catch (MongoException e) {
+			return null;
+		}
+		return result;
+	}
+
+	@Override
+	public void deleteFromDatabase(ObjectId id) {
+		try {
+			MongoDatabase db = Connection.getInstance().getConnection();
+			MongoCollection<Box> boxes = db.getCollection("boxes", Box.class);
+
+			boxes.deleteOne(eq("_id", id));
+		} catch (MongoException e) {
+
+		}
+	}
+
 }

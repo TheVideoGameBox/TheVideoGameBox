@@ -9,6 +9,8 @@ public interface DAOBox {
 	public ObjectId create(TBox box);
 	public ObjectId addGame(ObjectId idBox, ObjectId idGame);
 	public List<ObjectId> listGames(TBox box);
-	public void deleteFromDatabase(ObjectId id);
 	public List<TBox> searchAllByName(String name);
+	public ObjectId deleteBox(TBox box);
+	public void deleteFromDatabase(ObjectId id);
+
 }
