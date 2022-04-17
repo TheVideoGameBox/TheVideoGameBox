@@ -66,14 +66,37 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		contentContainer.setAlignmentX(CENTER_ALIGNMENT);
 		contentContainer.setOpaque(false);
 
-		mainPanel.add(contentContainer);
+		JScrollPane scrollFrame = new JScrollPane(contentContainer);
+		contentContainer.setAutoscrolls(true);
+		scrollFrame.getVerticalScrollBar().setUnitIncrement(25);
+		scrollFrame.setOpaque(false);
+		scrollFrame.getViewport().setOpaque(false);
+
+		mainPanel.add(scrollFrame);
 				
 		// HEADER
 		JPanel headerContainer = new JPanel();
 		headerContainer.setMaximumSize(new Dimension(1200, 100));
 		headerContainer.setLayout(new BoxLayout(headerContainer, BoxLayout.X_AXIS));
 		headerContainer.setOpaque(false);
-		headerContainer.add(Box.createRigidArea(new Dimension(60, 0)));
+		headerContainer.add(Box.createRigidArea(new Dimension(15, 0)));
+		
+		//BOTON DE BACK
+        Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
+        backButton.buttonIcon();
+        backButton.setBounds(0, 11, 119, 50);
+        backButton.setToolTipText("Go back");
+        backButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ApplicationController.getInstance().back();
+                setVisible(false);
+            }
+        });
+        
+        headerContainer.add(backButton);
+        headerContainer.add(Box.createRigidArea(new Dimension(7,0)));
 				
 		// TITLE
 		JLabel title = new JLabel("Select a game to add");
@@ -82,10 +105,10 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		title.setForeground(Color.white);
 		title.setFont(new Font("sans-serif", 1, 20));
 		headerContainer.add(title);
-		headerContainer.add(Box.createRigidArea(new Dimension(80, 0)));
+		//headerContainer.add(Box.createRigidArea(new Dimension(, 0)));
 		
 		// ICONO DE MENU
-		Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80), false);
+		Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
 		icon.buttonIcon();
 		icon.setToolTipText("Back to main window");
 		icon.setAlignmentX(CENTER_ALIGNMENT);
@@ -96,7 +119,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-				dispose();
+				setVisible(false);
 	 		}
 		});
 				
@@ -155,7 +178,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ApplicationController.getInstance().action(new Context(Event.ADD_GAME_TO_BOX, aux));
-				dispose();
+				setVisible(false);
 			}
 
 			public void mousePressed(MouseEvent e) {
@@ -203,8 +226,10 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		buttonPanel.setMinimumSize(new Dimension(300, 135));
 		
 
-		Button viewInfo = new Button("Add Game", "add_icon.png", new Dimension(170, 45), false);
+		Button viewInfo = new Button("Add Game", "add_icon.png", Color.white, null, new Dimension(200, 45), Color.orange);
 		viewInfo.buttonIcon();
+		viewInfo.setBorderPainted(false);
+        viewInfo.setContentAreaFilled(false);
 		viewInfo.setAlignmentX(CENTER_ALIGNMENT);
 		viewInfo.setAlignmentY(CENTER_ALIGNMENT);
 		viewInfo.addActionListener(new ActionListener() {
@@ -212,7 +237,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 			public void actionPerformed(ActionEvent e) {
 				SAAbstractFactory.getInstance().createSABox().addGame(box.getId(), game.getId());
 				ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-				dispose();
+				setVisible(false);
 			}
 		});
 
@@ -230,8 +255,6 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		switch(context.getEvent()) {
 			case Event.RES_ADD_GAME_TO_BOX_OK:
 				JOptionPane.showMessageDialog(this, "Game added!","Add Game", JOptionPane.INFORMATION_MESSAGE);
-				ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-				dispose();
 				break;
 			case Event.RES_ADD_GAME_TO_BOX_KO:
 				JOptionPane.showMessageDialog(null, "Failed to add the game","Add Game", JOptionPane.ERROR_MESSAGE);

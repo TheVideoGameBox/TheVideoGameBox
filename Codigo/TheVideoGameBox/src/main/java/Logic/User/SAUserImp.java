@@ -6,6 +6,7 @@ import org.bson.types.ObjectId;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import java.util.Objects;
 
 public class SAUserImp implements SAUser {
 
@@ -20,6 +21,23 @@ public class SAUserImp implements SAUser {
 			
 		DAOUser daoUser = DAOAbstractFactory.getInstance().createDAOUser();
 		return daoUser.create(user);
+	}
+
+	@Override
+	public ObjectId logIn(TUser user) {			//Pendiente de encriptar cuando el sistema de registro lo este
+		TUser aux;
+		if(!correctEmail(user.getEmail()))
+			return null;
+		if(!correctPassword(user.getPassword()))
+			return null;
+
+		DAOUser daoUser = DAOAbstractFactory.getInstance().createDAOUser();
+		aux = daoUser.logIn(user.getEmail());
+		if(aux != null) {
+			if(Objects.equals(aux.getPassword(), user.getPassword()))
+				return aux.getId();
+		}
+		return null;
 	}
 
 	private boolean correctPassword(String password) {

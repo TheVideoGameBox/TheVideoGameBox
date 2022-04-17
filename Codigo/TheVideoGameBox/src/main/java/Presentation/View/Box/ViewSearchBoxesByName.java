@@ -30,8 +30,9 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		if(context.getEvent() == Event.RES_SEARCH_ALL_BOXES_BY_NAME_OK){
 			this.boxes = (List<TBox>) context.getData();
 			init_GUI();
-			refreshView();
 		}
+
+		refreshView();
 	}
 	
 	private void init_GUI() {
@@ -69,7 +70,22 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		headerContainer.setMaximumSize(new Dimension(1200, 100));
 		headerContainer.setLayout(new BoxLayout(headerContainer, BoxLayout.X_AXIS));
 		headerContainer.setOpaque(false);
-		headerContainer.add(Box.createRigidArea(new Dimension(60, 0)));
+		headerContainer.add(Box.createRigidArea(new Dimension(15, 0)));
+		
+		// BACK BUTTON
+        Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
+        backButton.buttonIcon();
+        backButton.setToolTipText("Go back");
+        backButton.setBounds(0, 11, 119, 50);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ApplicationController.getInstance().back();
+                setVisible(false);
+            }
+        });
+
+        headerContainer.add(backButton);
 		
 		// TITLE
 		JLabel title = new JLabel("Boxes Results");
@@ -78,10 +94,10 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		title.setForeground(Color.white);
 		title.setFont(new Font("sans-serif", 1, 20));
 		headerContainer.add(title);
-		headerContainer.add(Box.createRigidArea(new Dimension(130, 0)));
+		headerContainer.add(Box.createRigidArea(new Dimension(50, 0)));
 
 		// ICONO DE MENU
-		Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80), false);
+		Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
 		icon.buttonIcon();
 		icon.setToolTipText("Back to main window");
 		icon.setAlignmentX(CENTER_ALIGNMENT);
@@ -92,8 +108,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-				setVisible(false
-				);
+				setVisible(false);
 			}
 		});
 

@@ -2,8 +2,12 @@ package Logic.Box;
 
 import Data.Box.DAOBox;
 import Data.DAOAbstractFactory;
+import Data.Game.DAOGame;
+import Logic.Game.TGame;
 import org.bson.types.ObjectId;
 
+import java.awt.image.AreaAveragingScaleFilter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,9 +39,26 @@ public class SABoxImp implements SABox {
     }
 
     @Override
-    public List<ObjectId> listGames(TBox box) {
+    public List<TGame> listGames(TBox box) {
+        List<TGame> games = new ArrayList<TGame>();
         DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
-        return daoBox.listGames(box);
+        List<ObjectId> gameIDs = daoBox.listGames(box);
+
+        if(gameIDs == null)
+            return games;
+
+        DAOGame daoGame = DAOAbstractFactory.getInstance().createDAOGame();
+
+        for(ObjectId gameID : gameIDs){
+            TGame game = daoGame.searchOne(gameID);
+
+            if(game == null)
+                return new ArrayList<>();
+
+            games.add(game);
+        }
+
+        return games;
     }
 
     @Override
@@ -48,6 +69,12 @@ public class SABoxImp implements SABox {
         DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
 
         return daoBox.searchAllByName(name);
+    }
+
+    @Override
+    public ObjectId deleteBox(TBox box) {
+        DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+        return daoBox.deleteBox(box);
     }
 
     @Override
