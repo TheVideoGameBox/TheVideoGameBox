@@ -223,7 +223,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		
 		panel.add(namePanel, BorderLayout.WEST);
 		panel.add(buttonPanel, BorderLayout.EAST);
-		panel.add(modifyButtonPanel, BorderLayout.CENTER);
+		panel.add(modifyButtonPanel, BorderLayout.SOUTH);
 				
 		return panel;
 	}
