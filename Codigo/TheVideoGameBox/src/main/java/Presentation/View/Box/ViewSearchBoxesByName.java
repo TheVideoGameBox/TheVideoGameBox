@@ -198,7 +198,22 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 				setVisible(false);
 			}
 		});
-		buttonPanel.add(viewInfo, BorderLayout.CENTER);
+		buttonPanel.add(viewInfo, BorderLayout.WEST);
+		
+
+		Button viewAttributes = new Button("View attributes", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(200, 45), Color.orange);
+		viewAttributes.buttonIcon();
+		viewAttributes.setBorderPainted(false);
+		viewAttributes.setContentAreaFilled(false);
+		viewAttributes.setToolTipText("View attributes of the box");
+		viewAttributes.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ApplicationController.getInstance().action(new Context(Event.SHOW_BOX, box));
+				setVisible(false);
+			}
+		});
+		buttonPanel.add(viewAttributes, BorderLayout.EAST);
 		
 		//CONSTRUIR PANEL
 		

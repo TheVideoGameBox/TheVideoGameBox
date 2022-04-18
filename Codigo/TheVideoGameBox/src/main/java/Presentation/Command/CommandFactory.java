@@ -1,8 +1,10 @@
 package Presentation.Command;
 
 import Presentation.Command.Box.CommandCreateBox;
+import Presentation.Command.Box.CommandDeleteBox;
 import Presentation.Command.Box.CommandListGames;
 import Presentation.Command.Box.CommandSearchAllBoxesByName;
+import Presentation.Command.Box.CommandShowBox;
 import Presentation.Command.Game.CommandRandomGames;
 import Presentation.Command.Game.CommandSearchAllByName;
 import Presentation.Command.Game.CommandSearchOne;
@@ -30,6 +32,9 @@ public class CommandFactory extends CommandAbstractFactory{
             case Event.CREATE_USER:
             	command = new CommandCreateUser();
             	break;
+            case Event.SHOW_BOX:
+            	command = new CommandShowBox();
+            	break;
             case Event.LIST_GAMES_OF_BOX:
                 command = new CommandListGames();
                 break;
@@ -39,9 +44,14 @@ public class CommandFactory extends CommandAbstractFactory{
             case Event.LOGIN_USER:
                 command = new CommandLogIn();
                 break;
+            case Event.DELETE_BOX:
+                command = new CommandDeleteBox();
+                break;
             default:
+                command = null;
                 break;
         }
+
         return command;
     }
 }

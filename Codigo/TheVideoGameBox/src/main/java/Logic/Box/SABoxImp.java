@@ -82,8 +82,19 @@ public class SABoxImp implements SABox {
     }
 
     @Override
+    public ObjectId deleteBox(TBox box) {
+        DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+        return daoBox.deleteBox(box);
+    }
+
+    @Override
     public void deleteFromDatabase(ObjectId id){
         daoFactory.createDAOBox().deleteFromDatabase(id);
+    }
+
+    @Override
+    public TBox showBox(ObjectId _id) {
+        return DAOAbstractFactory.getInstance().createDAOBox().showBox(_id);
     }
 
 	private boolean correctPrivacy(boolean privacy) {
