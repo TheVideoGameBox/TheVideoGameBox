@@ -13,10 +13,11 @@ import static org.junit.Assert.*;
 public class SignUp {
 
     private static SAUser saUser;
-    private static ObjectId idUser;
-    private static final TUser correct = new TUser("TEST_SIGN_UP@email.com", "TEST_SIGN_UP", "TEST_SIGN_UP");
-    private static final TUser repeatedEmail = new TUser("TEST_SIGN_UP@email.com", "TEST_SIGN_UP2", "TEST_SIGN_UP");
-    private static final TUser repeatedUsername = new TUser("TEST_SIGN_UP2@email.com", "TEST_SIGN_UP", "TEST_SIGN_UP");
+    private static final TUser correct = new TUser("TEST_SIGN_UP1@email.com", "TEST_SIGN_UP1", "TEST_SIGN_UP1");
+    private static final TUser repeatedEmail = new TUser("TEST_SIGN_UP2@email.com", "TEST_SIGN_UP2", "TEST_SIGN_UP2");
+    private static final TUser repeatedUsername = new TUser("TEST_SIGN_UP3@email.com", "TEST_SIGN_UP3", "TEST_SIGN_UP3");
+
+    private ObjectId idUser;
 
     @BeforeClass
     public static void init() {
@@ -35,7 +36,7 @@ public class SignUp {
 
     @Test
     public void testRepeatedEmail() {
-        idUser = saUser.createUser(correct);
+        idUser = saUser.createUser(repeatedEmail);
         try {
             assertNull(saUser.createUser(repeatedEmail));
         } catch (Exception ae) {
@@ -45,7 +46,7 @@ public class SignUp {
 
     @Test
     public void testRepeatedUsername() {
-        idUser = saUser.createUser(correct);
+        idUser = saUser.createUser(repeatedUsername);
         try {
             assertNull(saUser.createUser(repeatedUsername));
         } catch (Exception ae) {
