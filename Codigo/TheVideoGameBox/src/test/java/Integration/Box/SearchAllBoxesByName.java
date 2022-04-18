@@ -5,12 +5,10 @@ import Logic.Box.Privacy;
 import Logic.Box.SABox;
 import Logic.Box.TBox;
 import Logic.SAAbstractFactory;
-import org.bson.types.ObjectId;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,7 +19,7 @@ public class SearchAllBoxesByName {
     private static SABox saBox;
 
     private static final TBox tBox = new TBox("TEST_SEARCH_ALL", "TEST_SEARCH_ALL", Privacy.PRIVATE,
-            new ArrayList<Genres>(Collections.singletonList(Genres.INDIE)), new ArrayList<ObjectId>());
+            Collections.singletonList(Genres.INDIE), Collections.emptyList());
 
     private static final String correct = "TEST_SEARCH_ALL";
     private static final String correctEmptyResult = "@!214_=-";
