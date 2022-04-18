@@ -82,6 +82,11 @@ public class SABoxImp implements SABox {
         DAOAbstractFactory.getInstance().createDAOBox().deleteFromDatabase(id);
     }
 
+    @Override
+    public TBox showBox(ObjectId _id) {
+        return DAOAbstractFactory.getInstance().createDAOBox().showBox(_id);
+    }
+
 	private boolean correctPrivacy(boolean privacy) {
 		return !Objects.isNull(privacy);
 	}
@@ -101,9 +106,4 @@ public class SABoxImp implements SABox {
     private boolean correctName(String name) {
         return name != null && name.length() > 0 && name.length() <= 50;
     }
-
-	@Override
-	public TBox showBox(ObjectId _id) {
-		return DAOAbstractFactory.getInstance().createDAOBox().showBox(_id);
-	}
 }
