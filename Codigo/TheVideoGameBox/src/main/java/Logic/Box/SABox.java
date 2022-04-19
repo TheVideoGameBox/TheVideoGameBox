@@ -13,7 +13,7 @@ public interface SABox {
 	public List<TBox> searchAllBoxesByName(String name);
 	public TBox showBox(ObjectId _id);
 	public ObjectId deleteBox(TBox box);
+	public ObjectId deleteGame(ObjectId idBox, ObjectId gameId);
 	public void deleteFromDatabase(ObjectId id);
-
 
 }

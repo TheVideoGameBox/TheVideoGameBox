@@ -31,15 +31,16 @@ import static Presentation.View.Utils.Images.logo;
 
 public class ViewMain extends JFrame implements IView{
 
-	public static boolean logged;
-	public static ObjectId id_logged;
+	public static boolean logged = false;
+	public static ObjectId id_logged = null;
 	private boolean desplegado;
-	private List<TGame> listRandom = new ArrayList<>();
+	private List<TGame> randomGames = new ArrayList<>();
+	private Button createBox;
+	private Button myBox;
 	private boolean hideView;		//Para poder controlar si la vista se ve o no desde el update
 
 	public ViewMain() {
 		super();
-		logged = false;
 		desplegado = true;
 		hideView = true;
 		initGUI();
@@ -50,23 +51,31 @@ public class ViewMain extends JFrame implements IView{
 	public void update(Context context) {
 		ApplicationController.getInstance().clearViewStack();
 
-		if(context.getEvent() == Event.RES_SEARCH_ALL_BY_NAME_KO){
-			JOptionPane.showMessageDialog(null, "There isn't any game with that name");
-			hideView = false;
+		switch (context.getEvent()) {
+			case Event.RES_SEARCH_ALL_BY_NAME_KO:
+				JOptionPane.showMessageDialog(null, "There isn't any game with that name");
+				hideView = false;
+				break;
+			case Event.RES_SEARCH_ALL_BOXES_BY_NAME_KO:
+				JOptionPane.showMessageDialog(null, "There isn't any box with that name");
+				hideView = false;
+				break;
+			case Event.RES_RANDOM_GAMES_OK:
+				randomGames = (List<TGame>) context.getData();
+				refreshView();
+				break;
+			case Event.RES_LOGIN_USER_OK:
+				id_logged = (ObjectId) context.getData();
+				break;
+			case Event.BACK:
+				refreshView();
+				break;
+			default:
+				break;
 		}
-		else if(context.getEvent() == Event.RES_SEARCH_ALL_BOXES_BY_NAME_KO){
-			JOptionPane.showMessageDialog(null, "There isn't any box with that name");
-			hideView = false;
-		}
-		else if(context.getEvent() == Event.RES_RANDOM_GAMES_OK) {
-			listRandom = (List<TGame>) context.getData();
-			refreshView();
-		}
-		else if(context.getEvent() == Event.BACK)
-			refreshView();
 	}
 
-	public void initGUI() {
+	private void initGUI() {
 		Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
 		this.setIconImage(iconFrame);
 		this.setPreferredSize(new Dimension(1150, 750));
@@ -88,7 +97,7 @@ public class ViewMain extends JFrame implements IView{
 	}
 
 
-	public JPanel creaTopPanel() {
+	private JPanel creaTopPanel() {
 		JPanel topPanel = new JPanel();
 		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
 		topPanel.setBackground(new Color(62, 80, 90));
@@ -198,9 +207,11 @@ public class ViewMain extends JFrame implements IView{
 				logIn.setVisible(true);
 				registry.setVisible(true);
 				logout.setVisible(false);
-				game.setVisible(false);
-				box.setVisible(false);
-				user.setVisible(false);
+				game.setVisible(true);
+				box.setVisible(true);
+				user.setVisible(true);
+				createBox.setVisible(false);
+				myBox.setVisible(false);
 				logged = false;
 			}
 
@@ -212,19 +223,16 @@ public class ViewMain extends JFrame implements IView{
 			logIn.setVisible(false);
 			registry.setVisible(false);
 			logout.setVisible(true);
-			game.setVisible(true);
-			box.setVisible(true);
-			user.setVisible(true);
 		}
 		else {							//Cambios para probar que funciona... Deben adaptarse a los criterios de PO
 			logIn.setVisible(true);
 			registry.setVisible(true);
 			logout.setVisible(false);
-			game.setVisible(true);
-			box.setVisible(true);
-			user.setVisible(true);
 		}
-		
+		game.setVisible(true);
+		box.setVisible(true);
+		user.setVisible(true);
+
 		top.add(logout);
 		
 		//PANEL DE JUEGOS
@@ -416,7 +424,6 @@ public class ViewMain extends JFrame implements IView{
 			}
 		});
 
-		
 		JPanel boxButtonPanel = new JPanel();
 		boxButtonPanel.setOpaque(false);
 		boxButtonPanel.setPreferredSize(new Dimension(250, 100));
@@ -569,7 +576,7 @@ public class ViewMain extends JFrame implements IView{
 	}
 
 
-	public JPanel creaMidPanel() {
+	private JPanel creaMidPanel() {
 		JPanel midpanel = new JPanel();
 		midpanel.setLayout(new BoxLayout(midpanel, BoxLayout.Y_AXIS));
 		midpanel.setBorder(new EmptyBorder(0, 10, 0, 10));
@@ -584,7 +591,7 @@ public class ViewMain extends JFrame implements IView{
 		iconPanel.setOpaque(false);
 		
 		JLabel icono = new JLabel();
-		icono.setIcon(new ImageIcon(getClass().getClassLoader().getResource("logo_medium_blanco.png")));
+		icono.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo_medium_blanco.png"))));
 		icono.setAlignmentX(JPanel.CENTER_ALIGNMENT);
 		icono.setAlignmentY(JPanel.CENTER_ALIGNMENT);
 		
@@ -592,9 +599,28 @@ public class ViewMain extends JFrame implements IView{
 		
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setOpaque(false);
-		
-		Button myBox = new Button("Create Box", null, Color.white, null, new Dimension(120, 50), Color.orange);
+		buttonPanel.setMaximumSize(new Dimension(215, 35));
+		buttonPanel.setMinimumSize(new Dimension(215, 35));
+		buttonPanel.setPreferredSize(new Dimension(215, 35));
+
+		createBox = new Button("Create Box", null, Color.white, null, new Dimension(90, 35), Color.orange);
+		createBox.button();
+		createBox.setVisible(logged);
+		createBox.setBorderPainted(false);
+		createBox.setContentAreaFilled(false);
+		createBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ApplicationController.getInstance().action(new Context(Event.VIEW_CREATE_BOX, null));
+				setVisible(false);
+			}
+		});
+
+		buttonPanel.add(createBox);
+
+		myBox = new Button("My Boxes", null, Color.BLUE, null, new Dimension(100, 35), Color.orange);
 		myBox.button();
+		myBox.setVisible(logged);
 		myBox.setBorderPainted(false);
 		myBox.setContentAreaFilled(false);
 		myBox.setAlignmentX(JPanel.RIGHT_ALIGNMENT);
@@ -607,9 +633,7 @@ public class ViewMain extends JFrame implements IView{
 				setVisible(false);
 			}
 		});
-		
 		buttonPanel.add(myBox);
-		
 		topPanel.add(iconPanel, BorderLayout.CENTER);
 		topPanel.add(buttonPanel, BorderLayout.EAST);
 		
@@ -623,8 +647,7 @@ public class ViewMain extends JFrame implements IView{
 		randomPanel.setMinimumSize(new Dimension(900, 420));
 		randomPanel.setLayout(new BoxLayout(randomPanel, BoxLayout.Y_AXIS));
 		randomPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-		
-		
+
 		JPanel panel1 = new JPanel();
 		panel1.setOpaque(false);
 		panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
@@ -633,13 +656,12 @@ public class ViewMain extends JFrame implements IView{
 		
 		//Falta funcion para coger 3 juegos randoms
 		//TODO REVISAR ESTO
-		List<TGame> randomGames = new ArrayList<>();
-		randomGames = SAAbstractFactory.getInstance().createSAGame().random();
-
-		for(TGame g : randomGames) {
-			panel1.add(gamePanel(g));
+		if(randomGames.isEmpty()) {
+			randomGames = SAAbstractFactory.getInstance().createSAGame().random();
+			for(TGame g : randomGames) {
+				panel1.add(gamePanel(g));
+			}
 		}
-
 		midpanel.add(topPanel);
 		midpanel.add(Box.createRigidArea(new Dimension(0,20)));
 		midpanel.add(randomPanel);
@@ -647,7 +669,7 @@ public class ViewMain extends JFrame implements IView{
 		return midpanel;
 	}
 	
-	public JPanel gamePanel(TGame g) {
+	private JPanel gamePanel(TGame g) {
 		JPanel main = new JPanel(new BorderLayout());
 		main.setMaximumSize(new Dimension(300, 400));
 		main.setMinimumSize(new Dimension(200, 400));
