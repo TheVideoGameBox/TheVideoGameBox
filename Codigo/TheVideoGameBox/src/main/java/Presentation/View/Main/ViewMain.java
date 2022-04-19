@@ -6,11 +6,10 @@ import Presentation.Controller.ApplicationController;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 import Presentation.View.IView;
+import Presentation.View.Utils.AutoCompleteTextField;
 import Presentation.View.Utils.Button;
 import Presentation.View.Utils.TextField;
 import org.bson.types.ObjectId;
-import org.jdesktop.xswingx.PromptSupport;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -24,6 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -294,6 +294,13 @@ public class ViewMain extends JFrame implements IView{
 		TextField textGame = new TextField(new Dimension(225, 30),"Name of the Game");
 		textGame.textField();
 		
+		ArrayList<String> items= new ArrayList<String>(Arrays.asList("Android", "PS4", "PC (Microsoft Windows)"));
+		AutoCompleteTextField textPlatform = new AutoCompleteTextField(new Dimension(225, 30), "Name of the Platform", items);
+		textPlatform.textField();
+		AutoCompleteTextField.setupAutoComplete(textPlatform, items);
+		textPlatform.setVisible(false);
+		
+		
 		class actionListenerSearchAllByName implements ActionListener{
 
 			@Override
@@ -318,9 +325,9 @@ public class ViewMain extends JFrame implements IView{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String search = textGame.getText();
+				String search = textPlatform.getText();
 				if(search.length() <= 50 && search.length() > 0) {
-					textGame.setText(null);
+					textPlatform.setText(null);
 					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BY_PLATFORM, search));
 					if(hideView)
 						setVisible(false);
@@ -335,7 +342,7 @@ public class ViewMain extends JFrame implements IView{
 			
 		}
 		textGame.addActionListener(new actionListenerSearchAllByName());
-		
+		textPlatform.addActionListener(new actionListenerSearchAllByPlatform());
 
 		
 
@@ -352,6 +359,7 @@ public class ViewMain extends JFrame implements IView{
 		gameButton.addActionListener(new actionListenerSearchAllByName());
 		
 		textGamePanel.add(textGame);
+		textGamePanel.add(textPlatform);
 		gameButtonPanel.add(gameButton);
 		
 		textGPanel.add(textGamePanel);
@@ -365,14 +373,19 @@ public class ViewMain extends JFrame implements IView{
 				   String itemSeleecionado = (String)comboBoxGame.getSelectedItem();
 				   switch (itemSeleecionado) {
 						case "By Name": {
-							textGame.setPrompt("Name of the Game");
-							textGame.addActionListener(new actionListenerSearchAllByName());
+							textGame.setVisible(true);
+							textPlatform.setVisible(false);
+							textGamePanel.revalidate();
+							textGamePanel.repaint();
 							gameButton.addActionListener(new actionListenerSearchAllByName());
+							
 							break;
 						}
 						case "By Platform": {
-							textGame.setPrompt("Name of the Platform");
-							textGame.addActionListener(new actionListenerSearchAllByPlatform());
+							textGame.setVisible(false);
+							textPlatform.setVisible(true);
+							textGamePanel.revalidate();
+							textGamePanel.repaint();
 							gameButton.addActionListener(new actionListenerSearchAllByPlatform());
 							break;
 						}
