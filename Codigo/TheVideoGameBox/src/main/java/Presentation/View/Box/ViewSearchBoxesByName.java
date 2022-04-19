@@ -186,9 +186,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		//
 		
 		// MODIFY BOX BUTTON
-		JPanel modifyButtonPanel = new JPanel(new BorderLayout());
-		modifyButtonPanel.setOpaque(false);
-		Button modifyInfo = new Button("Modify Box Info", "modify_icon.png", Color.white, new Color(50,170,9), new Dimension(200, 45), Color.orange);
+		Button modifyInfo = new Button("Modify", "modify_icon.png", Color.white, new Color(50,170,9), new Dimension(100, 45), Color.orange);
 		modifyInfo.buttonIcon();
 		modifyInfo.setBorderPainted(false);
 		modifyInfo.setContentAreaFilled(false);
@@ -196,20 +194,20 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		modifyInfo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ApplicationController.getInstance().action(new Context(Event.MODIFY_BOX, box));		
+				ApplicationController.getInstance().action(new Context(Event.VIEW_MODIFY_BOX, box));		
 				setVisible(false);
 			}
 		});
-		modifyButtonPanel.add(modifyInfo, BorderLayout.CENTER);
+	
 		
 		//BUTTON PANEL
 		JPanel buttonPanel = new JPanel(new BorderLayout());
 		buttonPanel.setOpaque(false);
-		Button viewInfo = new Button("View Games", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(200, 45), Color.orange);
+		Button viewInfo = new Button("Games", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(100, 45), Color.orange);
 		viewInfo.buttonIcon();
 		viewInfo.setBorderPainted(false);
 		viewInfo.setContentAreaFilled(false);
-		viewInfo.setToolTipText("Search a Box by Name");
+		viewInfo.setToolTipText("View games of box");
 		viewInfo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -219,12 +217,13 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		});
 		buttonPanel.add(viewInfo, BorderLayout.CENTER);
 		
+		buttonPanel.add(modifyInfo, BorderLayout.EAST);
+		
 		//CONSTRUIR PANEL
 		
 		panel.add(namePanel, BorderLayout.WEST);
 		panel.add(buttonPanel, BorderLayout.EAST);
-		panel.add(modifyButtonPanel, BorderLayout.SOUTH);
-				
+		
 		return panel;
 	}
 

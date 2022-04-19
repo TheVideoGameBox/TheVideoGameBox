@@ -131,14 +131,6 @@ public class ViewModifyBox extends JFrame implements IView {
         midPanel.setLayout(new BoxLayout(midPanel, BoxLayout.Y_AXIS));
         midPanel.setOpaque(false);
 
-        // Create account label
-        JLabel createLabel = new JLabel("Modify box ");
-        createLabel.setHorizontalAlignment((SwingConstants.LEFT));
-        createLabel.setFont(new Font("Leelawadee", Font.BOLD, 30));
-        createLabel.setForeground(Color.WHITE);
-        createLabel.setAlignmentX(CENTER_ALIGNMENT);
-
-        midPanel.add(createLabel);
         midPanel.add(Box.createRigidArea(new Dimension(0, 15)));
         midPanel.add(modifyBoxPanel());
 
@@ -171,8 +163,8 @@ public class ViewModifyBox extends JFrame implements IView {
 	    TextField nameBox = textField();
 	    nameBox.setToolTipText("Type new name");
 	    nameBox.setFont(new Font("Leelawadee", Font.PLAIN, 13));
-	    nameBox.setColumns(10);
 	    nameBox.setBounds(81, 180, 401, 30);
+	    nameBox.setColumns(10);
 	    auxPanel.add(nameBox);
 	    auxPanel.add(Box.createRigidArea(new Dimension(50, 15)));
 
@@ -196,12 +188,103 @@ public class ViewModifyBox extends JFrame implements IView {
 
 	    // GENRES LABEL
 	    JLabel labelGenres = new JLabel("Genres:");
-	    labelDescription.setToolTipText("Select Genres");
-	    labelDescription.setForeground(Color.WHITE);
-	    labelDescription.setFont(new Font("Leelawadee", Font.BOLD, 15));
-	    labelDescription.setAlignmentX(0.5f);
-	    labelDescription.setBounds(238, 162, 97, 14);
+	    labelGenres.setToolTipText("Select Genres");
+	    labelGenres.setForeground(Color.WHITE);
+	    labelGenres.setFont(new Font("Leelawadee", Font.BOLD, 15));
+	    labelGenres.setAlignmentX(0.5f);
+	    labelGenres.setBounds(62, 277, 60, 19);
 	    auxPanel.add(labelGenres);
+	    
+	 // Checkbox Shooter
+	    JCheckBox checkBoxShooter = new JCheckBox("Shooter");
+	    checkBoxShooter.setOpaque(false);
+	    checkBoxShooter.setForeground(Color.WHITE);
+	    checkBoxShooter.setFont(new Font("Leelawadee", Font.BOLD, 13));
+	    checkBoxShooter.setFocusable(false);
+	    checkBoxShooter.setBounds(6, 7, 83, 23);
+	    auxPanel.add(checkBoxShooter);
+	        
+	    // Checkbox Strategy
+	    JCheckBox checkBoxStrategy = new JCheckBox("Strategy");
+	    checkBoxStrategy.setOpaque(false);
+	    checkBoxStrategy.setForeground(Color.WHITE);
+	    checkBoxStrategy.setFont(new Font("Leelawadee", Font.BOLD, 13));
+	    checkBoxStrategy.setFocusable(false);
+	    checkBoxStrategy.setBounds(6, 33, 91, 23);
+	    auxPanel.add(checkBoxStrategy);
+
+	    // Checkbox Indie
+	    JCheckBox checkBoxIndie = new JCheckBox("Indie");
+	    checkBoxIndie.setOpaque(false);
+	    checkBoxIndie.setForeground(Color.WHITE);
+	    checkBoxIndie.setFont(new Font("Leelawadee", Font.BOLD, 13));
+	    checkBoxIndie.setFocusable(false);
+	    checkBoxIndie.setBounds(6, 59, 83, 23);
+	    auxPanel.add(checkBoxIndie);
+
+	    // Checkbox RPG
+	    JCheckBox checkBoxRPG = new JCheckBox("RPG");
+	    checkBoxRPG.setOpaque(false);
+	    checkBoxRPG.setForeground(Color.WHITE);
+	    checkBoxRPG.setFont(new Font("Leelawadee", Font.BOLD, 13));
+	    checkBoxRPG.setFocusable(false);
+	    checkBoxRPG.setBounds(6, 85, 83, 23);
+	    auxPanel.add(checkBoxRPG);
+
+	    // Checkbox Racing
+	    JCheckBox checkBoxRacing = new JCheckBox("Racing");
+	    checkBoxRacing.setOpaque(false);
+	    checkBoxRacing.setForeground(Color.WHITE);
+	    checkBoxRacing.setFont(new Font("Leelawadee", Font.BOLD, 13));
+	    checkBoxRacing.setFocusable(false);
+	    checkBoxRacing.setBounds(6, 111, 83, 23);
+	    auxPanel.add(checkBoxRacing);
+
+	    // Checkbox Sandbox
+	    JCheckBox checkBoxSandbox = new JCheckBox("Sandbox");
+	    checkBoxSandbox.setHorizontalAlignment(SwingConstants.CENTER);
+	    checkBoxSandbox.setOpaque(false);
+	    checkBoxSandbox.setForeground(Color.WHITE);
+	    checkBoxSandbox.setFont(new Font("Leelawadee", Font.BOLD, 13));
+	    checkBoxSandbox.setFocusable(false);
+	    checkBoxSandbox.setBounds(99, 20, 83, 23);
+	    auxPanel.add(checkBoxSandbox);
+
+	    // Checkbox Horror
+	    JCheckBox checkBoxHorror = new JCheckBox("Horror");
+	    checkBoxHorror.setOpaque(false);
+	    checkBoxHorror.setForeground(Color.WHITE);
+	    checkBoxHorror.setFont(new Font("Leelawadee", Font.BOLD, 13));
+	    checkBoxHorror.setFocusable(false);
+	    checkBoxHorror.setBounds(101, 46, 81, 23);
+	    auxPanel.add(checkBoxHorror);
+
+	    // Checkbox Sports
+	    JCheckBox checkBoxSports = new JCheckBox("Sports");
+	    checkBoxSports.setOpaque(false);
+	    checkBoxSports.setForeground(Color.WHITE);
+	    checkBoxSports.setFont(new Font("Leelawadee", Font.BOLD, 13));
+	    checkBoxSports.setFocusable(false);
+	    checkBoxSports.setBounds(101, 72, 81, 23);
+	    auxPanel.add(checkBoxSports);
+
+	    // Checkbox Survival
+	    JCheckBox checkBoxSurvival = new JCheckBox("Survival");
+	    checkBoxSurvival.setOpaque(false);
+	    checkBoxSurvival.setForeground(Color.WHITE);
+	    checkBoxSurvival.setFont(new Font("Leelawadee", Font.BOLD, 13));
+	    checkBoxSurvival.setFocusable(false);
+	    checkBoxSurvival.setBounds(101, 96, 114, 23);
+	    auxPanel.add(checkBoxSurvival);
+	    
+	    // PRIVACY LABEL
+	    JLabel privacyLabel = new JLabel("Privacy:");
+	    privacyLabel.setToolTipText("Select Privacy");
+	    privacyLabel.setForeground(Color.WHITE);
+	    privacyLabel.setFont(new Font("Leelawadee", Font.BOLD, 15));
+	    privacyLabel.setAlignmentX(0.5f);
+	    privacyLabel.setBounds(238, 162, 97, 14);
+	    auxPanel.add(privacyLabel);
 	        
 	    // ComboBox para Privacy
 	    JComboBox comboBoxPrivacy = new JComboBox(Privacy.values());
@@ -217,88 +300,7 @@ public class ViewModifyBox extends JFrame implements IView {
 	    panelCategories.setLayout(null);
 	    auxPanel.add(panelCategories);
 	        
-	    // Checkbox Shooter
-	    JCheckBox checkBoxShooter = new JCheckBox("Shooter");
-	    checkBoxShooter.setOpaque(false);
-	    checkBoxShooter.setForeground(Color.WHITE);
-	    checkBoxShooter.setFont(new Font("Leelawadee", Font.BOLD, 13));
-	    checkBoxShooter.setFocusable(false);
-
-	    checkBoxShooter.setBounds(6, 7, 83, 23);
-	    panelCategories.add(checkBoxShooter);
-	        
-	    // Checkbox Strategy
-	    JCheckBox checkBoxStrategy = new JCheckBox("Strategy");
-	    checkBoxStrategy.setOpaque(false);
-	    checkBoxStrategy.setForeground(Color.WHITE);
-	    checkBoxStrategy.setFont(new Font("Leelawadee", Font.BOLD, 13));
-	    checkBoxStrategy.setFocusable(false);
-	    checkBoxStrategy.setBounds(6, 33, 91, 23);
-	    panelCategories.add(checkBoxStrategy);
-
-	    // Checkbox Indie
-	    JCheckBox checkBoxIndie = new JCheckBox("Indie");
-	    checkBoxIndie.setOpaque(false);
-	    checkBoxIndie.setForeground(Color.WHITE);
-	    checkBoxIndie.setFont(new Font("Leelawadee", Font.BOLD, 13));
-	    checkBoxIndie.setFocusable(false);
-	    checkBoxIndie.setBounds(6, 59, 83, 23);
-	    panelCategories.add(checkBoxIndie);
-
-	    // Checkbox RPG
-	    JCheckBox checkBoxRPG = new JCheckBox("RPG");
-	    checkBoxRPG.setOpaque(false);
-	    checkBoxRPG.setForeground(Color.WHITE);
-	    checkBoxRPG.setFont(new Font("Leelawadee", Font.BOLD, 13));
-	    checkBoxRPG.setFocusable(false);
-	    checkBoxRPG.setBounds(6, 85, 83, 23);
-	    panelCategories.add(checkBoxRPG);
-
-	    // Checkbox Racing
-	    JCheckBox checkBoxRacing = new JCheckBox("Racing");
-	    checkBoxRacing.setOpaque(false);
-	    checkBoxRacing.setForeground(Color.WHITE);
-	    checkBoxRacing.setFont(new Font("Leelawadee", Font.BOLD, 13));
-	    checkBoxRacing.setFocusable(false);
-	    checkBoxRacing.setBounds(6, 111, 83, 23);
-	    panelCategories.add(checkBoxRacing);
-
-	    // Checkbox Sandbox
-	    JCheckBox checkBoxSandbox = new JCheckBox("Sandbox");
-	    checkBoxSandbox.setHorizontalAlignment(SwingConstants.CENTER);
-	    checkBoxSandbox.setOpaque(false);
-	    checkBoxSandbox.setForeground(Color.WHITE);
-	    checkBoxSandbox.setFont(new Font("Leelawadee", Font.BOLD, 13));
-	    checkBoxSandbox.setFocusable(false);
-	    checkBoxSandbox.setBounds(99, 20, 83, 23);
-	    panelCategories.add(checkBoxSandbox);
-
-	    // Checkbox Horror
-	    JCheckBox checkBoxHorror = new JCheckBox("Horror");
-	    checkBoxHorror.setOpaque(false);
-	    checkBoxHorror.setForeground(Color.WHITE);
-	    checkBoxHorror.setFont(new Font("Leelawadee", Font.BOLD, 13));
-	    checkBoxHorror.setFocusable(false);
-	    checkBoxHorror.setBounds(101, 46, 81, 23);
-	    panelCategories.add(checkBoxHorror);
-
-	    // Checkbox Sports
-	    JCheckBox checkBoxSports = new JCheckBox("Sports");
-	    checkBoxSports.setOpaque(false);
-	    checkBoxSports.setForeground(Color.WHITE);
-	    checkBoxSports.setFont(new Font("Leelawadee", Font.BOLD, 13));
-	    checkBoxSports.setFocusable(false);
-	    checkBoxSports.setBounds(101, 72, 81, 23);
-	    panelCategories.add(checkBoxSports);
-
-	    // Checkbox Survival
-	    JCheckBox checkBoxSurvival = new JCheckBox("Survival");
-	    checkBoxSurvival.setOpaque(false);
-	    checkBoxSurvival.setForeground(Color.WHITE);
-	    checkBoxSurvival.setFont(new Font("Leelawadee", Font.BOLD, 13));
-	    checkBoxSurvival.setFocusable(false);
-	    checkBoxSurvival.setBounds(101, 96, 114, 23);
-	    panelCategories.add(checkBoxSurvival);
+	    
 
 	    // PRIVACY LABEL
 	    JLabel labelPrivacy = new JLabel("Privacy:");
@@ -308,25 +310,6 @@ public class ViewModifyBox extends JFrame implements IView {
 	    labelPrivacy.setAlignmentX(0.5f);
 	    labelPrivacy.setBounds(334, 277, 66, 19);
 	    auxPanel.add(labelPrivacy);	 
-	        
-	    // BACK BUTTON
-	    JPanel backButtonContainer = new JPanel();
-	    backButtonContainer.setLayout(null);
-	    backButtonContainer.setOpaque(false);
-	    backButtonContainer.setBounds(10, 11, 196, 67);
-	    Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
-	    backButton.buttonIcon();
-	    backButton.setBounds(0, 11, 119, 50);
-	    backButton.setToolTipText("Back to the main window");
-	    backButton.addActionListener(new ActionListener() {
-	          @Override
-	          public void actionPerformed(ActionEvent e) {
-	              ApplicationController.getInstance().back();
-	              setVisible(false);
-	          }
-	    });
-	    auxPanel.add(backButtonContainer);
-	    backButtonContainer.add(backButton);
 	         
 	    // Check Genres
 	    genres = new ArrayList<>();
@@ -358,7 +341,7 @@ public class ViewModifyBox extends JFrame implements IView {
 		    genres.add(Genres.SURVIVAL);
 		}
 	         
-	    // Botón para confirmar
+	    // Botón para confirmar los cambios
 		Button btnModify = new Button("MODIFY", new Color(64, 147, 255), new Dimension(120, 30));
 		btnModify.button();
 		btnModify.setBounds(232, 378, 127, 39);
