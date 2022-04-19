@@ -226,22 +226,22 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		buttonPanel.setMinimumSize(new Dimension(300, 135));
 		
 
-		Button viewInfo = new Button("Add Game", "add_icon.png", Color.white, null, new Dimension(200, 45), Color.orange);
-		viewInfo.buttonIcon();
-		viewInfo.setBorderPainted(false);
-        viewInfo.setContentAreaFilled(false);
-		viewInfo.setAlignmentX(CENTER_ALIGNMENT);
-		viewInfo.setAlignmentY(CENTER_ALIGNMENT);
-		viewInfo.addActionListener(new ActionListener() {
+		Button addGame = new Button("Add Game", "add_icon.png", Color.white, null, new Dimension(200, 45), Color.orange);
+		addGame.buttonIcon();
+		addGame.setBorderPainted(false);
+        addGame.setContentAreaFilled(false);
+		addGame.setAlignmentX(CENTER_ALIGNMENT);
+		addGame.setAlignmentY(CENTER_ALIGNMENT);
+		addGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SAAbstractFactory.getInstance().createSABox().addGame(box.getId(), game.getId());
-				ApplicationController.getInstance().action(new Context(Event.LIST_GAMES_OF_BOX, box));
+				ApplicationController.getInstance().action(new Context(Event.BACK, box));
 				setVisible(false);
 			}
 		});
 
-		buttonPanel.add(viewInfo, BorderLayout.CENTER);
+		buttonPanel.add(addGame, BorderLayout.CENTER);
 		
 		//CONSTRUIR PANEL
 		panel.add(namePanel, BorderLayout.WEST);

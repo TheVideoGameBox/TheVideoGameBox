@@ -44,7 +44,11 @@ public class ViewListGamesBox extends JFrame implements IView {
 
     @Override
     public void update(Context context) {
+        if(Event.BACK == context.getEvent())
+            tBox = (TBox) context.getData();
+
         refreshView();
+
     }
 
     public void init_GUI() {
