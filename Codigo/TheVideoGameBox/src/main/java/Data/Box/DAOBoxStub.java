@@ -22,6 +22,11 @@ public class DAOBoxStub implements DAOBox {
     }
 
     @Override
+    public ObjectId deleteGame(ObjectId idBox, ObjectId idGame) {
+        return null;
+    }
+
+    @Override
     public List<ObjectId> listGames(TBox tBox) {
         return new ArrayList<ObjectId>();
     }
