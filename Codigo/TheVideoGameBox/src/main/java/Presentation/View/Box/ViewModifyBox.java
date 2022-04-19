@@ -40,8 +40,30 @@ import Presentation.View.Utils.TextField;
 
 public class ViewModifyBox extends JFrame implements IView {
 	
+	private static final long serialVersionUID = 1L;
+
 	private TBox box;
-	private List<Genres> genres;
+	
+	JPanelConFondo mainPanel;
+	
+	private JPanel auxPanel;
+	private JComboBox comboBoxPrivacy;
+	
+	private JPanel panelCheckbox;
+	private JCheckBox checkBoxShooter;
+	private JCheckBox checkBoxStrategy;
+	private JCheckBox checkBoxIndie;
+	private JCheckBox checkBoxRPG;
+	private JCheckBox checkBoxRacing;
+	private JCheckBox checkBoxSandbox;
+	private JCheckBox checkBoxHorror;
+	private JCheckBox checkBoxSports;
+	private JCheckBox checkBoxSurvival;
+
+	private TextField nameBox;
+	private TextField descriptionBox;
+	
+	private JPanel backButtonContainer;
 	
 	public ViewModifyBox(TBox box) {
 		super();
@@ -50,98 +72,28 @@ public class ViewModifyBox extends JFrame implements IView {
 		initGUI();
 	}
 	
-	@Override
-	public void update(Context context) {
-		 switch (context.getEvent()) {
-         case Event.RES_MODIFY_BOX_OK:
-             JOptionPane.showMessageDialog(this, "Box data updated!", "Modify Box", JOptionPane.INFORMATION_MESSAGE);
-             ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-             setVisible(false);
-             break;
-         case Event.RES_MODIFY_BOX_KO:
-             JOptionPane.showMessageDialog(null, "Failed to update the Box", "Modify Box", JOptionPane.ERROR_MESSAGE);
-             break;
-     }
-	}
-	
 	private void initGUI() {
-		this.setPreferredSize(new Dimension(900, 700));
         Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
         this.setIconImage(iconFrame);
-        
-        JPanelConFondo mainPanel = new JPanelConFondo();
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.setImagen(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(backGround))).getImage());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.add(mainPanel);
+        getContentPane().removeAll();
+        this.setPreferredSize(new Dimension(900, 700));
+        setLocation(400, 100);
+        setBounds(100, 100, 887, 536);
         
-        JPanel topPanel = createTopPanel();
-        JPanel midPanel = createMidPanel();
-        
-        mainPanel.add(topPanel, BorderLayout.NORTH);
-        mainPanel.add(midPanel, BorderLayout.SOUTH);
+        mainPanel = new JPanelConFondo();
+        mainPanel.setBorder(null);
+        mainPanel.setImagen(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(backGround))).getImage());
+        getContentPane().add(mainPanel);
+        mainPanel.setLayout(null);
 
-        this.pack();
-	}
-	
-	private JPanel createTopPanel() {
-        JPanel topPanel = new JPanel();
-        topPanel.setPreferredSize(new Dimension(1150, 100));
-        topPanel.setMaximumSize(new Dimension(1150, 100));
-        topPanel.setMinimumSize(new Dimension(1150, 100));
-        topPanel.setOpaque(false);
-        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
-
-        // BACK BUTTON
-        Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
-        backButton.buttonIcon();
-        backButton.setBorderPainted(false);
-        backButton.setContentAreaFilled(false);
-        backButton.setBounds(0, 11, 119, 50);
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ApplicationController.getInstance().back();
-                setVisible(false);
-            }
-        });
-
-        // ICONO DE MENU
-        Button icon = new Button(null, "logo_small_blanco.png", new Dimension(500, 80));
-        icon.buttonIcon();
-        icon.setToolTipText("Back to main window");
-
-        icon.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ApplicationController.getInstance().action(new Context(Event.VIEW, null));
-                setVisible(false);
-            }
-        });
-		topPanel.add(backButton);
-        topPanel.add(Box.createRigidArea(new Dimension(50, 0)));
-        topPanel.add(icon);
-
-        return topPanel;
-    }
-
-	private JPanel createMidPanel() {
-        JPanel midPanel = new JPanel();
-        midPanel.setPreferredSize(new Dimension(1150, 550));
-        midPanel.setLayout(new BoxLayout(midPanel, BoxLayout.Y_AXIS));
-        midPanel.setOpaque(false);
-
-        midPanel.add(Box.createRigidArea(new Dimension(0, 15)));
-        midPanel.add(modifyBoxPanel());
-
-        return midPanel;
-    }
-	
-	private JPanel modifyBoxPanel() {
-	    JPanel auxPanel = new JPanel();
-	    auxPanel.setLayout(new BoxLayout(auxPanel, BoxLayout.Y_AXIS));
+        auxPanel = new JPanel();
+        auxPanel.setBounds(203, 23, 556, 446);
 	    auxPanel.setOpaque(false);
-	        
+        mainPanel.add(auxPanel);
+        auxPanel.setLayout(null);
+        
+        // TITLE LABEL
 	    JLabel titleLabel = new JLabel("Modify Box");
 	    titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 	    titleLabel.setAlignmentX(CENTER_ALIGNMENT);
@@ -149,6 +101,14 @@ public class ViewModifyBox extends JFrame implements IView {
 	    titleLabel.setBounds(158, 22, 225, 59);
 	    titleLabel.setForeground(SystemColor.controlHighlight);
 	    auxPanel.add(titleLabel);
+        
+	    // Input para el name
+	    TextField nameBox = textField();
+	    nameBox.setToolTipText("Modify box name");
+	    nameBox.setFont(new Font("Leelawadee", Font.PLAIN, 13));
+	    nameBox.setBounds(81, 114, 401, 30);
+	    auxPanel.add(nameBox);
+	    nameBox.setColumns(10);
 
 	    // BOX NAME LABEL
 	    JLabel labelName = new JLabel("Name:");
@@ -158,16 +118,7 @@ public class ViewModifyBox extends JFrame implements IView {
 	    labelName.setAlignmentX(CENTER_ALIGNMENT);
 	    labelName.setBounds(257, 97, 66, 14);
 	    auxPanel.add(labelName);
-
-	    // Input para el name
-	    TextField nameBox = textField();
-	    nameBox.setToolTipText("Type new name");
-	    nameBox.setFont(new Font("Leelawadee", Font.PLAIN, 13));
-	    nameBox.setBounds(81, 180, 401, 30);
-	    nameBox.setColumns(10);
-	    auxPanel.add(nameBox);
-	    auxPanel.add(Box.createRigidArea(new Dimension(50, 15)));
-
+        
 	    // DESCRIPTION LABEL
 	    JLabel labelDescription = new JLabel("Description:");
 	    labelDescription.setToolTipText("");
@@ -176,16 +127,15 @@ public class ViewModifyBox extends JFrame implements IView {
 	    labelDescription.setAlignmentX(0.5f);
 	    labelDescription.setBounds(238, 162, 97, 14);
 	    auxPanel.add(labelDescription);
-
-	    // Input para el description
+	    
+	 	// Input para el description
 	    TextField descriptionBox = textField();
 	    descriptionBox.setToolTipText("Type new description");
 	    descriptionBox.setFont(new Font("Leelawadee", Font.PLAIN, 13));
 	    descriptionBox.setColumns(10);
 	    descriptionBox.setBounds(81, 180, 401, 30);
 	    auxPanel.add(descriptionBox);
-	    auxPanel.add(Box.createRigidArea(new Dimension(50, 15)));
-
+	    
 	    // GENRES LABEL
 	    JLabel labelGenres = new JLabel("Genres:");
 	    labelGenres.setToolTipText("Select Genres");
@@ -195,177 +145,39 @@ public class ViewModifyBox extends JFrame implements IView {
 	    labelGenres.setBounds(62, 277, 60, 19);
 	    auxPanel.add(labelGenres);
 	    
-	 // Checkbox Shooter
-	    JCheckBox checkBoxShooter = new JCheckBox("Shooter");
-	    checkBoxShooter.setOpaque(false);
-	    checkBoxShooter.setForeground(Color.WHITE);
-	    checkBoxShooter.setFont(new Font("Leelawadee", Font.BOLD, 13));
-	    checkBoxShooter.setFocusable(false);
-	    checkBoxShooter.setBounds(6, 7, 83, 23);
-	    auxPanel.add(checkBoxShooter);
-	        
-	    // Checkbox Strategy
-	    JCheckBox checkBoxStrategy = new JCheckBox("Strategy");
-	    checkBoxStrategy.setOpaque(false);
-	    checkBoxStrategy.setForeground(Color.WHITE);
-	    checkBoxStrategy.setFont(new Font("Leelawadee", Font.BOLD, 13));
-	    checkBoxStrategy.setFocusable(false);
-	    checkBoxStrategy.setBounds(6, 33, 91, 23);
-	    auxPanel.add(checkBoxStrategy);
-
-	    // Checkbox Indie
-	    JCheckBox checkBoxIndie = new JCheckBox("Indie");
-	    checkBoxIndie.setOpaque(false);
-	    checkBoxIndie.setForeground(Color.WHITE);
-	    checkBoxIndie.setFont(new Font("Leelawadee", Font.BOLD, 13));
-	    checkBoxIndie.setFocusable(false);
-	    checkBoxIndie.setBounds(6, 59, 83, 23);
-	    auxPanel.add(checkBoxIndie);
-
-	    // Checkbox RPG
-	    JCheckBox checkBoxRPG = new JCheckBox("RPG");
-	    checkBoxRPG.setOpaque(false);
-	    checkBoxRPG.setForeground(Color.WHITE);
-	    checkBoxRPG.setFont(new Font("Leelawadee", Font.BOLD, 13));
-	    checkBoxRPG.setFocusable(false);
-	    checkBoxRPG.setBounds(6, 85, 83, 23);
-	    auxPanel.add(checkBoxRPG);
-
-	    // Checkbox Racing
-	    JCheckBox checkBoxRacing = new JCheckBox("Racing");
-	    checkBoxRacing.setOpaque(false);
-	    checkBoxRacing.setForeground(Color.WHITE);
-	    checkBoxRacing.setFont(new Font("Leelawadee", Font.BOLD, 13));
-	    checkBoxRacing.setFocusable(false);
-	    checkBoxRacing.setBounds(6, 111, 83, 23);
-	    auxPanel.add(checkBoxRacing);
-
-	    // Checkbox Sandbox
-	    JCheckBox checkBoxSandbox = new JCheckBox("Sandbox");
-	    checkBoxSandbox.setHorizontalAlignment(SwingConstants.CENTER);
-	    checkBoxSandbox.setOpaque(false);
-	    checkBoxSandbox.setForeground(Color.WHITE);
-	    checkBoxSandbox.setFont(new Font("Leelawadee", Font.BOLD, 13));
-	    checkBoxSandbox.setFocusable(false);
-	    checkBoxSandbox.setBounds(99, 20, 83, 23);
-	    auxPanel.add(checkBoxSandbox);
-
-	    // Checkbox Horror
-	    JCheckBox checkBoxHorror = new JCheckBox("Horror");
-	    checkBoxHorror.setOpaque(false);
-	    checkBoxHorror.setForeground(Color.WHITE);
-	    checkBoxHorror.setFont(new Font("Leelawadee", Font.BOLD, 13));
-	    checkBoxHorror.setFocusable(false);
-	    checkBoxHorror.setBounds(101, 46, 81, 23);
-	    auxPanel.add(checkBoxHorror);
-
-	    // Checkbox Sports
-	    JCheckBox checkBoxSports = new JCheckBox("Sports");
-	    checkBoxSports.setOpaque(false);
-	    checkBoxSports.setForeground(Color.WHITE);
-	    checkBoxSports.setFont(new Font("Leelawadee", Font.BOLD, 13));
-	    checkBoxSports.setFocusable(false);
-	    checkBoxSports.setBounds(101, 72, 81, 23);
-	    auxPanel.add(checkBoxSports);
-
-	    // Checkbox Survival
-	    JCheckBox checkBoxSurvival = new JCheckBox("Survival");
-	    checkBoxSurvival.setOpaque(false);
-	    checkBoxSurvival.setForeground(Color.WHITE);
-	    checkBoxSurvival.setFont(new Font("Leelawadee", Font.BOLD, 13));
-	    checkBoxSurvival.setFocusable(false);
-	    checkBoxSurvival.setBounds(101, 96, 114, 23);
-	    auxPanel.add(checkBoxSurvival);
-	    
-	    // PRIVACY LABEL
-	    JLabel privacyLabel = new JLabel("Privacy:");
-	    privacyLabel.setToolTipText("Select Privacy");
-	    privacyLabel.setForeground(Color.WHITE);
-	    privacyLabel.setFont(new Font("Leelawadee", Font.BOLD, 15));
-	    privacyLabel.setAlignmentX(0.5f);
-	    privacyLabel.setBounds(238, 162, 97, 14);
-	    auxPanel.add(privacyLabel);
-	        
 	    // ComboBox para Privacy
 	    JComboBox comboBoxPrivacy = new JComboBox(Privacy.values());
 	    comboBoxPrivacy.setBackground(UIManager.getColor("Button.light"));
 	    comboBoxPrivacy.setFont(new Font("Leelawadee", Font.PLAIN, 14));
 	    comboBoxPrivacy.setBounds(395, 276, 87, 22);
 	    auxPanel.add(comboBoxPrivacy);
-	       
-	    // Panel para categorías de la box
-	    JPanel panelCategories = new JPanel();
-	    panelCategories.setBounds(120, 221, 215, 143);
-	    panelCategories.setOpaque(false);
-	    panelCategories.setLayout(null);
-	    auxPanel.add(panelCategories);
-	        
 	    
-
-	    // PRIVACY LABEL
-	    JLabel labelPrivacy = new JLabel("Privacy:");
-	    labelPrivacy.setToolTipText("Select privacy");
-	    labelPrivacy.setForeground(Color.WHITE);
-	    labelPrivacy.setFont(new Font("Leelawadee", Font.BOLD, 15));
-	    labelPrivacy.setAlignmentX(0.5f);
-	    labelPrivacy.setBounds(334, 277, 66, 19);
-	    auxPanel.add(labelPrivacy);	 
-	         
-	    // Check Genres
-	    genres = new ArrayList<>();
-		if (checkBoxShooter.isSelected()) {
-		    genres.add(Genres.SHOOTER);
-		}
-		if (checkBoxStrategy.isSelected()) {
-		    genres.add(Genres.STRATEGY);
-		}
-		if (checkBoxIndie.isSelected()) {
-		    genres.add(Genres.INDIE);
-		}
-		if (checkBoxRPG.isSelected()) {
-		    genres.add(Genres.RPG);
-		}
-		if (checkBoxRacing.isSelected()) {
-		    genres.add(Genres.RACING);
-		}
-		if (checkBoxSandbox.isSelected()) {
-		    genres.add(Genres.SANDBOX);
-		}
-		if (checkBoxHorror.isSelected()) {
-		    genres.add(Genres.HORROR);
-		}
-		if (checkBoxSports.isSelected()) {
-		    genres.add(Genres.SPORTS);
-	    }
-		if (checkBoxSurvival.isSelected()) {
-		    genres.add(Genres.SURVIVAL);
-		}
-	         
 	    // Botón para confirmar los cambios
-		Button btnModify = new Button("MODIFY", new Color(64, 147, 255), new Dimension(120, 30));
-		btnModify.button();
-		btnModify.setBounds(232, 378, 127, 39);
-		btnModify.addActionListener(new ActionListener() {
-			@Override
-		    public void actionPerformed(ActionEvent e) {
-				//Capturar datos
-		    	String name = nameBox.getText();
-		    	String description = descriptionBox.getText();
-		    	List<Genres> categories = genres;
-		    	Privacy privacy = getPrivacy(comboBoxPrivacy);
-
-		    	TBox box = new TBox(name, description, privacy, categories);
-
-		    	ApplicationController.getInstance().action(new Context(Event.MODIFY_BOX, box));	            }
-		});   
-		auxPanel.add(btnModify);
-
-	    this.pack();
-	    refreshView();
+	  	Button btnModify = new Button("MODIFY", new Color(64, 147, 255), new Dimension(120, 30));
+	  	btnModify.button();
+	  	btnModify.setBounds(232, 378, 127, 39);
+	  	btnModify.addActionListener(new ActionListener() {
+	  		@Override
+	  		public void actionPerformed(ActionEvent e) {
+	  			modifyBox();
+	  		}
+	  	});   
+	  	auxPanel.add(btnModify);
 	    
-	    return auxPanel;
+	  	addPanelCheckboxes();
+	  	
+	    backButtonContainer = new JPanel();
+        backButtonContainer.setLayout(null);
+        backButtonContainer.setOpaque(false);
+        backButtonContainer.setBounds(10, 11, 196, 67);
+        addBackButton();
+        mainPanel.add(backButtonContainer);
+	    
+        this.pack();
+        refreshView();
 	}
 	 
+	// TextField para obtener nombre y descripcion
 	private TextField textField() {
 		TextField aux = new TextField(new Dimension(500, 40));
 	    aux.textField();
@@ -374,13 +186,39 @@ public class ViewModifyBox extends JFrame implements IView {
 	    return aux;
 	}
 	    
-	private void refreshView(){
-	    setLocationRelativeTo(null);
-	    setVisible(true);
+
+	// Método update
+	@Override
+	public void update(Context context) {
+		switch (context.getEvent()) {
+        	case Event.RES_MODIFY_BOX_OK:
+        		JOptionPane.showMessageDialog(this, "Box data modified!", "Modify Box", JOptionPane.INFORMATION_MESSAGE);
+        		ApplicationController.getInstance().action(new Context(Event.VIEW, null));
+        		setVisible(false);
+        		break;
+        	case Event.RES_MODIFY_BOX_KO:
+        		JOptionPane.showMessageDialog(null, "Failed to modify the Box", "Modify Box", JOptionPane.ERROR_MESSAGE);
+        		break;
+		}
 	}
 	
-	private Privacy getPrivacy(JComboBox comboBoxPrivacy) {
-        String privacy = comboBoxPrivacy.getSelectedItem().toString();
+	// Método para confirmar
+	protected void modifyBox() {
+		//Capturar datos
+		String name = nameBox.getText();
+		String description = descriptionBox.getText();
+		List<Genres> categories = getCategories();
+		Privacy privacy = getPrivacy();
+
+		TBox box = new TBox(name, description, privacy, categories);
+
+		ApplicationController.getInstance().action(new Context(Event.MODIFY_BOX, box));	
+	}
+	
+	// GetPrivacy del ComboBox
+	private Privacy getPrivacy() {
+		String privacy = comboBoxPrivacy.getSelectedItem().toString();
+        
         if (privacy.equals(Privacy.PRIVATE.toString())) {
         	return Privacy.PRIVATE;
         }
@@ -388,4 +226,161 @@ public class ViewModifyBox extends JFrame implements IView {
         	return Privacy.PUBLIC;
         }
     }
+	
+	// Check Genres
+	private List<Genres> getCategories() {
+		List<Genres>genres = new ArrayList<>();
+		
+		if (checkBoxShooter.isSelected()) {
+			genres.add(Genres.SHOOTER);
+		}
+		if (checkBoxStrategy.isSelected()) {
+			genres.add(Genres.STRATEGY);
+		}
+		if (checkBoxIndie.isSelected()) {
+			genres.add(Genres.INDIE);
+		}
+		if (checkBoxRPG.isSelected()) {
+			genres.add(Genres.RPG);
+		}
+		if (checkBoxRacing.isSelected()) {
+			genres.add(Genres.RACING);
+		}
+		if (checkBoxSandbox.isSelected()) {
+			genres.add(Genres.SANDBOX);
+		}
+		if (checkBoxHorror.isSelected()) {
+			genres.add(Genres.HORROR);
+		}
+		if (checkBoxSports.isSelected()) {
+			genres.add(Genres.SPORTS);
+		}
+		if (checkBoxSurvival.isSelected()) {
+			genres.add(Genres.SURVIVAL);
+		}
+		
+		return genres;
+	}
+	
+	private void addPanelCheckboxes() {
+		// Checkbox Panel
+	  	panelCheckbox = new JPanel();
+	  	panelCheckbox.setBounds(120, 221, 215, 143);
+	  	panelCheckbox.setOpaque(false);
+	  	panelCheckbox.setLayout(null);
+	    auxPanel.add(panelCheckbox);
+	  	
+	    // Checkbox Shooter
+	    checkBoxShooter = new JCheckBox("Shooter");
+	    checkBoxShooter.setOpaque(false);
+	    checkBoxShooter.setForeground(Color.WHITE);
+	    checkBoxShooter.setFont(new Font("Leelawadee", Font.BOLD, 13));
+	    checkBoxShooter.setFocusable(false);
+	    checkBoxShooter.setBounds(6, 7, 83, 23);
+	    panelCheckbox.add(checkBoxShooter);
+	        
+	    // Checkbox Strategy
+	    checkBoxStrategy = new JCheckBox("Strategy");
+	    checkBoxStrategy.setOpaque(false);
+	    checkBoxStrategy.setForeground(Color.WHITE);
+	    checkBoxStrategy.setFont(new Font("Leelawadee", Font.BOLD, 13));
+	    checkBoxStrategy.setFocusable(false);
+	    checkBoxStrategy.setBounds(6, 33, 91, 23);
+	    panelCheckbox.add(checkBoxStrategy);
+
+	    // Checkbox Indie
+	    checkBoxIndie = new JCheckBox("Indie");
+	    checkBoxIndie.setOpaque(false);
+	    checkBoxIndie.setForeground(Color.WHITE);
+	    checkBoxIndie.setFont(new Font("Leelawadee", Font.BOLD, 13));
+	    checkBoxIndie.setFocusable(false);
+	    checkBoxIndie.setBounds(6, 59, 83, 23);
+	    panelCheckbox.add(checkBoxIndie);
+
+	    // Checkbox RPG
+	    checkBoxRPG = new JCheckBox("RPG");
+	    checkBoxRPG.setOpaque(false);
+	    checkBoxRPG.setForeground(Color.WHITE);
+	    checkBoxRPG.setFont(new Font("Leelawadee", Font.BOLD, 13));
+	    checkBoxRPG.setFocusable(false);
+	    checkBoxRPG.setBounds(6, 85, 83, 23);
+	    panelCheckbox.add(checkBoxRPG);
+
+	    // Checkbox Racing
+	    checkBoxRacing = new JCheckBox("Racing");
+	    checkBoxRacing.setOpaque(false);
+	    checkBoxRacing.setForeground(Color.WHITE);
+	    checkBoxRacing.setFont(new Font("Leelawadee", Font.BOLD, 13));
+	    checkBoxRacing.setFocusable(false);
+	    checkBoxRacing.setBounds(6, 111, 83, 23);
+	    panelCheckbox.add(checkBoxRacing);
+
+	    // Checkbox Sandbox
+	    checkBoxSandbox = new JCheckBox("Sandbox");
+	    checkBoxSandbox.setHorizontalAlignment(SwingConstants.CENTER);
+	    checkBoxSandbox.setOpaque(false);
+	    checkBoxSandbox.setForeground(Color.WHITE);
+	    checkBoxSandbox.setFont(new Font("Leelawadee", Font.BOLD, 13));
+	    checkBoxSandbox.setFocusable(false);
+	    checkBoxSandbox.setBounds(99, 20, 83, 23);
+	    panelCheckbox.add(checkBoxSandbox);
+
+	    // Checkbox Horror
+	    checkBoxHorror = new JCheckBox("Horror");
+	    checkBoxHorror.setOpaque(false);
+	    checkBoxHorror.setForeground(Color.WHITE);
+	    checkBoxHorror.setFont(new Font("Leelawadee", Font.BOLD, 13));
+	    checkBoxHorror.setFocusable(false);
+	    checkBoxHorror.setBounds(101, 46, 81, 23);
+	    panelCheckbox.add(checkBoxHorror);
+
+	    // Checkbox Sports
+	    checkBoxSports = new JCheckBox("Sports");
+	    checkBoxSports.setOpaque(false);
+	    checkBoxSports.setForeground(Color.WHITE);
+	    checkBoxSports.setFont(new Font("Leelawadee", Font.BOLD, 13));
+	    checkBoxSports.setFocusable(false);
+	    checkBoxSports.setBounds(101, 72, 81, 23);
+	    panelCheckbox.add(checkBoxSports);
+
+	    // Checkbox Survival
+	    checkBoxSurvival = new JCheckBox("Survival");
+	    checkBoxSurvival.setOpaque(false);
+	    checkBoxSurvival.setForeground(Color.WHITE);
+	    checkBoxSurvival.setFont(new Font("Leelawadee", Font.BOLD, 13));
+	    checkBoxSurvival.setFocusable(false);
+	    checkBoxSurvival.setBounds(101, 96, 114, 23);
+	    panelCheckbox.add(checkBoxSurvival);
+	    
+	    // PRIVACY LABEL
+	    JLabel privacyLabel = new JLabel("Privacy:");
+	    privacyLabel.setToolTipText("Select Privacy");
+	    privacyLabel.setForeground(Color.WHITE);
+	    privacyLabel.setFont(new Font("Leelawadee", Font.BOLD, 15));
+	    privacyLabel.setAlignmentX(0.5f);
+	    privacyLabel.setBounds(238, 162, 97, 14);
+	    panelCheckbox.add(privacyLabel);
+	}
+	
+	private void addBackButton() {
+        Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
+        backButton.buttonIcon();
+        backButton.setBounds(0, 11, 119, 50);
+        backButton.setToolTipText("Back to the main window");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ApplicationController.getInstance().back();
+                setVisible(false);
+            }
+        });
+        backButtonContainer.add(backButton);
+    }
+	
+	// Refrescar vista
+	private void refreshView() {
+	    setLocationRelativeTo(null);
+	    setVisible(true);
+	}
+	
 }
