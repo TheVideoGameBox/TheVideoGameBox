@@ -54,6 +54,9 @@ public class ViewMain extends JFrame implements IView{
 		if(context.getEvent() == Event.RES_SEARCH_ALL_BY_NAME_KO){
 			JOptionPane.showMessageDialog(null, "There isn't any game with that name");
 			hideView = false;
+		}else if(context.getEvent() == Event.RES_SEARCH_ALL_BY_PLATFORM_KO){
+			JOptionPane.showMessageDialog(null, "There isn't any game with on that platform.");
+			hideView = false;
 		}
 		else if(context.getEvent() == Event.RES_SEARCH_ALL_BOXES_BY_NAME_KO){
 			JOptionPane.showMessageDialog(null, "There isn't any box with that name");
