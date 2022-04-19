@@ -9,6 +9,7 @@ import Presentation.View.IView;
 import Presentation.View.Utils.Button;
 import Presentation.View.Utils.TextField;
 import org.bson.types.ObjectId;
+import org.jdesktop.xswingx.PromptSupport;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -259,6 +260,7 @@ public class ViewMain extends JFrame implements IView{
 		comboBoxGame.addItem("By Name");
 		comboBoxGame.addItem("By Platform");
 		comboBoxGame.setRenderer(listRenderer);
+
 		
 		//Falta hacer la comprobación de en que combobox está en función de eso cambia el TextField y la búsqueda
 		
@@ -278,6 +280,8 @@ public class ViewMain extends JFrame implements IView{
 		textGPanel.setMinimumSize(new Dimension(250, 100));
 		textGPanel.setMaximumSize(new Dimension(250, 100));
 		
+		
+		
 		JPanel textGamePanel = new JPanel();
 		textGamePanel.setOpaque(false);
 		textGamePanel.setPreferredSize(new Dimension(250, 100));
@@ -286,36 +290,11 @@ public class ViewMain extends JFrame implements IView{
 		
 		TextField textGame = new TextField(new Dimension(225, 30),"Name of the Game");
 		textGame.textField();
-		textGame.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String search = textGame.getText();
-				if(search.length() <= 50 && search.length() > 0) {
-					textGame.setText(null);
-					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BY_NAME, search));
-					if(hideView)
-						setVisible(false);
-
-					hideView = true;
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Too many characters");
-				}
-			}
-		});
 		
-		JPanel gameButtonPanel = new JPanel();
-		gameButtonPanel.setOpaque(false);
-		gameButtonPanel.setPreferredSize(new Dimension(250, 100));
-		gameButtonPanel.setMinimumSize(new Dimension(250, 100));
-		gameButtonPanel.setMaximumSize(new Dimension(250, 100));
+		class actionListenerSearchAllByName implements ActionListener{
 
-		Button gameButton = new Button("SEARCH", "tinylupa_icon.png", new Dimension(120, 35), Color.orange);
-		gameButton.buttonIcon();
-		gameButton.setToolTipText("Search a Game by Name");
-		gameButton.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				String search = textGame.getText();
 				if(search.length() <= 50 && search.length() > 0) {
 					textGame.setText(null);
@@ -328,8 +307,46 @@ public class ViewMain extends JFrame implements IView{
 				else if(search.length() > 50) {
 					JOptionPane.showMessageDialog(null, "Too many characters");
 				}
+				
 			}
-		});
+			
+		}
+		class actionListenerSearchAllByPlatform implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String search = textGame.getText();
+				if(search.length() <= 50 && search.length() > 0) {
+					textGame.setText(null);
+					ApplicationController.getInstance().action(new Context(Event.SEARCH_ALL_BY_PLATFORM, search));
+					if(hideView)
+						setVisible(false);
+
+					hideView = true;
+				}
+				else if(search.length() > 50) {
+					JOptionPane.showMessageDialog(null, "Too many characters");
+				}
+				
+			}
+			
+		}
+		textGame.addActionListener(new actionListenerSearchAllByName());
+		
+
+		
+
+		
+		JPanel gameButtonPanel = new JPanel();
+		gameButtonPanel.setOpaque(false);
+		gameButtonPanel.setPreferredSize(new Dimension(250, 100));
+		gameButtonPanel.setMinimumSize(new Dimension(250, 100));
+		gameButtonPanel.setMaximumSize(new Dimension(250, 100));
+
+		Button gameButton = new Button("SEARCH", "tinylupa_icon.png", new Dimension(120, 35), Color.orange);
+		gameButton.buttonIcon();
+		gameButton.setToolTipText("Search a Game by Name");
+		gameButton.addActionListener(new actionListenerSearchAllByName());
 		
 		textGamePanel.add(textGame);
 		gameButtonPanel.add(gameButton);
@@ -338,6 +355,28 @@ public class ViewMain extends JFrame implements IView{
 		textGPanel.add(gameButtonPanel);
 		
 		game.add(textGPanel);
+		
+		comboBoxGame.addActionListener(new ActionListener() {
+			   @Override
+			   public void actionPerformed(ActionEvent e) {
+				   String itemSeleecionado = (String)comboBoxGame.getSelectedItem();
+				   switch (itemSeleecionado) {
+						case "By Name": {
+							textGame.setPrompt("Name of the Game");
+							textGame.addActionListener(new actionListenerSearchAllByName());
+							gameButton.addActionListener(new actionListenerSearchAllByName());
+							break;
+						}
+						case "By Platform": {
+							textGame.setPrompt("Name of the Platform");
+							textGame.addActionListener(new actionListenerSearchAllByPlatform());
+							gameButton.addActionListener(new actionListenerSearchAllByPlatform());
+							break;
+						}
+
+				   }
+			   }
+			});
 		
 		
 		//PANEL DE BOX

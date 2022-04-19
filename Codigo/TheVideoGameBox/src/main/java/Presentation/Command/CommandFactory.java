@@ -5,6 +5,7 @@ import Presentation.Command.Box.CommandListGames;
 import Presentation.Command.Box.CommandSearchAllBoxesByName;
 import Presentation.Command.Game.CommandRandomGames;
 import Presentation.Command.Game.CommandSearchAllByName;
+import Presentation.Command.Game.CommandSearchAllByPlatform;
 import Presentation.Command.Game.CommandSearchOne;
 import Presentation.Command.User.CommandCreateUser;
 import Presentation.Command.User.CommandLogIn;
@@ -38,6 +39,9 @@ public class CommandFactory extends CommandAbstractFactory{
                 break;
             case Event.LOGIN_USER:
                 command = new CommandLogIn();
+                break;
+            case Event.SEARCH_ALL_BY_PLATFORM:
+                command = new CommandSearchAllByPlatform();
                 break;
             default:
                 break;

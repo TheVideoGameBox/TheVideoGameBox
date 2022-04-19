@@ -51,6 +51,9 @@ public class ViewFactory extends ViewAbstractFactory {
 			case Event.VIEW_LOGIN:
 				view = new ViewLogIn();
 				break;
+			case Event.RES_SEARCH_ALL_BY_PLATFORM_OK:
+				view = new ViewSearchGamesByName();
+				break;
 			default:
 				break;
 		}

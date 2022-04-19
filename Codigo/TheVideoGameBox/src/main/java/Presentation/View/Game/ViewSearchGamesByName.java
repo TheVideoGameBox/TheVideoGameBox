@@ -31,7 +31,7 @@ public class ViewSearchGamesByName extends JFrame implements IView {
 
     @Override
     public void update(Context context) {
-        if (context.getEvent() == Event.RES_SEARCH_ALL_BY_NAME_OK) {
+        if (context.getEvent() == Event.RES_SEARCH_ALL_BY_NAME_OK || context.getEvent() == Event.RES_SEARCH_ALL_BY_PLATFORM_OK) {
             this.games = (List<TGame>) context.getData();
             init_GUI();
         }

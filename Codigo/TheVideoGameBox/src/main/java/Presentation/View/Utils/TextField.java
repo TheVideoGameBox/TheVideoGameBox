@@ -20,12 +20,17 @@ public class TextField extends JTextField{
     }
 
     public void textField(){
-        PromptSupport.setPrompt(prompt, this);
+    	PromptSupport.setPrompt(prompt, this);
         this.setPreferredSize(dimension);
         this.setMinimumSize(dimension);
         this.setMaximumSize(dimension);
         this.setBorder(null);
 
+    }
+    
+    public void setPrompt(String prompt) {
+    	this.prompt=prompt;
+    	PromptSupport.setPrompt(prompt, this);
     }
 
 }

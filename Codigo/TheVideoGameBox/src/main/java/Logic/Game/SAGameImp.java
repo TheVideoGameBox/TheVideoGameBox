@@ -28,4 +28,11 @@ public class SAGameImp implements SAGame {
         return result = DAOAbstractFactory.getInstance().createDAOGame().random();
     }
 
+	@Override
+	public List<TGame> searchAllByPlatform(String platform) {
+		
+        return DAOAbstractFactory.getInstance().createDAOGame().searchAllByPlatform(platform);
+        
+	}
+
 }
