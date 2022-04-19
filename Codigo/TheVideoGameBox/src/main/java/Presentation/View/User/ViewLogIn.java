@@ -9,6 +9,7 @@ import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Utils.Button;
 import Presentation.View.Utils.PasswordField;
 import Presentation.View.Utils.TextField;
+import org.bson.types.ObjectId;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
+import static Presentation.View.Main.ViewMain.id_logged;
 import static Presentation.View.Main.ViewMain.logged;
 import static Presentation.View.Utils.Images.backGround;
 import static Presentation.View.Utils.Images.logo;
@@ -34,6 +36,7 @@ public class ViewLogIn extends JFrame implements IView {
             case Event.RES_LOGIN_USER_OK:
                 JOptionPane.showMessageDialog(this, "Logged In!", "Log In", JOptionPane.INFORMATION_MESSAGE);
                 logged = true;
+                id_logged = (ObjectId) context.getData();
                 setVisible(false);
                 ApplicationController.getInstance().action(new Context(Event.VIEW, null));
                 break;
@@ -44,7 +47,7 @@ public class ViewLogIn extends JFrame implements IView {
     }
 
     private void init_GUI() {
-        this.setPreferredSize(new Dimension(500, 275));
+        this.setPreferredSize(new Dimension(600, 325));
         Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
         this.setIconImage(iconFrame);
 
@@ -62,7 +65,29 @@ public class ViewLogIn extends JFrame implements IView {
         JPanel auxPanel = new JPanel();
         auxPanel.setLayout(new BoxLayout(auxPanel, BoxLayout.Y_AXIS));
         auxPanel.setOpaque(false);
+
+        JPanel backPanel = new JPanel();
+        backPanel.setLayout(new BoxLayout(backPanel, BoxLayout.X_AXIS));
+        backPanel.setOpaque(false);
+
+        Button backButton = new Button(null, "back_icon.png", Color.white, Color.orange);
+        backButton.buttonIcon();
+        backButton.setAlignmentX(RIGHT_ALIGNMENT);
+        backButton.setBorderPainted(false);
+        backButton.setContentAreaFilled(false);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ApplicationController.getInstance().back();
+                setVisible(false);
+            }
+        });
+
+        backPanel.add(backButton);
+        backPanel.add(Box.createRigidArea(new Dimension(540, 0)));
+
         auxPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        auxPanel.add(backPanel, LEFT_ALIGNMENT);
 
         // EMAIL LABEL
         auxPanel.add(label("Email"));
