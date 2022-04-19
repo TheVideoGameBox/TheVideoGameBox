@@ -75,7 +75,7 @@ public class DAOGameImp implements DAOGame {
         try {
             MongoDatabase db = Connection.getInstance().getConnection();
             //CAMBIAR PARA BUSCAR PLATAFORMA
-            FindIterable<Game> iter = db.getCollection("games", Game.class).find(regex("name", Pattern.compile(platform, Pattern.CASE_INSENSITIVE)));
+            FindIterable<Game> iter = db.getCollection("games", Game.class).find(eq("platforms",platform));;
             for(Game game : iter)
                 result.add(game.toTransfer());
         } catch (MongoException e) {
