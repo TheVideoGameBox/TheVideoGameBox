@@ -27,6 +27,7 @@ import java.net.URLConnection;
 import java.util.List;
 import java.util.Objects;
 
+import static Presentation.View.Main.ViewMain.logged;
 import static Presentation.View.Utils.Images.backGround;
 import static Presentation.View.Utils.Images.logo;
 
@@ -138,6 +139,7 @@ public class ViewListGamesBox extends JFrame implements IView {
 
         TextField textName = new TextField(new Dimension(180, 30), "Add Games");
         textName.textField();
+        textName.setVisible(logged);
         headerContainer.add(textName);
         headerContainer.add(Box.createRigidArea(new Dimension(0, 0)));
         textName.addActionListener(new ActionListener() {
@@ -278,6 +280,7 @@ public class ViewListGamesBox extends JFrame implements IView {
         deletePanel.setOpaque(false);
         Button deleteButton = new Button(null, "delete_icon.png", new Dimension(60, 45), Color.orange);
         deleteButton.buttonIcon();
+        deleteButton.setVisible(logged);
         deleteButton.setBorderPainted(false);
         deleteButton.setContentAreaFilled(false);
         deleteButton.addActionListener(new ActionListener() {

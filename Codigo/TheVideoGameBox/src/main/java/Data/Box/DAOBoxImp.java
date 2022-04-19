@@ -2,6 +2,7 @@ package Data.Box;
 
 import Data.Connection;
 import Logic.Box.Box;
+import Logic.Box.Privacy;
 import Logic.Box.TBox;
 import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
@@ -93,7 +94,7 @@ public class DAOBoxImp implements DAOBox {
 				MongoDatabase db = Connection.getInstance().getConnection();
 				FindIterable<Box> iter = db.getCollection("boxes", Box.class).find(regex("name", Pattern.compile(name, Pattern.CASE_INSENSITIVE)));
 		        for (Box box : iter)
-					if(box.isActive()) result.add(box.toTransfer());
+					if(box.isActive() && box.getPrivacy() == Privacy.PUBLIC) result.add(box.toTransfer());
 		    } catch (MongoException e) {
 		    	result = null;
 		    }
