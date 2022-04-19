@@ -44,11 +44,18 @@ public class ViewListGamesBox extends JFrame implements IView {
 
     @Override
     public void update(Context context) {
-        if(Event.BACK == context.getEvent())
-            tBox = (TBox) context.getData();
-
-        refreshView();
-
+        switch (context.getEvent()) {
+            case Event.BACK:
+                games = (List<TGame>) context.getData();
+                refreshView();
+                break;
+            case Event.RES_UPDATE_GAME_LIST_OK:
+                games = (List<TGame>) context.getData();
+                refreshView();
+                break;
+            default:
+                break;
+        }
     }
 
     public void init_GUI() {
@@ -125,6 +132,7 @@ public class ViewListGamesBox extends JFrame implements IView {
             public void actionPerformed(ActionEvent e) {
                 ApplicationController.getInstance().action(new Context(Event.VIEW, null));
                 setVisible(false);
+                ApplicationController.getInstance().action(new Context(Event.UPDATE_GAME_LIST, tBox));
             }
         });
 
@@ -157,6 +165,7 @@ public class ViewListGamesBox extends JFrame implements IView {
                     textName.setText(null);
                     ApplicationController.getInstance().action(new Context(Event.ADD_GAME_TO_BOX, aux));
                     setVisible(false);
+                    ApplicationController.getInstance().action(new Context(Event.UPDATE_GAME_LIST, tBox));
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "There is no games with that name");
@@ -277,7 +286,7 @@ public class ViewListGamesBox extends JFrame implements IView {
                 Pair<ObjectId, ObjectId> aux = new MutablePair<>(tBox.getId(), game.getId());
                 ApplicationController.getInstance().action(new Context(Event.DELETE_GAME_FROM_BOX, aux));
                 setVisible(false);
-                ApplicationController.getInstance().action(new Context(Event.LIST_GAMES_OF_BOX, tBox));
+                ApplicationController.getInstance().action(new Context(Event.UPDATE_GAME_LIST, tBox));
             }
         });
         deletePanel.add(deleteButton);

@@ -171,7 +171,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		namePanel.setMinimumSize(new Dimension(700, 135));
 		
 		// NAME
-		JLabel name = new JLabel("Nombre: " + game.getName());
+		JLabel name = new JLabel(game.getName());
 		name.setForeground(Color.white);
 		name.setFont(new Font("Leelawadee", Font.BOLD, 20));
 		name.addMouseListener(new MouseListener() {
@@ -209,7 +209,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 			cover = new JLabel(new ImageIcon(image));
 		}
 		else {
-			cover.setIcon(new ImageIcon((getClass().getClassLoader().getResource("no_image.png"))));
+			cover.setIcon(new ImageIcon((Objects.requireNonNull(getClass().getClassLoader().getResource("no_image.png")))));
 		}
 		
 		// CONSTRUIR NAMEPANEL
@@ -236,7 +236,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SAAbstractFactory.getInstance().createSABox().addGame(box.getId(), game.getId());
-				ApplicationController.getInstance().action(new Context(Event.BACK, box));
+				ApplicationController.getInstance().back();
 				setVisible(false);
 			}
 		});
