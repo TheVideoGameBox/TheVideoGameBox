@@ -32,7 +32,7 @@ import static Presentation.View.Utils.Images.logo;
 public class ViewMain extends JFrame implements IView{
 
 	public static boolean logged = false;
-	public static ObjectId id_logged;
+	public static ObjectId id_logged = null;
 	private boolean desplegado;
 	private List<TGame> randomGames = new ArrayList<>();
 	private Button createBox;
