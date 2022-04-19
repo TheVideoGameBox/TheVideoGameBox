@@ -40,6 +40,12 @@ public class SAUserImp implements SAUser {
 		return null;
 	}
 
+	@Override
+	public ObjectId addBox(ObjectId idUser, ObjectId idBox) {
+		DAOUser daoUser = DAOAbstractFactory.getInstance().createDAOUser();
+		return daoUser.addBox(idUser, idBox);
+	}
+
 	private boolean correctPassword(String password) {
 		return password != null;
 	}

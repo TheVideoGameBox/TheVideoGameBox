@@ -4,6 +4,7 @@ import Presentation.Command.Box.*;
 import Presentation.Command.Game.CommandRandomGames;
 import Presentation.Command.Game.CommandSearchAllByName;
 import Presentation.Command.Game.CommandSearchOne;
+import Presentation.Command.User.CommandAssociateBox;
 import Presentation.Command.User.CommandCreateUser;
 import Presentation.Command.User.CommandLogIn;
 import Presentation.Controller.Event;
@@ -48,6 +49,9 @@ public class CommandFactory extends CommandAbstractFactory{
                 break;
             case Event.UPDATE_GAME_LIST:
                 command = new CommandUpdateGameList();
+                break;
+            case Event.ASSOCIATE_BOX:
+                command = new CommandAssociateBox();
                 break;
             default:
                 break;

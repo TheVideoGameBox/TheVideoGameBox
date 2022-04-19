@@ -2,12 +2,16 @@ package Logic.User;
 
 import org.bson.types.ObjectId;
 
+import java.util.List;
+
 public class User {
     private ObjectId id;
     private String email;
     private String username;
     private String password;
     private Boolean active;
+    private List<ObjectId> boxList;
+
 
     public User() {
 
@@ -25,6 +29,15 @@ public class User {
         this.username = username;
         this.password = password;
         this.active = active;
+    }
+
+    public User(ObjectId id, String email, String username, String password, Boolean active, List<ObjectId> boxList) {
+        this.id = id;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.active = active;
+        this.boxList = boxList;
     }
 
     public User(TUser tUser) {
@@ -73,6 +86,15 @@ public class User {
     public void setActive(Boolean active) {
         this.active = active;
     }
+
+    public List<ObjectId> getBoxList() {
+        return boxList;
+    }
+
+    public void setBoxList(List<ObjectId> boxList) {
+        this.boxList = boxList;
+    }
+
 
     //Obtener todos los datos de un transfer
     public void transferToMongoEntity(TUser tUser) {

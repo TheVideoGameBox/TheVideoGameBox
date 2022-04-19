@@ -18,7 +18,7 @@ public class CommandCreateUser implements ICommand{
 		Context con;
 	  	
 		if(result != null) con = new Context(Event.RES_CREATE_USER_OK, result);
-		else con = new Context(Event.RES_CREATE_USER_KO, result);
+		else con = new Context(Event.RES_CREATE_USER_KO, null);
 		
 		return con;
 	}

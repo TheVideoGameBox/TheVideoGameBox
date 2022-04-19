@@ -2,6 +2,8 @@ package Logic.User;
 
 import org.bson.types.ObjectId;
 
+import java.util.List;
+
 public class TUser {
 
     private ObjectId id;
@@ -9,6 +11,7 @@ public class TUser {
     private String username;
     private String password;
     private Boolean active;
+    private List<ObjectId> boxList;
 
 
     public TUser(String email, String username, String password) {
@@ -27,6 +30,14 @@ public class TUser {
         this.email = email;
         this.username = username;
         this.password = password;
+    }
+
+    public TUser(ObjectId id, String email, String username, String password, List<ObjectId> boxList) {
+        this.id = id;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.boxList = boxList;
     }
 
     public ObjectId getId() {
@@ -69,6 +80,14 @@ public class TUser {
         this.active = active;
     }
 
+    public List<ObjectId> getBoxList() {
+        return boxList;
+    }
+
+    public void setBoxList(List<ObjectId> boxList) {
+        this.boxList = boxList;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -76,6 +95,7 @@ public class TUser {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password=" + password +
+                ", boxList= " + boxList +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package Data.User;
 
 import Data.Connection;
+import Logic.Box.Box;
 import Logic.User.TUser;
 import Logic.User.User;
 import com.mongodb.MongoException;
@@ -8,8 +9,11 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.IndexOptions;
 import com.mongodb.client.model.Indexes;
+import com.mongodb.client.model.Updates;
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -45,6 +49,21 @@ public class DAOUserImp implements DAOUser {
 			tUser = null;
 		}
 		return tUser;
+	}
+
+	@Override
+	public ObjectId addBox(ObjectId idUser, ObjectId idBox) {
+		List<ObjectId> boxList = new ArrayList<>();
+		try {
+			MongoDatabase db = Connection.getInstance().getConnection();
+			User user = Objects.requireNonNull(db.getCollection("users", User.class).find(eq("_id", idUser)).first());
+			if(user.getBoxList() != null) boxList = user.getBoxList();
+			boxList.add(idBox);
+			db.getCollection("users", Box.class).updateOne(eq("_id", idUser), Updates.set("boxList", boxList));
+		} catch (MongoException e) {
+			return null;
+		}
+		return idBox;
 	}
 
 	@Override
