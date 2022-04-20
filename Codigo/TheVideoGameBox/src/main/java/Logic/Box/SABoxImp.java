@@ -13,6 +13,16 @@ import java.util.Objects;
 
 public class SABoxImp implements SABox {
 
+    private DAOAbstractFactory daoFactory;
+
+    public SABoxImp(){
+        daoFactory = DAOAbstractFactory.getInstance();
+    }
+
+    public SABoxImp(DAOAbstractFactory daoFactory){
+        this.daoFactory = daoFactory;
+    }
+
     @Override
     public ObjectId createBox(TBox box) {
         if (!correctName(box.getName()))
@@ -27,27 +37,27 @@ public class SABoxImp implements SABox {
         if (!correctPrivacy(box.getPrivacy()))
             return null;
 
-        DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+        DAOBox daoBox = daoFactory.createDAOBox();
 
         return daoBox.create(box);
     }
 
     @Override
     public ObjectId addGame(ObjectId idBox, ObjectId gameId) {
-        DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+        DAOBox daoBox = daoFactory.createDAOBox();
         return daoBox.addGame(idBox, gameId);
     }
 
     @Override
     public List<TGame> listGames(TBox box) {
         List<TGame> games = new ArrayList<TGame>();
-        DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+        DAOBox daoBox = daoFactory.createDAOBox();
         List<ObjectId> gameIDs = daoBox.listGames(box);
 
         if(gameIDs == null)
             return games;
 
-        DAOGame daoGame = DAOAbstractFactory.getInstance().createDAOGame();
+        DAOGame daoGame = daoFactory.createDAOGame();
 
         for(ObjectId gameID : gameIDs){
             TGame game = daoGame.searchOne(gameID);
@@ -66,20 +76,25 @@ public class SABoxImp implements SABox {
         if(!correctName(name))
             return null;
 
-        DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+        DAOBox daoBox = daoFactory.createDAOBox();
 
         return daoBox.searchAllByName(name);
     }
 
     @Override
-    public ObjectId deleteBox(TBox box) {
+    public ObjectId deleteBox(ObjectId id) {
         DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
-        return daoBox.deleteBox(box);
+        return daoBox.deleteBox(id);
     }
 
     @Override
     public void deleteFromDatabase(ObjectId id){
-        DAOAbstractFactory.getInstance().createDAOBox().deleteFromDatabase(id);
+        daoFactory.createDAOBox().deleteFromDatabase(id);
+    }
+
+    @Override
+    public TBox showBox(ObjectId _id) {
+        return DAOAbstractFactory.getInstance().createDAOBox().showBox(_id);
     }
     
     @Override
@@ -107,9 +122,4 @@ public class SABoxImp implements SABox {
     private boolean correctName(String name) {
         return name != null && name.length() > 0 && name.length() <= 50;
     }
-
-	@Override
-	public TBox showBox(ObjectId _id) {
-		return DAOAbstractFactory.getInstance().createDAOBox().showBox(_id);
-	}
 }

@@ -1,22 +1,20 @@
 package Integration.User;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-
+import Logic.SAAbstractFactory;
+import Logic.User.SAUser;
+import Logic.User.TUser;
 import org.bson.types.ObjectId;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import Logic.SAAbstractFactory;
-import Logic.User.SAUser;
-import Logic.User.TUser;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
-public class LogInIntegracion {
+public class LogIn {
     private static SAUser saUser;
     private static ObjectId idUser;
     private static final TUser correct = new TUser("TEST_LOG_IN@email.com", "TEST_LOG_IN", "TEST_LOG_IN");
-
 
     @BeforeClass
     public static void init() {
@@ -26,7 +24,6 @@ public class LogInIntegracion {
 
     @Test
     public void testCorrectLogIn() {
-        
         try {
             assertNotNull(saUser.logIn(correct));
         } catch (Exception ae) {

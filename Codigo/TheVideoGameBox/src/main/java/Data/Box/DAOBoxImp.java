@@ -8,14 +8,11 @@ import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Updates;
-
-import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -62,10 +59,12 @@ public class DAOBoxImp implements DAOBox {
 		try {
 			MongoDatabase db = Connection.getInstance().getConnection();
 			Box box = db.getCollection("boxes", Box.class).find(eq("_id",idBox)).first();
-			if(box.getGameList() !=null) 
+
+			if(box.getGameList() != null) {
 				gameList = box.getGameList();
-			gameList.remove(idGame);
-			db.getCollection("boxes", Box.class).updateOne(eq("_id", idBox), Updates.set("gameList", gameList));
+				gameList.remove(idGame);
+				db.getCollection("boxes", Box.class).updateOne(eq("_id", idBox), Updates.set("gameList", gameList));
+			}
 		}
 		catch(MongoException e) {
 			return null;
@@ -92,7 +91,10 @@ public class DAOBoxImp implements DAOBox {
 		List<TBox> result = new ArrayList<>();
 			try {
 				MongoDatabase db = Connection.getInstance().getConnection();
-				FindIterable<Box> iter = db.getCollection("boxes", Box.class).find(regex("name", Pattern.compile(name, Pattern.CASE_INSENSITIVE)));
+				Bson filter1 = regex("name", Pattern.compile(name, Pattern.CASE_INSENSITIVE));
+				Bson filter2 = eq("active", true);
+				Bson filter3 = eq("privacy", Privacy.PUBLIC);
+				FindIterable<Box> iter = db.getCollection("boxes", Box.class).find(and(filter1, and(filter2, filter3)));
 		        for (Box box : iter)
 					if(box.isActive() && box.getPrivacy() == Privacy.PUBLIC) result.add(box.toTransfer());
 		    } catch (MongoException e) {
@@ -103,7 +105,7 @@ public class DAOBoxImp implements DAOBox {
 	}
 
 	@Override
-	public ObjectId deleteBox(TBox id) {
+	public ObjectId deleteBox(ObjectId id) {
 		ObjectId result;
 		try {
 			MongoDatabase db = Connection.getInstance().getConnection();

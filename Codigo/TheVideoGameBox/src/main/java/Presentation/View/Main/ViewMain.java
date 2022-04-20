@@ -423,7 +423,7 @@ public class ViewMain extends JFrame implements IView{
 				}
 			}
 		});
-		
+
 		JPanel boxButtonPanel = new JPanel();
 		boxButtonPanel.setOpaque(false);
 		boxButtonPanel.setPreferredSize(new Dimension(250, 100));
@@ -585,8 +585,8 @@ public class ViewMain extends JFrame implements IView{
 		JPanel topPanel = new JPanel(new BorderLayout());
 		topPanel.setOpaque(false);
 		topPanel.setMaximumSize(new Dimension(1150, 172));
-		topPanel.setMinimumSize(new Dimension(1150, 172));
-
+		topPanel.setMinimumSize(new Dimension(950, 172));
+		
 		JPanel iconPanel = new JPanel();
 		iconPanel.setOpaque(false);
 		
@@ -594,9 +594,9 @@ public class ViewMain extends JFrame implements IView{
 		icono.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("logo_medium_blanco.png"))));
 		icono.setAlignmentX(JPanel.CENTER_ALIGNMENT);
 		icono.setAlignmentY(JPanel.CENTER_ALIGNMENT);
-
+		
 		iconPanel.add(icono);
-
+		
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setOpaque(false);
 		buttonPanel.setMaximumSize(new Dimension(215, 35));
@@ -623,6 +623,8 @@ public class ViewMain extends JFrame implements IView{
 		myBox.setVisible(logged);
 		myBox.setBorderPainted(false);
 		myBox.setContentAreaFilled(false);
+		myBox.setAlignmentX(JPanel.RIGHT_ALIGNMENT);
+		myBox.setAlignmentY(JPanel.TOP_ALIGNMENT);
 		myBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -634,7 +636,7 @@ public class ViewMain extends JFrame implements IView{
 		buttonPanel.add(myBox);
 		topPanel.add(iconPanel, BorderLayout.CENTER);
 		topPanel.add(buttonPanel, BorderLayout.EAST);
-
+		
 		//JPanelRound randomPanel = new JPanelRound(new Color(0, 0, 128), new Color(47, 79, 79), new Color(0, 0, 128)); //Azul-gris
 		//JPanelRound randomPanel = new JPanelRound(new Color(46, 56, 90), new Color(107, 113, 144), new Color(46, 56, 90)); //Grises
 		//JPanelRound randomPanel = new JPanelRound(new Color(0, 0, 0), new Color(107, 113, 144), new Color(0, 0, 0)); //Negro-Gris

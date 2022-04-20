@@ -13,7 +13,8 @@ public class CommandShowBox implements ICommand {
     @Override
     public Context execute(Object data) {
         SABox saBox = SAAbstractFactory.getInstance().createSABox();
-        TBox result = saBox.showBox((ObjectId) data);
+        TBox box = (TBox) data;
+        TBox result = saBox.showBox(box.getId());
         Context con;
 
         if(result != null) con = new Context(Event.RES_SHOW_BOX_OK, result);

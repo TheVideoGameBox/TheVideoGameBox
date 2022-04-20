@@ -49,6 +49,9 @@ public class ViewFactory extends ViewAbstractFactory {
 				break;
 			case Event.ADD_GAME_TO_BOX:
 				view = new ViewAddGameToBox((Pair<List<TGame>, TBox>) context.getData());
+			case Event.LIST_GAMES_OF_BOX:
+				view = new ViewListGamesBox((Pair<TBox, List<TGame>>) context.getData());
+				break;
 			case Event.RES_SHOW_BOX_OK:
 				view = new ViewShowBox();
 				break;

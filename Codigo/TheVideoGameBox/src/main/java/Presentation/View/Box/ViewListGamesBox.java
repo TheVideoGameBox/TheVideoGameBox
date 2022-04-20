@@ -47,16 +47,16 @@ public class ViewListGamesBox extends JFrame implements IView {
     public void update(Context context) {
         switch (context.getEvent()) {
             case Event.BACK:
-                games = (List<TGame>) context.getData();
-                refreshView();
+                ApplicationController.getInstance().action(new Context(Event.UPDATE_GAME_LIST, tBox));
                 break;
             case Event.RES_UPDATE_GAME_LIST_OK:
+                setVisible(false);
                 games = (List<TGame>) context.getData();
-                refreshView();
                 break;
             default:
                 break;
         }
+        refreshView();
     }
 
     public void init_GUI() {
@@ -112,7 +112,7 @@ public class ViewListGamesBox extends JFrame implements IView {
         headerContainer.add(backButton);
 
         // TITLE
-        JLabel title = new JLabel("Games of Box: " + tBox.getName());
+        JLabel title = new JLabel(tBox.getName());
         title.setFont(new Font(title.getFont().getName(), Font.PLAIN, 25));
         title.setAlignmentX(CENTER_ALIGNMENT);
         title.setForeground(Color.white);
@@ -133,11 +133,10 @@ public class ViewListGamesBox extends JFrame implements IView {
             public void actionPerformed(ActionEvent e) {
                 ApplicationController.getInstance().action(new Context(Event.VIEW, null));
                 setVisible(false);
-                ApplicationController.getInstance().action(new Context(Event.UPDATE_GAME_LIST, tBox));
             }
         });
 
-        TextField textName = new TextField(new Dimension(180, 30), "Add Games");
+        TextField textName = new TextField(new Dimension(210, 30), "Add Games");
         textName.textField();
         textName.setVisible(logged);
         headerContainer.add(textName);
@@ -167,7 +166,6 @@ public class ViewListGamesBox extends JFrame implements IView {
                     textName.setText(null);
                     ApplicationController.getInstance().action(new Context(Event.ADD_GAME_TO_BOX, aux));
                     setVisible(false);
-                    ApplicationController.getInstance().action(new Context(Event.UPDATE_GAME_LIST, tBox));
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "There is no games with that name");
@@ -288,8 +286,9 @@ public class ViewListGamesBox extends JFrame implements IView {
             public void actionPerformed(ActionEvent e) {
                 Pair<ObjectId, ObjectId> aux = new MutablePair<>(tBox.getId(), game.getId());
                 ApplicationController.getInstance().action(new Context(Event.DELETE_GAME_FROM_BOX, aux));
-                setVisible(false);
                 ApplicationController.getInstance().action(new Context(Event.UPDATE_GAME_LIST, tBox));
+                //setVisible(false);
+
             }
         });
         deletePanel.add(deleteButton);
