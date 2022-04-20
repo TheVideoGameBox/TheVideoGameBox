@@ -20,13 +20,18 @@ public class TBox {
 
     //Constructors
 
+    public TBox(String name, String description, Privacy privacy, List<Genres> genres) {
+        this.name = name;
+        this.description = description;
+        this.privacy = privacy;
+        this.genres = genres;
+    }
 
     public TBox(String name, String description, Privacy privacy, List<Genres> genres, ObjectId owner) {
         this.name = name;
         this.description = description;
         this.privacy = privacy;
         this.genres = genres;
-        this.gameList = new ArrayList<>();
         this.owner = owner;
     }
 

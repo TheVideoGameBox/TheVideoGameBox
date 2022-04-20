@@ -47,6 +47,11 @@ public class DAOBoxStub implements DAOBox {
     }
 
     @Override
+    public List<TBox> showUserBoxes(ObjectId idUser) {
+        return null;
+    }
+
+    @Override
     public void deleteFromDatabase(ObjectId id) {
     }
 }
