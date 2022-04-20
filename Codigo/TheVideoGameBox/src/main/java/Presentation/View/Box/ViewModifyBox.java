@@ -41,8 +41,6 @@ import Presentation.View.Utils.TextField;
 public class ViewModifyBox extends JFrame implements IView {
 	
 	private static final long serialVersionUID = 1L;
-
-	private TBox box;
 	
 	JPanelConFondo mainPanel;
 	
@@ -65,10 +63,9 @@ public class ViewModifyBox extends JFrame implements IView {
 	
 	private JPanel backButtonContainer;
 	
-	public ViewModifyBox(TBox box) {
+	public ViewModifyBox() {
 		super();
 		setTitle("Modify box");
-		this.box = box;
 		initGUI();
 	}
 	
@@ -103,7 +100,7 @@ public class ViewModifyBox extends JFrame implements IView {
 	    auxPanel.add(titleLabel);
         
 	    // Input para el name
-	    TextField nameBox = textField();
+	    nameBox = textField();
 	    nameBox.setToolTipText("Modify box name");
 	    nameBox.setFont(new Font("Leelawadee", Font.PLAIN, 13));
 	    nameBox.setBounds(81, 114, 401, 30);
@@ -129,7 +126,7 @@ public class ViewModifyBox extends JFrame implements IView {
 	    auxPanel.add(labelDescription);
 	    
 	 	// Input para el description
-	    TextField descriptionBox = textField();
+	    descriptionBox = textField();
 	    descriptionBox.setToolTipText("Type new description");
 	    descriptionBox.setFont(new Font("Leelawadee", Font.PLAIN, 13));
 	    descriptionBox.setColumns(10);
@@ -146,7 +143,7 @@ public class ViewModifyBox extends JFrame implements IView {
 	    auxPanel.add(labelGenres);
 	    
 	    // ComboBox para Privacy
-	    JComboBox comboBoxPrivacy = new JComboBox(Privacy.values());
+	    comboBoxPrivacy = new JComboBox(Privacy.values());
 	    comboBoxPrivacy.setBackground(UIManager.getColor("Button.light"));
 	    comboBoxPrivacy.setFont(new Font("Leelawadee", Font.PLAIN, 14));
 	    comboBoxPrivacy.setBounds(395, 276, 87, 22);

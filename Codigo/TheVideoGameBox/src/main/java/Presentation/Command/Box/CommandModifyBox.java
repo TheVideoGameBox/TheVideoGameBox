@@ -1,5 +1,7 @@
 package Presentation.Command.Box;
 
+import org.bson.types.ObjectId;
+
 import Logic.SAAbstractFactory;
 import Logic.Box.SABox;
 import Logic.Box.TBox;
@@ -13,10 +15,10 @@ public class CommandModifyBox implements ICommand {
 	public Context execute(Object data) {
 		SABox saBox = SAAbstractFactory.getInstance().createSABox();
 		TBox box = (TBox) data;
-		int result = saBox.modifyBox(box);
+		ObjectId result = saBox.modifyBox(box);
 		Context con;
 		
-		if (result > 0) { 
+		if (result != null) { 
 			con = new Context(Event.RES_MODIFY_BOX_OK, result);
 		}
 		else {

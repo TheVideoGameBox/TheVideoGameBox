@@ -56,14 +56,23 @@ public class SABoxImp implements SABox {
     }
     
 	@Override
-	public int modifyBox(TBox tBox) {
-		if (!correctName(tBox.getName()) || !correctDescription(tBox.getDescription()) || !correctGenres(tBox.getGenres()) || !correctPrivacy(tBox.getPrivacy())) {
-			return -1;
+	public ObjectId modifyBox(TBox tBox) {
+		if (!correctName(tBox.getName()))  {
+			return null;
 		}
-		else {
-			DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
-			return daoBox.modifyBox(tBox);
+		if (!correctDescription(tBox.getDescription())) {
+			return null;
 		}
+		if (!correctGenres(tBox.getGenres())) {
+			return null;
+		}
+		if( !correctPrivacy(tBox.getPrivacy())) {
+			return null;
+		}
+		
+		DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+		
+		return daoBox.modifyBox(tBox);
 	}
 
 	private boolean correctPrivacy(boolean privacy) {
