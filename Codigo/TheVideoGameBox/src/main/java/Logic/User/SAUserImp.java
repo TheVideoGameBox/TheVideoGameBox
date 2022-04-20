@@ -10,6 +10,16 @@ import java.util.Objects;
 
 public class SAUserImp implements SAUser {
 
+	private DAOAbstractFactory daoFactory;
+
+	public SAUserImp(){
+		daoFactory = DAOAbstractFactory.getInstance();
+	}
+
+	public SAUserImp(DAOAbstractFactory daoFactory){
+		this.daoFactory = daoFactory;
+	}
+
 	@Override
 	public ObjectId createUser(TUser user) {
 		if(!correctEmail(user.getEmail()))
@@ -19,7 +29,7 @@ public class SAUserImp implements SAUser {
 		if(!correctPassword(user.getPassword()))
 			return null;
 			
-		DAOUser daoUser = DAOAbstractFactory.getInstance().createDAOUser();
+		DAOUser daoUser = daoFactory.createDAOUser();
 		return daoUser.create(user);
 	}
 
@@ -31,13 +41,18 @@ public class SAUserImp implements SAUser {
 		if(!correctPassword(user.getPassword()))
 			return null;
 
-		DAOUser daoUser = DAOAbstractFactory.getInstance().createDAOUser();
+		DAOUser daoUser = daoFactory.createDAOUser();
 		aux = daoUser.logIn(user.getEmail());
 		if(aux != null) {
 			if(Objects.equals(aux.getPassword(), user.getPassword()))
 				return aux.getId();
 		}
 		return null;
+	}
+
+	@Override
+	public void deleteFromDatabase(ObjectId id) {
+		daoFactory.createDAOUser().deleteFromDatabase(id);
 	}
 
 	private boolean correctPassword(String password) {
@@ -57,10 +72,5 @@ public class SAUserImp implements SAUser {
 			result = false;
 		}
 		return result;
-	}
-
-	@Override
-	public void deleteFromDatabase(ObjectId id) {
-		DAOAbstractFactory.getInstance().createDAOUser().deleteFromDatabase(id);
 	}
 }

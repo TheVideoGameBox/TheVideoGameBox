@@ -33,6 +33,7 @@ public class TBox {
         this.privacy = privacy;
         this.genres = genres;
         this.gameList = new ArrayList<>();
+        this.active = true;
     }
 
     public TBox(String name, String description, Privacy privacy, List<Genres> genres, List<ObjectId> gameList) {
@@ -41,6 +42,7 @@ public class TBox {
         this.privacy = privacy;
         this.genres = genres;
         this.gameList = gameList;
+        this.active = true;
     }
 
     public TBox(ObjectId id, String name, String description, Privacy privacy, List<Genres> genres, List<ObjectId> gameList, boolean active) {

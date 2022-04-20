@@ -52,6 +52,7 @@ public class Box {
         this.privacy = box.getPrivacy();
         this.genres = box.getGenres();
         this.active = box.isActive();
+        this.gameList = box.getGameList();
     }
 
     public ObjectId getId() {
