@@ -23,7 +23,7 @@ public class DAOBoxStub implements DAOBox {
 
     @Override
     public ObjectId deleteGame(ObjectId idBox, ObjectId idGame) {
-        return null;
+        return ObjectId.get();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class DAOBoxStub implements DAOBox {
     }
 
     @Override
-    public ObjectId deleteBox(TBox box) {
+    public ObjectId deleteBox(ObjectId id) {
         return ObjectId.get();
     }
 

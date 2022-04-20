@@ -14,7 +14,7 @@ public class CommandDeleteBox implements ICommand {
     public Context execute(Object data) {
         SABox saBox = SAAbstractFactory.getInstance().createSABox();
         TBox box = (TBox) data;
-        ObjectId result = saBox.deleteBox(box);
+        ObjectId result = saBox.deleteBox(box.getId());
         Context con;
 
         if(result!=null) con = new Context(Event.RES_DELETE_BOX_OK, result);

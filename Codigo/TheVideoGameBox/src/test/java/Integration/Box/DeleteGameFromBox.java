@@ -1,10 +1,5 @@
 package Integration.Box;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -26,7 +21,11 @@ import Logic.Box.SABox;
 import Logic.Box.TBox;
 import Logic.Game.Game;
 
-@FixMethodOrder( MethodSorters.NAME_ASCENDING )
+import static org.junit.Assert.*;
+
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+// Mejor que los tests no dependan de otros
+//Podriamos querer probar un test sin tener que ejecutar otro
 public class DeleteGameFromBox {
     private static SABox saBox;
     private static ObjectId idBox;
@@ -41,32 +40,35 @@ public class DeleteGameFromBox {
         saBox = SAAbstractFactory.getInstance().createSABox();
         idBox = saBox.createBox(correct);
         correct.setId(idBox);
-        
+
         saBox.addGame(idBox, idGame);
-        
     }
 
     @Test
     public void testCorrectDeleteGame_1() {
         try {
-        	assertTrue(saBox.listGames(correct).contains(idGame));
+            assertTrue(saBox.listGames(correct).get(0).getId().equals(idGame));
             assertNotNull(saBox.deleteGame(idBox, idGame));
-            assertFalse(saBox.listGames(correct).contains(idGame));
+            assertTrue(saBox.listGames(correct).isEmpty());
+            saBox.addGame(idBox, idGame);
         } catch (Exception ae) {
             fail(ae.getMessage());
         }
     }
-    
-    @Test
-    public void testCorrectDeleteGame_2() { // Elemento ya eliminado
-        try {
-        	assertFalse(saBox.listGames(correct).contains(idGame));
-            assertNotNull(saBox.deleteGame(idBox, idGame));
-            assertFalse(saBox.listGames(correct).contains(idGame));
-        } catch (Exception ae) {
-            fail(ae.getMessage());
-        }
-    }
+
+//  No tiene sentido este test teniendo en cuenta los criterios de aceptacion
+//    @Test
+//    public void testCorrectDeleteGame_2() { // Elemento ya eliminado
+//        try {
+//            saBox.deleteGame(idBox, idGame);
+//
+//            assertTrue(saBox.listGames(correct).isEmpty());
+//            assertNull(saBox.deleteGame(idBox, idGame));
+//            assertTrue(saBox.listGames(correct).isEmpty());
+//        } catch (Exception ae) {
+//            fail(ae.getMessage());
+//        }
+//    }
 
     @AfterClass
     public static void after() {
