@@ -43,13 +43,13 @@ jobs:
       - name: Paso 4.1 - Ejecutar tests unitarios
         run: |
              cd Codigo/TheVideoGameBox
-             mvn -Dtest="Unit/**" -DfailIfNoTests=false test
+             mvn -Dtest="Unit/**" -DfailIfNoTests=false Dsurefire.printSummary=false test
              
       - name: Paso 4.2 - Ejecutar tests de integracion
         if: success()
         run: |
              cd Codigo/TheVideoGameBox
-             mvn -Dtest="Integration/**" -DfailIfNoTests=false test
+             mvn -Dtest="Integration/**" -DfailIfNoTests=false Dsurefire.printSummary=false test
         
       - name: Paso 5.1 - Subir el proyecto compilado como un artefacto
         if: success()
