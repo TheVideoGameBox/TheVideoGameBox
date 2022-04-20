@@ -19,6 +19,7 @@ public class AutoCompleteTextField extends TextField{
 	/**
 	 * 
 	 */
+	private ArrayList<String> items;
 	
 
 	
@@ -26,30 +27,31 @@ public class AutoCompleteTextField extends TextField{
 	
 	public AutoCompleteTextField(Dimension dimension, ArrayList<String> items) {
 		super(dimension);
-        
+        this.items=items;
 	}
 	
 	
 	public AutoCompleteTextField(Dimension dimension, String prompt, ArrayList<String> items) {
 		super(dimension, prompt);
+		this.items=items;
         
 	}
 	
-    private static boolean isAdjusting(JComboBox<String> cbInput) {
+    private boolean isAdjusting(JComboBox<String> cbInput) {
         if (cbInput.getClientProperty("is_adjusting") instanceof Boolean) {
             return (Boolean) cbInput.getClientProperty("is_adjusting");
         }
         return false;
     }
 
-    private static void setAdjusting(JComboBox<String> cbInput, boolean adjusting) {
+    private void setAdjusting(JComboBox<String> cbInput, boolean adjusting) {
         cbInput.putClientProperty("is_adjusting", adjusting);
     }
 
 	
-	 public static void setupAutoComplete(final JTextField txtInput, final ArrayList<String> items) {
-	        final DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
-	        final JComboBox<String> cbInput  = new JComboBox<String>(model) {
+	 public void setupAutoComplete() {
+	        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
+	        JComboBox<String> cbInput  = new JComboBox<String>(model) {
 	            /**
 				 * 
 				 */
@@ -69,13 +71,13 @@ public class AutoCompleteTextField extends TextField{
 	            public void actionPerformed(ActionEvent e) {
 	                if (!isAdjusting(cbInput)) {
 	                    if (cbInput.getSelectedItem() != null) {
-	                        txtInput.setText(cbInput.getSelectedItem().toString());
+	                        setText(cbInput.getSelectedItem().toString());
 	                    }
 	                }
 	            }
 	        });
 	
-	        txtInput.addKeyListener(new KeyAdapter() {
+	        this.addKeyListener(new KeyAdapter() {
 	
 	            @Override
 	            public void keyPressed(KeyEvent e) {
@@ -89,7 +91,7 @@ public class AutoCompleteTextField extends TextField{
 	                    e.setSource(cbInput);
 	                    cbInput.dispatchEvent(e);
 	                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-	                        txtInput.setText(cbInput.getSelectedItem().toString());
+	                        setText(cbInput.getSelectedItem().toString());
 	                        cbInput.setPopupVisible(false);
 	                    }
 	                }
@@ -99,7 +101,7 @@ public class AutoCompleteTextField extends TextField{
 	                setAdjusting(cbInput, false);
 	            }
 	        });
-	        txtInput.getDocument().addDocumentListener(new DocumentListener() {
+	        this.getDocument().addDocumentListener(new DocumentListener() {
 	            public void insertUpdate(DocumentEvent e) {
 	                updateList();
 	            }
@@ -115,7 +117,7 @@ public class AutoCompleteTextField extends TextField{
 	            private void updateList() {
 	                setAdjusting(cbInput, true);
 	                model.removeAllElements();
-	                String input = txtInput.getText();
+	                String input = getText();
 	                if (!input.isEmpty()) {
 	                    for (String item : items) {
 	                        if (item.toLowerCase().startsWith(input.toLowerCase())) {
@@ -128,8 +130,8 @@ public class AutoCompleteTextField extends TextField{
 	                setAdjusting(cbInput, false);
 	            }
 	        });
-	        txtInput.setLayout(new BorderLayout());
-	        txtInput.add(cbInput, BorderLayout.SOUTH);
+	        this.setLayout(new BorderLayout());
+	        this.add(cbInput, BorderLayout.SOUTH);
 	 }
 	
 }

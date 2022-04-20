@@ -294,10 +294,9 @@ public class ViewMain extends JFrame implements IView{
 		TextField textGame = new TextField(new Dimension(225, 30),"Name of the Game");
 		textGame.textField();
 		
-		ArrayList<String> items= new ArrayList<String>(Arrays.asList("Android", "PS4", "PC (Microsoft Windows)"));
-		AutoCompleteTextField textPlatform = new AutoCompleteTextField(new Dimension(225, 30), "Name of the Platform", items);
+		AutoCompleteTextField textPlatform = new AutoCompleteTextField(new Dimension(225, 30), "Name of the Platform", new PlatformNames());
 		textPlatform.textField();
-		AutoCompleteTextField.setupAutoComplete(textPlatform, items);
+		textPlatform.setupAutoComplete();
 		textPlatform.setVisible(false);
 		
 		
