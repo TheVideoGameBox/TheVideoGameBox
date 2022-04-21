@@ -53,9 +53,17 @@ public class TBox {
         this.active = active;
     }
 
+    public TBox(ObjectId _id, String name, String description, Privacy privacy, List<Genres> genres) {
+    	 this.id = _id;
+         this.name = name;
+         this.description = description;
+         this.privacy = privacy;
+         this.genres = genres;
+	}
+    
     //Getters and setters
-
-    public ObjectId getId() {
+    
+	public ObjectId getId() {
         return id;
     }
 

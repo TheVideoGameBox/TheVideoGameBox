@@ -44,7 +44,7 @@ public class ViewFactory extends ViewAbstractFactory {
 //				view = new ViewAddGameToBox();
 //				break;
 			case Event.VIEW_MODIFY_BOX:
-				view = new ViewModifyBox();
+				view = new ViewModifyBox((TBox) context.getData());
 				break;
 			default:
 				break;

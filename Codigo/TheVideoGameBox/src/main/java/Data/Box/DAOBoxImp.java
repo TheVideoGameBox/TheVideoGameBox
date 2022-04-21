@@ -102,11 +102,12 @@ public class DAOBoxImp implements DAOBox {
 			
 			db.getCollection("boxes", Box.class).updateOne(eq("_id", tBox.getId()), Updates.combine(Updates.set("name", tBox.getName()), Updates.set("description", tBox.getDescription()), 
 						Updates.set("genres", tBox.getGenres()), Updates.set("privacy", tBox.getPrivacy())));
+			result = tBox.getId();
 		} catch (MongoException e) {
-			return null;
+			result = null;
 		}
 		
-		return tBox.getId();
+		return result;
 	}
 
 }

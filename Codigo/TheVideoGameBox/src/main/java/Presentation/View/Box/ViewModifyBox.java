@@ -27,6 +27,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
+import org.bson.types.ObjectId;
+
 import Logic.Box.Genres;
 import Logic.Box.Privacy;
 import Logic.Box.TBox;
@@ -41,6 +43,8 @@ import Presentation.View.Utils.TextField;
 public class ViewModifyBox extends JFrame implements IView {
 	
 	private static final long serialVersionUID = 1L;
+	
+	private TBox tbox;
 	
 	JPanelConFondo mainPanel;
 	
@@ -63,8 +67,9 @@ public class ViewModifyBox extends JFrame implements IView {
 	
 	private JPanel backButtonContainer;
 	
-	public ViewModifyBox() {
+	public ViewModifyBox(TBox tbox) {
 		super();
+		this.tbox = tbox;
 		setTitle("Modify box");
 		initGUI();
 	}
@@ -202,12 +207,13 @@ public class ViewModifyBox extends JFrame implements IView {
 	// Método para confirmar
 	protected void modifyBox() {
 		//Capturar datos
+		ObjectId _id = tbox.getId();
 		String name = nameBox.getText();
 		String description = descriptionBox.getText();
 		List<Genres> categories = getCategories();
 		Privacy privacy = getPrivacy();
 
-		TBox box = new TBox(name, description, privacy, categories);
+		TBox box = new TBox(_id, name, description, privacy, categories);
 
 		ApplicationController.getInstance().action(new Context(Event.MODIFY_BOX, box));	
 	}
