@@ -13,10 +13,6 @@ public interface DAOBox {
 	public List<TBox> searchAllByName(String name);
 	public TBox showBox(ObjectId id);
 	ObjectId deleteBox(ObjectId id);
-
-
-
-	public List<TBox> showUserBoxes(ObjectId idUser);
 	public void deleteFromDatabase(ObjectId id);
 
 }

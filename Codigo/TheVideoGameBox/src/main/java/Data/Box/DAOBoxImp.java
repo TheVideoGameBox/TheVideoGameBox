@@ -119,30 +119,16 @@ public class DAOBoxImp implements DAOBox {
 	}
 
 	@Override
-	public List<TBox> showUserBoxes(ObjectId idUser) {
-		return null;
-	}
-
-	@Override
 	public TBox showBox(ObjectId _id) {
-		Box box = null;
+		TBox tBox = null;
 		try {
 			MongoDatabase db = Connection.getInstance().getConnection();
-			MongoCollection<Box> collection = db.getCollection("boxes", Box.class);
-
-			List<Box> boxes = new ArrayList<Box>();
-			collection.find(eq("_id", _id)).into(boxes);
-
-			if (boxes.size() == 1) {
-				box = new Box(boxes.get(0).toTransfer());
-			}
+			tBox = Objects.requireNonNull(db.getCollection("boxes", Box.class).find(eq("_id", _id)).first()).toTransfer();
 		}
 		catch(MongoException e) {
 			return null;
 		}
-
-
-		return box.toTransfer();
+		return tBox;
 	}
 
 	@Override

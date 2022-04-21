@@ -8,6 +8,9 @@ import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
 import Presentation.View.Utils.Button;
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+import org.bson.types.ObjectId;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -18,6 +21,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+import static Presentation.View.Main.ViewMain.id_logged;
 import static Presentation.View.Main.ViewMain.viewOptions;
 import static Presentation.View.Utils.Images.backGround;
 import static Presentation.View.Utils.Images.logo;
@@ -32,7 +36,10 @@ public class ViewUserBoxes extends JFrame implements IView {
             viewOptions = true;
             init_GUI();
         }
-
+        else if(context.getEvent() == Event.RES_UPDATE_GAME_LIST_OK){
+            this.boxes = (List<TBox>) context.getData();
+            init_GUI();
+        }
         refreshView();
     }
 
@@ -133,7 +140,7 @@ public class ViewUserBoxes extends JFrame implements IView {
 
         for (TBox box : boxes) {
             try {
-                contentContainer.add(boxPanel(box));
+                if(box.isActive()) contentContainer.add(boxPanel(box));
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -184,7 +191,7 @@ public class ViewUserBoxes extends JFrame implements IView {
                 setVisible(false);
             }
         });
-        buttonPanel.add(viewInfo, BorderLayout.WEST);
+        buttonPanel.add(viewInfo);
 
 
         Presentation.View.Utils.Button viewAttributes = new Button("View attributes", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(200, 45), Color.orange);
@@ -199,12 +206,32 @@ public class ViewUserBoxes extends JFrame implements IView {
                 setVisible(false);
             }
         });
-        buttonPanel.add(viewAttributes, BorderLayout.EAST);
+        buttonPanel.add(viewAttributes);
+
+        JPanel deletePanel = new JPanel(new BorderLayout());
+        deletePanel.setOpaque(false);
+        Button deleteButton = new Button(null, "delete_icon.png", new Dimension(60, 45), Color.orange);
+        deleteButton.buttonIcon();
+        deleteButton.setVisible(viewOptions);
+        deleteButton.setBorderPainted(false);
+        deleteButton.setContentAreaFilled(false);
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ApplicationController.getInstance().action(new Context(Event.DELETE_BOX, box.getId()));
+                ApplicationController.getInstance().action(new Context(Event.UPDATE_USER_BOX_LIST, id_logged));
+                setVisible(false);
+
+
+            }
+        });
+        deletePanel.add(deleteButton);
 
         //CONSTRUIR PANEL
 
         panel.add(namePanel, BorderLayout.WEST);
-        panel.add(buttonPanel, BorderLayout.EAST);
+        panel.add(buttonPanel, BorderLayout.CENTER);
+        panel.add(deletePanel, BorderLayout.EAST);
 
         return panel;
     }

@@ -33,6 +33,7 @@ public class TBox {
         this.privacy = privacy;
         this.genres = genres;
         this.owner = owner;
+        this.active = true;
     }
 
     public TBox(String name, String description, Privacy privacy, List<Genres> genres, List<ObjectId> gameList, ObjectId owner) {
