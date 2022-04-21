@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class DAOBoxStub implements DAOBox {
-//La integracion continua funciona
     @Override
     public ObjectId create(TBox box) {
         return ObjectId.get();
