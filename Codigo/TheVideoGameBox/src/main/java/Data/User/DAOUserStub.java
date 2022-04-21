@@ -28,6 +28,10 @@ public class DAOUserStub implements DAOUser {
     }
 
     @Override
+    public void deleteUserBoxFromDatabase(ObjectId idUser, ObjectId idBox) {
+    }
+
+    @Override
     public void deleteFromDatabase(ObjectId id) {
     }
 }

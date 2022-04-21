@@ -11,5 +11,6 @@ public interface DAOUser {
     public TUser logIn(String email);
     public ObjectId addBox(ObjectId idUser, ObjectId idBox);
     public List<ObjectId> userBoxes(ObjectId id);
+    void deleteUserBoxFromDatabase(ObjectId idUser, ObjectId idBox);
     void deleteFromDatabase(ObjectId id);
 }

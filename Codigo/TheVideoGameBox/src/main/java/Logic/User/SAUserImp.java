@@ -69,6 +69,16 @@ public class SAUserImp implements SAUser {
 		return boxes;
 	}
 
+	@Override
+	public void deleteUserBoxFromDatabase(ObjectId idUser, ObjectId idBox) {
+		DAOAbstractFactory.getInstance().createDAOUser().deleteUserBoxFromDatabase(idUser, idBox);
+	}
+
+	@Override
+	public void deleteFromDatabase(ObjectId id) {
+		DAOAbstractFactory.getInstance().createDAOUser().deleteFromDatabase(id);
+	}
+
 	private boolean correctPassword(String password) {
 		return password != null;
 	}
@@ -88,8 +98,4 @@ public class SAUserImp implements SAUser {
 		return result;
 	}
 
-	@Override
-	public void deleteFromDatabase(ObjectId id) {
-		DAOAbstractFactory.getInstance().createDAOUser().deleteFromDatabase(id);
-	}
 }

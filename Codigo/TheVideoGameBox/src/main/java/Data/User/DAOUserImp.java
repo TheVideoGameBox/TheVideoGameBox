@@ -79,6 +79,19 @@ public class DAOUserImp implements DAOUser {
 	}
 
 	@Override
+	public void deleteUserBoxFromDatabase(ObjectId idUser, ObjectId idBox) {
+		List<ObjectId> boxList = new ArrayList<>();
+		try {
+			MongoDatabase db = Connection.getInstance().getConnection();
+			boxList = Objects.requireNonNull(db.getCollection("users", User.class).find(eq("_id", idUser)).first()).getBoxList();
+			boxList.removeIf(box -> box == idBox);
+			Objects.requireNonNull(db.getCollection("users", User.class).findOneAndUpdate(eq("_id", idUser), Updates.set("boxList", boxList)));
+		} catch (MongoException e) {
+
+		}
+	}
+
+	@Override
 	public void deleteFromDatabase(ObjectId id) {
 		try {
 			MongoDatabase db = Connection.getInstance().getConnection();
