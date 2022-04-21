@@ -12,7 +12,11 @@ public interface DAOBox {
 	public List<ObjectId> listGames(TBox box);
 	public List<TBox> searchAllByName(String name);
 	public TBox showBox(ObjectId id);
-	public ObjectId deleteBox(ObjectId id);
+	ObjectId deleteBox(ObjectId id);
+
+
+
+	public List<TBox> showUserBoxes(ObjectId idUser);
 	public void deleteFromDatabase(ObjectId id);
 
 }

@@ -1,5 +1,6 @@
 package Presentation.View.Main;
 
+import Logic.Box.TBox;
 import Logic.Game.TGame;
 import Logic.SAAbstractFactory;
 import Presentation.Controller.ApplicationController;
@@ -623,13 +624,10 @@ public class ViewMain extends JFrame implements IView{
 		myBox.setVisible(logged);
 		myBox.setBorderPainted(false);
 		myBox.setContentAreaFilled(false);
-		myBox.setAlignmentX(JPanel.RIGHT_ALIGNMENT);
-		myBox.setAlignmentY(JPanel.TOP_ALIGNMENT);
 		myBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//CAMBIAR CUANDO TENGAMOS EL ACCESO A MIS BOXES
-				ApplicationController.getInstance().action(new Context(Event.VIEW_CREATE_BOX, null));
+				ApplicationController.getInstance().action(new Context(Event.USER_BOXES, id_logged));
 				setVisible(false);
 			}
 		});
