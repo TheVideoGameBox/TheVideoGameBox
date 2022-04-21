@@ -7,6 +7,7 @@ import Presentation.Command.Game.CommandSearchOne;
 import Presentation.Command.User.CommandAssociateBox;
 import Presentation.Command.User.CommandCreateUser;
 import Presentation.Command.User.CommandLogIn;
+import Presentation.Command.User.CommandUserBoxes;
 import Presentation.Controller.Event;
 
 public class CommandFactory extends CommandAbstractFactory{
@@ -52,6 +53,9 @@ public class CommandFactory extends CommandAbstractFactory{
                 break;
             case Event.ASSOCIATE_BOX:
                 command = new CommandAssociateBox();
+                break;
+            case Event.USER_BOXES:
+                command = new CommandUserBoxes();
                 break;
             default:
                 break;

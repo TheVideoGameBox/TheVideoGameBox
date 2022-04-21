@@ -1,11 +1,17 @@
 package Logic.User;
 
+import Data.Box.DAOBox;
 import Data.DAOAbstractFactory;
+import Data.Game.DAOGame;
 import Data.User.DAOUser;
+import Logic.Box.TBox;
+import Logic.Game.TGame;
 import org.bson.types.ObjectId;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class SAUserImp implements SAUser {
@@ -44,6 +50,23 @@ public class SAUserImp implements SAUser {
 	public ObjectId addBox(ObjectId idUser, ObjectId idBox) {
 		DAOUser daoUser = DAOAbstractFactory.getInstance().createDAOUser();
 		return daoUser.addBox(idUser, idBox);
+	}
+
+	@Override
+	public List<TBox> userBoxes(ObjectId id) {
+		List<TBox> boxes = new ArrayList<>();
+		DAOUser daoUser = DAOAbstractFactory.getInstance().createDAOUser();
+		List<ObjectId> boxesIDs = daoUser.userBoxes(id);
+
+		if(boxesIDs == null) return boxes;
+
+		DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+		for(ObjectId boxID : boxesIDs){
+			TBox tBox = daoBox.showBox(boxID);
+			if(tBox == null) return boxes;
+			boxes.add(tBox);
+		}
+		return boxes;
 	}
 
 	private boolean correctPassword(String password) {

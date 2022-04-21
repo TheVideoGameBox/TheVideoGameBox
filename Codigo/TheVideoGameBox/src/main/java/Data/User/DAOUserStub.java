@@ -3,6 +3,8 @@ package Data.User;
 import Logic.User.TUser;
 import org.bson.types.ObjectId;
 
+import java.util.List;
+
 public class DAOUserStub implements DAOUser {
 
     @Override
@@ -17,6 +19,11 @@ public class DAOUserStub implements DAOUser {
 
     @Override
     public ObjectId addBox(ObjectId idUser, ObjectId idBox) {
+        return null;
+    }
+
+    @Override
+    public List<ObjectId> userBoxes(ObjectId id) {
         return null;
     }
 

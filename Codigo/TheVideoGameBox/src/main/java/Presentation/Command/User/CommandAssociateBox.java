@@ -19,7 +19,7 @@ public class CommandAssociateBox implements ICommand {
         Context con;
 
         if(result != null) con = new Context(Event.RES_ASSOCIATE_BOX_OK, result);
-        else con = new Context(Event.RES_ASSOCIATE_BOX_OK, null);
+        else con = new Context(Event.RES_ASSOCIATE_BOX_KO, null);
 
         return con;
     }

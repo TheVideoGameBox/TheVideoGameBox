@@ -32,6 +32,10 @@ public class Event {
     public static final int ASSOCIATE_BOX = 308;
     public static final int RES_ASSOCIATE_BOX_OK = 309;
     public static final int RES_ASSOCIATE_BOX_KO = 310;
+    public static final int USER_BOXES = 311;
+    public static final int RES_USER_BOXES_OK = 312;
+    public static final int RES_USER_BOXES_KO = 313;
+    public static final int VIEW_USER_BOXES = 314;
 
 
     // Codigos de eventos para BOX [500-700)
