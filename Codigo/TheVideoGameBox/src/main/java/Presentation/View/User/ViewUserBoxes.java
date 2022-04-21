@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+import static Presentation.View.Main.ViewMain.viewOptions;
 import static Presentation.View.Utils.Images.backGround;
 import static Presentation.View.Utils.Images.logo;
 
@@ -28,6 +29,7 @@ public class ViewUserBoxes extends JFrame implements IView {
     public void update(Context context) {
         if(context.getEvent() == Event.RES_USER_BOXES_OK){
             this.boxes = (List<TBox>) context.getData();
+            viewOptions = true;
             init_GUI();
         }
 

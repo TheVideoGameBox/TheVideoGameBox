@@ -28,6 +28,11 @@ public abstract class ApplicationController {
         currentView.update(new Context(Event.BACK, null));
     }
 
+    public void backAux() {
+        currentView = viewStack.pop();
+        currentView.update(new Context(Event.BACK_AUX, null));
+    }
+
     public void back(Object data) {
         currentView = viewStack.pop();
         currentView.update(new Context(Event.BACK, data));

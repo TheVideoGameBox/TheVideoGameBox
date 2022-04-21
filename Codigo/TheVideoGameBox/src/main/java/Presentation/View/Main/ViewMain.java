@@ -33,6 +33,7 @@ import static Presentation.View.Utils.Images.logo;
 public class ViewMain extends JFrame implements IView{
 
 	public static boolean logged = false;
+	public static boolean viewOptions = false;
 	public static ObjectId id_logged = null;
 	private boolean desplegado;
 	private List<TGame> randomGames = new ArrayList<>();
@@ -59,6 +60,10 @@ public class ViewMain extends JFrame implements IView{
 				break;
 			case Event.RES_SEARCH_ALL_BOXES_BY_NAME_KO:
 				JOptionPane.showMessageDialog(null, "There isn't any box with that name");
+				hideView = false;
+				break;
+			case Event.RES_USER_BOXES_KO:
+				JOptionPane.showMessageDialog(null, "You don't have any Box yet");
 				hideView = false;
 				break;
 			case Event.RES_RANDOM_GAMES_OK:
@@ -628,7 +633,8 @@ public class ViewMain extends JFrame implements IView{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ApplicationController.getInstance().action(new Context(Event.USER_BOXES, id_logged));
-				setVisible(false);
+				if(hideView) setVisible(false);
+				hideView = true;
 			}
 		});
 		buttonPanel.add(myBox);
