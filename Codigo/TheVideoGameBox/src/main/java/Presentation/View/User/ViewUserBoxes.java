@@ -183,7 +183,7 @@ public class ViewUserBoxes extends JFrame implements IView {
         viewInfo.buttonIcon();
         viewInfo.setBorderPainted(false);
         viewInfo.setContentAreaFilled(false);
-        viewInfo.setToolTipText("Search a Box by Name");
+        viewInfo.setToolTipText("View Box's games");
         viewInfo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
