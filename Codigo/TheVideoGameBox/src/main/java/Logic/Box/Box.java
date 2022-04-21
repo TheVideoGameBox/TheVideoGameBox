@@ -15,27 +15,30 @@ public class Box {
     private List<Genres> genres;
     private List<ObjectId> gameList;
     private boolean active;
+    private ObjectId owner;
 
     public Box() {
     }
 
-    public Box(String name, String description, Privacy privacy, List<Genres> genres) {
+    public Box(String name, String description, Privacy privacy, List<Genres> genres, ObjectId owner) {
         this.name = name;
         this.description = description;
         this.privacy = privacy;
         this.genres = genres;
         this.gameList = new ArrayList<>();
+        this.owner = owner;
     }
 
-    public Box(String name, String description, Privacy privacy, List<Genres> genres, List<ObjectId> gameList) {
+    public Box(String name, String description, Privacy privacy, List<Genres> genres, List<ObjectId> gameList, ObjectId owner) {
         this.name = name;
         this.description = description;
         this.privacy = privacy;
         this.genres = genres;
         this.gameList = gameList;
+        this.owner = owner;
     }
 
-    public Box(ObjectId id, String name, String description, Privacy privacy, List<Genres> genres, List<ObjectId> gameList, boolean active) {
+    public Box(ObjectId id, String name, String description, Privacy privacy, List<Genres> genres, List<ObjectId> gameList, boolean active, ObjectId owner) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -43,6 +46,7 @@ public class Box {
         this.genres = genres;
         this.gameList = gameList;
         this.active = active;
+        this.owner = owner;
     }
 
     public Box(TBox box) {
@@ -52,6 +56,7 @@ public class Box {
         this.privacy = box.getPrivacy();
         this.genres = box.getGenres();
         this.active = box.isActive();
+        this.owner = box.getOwner();
         this.gameList = box.getGameList();
     }
 
@@ -111,7 +116,15 @@ public class Box {
         this.active = active;
     }
 
+    public ObjectId getOwner() {
+        return owner;
+    }
+
+    public void setOwner(ObjectId owner) {
+        this.owner = owner;
+    }
+
     public TBox toTransfer() {
-        return new TBox(id, name, description, privacy, genres, gameList, active);
+        return new TBox(id, name, description, privacy, genres, gameList, active, owner);
     }
 }

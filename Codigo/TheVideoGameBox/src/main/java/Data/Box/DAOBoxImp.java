@@ -119,6 +119,11 @@ public class DAOBoxImp implements DAOBox {
 	}
 
 	@Override
+	public List<TBox> showUserBoxes(ObjectId idUser) {
+		return null;
+	}
+
+	@Override
 	public TBox showBox(ObjectId _id) {
 		Box box = null;
 		try {

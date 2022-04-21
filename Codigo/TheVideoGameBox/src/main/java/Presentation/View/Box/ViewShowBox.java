@@ -217,9 +217,8 @@ public class ViewShowBox extends JFrame implements IView {
         numGames.setAlignmentX(JPanel.CENTER_ALIGNMENT);
         numGames.setForeground(Color.white);
         numGames.setFont(new Font("sans-serif", 1, 27));
-        System.out.print(box.getGameList().size());
-        if(box.getGameList() != null) numGames.setText("Number of Games inside the box: " + box.getGameList().size());
-        else numGames.setText("Number of Games inside the box: 0");
+        if(box.getGameList() != null) numGames.setText("Number of Games: " + box.getGameList().size());
+        else numGames.setText("Number of Games: 0");
         
         numGamePanel.add(numGames);
         
