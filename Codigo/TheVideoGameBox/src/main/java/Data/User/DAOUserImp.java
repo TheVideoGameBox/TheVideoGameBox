@@ -5,18 +5,23 @@ import Logic.Box.Box;
 import Logic.User.TUser;
 import Logic.User.User;
 import com.mongodb.MongoException;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.IndexOptions;
 import com.mongodb.client.model.Indexes;
 import com.mongodb.client.model.Updates;
+
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.regex;
 
 public class DAOUserImp implements DAOUser {
 
@@ -100,6 +105,21 @@ public class DAOUserImp implements DAOUser {
 		} catch (MongoException e) {
 
 		}
+	}
+
+	@Override
+	public List<TUser> searchAllByName(String name) {
+		List<TUser> result = new ArrayList<>();
+		try {
+			MongoDatabase db = Connection.getInstance().getConnection();
+			Bson filter1 = regex("name", Pattern.compile(name, Pattern.CASE_INSENSITIVE));
+			FindIterable<User> it = db.getCollection("users", User.class).find(filter1);
+			for(User user : it)
+				result.add(user.toTransfer());
+		} catch(MongoException e) {
+			result = null;
+		}
+		return result;
 	}
 
 }

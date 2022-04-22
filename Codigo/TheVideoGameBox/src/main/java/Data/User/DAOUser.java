@@ -13,4 +13,5 @@ public interface DAOUser {
     public List<ObjectId> userBoxes(ObjectId id);
     void deleteUserBoxFromDatabase(ObjectId idUser, ObjectId idBox);
     void deleteFromDatabase(ObjectId id);
+    public List<TUser> searchAllByName(String name);
 }

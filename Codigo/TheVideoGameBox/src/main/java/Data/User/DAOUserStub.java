@@ -1,8 +1,10 @@
 package Data.User;
 
+import Logic.Box.TBox;
 import Logic.User.TUser;
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAOUserStub implements DAOUser {
@@ -34,4 +36,9 @@ public class DAOUserStub implements DAOUser {
     @Override
     public void deleteFromDatabase(ObjectId id) {
     }
+
+	@Override
+	public List<TUser> searchAllByName(String name) {
+		return new ArrayList<TUser>();
+	}
 }
