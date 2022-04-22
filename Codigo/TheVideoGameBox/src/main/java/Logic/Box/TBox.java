@@ -61,6 +61,17 @@ public class TBox {
          this.genres = genres;
 	}
     
+    //Costructor de copia para los Test
+    public TBox(TBox box) {
+    	this.id=box.getId();
+    	this.name=box.getName();
+    	this.description=box.getDescription();
+    	this.privacy=box.getPrivacy();
+    	this.genres=new ArrayList(box.getGenres());
+    	this.gameList=new ArrayList(box.getGameList());
+    	this.active=box.isActive();
+    }
+    
     //Getters and setters
     
 	public ObjectId getId() {
