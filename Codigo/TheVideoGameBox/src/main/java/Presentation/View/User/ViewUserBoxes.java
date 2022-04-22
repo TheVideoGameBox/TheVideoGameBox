@@ -162,9 +162,9 @@ public class ViewUserBoxes extends JFrame implements IView {
         JPanel namePanel = new JPanel();
         namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.X_AXIS));
         namePanel.setOpaque(false);
-        namePanel.setMaximumSize(new Dimension(700, 135));
-        namePanel.setPreferredSize(new Dimension(700, 135));
-        namePanel.setMinimumSize(new Dimension(700, 135));
+        namePanel.setMaximumSize(new Dimension(600, 135));
+        namePanel.setPreferredSize(new Dimension(600, 135));
+        namePanel.setMinimumSize(new Dimension(600, 135));
 
         // NAME
         JLabel name = new JLabel(box.getName());
@@ -172,33 +172,33 @@ public class ViewUserBoxes extends JFrame implements IView {
         name.setFont(new Font("Leelawadee", Font.BOLD, 20));
 
         // CONSTRUIR NAMEPANEL
-        namePanel.add(Box.createRigidArea(new Dimension(10, 0)));
-        namePanel.add(Box.createRigidArea(new Dimension(55, 0)));
+        namePanel.add(Box.createRigidArea(new Dimension(65, 0)));
         namePanel.add(name);
 
         //BUTTON PANEL
         JPanel buttonPanel = new JPanel(new BorderLayout());
         buttonPanel.setOpaque(false);
-        Presentation.View.Utils.Button viewInfo = new Presentation.View.Utils.Button("View Games", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(200, 45), Color.orange);
-        viewInfo.buttonIcon();
-        viewInfo.setBorderPainted(false);
-        viewInfo.setContentAreaFilled(false);
-        viewInfo.setToolTipText("View Box's games");
-        viewInfo.addActionListener(new ActionListener() {
+        Button viewGames = new Button("Games", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(120, 45), Color.orange);
+        viewGames.buttonIcon();
+        viewGames.setBorderPainted(false);
+        viewGames.setContentAreaFilled(false);
+        viewGames.setToolTipText("View Box's games");
+        viewGames.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ApplicationController.getInstance().action(new Context(Event.LIST_GAMES_OF_BOX, box));
                 setVisible(false);
             }
         });
-        buttonPanel.add(viewInfo);
+        buttonPanel.add(viewGames);
+        //buttonPanel.add(Box.createRigidArea(new Dimension(20, 0)));
 
 
-        Presentation.View.Utils.Button viewAttributes = new Button("View attributes", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(200, 45), Color.orange);
+        Button viewAttributes = new Button("Attributes", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(120, 45), Color.orange);
         viewAttributes.buttonIcon();
         viewAttributes.setBorderPainted(false);
         viewAttributes.setContentAreaFilled(false);
-        viewAttributes.setToolTipText("View attributes of the box");
+        viewAttributes.setToolTipText("View Box's attributes");
         viewAttributes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -206,11 +206,11 @@ public class ViewUserBoxes extends JFrame implements IView {
                 setVisible(false);
             }
         });
-        buttonPanel.add(viewAttributes);
+        buttonPanel.add(viewAttributes, BorderLayout.EAST);
 
         JPanel deletePanel = new JPanel(new BorderLayout());
         deletePanel.setOpaque(false);
-        Button deleteButton = new Button(null, "delete_icon.png", new Dimension(60, 45), Color.orange);
+        Button deleteButton = new Button(null, "delete_icon.png", new Dimension(100, 45), Color.orange);
         deleteButton.buttonIcon();
         deleteButton.setVisible(viewOptions);
         deleteButton.setBorderPainted(false);
