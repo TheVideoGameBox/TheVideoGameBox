@@ -162,9 +162,9 @@ public class ViewUserBoxes extends JFrame implements IView {
         JPanel namePanel = new JPanel();
         namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.X_AXIS));
         namePanel.setOpaque(false);
-        namePanel.setMaximumSize(new Dimension(600, 135));
-        namePanel.setPreferredSize(new Dimension(600, 135));
-        namePanel.setMinimumSize(new Dimension(600, 135));
+        namePanel.setMaximumSize(new Dimension(610, 135));
+        namePanel.setPreferredSize(new Dimension(610, 135));
+        namePanel.setMinimumSize(new Dimension(610, 135));
 
         // NAME
         JLabel name = new JLabel(box.getName());
