@@ -31,7 +31,7 @@ public class DeleteGameFromBox {
     private static ObjectId idBox;
     private static ObjectId idGame;
     private static final TBox correct = new TBox("TEST_DELETE_GAME", "TEST_DELETE_GAME", Privacy.PRIVATE,
-            new ArrayList<Logic.Box.Genres>(Arrays.asList(Genres.RACING, Genres.INDIE)), new ArrayList<ObjectId>());
+            new ArrayList<Logic.Box.Genres>(Arrays.asList(Genres.RACING, Genres.INDIE)), new ArrayList<ObjectId>(), null);
 
     @BeforeClass
     public static void init() {

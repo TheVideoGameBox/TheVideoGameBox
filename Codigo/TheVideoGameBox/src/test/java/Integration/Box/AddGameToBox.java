@@ -26,7 +26,7 @@ public class AddGameToBox {
     private static ObjectId idBox;
     private static ObjectId idGame;
     private static final TBox correct = new TBox("TEST_ADD_GAME", "TEST_ADD_GAME", Privacy.PRIVATE,
-            new ArrayList<Genres>(Arrays.asList(Genres.RACING, Genres.INDIE)), new ArrayList<ObjectId>());
+            new ArrayList<Genres>(Arrays.asList(Genres.RACING, Genres.INDIE)), new ArrayList<ObjectId>(), null);
 
     @BeforeClass
     public static void init() {
