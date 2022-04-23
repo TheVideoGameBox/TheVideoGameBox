@@ -1,12 +1,13 @@
 package Presentation.Command.Box;
 
-import Logic.Box.SABox;
+import org.apache.commons.lang3.tuple.Pair;
+import org.bson.types.ObjectId;
+
 import Logic.SAAbstractFactory;
+import Logic.Box.SABox;
 import Presentation.Command.ICommand;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
-import org.apache.commons.lang3.tuple.Pair;
-import org.bson.types.ObjectId;
 
 public class CommandDeleteGame implements ICommand {
 

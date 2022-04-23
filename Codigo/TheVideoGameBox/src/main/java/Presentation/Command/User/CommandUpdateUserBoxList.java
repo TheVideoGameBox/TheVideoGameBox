@@ -1,6 +1,8 @@
 package Presentation.Command.User;
 
+import Logic.Box.SABox;
 import Logic.Box.TBox;
+import Logic.Game.TGame;
 import Logic.SAAbstractFactory;
 import Logic.User.SAUser;
 import Presentation.Command.ICommand;

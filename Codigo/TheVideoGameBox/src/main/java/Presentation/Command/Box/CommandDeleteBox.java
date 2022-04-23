@@ -1,6 +1,7 @@
 package Presentation.Command.Box;
 
 import Logic.Box.SABox;
+import Logic.Box.TBox;
 import Logic.SAAbstractFactory;
 import Presentation.Command.ICommand;
 import Presentation.Controller.Context;

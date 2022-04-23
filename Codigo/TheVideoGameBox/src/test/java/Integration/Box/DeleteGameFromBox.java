@@ -1,21 +1,25 @@
 package Integration.Box;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
+
+import org.bson.types.ObjectId;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
+
+import com.mongodb.client.MongoDatabase;
+
 import Data.Connection;
+import Logic.SAAbstractFactory;
 import Logic.Box.Genres;
 import Logic.Box.Privacy;
 import Logic.Box.SABox;
 import Logic.Box.TBox;
 import Logic.Game.Game;
-import Logic.SAAbstractFactory;
-import com.mongodb.client.MongoDatabase;
-import org.bson.types.ObjectId;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
 
 import static org.junit.Assert.*;
 

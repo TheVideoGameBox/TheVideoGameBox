@@ -5,6 +5,7 @@ import Logic.Box.Privacy;
 import Logic.Box.SABox;
 import Logic.Box.TBox;
 import Logic.SAAbstractFactory;
+import org.bson.types.ObjectId;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

@@ -1,6 +1,7 @@
 package Presentation.View.Box;
 
 import Logic.Box.TBox;
+import Logic.Game.TGame;
 import Presentation.Controller.ApplicationController;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;

@@ -1,5 +1,34 @@
 package Presentation.View.Box;
 
+import static Presentation.View.Utils.Images.backGround;
+import static Presentation.View.Utils.Images.logo;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+
+import org.bson.types.ObjectId;
+
 import Logic.Box.Genres;
 import Logic.Box.Privacy;
 import Logic.Box.TBox;
@@ -10,18 +39,6 @@ import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Utils.Button;
 import Presentation.View.Utils.TextField;
-import org.bson.types.ObjectId;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import static Presentation.View.Utils.Images.backGround;
-import static Presentation.View.Utils.Images.logo;
 
 public class ViewModifyBox extends JFrame implements IView {
 	

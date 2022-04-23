@@ -1,27 +1,30 @@
 package Integration.Box;
 
-import Logic.Box.Genres;
-import Logic.Box.Privacy;
-import Logic.Box.SABox;
-import Logic.Box.TBox;
-import Logic.SAAbstractFactory;
-import org.bson.types.ObjectId;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import javax.swing.JList;
+
+import org.bson.types.ObjectId;
+import org.junit.*;
+
+import Logic.SAAbstractFactory;
+import Logic.Box.Box;
+import Logic.Box.Genres;
+import Logic.Box.Privacy;
+import Logic.Box.SABox;
+import Logic.Box.TBox;
 
 public class ModifyBox {
 
 	private static ObjectId idBox;
 	private static SABox saBox;
-	private static final TBox original = new TBox("TEST_MODIFY_BOX","TEST_MODIFY_BOX_DESCRIPTION", Privacy.PUBLIC, new ArrayList<Genres>(Arrays.asList(Genres.INDIE,Genres.RACING,Genres.SHOOTER)));
+	private static TBox original = new TBox("TEST_MODIFY_BOX","TEST_MODIFY_BOX_DESCRIPTION", Privacy.PUBLIC, new ArrayList<Genres>(Arrays.asList(Genres.INDIE,Genres.RACING,Genres.SHOOTER)));
 	
 	
 	@BeforeClass
@@ -62,7 +65,7 @@ public class ModifyBox {
 	
 	@Test
 	public void modifyBoxWithIncorrectName() {
-		TBox modified = original;
+		TBox modified = new TBox(original);
 		modified.setName(null);
 		ObjectId correct = saBox.modifyBox(modified);
 		assertNotEquals(correct, original.getId());
@@ -70,7 +73,7 @@ public class ModifyBox {
 	
 	@Test
 	public void modifyBoxWithIncorrectDescription() {
-		TBox modified = original;
+		TBox modified = new TBox(original);
 		modified.setDescription(null);
 		ObjectId correct = saBox.modifyBox(modified);
 		assertNotEquals(correct, original.getId());
@@ -78,7 +81,7 @@ public class ModifyBox {
 	
 	@Test
 	public void modifyBoxWithIncorrectPrivacy() {
-		TBox modified = original;
+		TBox modified = new TBox(original);
 		modified.setPrivacy(null);
 		ObjectId correct = saBox.modifyBox(modified);
 		assertNotEquals(correct, original.getId());
@@ -86,7 +89,7 @@ public class ModifyBox {
 	
 	@Test
 	public void modifyBoxWithIncorrectGenres() {
-		TBox modified = original;
+		TBox modified = new TBox(original);
 		modified.getGenres().clear();
 		ObjectId correct = saBox.modifyBox(modified);
 		assertNotEquals(correct, original.getId());

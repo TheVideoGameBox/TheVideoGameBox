@@ -2,6 +2,9 @@ package Presentation.Command;
 
 import Presentation.Command.Box.*;
 import Presentation.Command.Game.CommandRandomGames;
+import Presentation.Command.Box.CommandCreateBox;
+import Presentation.Command.Box.CommandModifyBox;
+import Presentation.Command.Box.CommandSearchAllBoxesByName;
 import Presentation.Command.Game.CommandSearchAllByName;
 import Presentation.Command.Game.CommandSearchOne;
 import Presentation.Command.User.*;
