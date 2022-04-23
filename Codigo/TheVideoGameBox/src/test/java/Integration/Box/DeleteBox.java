@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 public class DeleteBox {
     private static SABox saBox;
     private static TBox correct = new TBox("TEST_DELETE_BOX", "TEST_DELETE_BOX", Privacy.PRIVATE,
-            new ArrayList<Logic.Box.Genres>(Arrays.asList(Genres.RACING, Genres.INDIE)), Collections.emptyList());
+            new ArrayList<Logic.Box.Genres>(Arrays.asList(Genres.RACING, Genres.INDIE)), Collections.emptyList(), null);
 
     @BeforeClass
     public static void init() {

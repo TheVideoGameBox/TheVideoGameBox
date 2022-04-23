@@ -19,10 +19,10 @@ public class SearchAllBoxesByName {
     private static SABox saBox;
 
     private static final TBox tBox = new TBox("TEST_SEARCH_ALL", "TEST_SEARCH_ALL", Privacy.PUBLIC,
-            Collections.singletonList(Genres.INDIE), Collections.emptyList());
+            Collections.singletonList(Genres.INDIE), Collections.emptyList(), null);
 
     private static final TBox privateTBox = new TBox("TEST_SEARCH_ALL2", "TEST_SEARCH_ALL2", Privacy.PRIVATE,
-            Collections.singletonList(Genres.INDIE), Collections.emptyList());
+            Collections.singletonList(Genres.INDIE), Collections.emptyList(), null);
 
     private static final String correct = "TEST_SEARCH_ALL";
     private static final String[] correctEmptyResult = {"@!214_=-", "TEST_SEARCH_ALL2"};
