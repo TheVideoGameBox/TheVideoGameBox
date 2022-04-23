@@ -58,49 +58,60 @@ public class TBox {
         this.owner = owner;
     }
 
-    public ObjectId getId() {
+	public ObjectId getId() {
         return id;
     }
+
 
     public void setId(ObjectId id) {
         this.id = id;
     }
 
+
     public String getName() {
         return name;
     }
+
 
     public void setName(String name) {
         this.name = name;
     }
 
+
     public String getDescription() {
         return description;
     }
+
 
     public void setDescription(String description) {
         this.description = description;
     }
 
+
     public Privacy getPrivacy() {
         return privacy;
     }
+
 
     public void setPrivacy(Privacy privacy) {
         this.privacy = privacy;
     }
 
+
     public List<Genres> getGenres() {
         return genres;
     }
+
 
     public void setGenres(List<Genres> genres) {
         this.genres = genres;
     }
 
+
     public boolean isActive() {
         return active;
     }
+
 
     public void setActive(boolean active) {
         this.active = active;

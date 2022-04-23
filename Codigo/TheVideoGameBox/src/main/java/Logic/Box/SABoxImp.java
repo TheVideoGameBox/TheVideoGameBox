@@ -37,7 +37,7 @@ public class SABoxImp implements SABox {
         if (!correctPrivacy(box.getPrivacy()))
             return null;
 
-        DAOBox daoBox = daoFactory.createDAOBox();
+        DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
 
         return daoBox.create(box);
     }
@@ -96,11 +96,31 @@ public class SABoxImp implements SABox {
     public TBox showBox(ObjectId _id) {
         return DAOAbstractFactory.getInstance().createDAOBox().showBox(_id);
     }
-    
+
     @Override
 	public ObjectId deleteGame(ObjectId idBox, ObjectId gameId) {
 		DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
 		return daoBox.deleteGame(idBox, gameId);
+	}
+
+	@Override
+	public ObjectId modifyBox(TBox tBox) {
+		if (!correctName(tBox.getName()))  {
+			return null;
+		}
+		if (!correctDescription(tBox.getDescription())) {
+			return null;
+		}
+		if (!correctGenres(tBox.getGenres())) {
+			return null;
+		}
+		if( !correctPrivacy(tBox.getPrivacy())) {
+			return null;
+		}
+
+		DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+
+		return daoBox.modifyBox(tBox);
 	}
 
 	private boolean correctPrivacy(boolean privacy) {
@@ -122,4 +142,5 @@ public class SABoxImp implements SABox {
     private boolean correctName(String name) {
         return name != null && name.length() > 0 && name.length() <= 50;
     }
+
 }

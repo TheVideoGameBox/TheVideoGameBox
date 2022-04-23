@@ -67,5 +67,9 @@ public class Event {
     public static final int UPDATE_GAME_LIST = 522;
     public static final int RES_UPDATE_GAME_LIST_OK = 523;
     public static final int RES_UPDATE_GAME_LIST_KO = 524;
+    public static final int MODIFY_BOX = 525;
+    public static final int RES_MODIFY_BOX_OK = 526;
+    public static final int RES_MODIFY_BOX_KO = 527;
+    public static final int VIEW_MODIFY_BOX = 528;
 
 }

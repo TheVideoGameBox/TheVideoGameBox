@@ -3,6 +3,7 @@ package Data.Box;
 import Data.Connection;
 import Logic.Box.Box;
 import Logic.Box.Privacy;
+import Logic.Box.Genres;
 import Logic.Box.TBox;
 import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
@@ -129,6 +130,23 @@ public class DAOBoxImp implements DAOBox {
 			return null;
 		}
 		return tBox;
+	}
+
+	@Override
+	public ObjectId modifyBox(TBox tBox) {
+		ObjectId result;
+
+		try {
+			MongoDatabase db = Connection.getInstance().getConnection();
+
+			db.getCollection("boxes", Box.class).updateOne(eq("_id", tBox.getId()), Updates.combine(Updates.set("name", tBox.getName()), Updates.set("description", tBox.getDescription()),
+					Updates.set("genres", tBox.getGenres()), Updates.set("privacy", tBox.getPrivacy())));
+			result = tBox.getId();
+		} catch (MongoException e) {
+			result = null;
+		}
+
+		return result;
 	}
 
 	@Override

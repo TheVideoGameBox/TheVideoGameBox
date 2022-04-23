@@ -62,9 +62,13 @@ public class ViewFactory extends ViewAbstractFactory {
 			case Event.RES_USER_BOXES_OK:
 				view = new ViewUserBoxes();
 				break;
+			case Event.VIEW_MODIFY_BOX:
+				view = new ViewModifyBox((TBox) context.getData());
+				break;
 			default:
 				break;
 		}
+
 		return view;
     }
 }
