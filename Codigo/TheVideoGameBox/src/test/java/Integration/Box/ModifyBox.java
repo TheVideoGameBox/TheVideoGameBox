@@ -21,7 +21,7 @@ public class ModifyBox {
 
 	private static ObjectId idBox;
 	private static SABox saBox;
-	private static TBox original = new TBox("TEST_MODIFY_BOX","TEST_MODIFY_BOX_DESCRIPTION", Privacy.PUBLIC, new ArrayList<Genres>(Arrays.asList(Genres.INDIE,Genres.RACING,Genres.SHOOTER)));
+	private static final TBox original = new TBox("TEST_MODIFY_BOX","TEST_MODIFY_BOX_DESCRIPTION", Privacy.PUBLIC, new ArrayList<Genres>(Arrays.asList(Genres.INDIE,Genres.RACING,Genres.SHOOTER)));
 	
 	
 	@BeforeClass
@@ -62,7 +62,7 @@ public class ModifyBox {
 	
 	@Test
 	public void modifyBoxWithIncorrectName() {
-		TBox modified = new TBox(original);
+		TBox modified = original;
 		modified.setName(null);
 		ObjectId correct = saBox.modifyBox(modified);
 		assertNotEquals(correct, original.getId());
@@ -70,7 +70,7 @@ public class ModifyBox {
 	
 	@Test
 	public void modifyBoxWithIncorrectDescription() {
-		TBox modified = new TBox(original);
+		TBox modified = original;
 		modified.setDescription(null);
 		ObjectId correct = saBox.modifyBox(modified);
 		assertNotEquals(correct, original.getId());
@@ -78,7 +78,7 @@ public class ModifyBox {
 	
 	@Test
 	public void modifyBoxWithIncorrectPrivacy() {
-		TBox modified = new TBox(original);
+		TBox modified = original;
 		modified.setPrivacy(null);
 		ObjectId correct = saBox.modifyBox(modified);
 		assertNotEquals(correct, original.getId());
@@ -86,7 +86,7 @@ public class ModifyBox {
 	
 	@Test
 	public void modifyBoxWithIncorrectGenres() {
-		TBox modified = new TBox(original);
+		TBox modified = original;
 		modified.getGenres().clear();
 		ObjectId correct = saBox.modifyBox(modified);
 		assertNotEquals(correct, original.getId());

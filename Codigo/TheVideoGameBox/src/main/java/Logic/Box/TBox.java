@@ -27,6 +27,14 @@ public class TBox {
         this.active = true;
     }
 
+    public TBox(ObjectId id, String name, String description, Privacy privacy, List<Genres> genres) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.privacy = privacy;
+        this.genres = genres;
+    }
+
     public TBox(String name, String description, Privacy privacy, List<Genres> genres, ObjectId owner) {
         this.name = name;
         this.description = description;
@@ -55,14 +63,6 @@ public class TBox {
         this.gameList = gameList;
         this.active = active;
         this.owner = owner;
-    }
-
-    public TBox(ObjectId id, String name, String description, Privacy privacy, List<Genres> genres) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.privacy = privacy;
-        this.genres = genres;
     }
 
 	public ObjectId getId() {
