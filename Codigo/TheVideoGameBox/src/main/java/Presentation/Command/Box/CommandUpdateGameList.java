@@ -7,7 +7,6 @@ import Logic.SAAbstractFactory;
 import Presentation.Command.ICommand;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 

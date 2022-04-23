@@ -1,12 +1,9 @@
 package Data.Box;
 
-import Logic.Box.Genres;
-import Logic.Box.Privacy;
 import Logic.Box.TBox;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class DAOBoxStub implements DAOBox {
@@ -38,6 +35,11 @@ public class DAOBoxStub implements DAOBox {
     @Override
     public TBox showBox(ObjectId id) {
         return new TBox(null, null, null, null);
+    }
+
+    @Override
+    public ObjectId modifyBox(TBox tBox) {
+        return null;
     }
 
     @Override

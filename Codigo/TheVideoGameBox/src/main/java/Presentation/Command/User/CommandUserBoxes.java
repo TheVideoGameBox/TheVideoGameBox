@@ -3,7 +3,6 @@ package Presentation.Command.User;
 import Logic.Box.TBox;
 import Logic.SAAbstractFactory;
 import Logic.User.SAUser;
-import Logic.User.TUser;
 import Presentation.Command.ICommand;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;

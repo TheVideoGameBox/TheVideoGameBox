@@ -16,14 +16,12 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.List;
 import java.util.Objects;
 
 import static Presentation.View.Utils.Images.backGround;

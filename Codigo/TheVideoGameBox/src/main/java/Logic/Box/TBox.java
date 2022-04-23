@@ -2,7 +2,6 @@ package Logic.Box;
 
 import org.bson.types.ObjectId;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TBox {
@@ -56,6 +55,14 @@ public class TBox {
         this.gameList = gameList;
         this.active = active;
         this.owner = owner;
+    }
+
+    public TBox(ObjectId id, String name, String description, Privacy privacy, List<Genres> genres) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.privacy = privacy;
+        this.genres = genres;
     }
 
 	public ObjectId getId() {

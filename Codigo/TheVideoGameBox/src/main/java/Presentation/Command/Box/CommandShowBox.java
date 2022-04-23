@@ -1,10 +1,8 @@
 package Presentation.Command.Box;
 
-import org.bson.types.ObjectId;
-
-import Logic.SAAbstractFactory;
 import Logic.Box.SABox;
 import Logic.Box.TBox;
+import Logic.SAAbstractFactory;
 import Presentation.Command.ICommand;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;

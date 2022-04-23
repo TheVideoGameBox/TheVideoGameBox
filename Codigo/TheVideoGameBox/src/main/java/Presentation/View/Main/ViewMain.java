@@ -1,6 +1,5 @@
 package Presentation.View.Main;
 
-import Logic.Box.TBox;
 import Logic.Game.TGame;
 import Logic.SAAbstractFactory;
 import Presentation.Controller.ApplicationController;

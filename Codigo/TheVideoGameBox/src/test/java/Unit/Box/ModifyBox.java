@@ -1,24 +1,18 @@
 package Unit.Box;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
+import Data.Connection;
+import Logic.Box.*;
+import com.mongodb.client.MongoDatabase;
 import org.bson.types.ObjectId;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.mongodb.client.MongoDatabase;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-import Data.Connection;
-import Logic.Box.Genres;
-import Logic.Box.Privacy;
-import Logic.Box.SABox;
-import Logic.Box.SABoxImp;
-import Logic.Box.TBox;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 public class ModifyBox {
 

@@ -3,7 +3,6 @@ package Data.Box;
 import Data.Connection;
 import Logic.Box.Box;
 import Logic.Box.Privacy;
-import Logic.Box.Genres;
 import Logic.Box.TBox;
 import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;

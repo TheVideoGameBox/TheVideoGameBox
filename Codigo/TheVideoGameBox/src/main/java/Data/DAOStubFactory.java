@@ -5,7 +5,6 @@ import Data.Box.DAOBoxStub;
 import Data.Game.DAOGame;
 import Data.Game.DAOGameStub;
 import Data.User.DAOUser;
-import Data.User.DAOUserImp;
 import Data.User.DAOUserStub;
 
 public class DAOStubFactory extends DAOAbstractFactory {

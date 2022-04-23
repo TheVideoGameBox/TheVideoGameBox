@@ -2,10 +2,8 @@ package Logic.User;
 
 import Data.Box.DAOBox;
 import Data.DAOAbstractFactory;
-import Data.Game.DAOGame;
 import Data.User.DAOUser;
 import Logic.Box.TBox;
-import Logic.Game.TGame;
 import org.bson.types.ObjectId;
 
 import javax.mail.internet.AddressException;

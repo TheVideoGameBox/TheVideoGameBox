@@ -27,7 +27,6 @@ import java.net.URLConnection;
 import java.util.List;
 import java.util.Objects;
 
-import static Presentation.View.Main.ViewMain.logged;
 import static Presentation.View.Main.ViewMain.viewOptions;
 import static Presentation.View.Utils.Images.backGround;
 import static Presentation.View.Utils.Images.logo;

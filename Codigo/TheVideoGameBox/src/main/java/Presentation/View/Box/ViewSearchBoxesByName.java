@@ -1,7 +1,6 @@
 package Presentation.View.Box;
 
 import Logic.Box.TBox;
-import Logic.Game.TGame;
 import Presentation.Controller.ApplicationController;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
@@ -184,23 +183,6 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 //		namePanel.add(cover);
 		namePanel.add(Box.createRigidArea(new Dimension(55, 0)));
 		namePanel.add(name);
-
-		//
-		
-		// MODIFY BOX BUTTON
-		Button modifyInfo = new Button("Modify", "modify_icon.png", Color.white, new Color(50,170,9), new Dimension(100, 45), Color.orange);
-		modifyInfo.buttonIcon();
-		modifyInfo.setBorderPainted(false);
-		modifyInfo.setContentAreaFilled(false);
-		modifyInfo.setToolTipText("Modify the info of box");
-		modifyInfo.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ApplicationController.getInstance().action(new Context(Event.VIEW_MODIFY_BOX, box));		
-				setVisible(false);
-			}
-		});
-	
 		
 		//BUTTON PANEL
 		JPanel buttonPanel = new JPanel(new BorderLayout());
@@ -220,7 +202,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		buttonPanel.add(viewInfo, BorderLayout.WEST);
 		
 
-		Button viewAttributes = new Button("View attributes", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(200, 45), Color.orange);
+		Button viewAttributes = new Button("Attributes", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(200, 45), Color.orange);
 		viewAttributes.buttonIcon();
 		viewAttributes.setBorderPainted(false);
 		viewAttributes.setContentAreaFilled(false);
@@ -233,8 +215,6 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 			}
 		});
 		buttonPanel.add(viewAttributes, BorderLayout.EAST);
-		
-		buttonPanel.add(modifyInfo, BorderLayout.EAST);
 		
 		//CONSTRUIR PANEL
 		

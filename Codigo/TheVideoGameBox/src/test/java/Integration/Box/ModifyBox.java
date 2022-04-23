@@ -1,24 +1,21 @@
 package Integration.Box;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import Logic.Box.Genres;
+import Logic.Box.Privacy;
+import Logic.Box.SABox;
+import Logic.Box.TBox;
+import Logic.SAAbstractFactory;
+import org.bson.types.ObjectId;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.JList;
-
-import org.bson.types.ObjectId;
-import org.junit.*;
-
-import Logic.SAAbstractFactory;
-import Logic.Box.Box;
-import Logic.Box.Genres;
-import Logic.Box.Privacy;
-import Logic.Box.SABox;
-import Logic.Box.TBox;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class ModifyBox {
 

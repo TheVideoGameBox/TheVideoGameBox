@@ -1,34 +1,5 @@
 package Presentation.View.Box;
 
-import static Presentation.View.Utils.Images.backGround;
-import static Presentation.View.Utils.Images.logo;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-
-import org.bson.types.ObjectId;
-
 import Logic.Box.Genres;
 import Logic.Box.Privacy;
 import Logic.Box.TBox;
@@ -39,6 +10,18 @@ import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Utils.Button;
 import Presentation.View.Utils.TextField;
+import org.bson.types.ObjectId;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import static Presentation.View.Utils.Images.backGround;
+import static Presentation.View.Utils.Images.logo;
 
 public class ViewModifyBox extends JFrame implements IView {
 	
@@ -79,9 +62,7 @@ public class ViewModifyBox extends JFrame implements IView {
         this.setIconImage(iconFrame);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().removeAll();
-        this.setPreferredSize(new Dimension(900, 700));
-        setLocation(400, 100);
-        setBounds(100, 100, 887, 536);
+        this.setPreferredSize(new Dimension(900, 575));
         
         mainPanel = new JPanelConFondo();
         mainPanel.setBorder(null);
@@ -107,43 +88,29 @@ public class ViewModifyBox extends JFrame implements IView {
 	    // Input para el name
 	    nameBox = textField();
 	    nameBox.setToolTipText("Modify box name");
-	    nameBox.setFont(new Font("Leelawadee", Font.PLAIN, 13));
 	    nameBox.setBounds(81, 114, 401, 30);
 	    auxPanel.add(nameBox);
 	    nameBox.setColumns(10);
 
 	    // BOX NAME LABEL
-	    JLabel labelName = new JLabel("Name:");
-	    labelName.setToolTipText("");
-	    labelName.setForeground(Color.WHITE);
-	    labelName.setFont(new Font("Leelawadee", Font.BOLD, 15));
-	    labelName.setAlignmentX(CENTER_ALIGNMENT);
+	    JLabel labelName = label("Name:");
 	    labelName.setBounds(257, 97, 66, 14);
 	    auxPanel.add(labelName);
         
 	    // DESCRIPTION LABEL
-	    JLabel labelDescription = new JLabel("Description:");
-	    labelDescription.setToolTipText("");
-	    labelDescription.setForeground(Color.WHITE);
-	    labelDescription.setFont(new Font("Leelawadee", Font.BOLD, 15));
-	    labelDescription.setAlignmentX(0.5f);
+	    JLabel labelDescription = label("Description:");
 	    labelDescription.setBounds(238, 162, 97, 14);
 	    auxPanel.add(labelDescription);
 	    
 	 	// Input para el description
 	    descriptionBox = textField();
 	    descriptionBox.setToolTipText("Type new description");
-	    descriptionBox.setFont(new Font("Leelawadee", Font.PLAIN, 13));
-	    descriptionBox.setColumns(10);
 	    descriptionBox.setBounds(81, 180, 401, 30);
 	    auxPanel.add(descriptionBox);
 	    
 	    // GENRES LABEL
-	    JLabel labelGenres = new JLabel("Genres:");
+	    JLabel labelGenres = label("Genres:");
 	    labelGenres.setToolTipText("Select Genres");
-	    labelGenres.setForeground(Color.WHITE);
-	    labelGenres.setFont(new Font("Leelawadee", Font.BOLD, 15));
-	    labelGenres.setAlignmentX(0.5f);
 	    labelGenres.setBounds(62, 277, 60, 19);
 	    auxPanel.add(labelGenres);
 	    
@@ -176,6 +143,7 @@ public class ViewModifyBox extends JFrame implements IView {
         mainPanel.add(backButtonContainer);
 	    
         this.pack();
+		this.setLocationRelativeTo(null);
         refreshView();
 	}
 	 
@@ -183,18 +151,25 @@ public class ViewModifyBox extends JFrame implements IView {
 	private TextField textField() {
 		TextField aux = new TextField(new Dimension(500, 40));
 	    aux.textField();
+		aux.setFont(new Font("Leelawadee", Font.PLAIN, 13));
 	    aux.setAlignmentX(CENTER_ALIGNMENT);
-	    
 	    return aux;
 	}
-	    
+
+	private JLabel label(String name) {
+		JLabel aux = new JLabel(name);
+		aux.setForeground(Color.WHITE);
+		aux.setFont(new Font("Leelawadee", Font.BOLD, 15));
+		aux.setAlignmentX(0.5f);
+		return aux;
+	}
 
 	// Método update
 	@Override
 	public void update(Context context) {
 		switch (context.getEvent()) {
         	case Event.RES_MODIFY_BOX_OK:
-        		JOptionPane.showMessageDialog(this, "Box data modified!", "Modify Box", JOptionPane.INFORMATION_MESSAGE);
+        		JOptionPane.showMessageDialog(this, "Box modified!", "Modify Box", JOptionPane.INFORMATION_MESSAGE);
         		ApplicationController.getInstance().action(new Context(Event.VIEW, null));
         		setVisible(false);
         		break;
@@ -207,20 +182,20 @@ public class ViewModifyBox extends JFrame implements IView {
 	// Método para confirmar
 	protected void modifyBox() {
 		//Capturar datos
-		ObjectId _id = tbox.getId();
+		ObjectId id = tbox.getId();
 		String name = nameBox.getText();
 		String description = descriptionBox.getText();
 		List<Genres> categories = getCategories();
 		Privacy privacy = getPrivacy();
 
-		TBox box = new TBox(_id, name, description, privacy, categories);
+		TBox box = new TBox(id, name, description, privacy, categories);
 
 		ApplicationController.getInstance().action(new Context(Event.MODIFY_BOX, box));	
 	}
 	
 	// GetPrivacy del ComboBox
 	private Privacy getPrivacy() {
-		String privacy = comboBoxPrivacy.getSelectedItem().toString();
+		String privacy = Objects.requireNonNull(comboBoxPrivacy.getSelectedItem()).toString();
         
         if (privacy.equals(Privacy.PRIVATE.toString())) {
         	return Privacy.PRIVATE;
