@@ -122,10 +122,6 @@ public class SABoxImp implements SABox {
 		return daoBox.modifyBox(tBox);
 	}
 
-	private boolean correctPrivacy(boolean privacy) {
-		return !Objects.isNull(privacy);
-	}
-
     private boolean correctGenres(List<Genres> categories) {
         return categories != null && !categories.isEmpty();
     }

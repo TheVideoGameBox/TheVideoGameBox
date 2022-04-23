@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
@@ -18,10 +18,13 @@ public class CreateBox {
 
     private static final String LIMIT_50 = new String(new char[51]).replace('\0', 'f');
     private static final String LIMIT_250 = new String(new char[251]).replace('\0', 'f');
-    private static final TBox[] limit = {new TBox(LIMIT_50, "TEST_CREATE", Privacy.PRIVATE,
-            new ArrayList<Genres>(Arrays.asList(Genres.INDIE))), new TBox("TEST_CREATE", LIMIT_250, Privacy.PRIVATE, new ArrayList<Genres>(Arrays.asList(Genres.INDIE)))};
-    private static final TBox[] empty = {new TBox("", "TEST_CREATE", Privacy.PRIVATE,
-            new ArrayList<Genres>(Arrays.asList(Genres.INDIE))), new TBox("TEST_CREATE", "", Privacy.PRIVATE, new ArrayList<Genres>(Arrays.asList(Genres.INDIE))), new TBox("TEST_CREATE", "TEST_CREATE", Privacy.PRIVATE, new ArrayList<Genres>()), new TBox("TEST_CREATE", "TEST_CREATE", Privacy.PRIVATE, null), new TBox("TEST_CREATE", "TEST_CREATE", null, new ArrayList<Genres>(Arrays.asList(Genres.INDIE)))};
+    private static final TBox[] limit = {new TBox(LIMIT_50, "TEST_CREATE", Privacy.PRIVATE, new ArrayList<Genres>(Collections.singletonList(Genres.INDIE))),
+            new TBox("TEST_CREATE", LIMIT_250, Privacy.PRIVATE, new ArrayList<Genres>(Collections.singletonList(Genres.INDIE)))};
+    private static final TBox[] empty = {new TBox("", "TEST_CREATE", Privacy.PRIVATE, new ArrayList<Genres>(Collections.singletonList(Genres.INDIE))),
+            new TBox("TEST_CREATE", "", Privacy.PRIVATE, new ArrayList<Genres>(Collections.singletonList(Genres.INDIE))),
+            new TBox("TEST_CREATE", "TEST_CREATE", Privacy.PRIVATE, Collections.emptyList()),
+            new TBox("TEST_CREATE", "TEST_CREATE", Privacy.PRIVATE, null),
+            new TBox("TEST_CREATE", "TEST_CREATE", null, new ArrayList<Genres>(Collections.singletonList(Genres.INDIE)))};
 
     @BeforeClass
     public static void init() {
