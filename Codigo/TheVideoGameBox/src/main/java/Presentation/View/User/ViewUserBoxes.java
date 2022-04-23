@@ -194,7 +194,7 @@ public class ViewUserBoxes extends JFrame implements IView {
         //buttonPanel.add(Box.createRigidArea(new Dimension(20, 0)));
 
 
-        Button viewAttributes = new Button("Attributes", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(120, 45), Color.orange);
+        Button viewAttributes = new Button("Details", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(120, 45), Color.orange);
         viewAttributes.buttonIcon();
         viewAttributes.setBorderPainted(false);
         viewAttributes.setContentAreaFilled(false);

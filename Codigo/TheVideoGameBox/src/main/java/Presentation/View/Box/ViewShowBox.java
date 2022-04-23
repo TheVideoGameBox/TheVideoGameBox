@@ -55,9 +55,7 @@ public class ViewShowBox extends JFrame implements IView {
             this.box = (TBox) context.getData();
             initGUI();
         }
-
         refreshView();
-		
 	}
 	
     private void initGUI() {
@@ -66,17 +64,17 @@ public class ViewShowBox extends JFrame implements IView {
         Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
         this.setIconImage(iconFrame);
 
-        JPanelConFondo mainpanel = new JPanelConFondo();
-        mainpanel.setLayout(new BorderLayout());
-        mainpanel.setImagen(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(backGround))).getImage());
+        JPanelConFondo mainPanel = new JPanelConFondo();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.setImagen(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(backGround))).getImage());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.add(mainpanel);
+        this.add(mainPanel);
 
         JPanel topPanel = createTopPanel();
         JPanel midPanel = createMidPanel();
 
-        mainpanel.add(topPanel, BorderLayout.NORTH);
-        mainpanel.add(midPanel, BorderLayout.SOUTH);
+        mainPanel.add(topPanel, BorderLayout.NORTH);
+        mainPanel.add(midPanel, BorderLayout.SOUTH);
 
         this.pack();
     }
@@ -121,7 +119,7 @@ public class ViewShowBox extends JFrame implements IView {
         modifyInfo.setBorderPainted(false);
         modifyInfo.setContentAreaFilled(false);
         modifyInfo.setFont(new Font("Leelawadee", Font.BOLD, 22));
-        modifyInfo.setToolTipText("Modify the info of box");
+        modifyInfo.setToolTipText("Modify box");
         modifyInfo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

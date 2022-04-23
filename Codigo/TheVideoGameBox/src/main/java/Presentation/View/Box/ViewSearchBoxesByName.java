@@ -192,7 +192,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		viewInfo.buttonIcon();
 		viewInfo.setBorderPainted(false);
 		viewInfo.setContentAreaFilled(false);
-		viewInfo.setToolTipText("View games of box");
+		viewInfo.setToolTipText("View Box's games");
 		viewInfo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -203,11 +203,11 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 		buttonPanel.add(viewInfo, BorderLayout.WEST);
 		
 
-		Button viewAttributes = new Button("Attributes", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(200, 45), Color.orange);
+		Button viewAttributes = new Button("Details", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(200, 45), Color.orange);
 		viewAttributes.buttonIcon();
 		viewAttributes.setBorderPainted(false);
 		viewAttributes.setContentAreaFilled(false);
-		viewAttributes.setToolTipText("View attributes of the box");
+		viewAttributes.setToolTipText("View Box's details");
 		viewAttributes.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
