@@ -32,25 +32,25 @@ public class SAUserImp implements SAUser {
 			return null;
 		if(!correctPassword(user.getPassword()))
 			return null;
-			
-		DAOUser daoUser = daoFactory.createDAOUser();
-		return daoUser.create(user);
+
+		user.setPassword(BCryptUtility.hash(user.getPassword()));
+
+		return daoFactory.createDAOUser().create(user);
 	}
 
 	@Override
-	public ObjectId logIn(TUser user) {			//Pendiente de encriptar cuando el sistema de registro lo este
-		TUser aux;
+	public ObjectId logIn(TUser user) {
 		if(!correctEmail(user.getEmail()))
 			return null;
 		if(!correctPassword(user.getPassword()))
 			return null;
 
 		DAOUser daoUser = daoFactory.createDAOUser();
-		aux = daoUser.logIn(user.getEmail());
-		if(aux != null) {
-			if(Objects.equals(aux.getPassword(), user.getPassword()))
-				return aux.getId();
-		}
+		TUser aux = daoUser.logIn(user.getEmail());
+
+		if(aux != null && BCryptUtility.verifyHash(user.getPassword(), aux.getPassword()))
+			return aux.getId();
+
 		return null;
 	}
 

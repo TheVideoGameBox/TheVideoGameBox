@@ -34,7 +34,7 @@ public class DAOUserImp implements DAOUser {
 			result = Objects.requireNonNull(users.insertOne(insert).getInsertedId()).asObjectId().getValue();
 		} catch (MongoException | NullPointerException e) {
 			result = null;
-			e.getMessage();
+			e.printStackTrace();
 		}
 		return result;
 	}
