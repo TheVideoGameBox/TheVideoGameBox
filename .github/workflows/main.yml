@@ -50,6 +50,7 @@ jobs:
         run: |
              cd Codigo/TheVideoGameBox
              mvn -Dtest="Integration/**" -DfailIfNoTests=false test
+             cp -r logs build
         
       - name: Paso 5.1 - Subir el proyecto compilado como un artefacto
         if: success()

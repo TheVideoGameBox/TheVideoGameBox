@@ -9,6 +9,9 @@ import Presentation.Controller.Event;
 import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Utils.Button;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+import org.bson.types.ObjectId;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static Presentation.View.Main.ViewMain.id_logged;
 import static Presentation.View.Utils.Images.backGround;
 import static Presentation.View.Utils.Images.logo;
 
@@ -39,6 +43,7 @@ public class ViewCreateBox extends JFrame implements IView {
     private JPanel panelCategories;
     private JPanel midPanel;
     private JComboBox comboBoxPrivacy;
+    private ObjectId boxId;
 
     public ViewCreateBox() {
         Image iconFrame = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(logo))).getImage();
@@ -143,6 +148,7 @@ public class ViewCreateBox extends JFrame implements IView {
         switch (context.getEvent()) {
             case Event.RES_CREATE_BOX_OK:
                 JOptionPane.showMessageDialog(this, "Box created!", "Create Box", JOptionPane.INFORMATION_MESSAGE);
+                boxId = (ObjectId) context.getData();
                 ApplicationController.getInstance().action(new Context(Event.VIEW, null));
                 setVisible(false);
                 break;
@@ -159,9 +165,11 @@ public class ViewCreateBox extends JFrame implements IView {
         List<Genres> categories = getCategories();
         Privacy privacy = getPrivacy();
 
-        TBox box = new TBox(name, description, privacy, categories);
+        TBox box = new TBox(name, description, privacy, categories, id_logged);
 
         ApplicationController.getInstance().action(new Context(Event.CREATE_BOX, box));
+        Pair<ObjectId, ObjectId> aux = new ImmutablePair<>(id_logged, boxId);
+        ApplicationController.getInstance().action(new Context(Event.ASSOCIATE_BOX, aux));
     }
 
     private Privacy getPrivacy() {

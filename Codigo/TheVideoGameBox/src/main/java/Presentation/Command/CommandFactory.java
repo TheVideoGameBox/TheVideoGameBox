@@ -1,14 +1,14 @@
 package Presentation.Command;
 
-import Presentation.Command.Box.CommandCreateBox;
-import Presentation.Command.Box.CommandListGames;
-import Presentation.Command.Box.CommandSearchAllBoxesByName;
+import Presentation.Command.Box.*;
 import Presentation.Command.Game.CommandRandomGames;
+import Presentation.Command.Box.CommandCreateBox;
+import Presentation.Command.Box.CommandModifyBox;
+import Presentation.Command.Box.CommandSearchAllBoxesByName;
 import Presentation.Command.Game.CommandSearchAllByName;
 import Presentation.Command.Game.CommandSearchAllByPlatform;
 import Presentation.Command.Game.CommandSearchOne;
-import Presentation.Command.User.CommandCreateUser;
-import Presentation.Command.User.CommandLogIn;
+import Presentation.Command.User.*;
 import Presentation.Controller.Event;
 
 public class CommandFactory extends CommandAbstractFactory{
@@ -31,6 +31,12 @@ public class CommandFactory extends CommandAbstractFactory{
             case Event.CREATE_USER:
             	command = new CommandCreateUser();
             	break;
+            case Event.MODIFY_BOX:
+            	command = new CommandModifyBox();
+            	break;
+            case Event.SHOW_BOX:
+            	command = new CommandShowBox();
+            	break;
             case Event.LIST_GAMES_OF_BOX:
                 command = new CommandListGames();
                 break;
@@ -43,9 +49,28 @@ public class CommandFactory extends CommandAbstractFactory{
             case Event.SEARCH_ALL_BY_PLATFORM:
                 command = new CommandSearchAllByPlatform();
                 break;
+            case Event.DELETE_GAME_FROM_BOX:
+            	  command = new CommandDeleteGame();
+                break;
+            case Event.DELETE_BOX:
+                command = new CommandDeleteBox();
+                break;
+            case Event.UPDATE_GAME_LIST:
+                command = new CommandUpdateGameList();
+                break;
+            case Event.ASSOCIATE_BOX:
+                command = new CommandAssociateBox();
+                break;
+            case Event.USER_BOXES:
+                command = new CommandUserBoxes();
+                break;
+            case Event.UPDATE_USER_BOX_LIST:
+                command = new CommandUpdateUserBoxList();
+                break;
             default:
                 break;
         }
         return command;
     }
+
 }

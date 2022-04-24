@@ -1,4 +1,4 @@
-package Unit.Box;
+package Integration.Box;
 
 import Data.Connection;
 import Logic.Box.Genres;
@@ -20,26 +20,35 @@ import java.util.Objects;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-public class ListGames {
+public class AddGameToBox {
 
     private static SABox saBox;
     private static ObjectId idBox;
-    private static final TBox correct = new TBox("TEST_LIST_GAMES", "TEST_LIST_GAMES", Privacy.PRIVATE, new ArrayList<Genres>(Arrays.asList(Genres.RACING, Genres.INDIE)));
+    private static ObjectId idGame;
+    private static final TBox correct = new TBox("TEST_ADD_GAME", "TEST_ADD_GAME", Privacy.PRIVATE,
+            new ArrayList<Genres>(Arrays.asList(Genres.RACING, Genres.INDIE)), new ArrayList<ObjectId>(), null);
 
     @BeforeClass
     public static void init() {
         MongoDatabase db = Connection.getInstance().getConnection();
-        ObjectId idGame = Objects.requireNonNull(db.getCollection("games", Game.class).find().first()).getId();
+        idGame = Objects.requireNonNull(db.getCollection("games", Game.class).find().first()).getId();
         saBox = SAAbstractFactory.getInstance().createSABox();
         idBox = saBox.createBox(correct);
-        correct.setId((idBox));
-        saBox.addGame(idBox, idGame);
     }
 
     @Test
-    public void testCorrectListGames() {
+    public void testCorrectAddGame() {
         try {
-            assertNotNull(saBox.listGames(correct));
+            assertNotNull(saBox.addGame(idBox, idGame));
+        } catch (Exception ae) {
+            fail(ae.getMessage());
+        }
+    }
+
+    @Test
+    public void testCorrectAddGameX2() {        //Por ahora se puede añadir el mismo juego infinitas veces a la box
+        try {
+            assertNotNull(saBox.addGame(idBox, idGame));
         } catch (Exception ae) {
             fail(ae.getMessage());
         }

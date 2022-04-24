@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+import static Presentation.View.Main.ViewMain.viewOptions;
 import static Presentation.View.Utils.Images.backGround;
 import static Presentation.View.Utils.Images.logo;
 
@@ -29,6 +30,7 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 	public void update(Context context) {
 		if(context.getEvent() == Event.RES_SEARCH_ALL_BOXES_BY_NAME_OK){
 			this.boxes = (List<TBox>) context.getData();
+			viewOptions = false;
 			init_GUI();
 		}
 
@@ -182,15 +184,15 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 //		namePanel.add(cover);
 		namePanel.add(Box.createRigidArea(new Dimension(55, 0)));
 		namePanel.add(name);
-
+		
 		//BUTTON PANEL
 		JPanel buttonPanel = new JPanel(new BorderLayout());
 		buttonPanel.setOpaque(false);
-		Button viewInfo = new Button("View Games", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(200, 45), Color.orange);
+		Button viewInfo = new Button("Games", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(100, 45), Color.orange);
 		viewInfo.buttonIcon();
 		viewInfo.setBorderPainted(false);
 		viewInfo.setContentAreaFilled(false);
-		viewInfo.setToolTipText("Search a Box by Name");
+		viewInfo.setToolTipText("View Box's games");
 		viewInfo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -198,13 +200,28 @@ public class ViewSearchBoxesByName extends JFrame implements IView {
 				setVisible(false);
 			}
 		});
-		buttonPanel.add(viewInfo, BorderLayout.CENTER);
+		buttonPanel.add(viewInfo, BorderLayout.WEST);
+		
+
+		Button viewAttributes = new Button("Details", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(200, 45), Color.orange);
+		viewAttributes.buttonIcon();
+		viewAttributes.setBorderPainted(false);
+		viewAttributes.setContentAreaFilled(false);
+		viewAttributes.setToolTipText("View Box's details");
+		viewAttributes.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ApplicationController.getInstance().action(new Context(Event.SHOW_BOX, box));
+				setVisible(false);
+			}
+		});
+		buttonPanel.add(viewAttributes, BorderLayout.EAST);
 		
 		//CONSTRUIR PANEL
 		
 		panel.add(namePanel, BorderLayout.WEST);
 		panel.add(buttonPanel, BorderLayout.EAST);
-				
+		
 		return panel;
 	}
 

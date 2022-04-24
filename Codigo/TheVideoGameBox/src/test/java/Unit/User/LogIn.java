@@ -1,24 +1,19 @@
 package Unit.User;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
-
-import org.bson.types.ObjectId;
-import org.junit.AfterClass;
+import Data.DAOStubFactory;
+import Logic.User.SAUser;
+import Logic.User.SAUserImp;
+import Logic.User.TUser;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import Logic.SAAbstractFactory;
-import Logic.User.SAUser;
-import Logic.User.TUser;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
-public class LogInUnitaria {
-
+public class LogIn {
 
     private static SAUser saUser;
-    private static ObjectId idUser;
-    private static final TUser correct = new TUser("TEST_LOG_IN@email.com", "TEST_LOG_IN", "TEST_LOG_IN");
+
     private static final TUser wrongPassword = new TUser("TEST_LOG_IN@email.com", "TEST_LOG_IN", "TEST_LOG_IN_WRONG");
     private static final TUser[] incorrectEmail = {new TUser("TEST_LOG_IN4@", "TEST_LOG_IN4", "TEST_LOG_IN4"),
             new TUser("TEST_LOG_IN6@.com", "TEST_LOG_IN6", "TEST_LOG_IN6")};
@@ -26,30 +21,19 @@ public class LogInUnitaria {
 
     @BeforeClass
     public static void init() {
-        saUser = SAAbstractFactory.getInstance().createSAUser();
-        idUser = saUser.createUser(correct);
-    }
-
-    @Test
-    public void testCorrectLogIn() {
-        
-        try {
-            assertNotNull(saUser.logIn(correct));
-        } catch (Exception ae) {
-            fail(ae.getMessage());
-        }
+        saUser = new SAUserImp(new DAOStubFactory());
     }
 
     @Test
     public void testIncorrectEmail() {
         try {
-            for(TUser user : incorrectEmail)
+            for (TUser user : incorrectEmail)
                 assertNull(saUser.logIn(user));
         } catch (Exception ae) {
             fail(ae.getMessage());
         }
     }
-    
+
     @Test
     public void testNullPassword() {
         try {
@@ -58,7 +42,7 @@ public class LogInUnitaria {
             fail(ae.getMessage());
         }
     }
-    
+
     @Test
     public void testWrongPassword() {
         try {
@@ -66,11 +50,5 @@ public class LogInUnitaria {
         } catch (Exception ae) {
             fail(ae.getMessage());
         }
-    }
-
-    @AfterClass
-    public static void end() {
-        if (idUser != null)
-            saUser.deleteFromDatabase(idUser);
     }
 }

@@ -1,4 +1,4 @@
-package Unit.Game;
+package Integration.Game;
 
 import Data.Connection;
 import Logic.Game.Game;
@@ -27,7 +27,7 @@ public class SearchOne {
     }
 
     @Test
-    public void testCorrect(){
+    public void testCorrect() {
         try {
             assertNotNull(saGame.searchOne(_id));
         } catch (Exception ae) {
