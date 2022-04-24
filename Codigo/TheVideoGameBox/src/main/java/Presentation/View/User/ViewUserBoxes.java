@@ -29,6 +29,7 @@ import static Presentation.View.Utils.Images.logo;
 
 public class ViewUserBoxes extends JFrame implements IView {
     private List<TBox> boxes;
+    private JPanel contentContainer;
 
     @Override
     public void update(Context context) {
@@ -39,7 +40,7 @@ public class ViewUserBoxes extends JFrame implements IView {
         }
         else if(context.getEvent() == Event.RES_UPDATE_USER_BOX_LIST_OK){
             this.boxes = (List<TBox>) context.getData();
-            init_GUI();
+            refreshBoxes();
         }
         refreshView();
     }
@@ -61,7 +62,7 @@ public class ViewUserBoxes extends JFrame implements IView {
 
         // CONTENT CONTAINER
 
-        JPanel contentContainer = new JPanel();
+        contentContainer = new JPanel();
         contentContainer.setLayout(new BoxLayout(contentContainer, BoxLayout.Y_AXIS));
         contentContainer.setAlignmentX(CENTER_ALIGNMENT);
         contentContainer.setOpaque(false);
@@ -139,15 +140,21 @@ public class ViewUserBoxes extends JFrame implements IView {
         contentContainer.add(helpPanel);
         contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
 
+        JPanel boxesPanel = new JPanel();
+        boxesPanel.setLayout(new BoxLayout(boxesPanel, BoxLayout.Y_AXIS));
+        boxesPanel.setAlignmentX(CENTER_ALIGNMENT);
+        boxesPanel.setOpaque(false);
         for (TBox box : boxes) {
             try {
-                if(box.isActive()) contentContainer.add(boxPanel(box));
+                if(box.isActive()) boxesPanel.add(boxPanel(box));
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-            contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
+            boxesPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         }
 
+
+        contentContainer.add(boxesPanel);
     }
 
     private Component boxPanel(TBox box) throws IOException {
@@ -240,5 +247,25 @@ public class ViewUserBoxes extends JFrame implements IView {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    private void refreshBoxes(){
+        contentContainer.remove(contentContainer.getComponentCount() - 1);
+
+        JPanel boxesPanel = new JPanel();
+        boxesPanel.setLayout(new BoxLayout(boxesPanel, BoxLayout.Y_AXIS));
+        boxesPanel.setAlignmentX(CENTER_ALIGNMENT);
+        boxesPanel.setOpaque(false);
+        for (TBox box : boxes) {
+            try {
+                if(box.isActive()) boxesPanel.add(boxPanel(box));
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            boxesPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        }
+
+
+        contentContainer.add(boxesPanel);
     }
 }
