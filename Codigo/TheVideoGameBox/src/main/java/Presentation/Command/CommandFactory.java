@@ -6,6 +6,7 @@ import Presentation.Command.Box.CommandCreateBox;
 import Presentation.Command.Box.CommandModifyBox;
 import Presentation.Command.Box.CommandSearchAllBoxesByName;
 import Presentation.Command.Game.CommandSearchAllByName;
+import Presentation.Command.Game.CommandSearchAllByPlatform;
 import Presentation.Command.Game.CommandSearchOne;
 import Presentation.Command.User.*;
 import Presentation.Controller.Event;
@@ -45,8 +46,11 @@ public class CommandFactory extends CommandAbstractFactory{
             case Event.LOGIN_USER:
                 command = new CommandLogIn();
                 break;
+            case Event.SEARCH_ALL_BY_PLATFORM:
+                command = new CommandSearchAllByPlatform();
+                break;
             case Event.DELETE_GAME_FROM_BOX:
-            	command = new CommandDeleteGame();
+            	  command = new CommandDeleteGame();
                 break;
             case Event.DELETE_BOX:
                 command = new CommandDeleteBox();

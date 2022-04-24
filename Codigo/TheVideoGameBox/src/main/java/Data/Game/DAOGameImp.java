@@ -68,4 +68,19 @@ public class DAOGameImp implements DAOGame {
         }
         return result;
     }
+
+	@Override
+	public List<TGame> searchAllByPlatform(String platform) {
+        List<TGame> result = new ArrayList<>();
+        try {
+            MongoDatabase db = Connection.getInstance().getConnection();
+            FindIterable<Game> iter = db.getCollection("games", Game.class).find(eq("platforms",platform)).limit(50);
+            for(Game game : iter)
+                result.add(game.toTransfer());
+        } catch (MongoException e) {
+            result = null;
+        }
+
+        return result;
+	}
 }

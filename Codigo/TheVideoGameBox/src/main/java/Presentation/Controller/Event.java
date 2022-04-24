@@ -18,6 +18,9 @@ public class Event {
     public static final int RANDOM_GAMES = 106;
     public static final int RES_RANDOM_GAMES_OK = 107;
     public static final int RES_RANDOM_GAMES_KO = 108;
+    public static final int SEARCH_ALL_BY_PLATFORM = 109;
+    public static final int RES_SEARCH_ALL_BY_PLATFORM_OK = 110;
+    public static final int RES_SEARCH_ALL_BY_PLATFORM_KO = 111;
 
 
 
