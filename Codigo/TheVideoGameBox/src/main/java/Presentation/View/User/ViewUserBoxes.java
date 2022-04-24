@@ -8,6 +8,7 @@ import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
 import Presentation.View.Utils.Button;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bson.types.ObjectId;
@@ -36,7 +37,7 @@ public class ViewUserBoxes extends JFrame implements IView {
             viewOptions = true;
             init_GUI();
         }
-        else if(context.getEvent() == Event.RES_UPDATE_GAME_LIST_OK){
+        else if(context.getEvent() == Event.RES_UPDATE_USER_BOX_LIST_OK){
             this.boxes = (List<TBox>) context.getData();
             init_GUI();
         }
@@ -147,7 +148,6 @@ public class ViewUserBoxes extends JFrame implements IView {
             contentContainer.add(Box.createRigidArea(new Dimension(0, 10)));
         }
 
-        this.pack();
     }
 
     private Component boxPanel(TBox box) throws IOException {
@@ -218,11 +218,11 @@ public class ViewUserBoxes extends JFrame implements IView {
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Pair<ObjectId, ObjectId> aux = new ImmutablePair<>(id_logged, box.getId());
                 ApplicationController.getInstance().action(new Context(Event.DELETE_BOX, box.getId()));
-                ApplicationController.getInstance().action(new Context(Event.UPDATE_USER_BOX_LIST, id_logged));
+                ApplicationController.getInstance().action(new Context(Event.DELETE_BOX_FROM_USER, aux));
                 setVisible(false);
-
-
+                ApplicationController.getInstance().action(new Context(Event.UPDATE_USER_BOX_LIST, id_logged));
             }
         });
         deletePanel.add(deleteButton);
@@ -237,6 +237,7 @@ public class ViewUserBoxes extends JFrame implements IView {
     }
 
     private void refreshView(){
+        pack();
         setLocationRelativeTo(null);
         setVisible(true);
     }

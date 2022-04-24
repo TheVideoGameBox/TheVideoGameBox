@@ -84,8 +84,9 @@ public class DAOUserImp implements DAOUser {
 		try {
 			MongoDatabase db = Connection.getInstance().getConnection();
 			boxList = Objects.requireNonNull(db.getCollection("users", User.class).find(eq("_id", idUser)).first()).getBoxList();
-			boxList.removeIf(box -> box == idBox);
-			Objects.requireNonNull(db.getCollection("users", User.class).findOneAndUpdate(eq("_id", idUser), Updates.set("boxList", boxList)));
+			if(boxList != null)
+				boxList.remove(idBox);
+				Objects.requireNonNull(db.getCollection("users", User.class).findOneAndUpdate(eq("_id", idUser), Updates.set("boxList", boxList)));
 		} catch (MongoException e) {
 
 		}

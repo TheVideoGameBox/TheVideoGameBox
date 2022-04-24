@@ -67,6 +67,9 @@ public class CommandFactory extends CommandAbstractFactory{
             case Event.UPDATE_USER_BOX_LIST:
                 command = new CommandUpdateUserBoxList();
                 break;
+            case Event.DELETE_BOX_FROM_USER:
+                command = new CommandDeleteBoxFromUser();
+                break;
             default:
                 break;
         }

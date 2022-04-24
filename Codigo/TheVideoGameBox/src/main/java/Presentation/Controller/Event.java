@@ -42,6 +42,9 @@ public class Event {
     public static final int UPDATE_USER_BOX_LIST = 314;
     public static final int RES_UPDATE_USER_BOX_LIST_OK = 315;
     public static final int RES_UPDATE_USER_BOX_LIST_KO = 316;
+    public static final int DELETE_BOX_FROM_USER = 317;
+    public static final int RES_DELETE_BOX_FROM_USER_OK = 318;
+    public static final int RES_DELETE_BOX_FROM_USER_KO = 319;
 
 
     // Codigos de eventos para BOX [500-700)
