@@ -4,6 +4,7 @@ import Logic.Box.TBox;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DAOBoxStub implements DAOBox {
@@ -24,12 +25,12 @@ public class DAOBoxStub implements DAOBox {
 
     @Override
     public List<ObjectId> listGames(TBox tBox) {
-        return new ArrayList<ObjectId>();
+        return Collections.emptyList();
     }
 
     @Override
     public List<TBox> searchAllByName(String name) {
-        return new ArrayList<TBox>();
+        return Collections.emptyList();
     }
 
     @Override
