@@ -33,9 +33,9 @@ public class SAUserImp implements SAUser {
 		if(!correctPassword(user.getPassword()))
 			return null;
 
-		user.setPassword(BCryptUtility.hash(user.getPassword()));
+		TUser encryptedUser = new TUser(user.getEmail(), user.getUsername(), BCryptUtility.hash(user.getPassword()));
 
-		return daoFactory.createDAOUser().create(user);
+		return daoFactory.createDAOUser().create(encryptedUser);
 	}
 
 	@Override

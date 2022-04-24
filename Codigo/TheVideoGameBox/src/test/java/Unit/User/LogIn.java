@@ -11,13 +11,11 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
 public class LogIn {
-
     private static SAUser saUser;
 
-    private static final TUser wrongPassword = new TUser("TEST_LOG_IN@email.com", "TEST_LOG_IN", "TEST_LOG_IN_WRONG");
-    private static final TUser[] incorrectEmail = {new TUser("TEST_LOG_IN4@", "TEST_LOG_IN4", "TEST_LOG_IN4"),
-            new TUser("TEST_LOG_IN6@.com", "TEST_LOG_IN6", "TEST_LOG_IN6")};
-    private static final TUser nullPassword = new TUser("TEST_LOG_IN2@email.com", "TEST_LOG_IN2", null);
+    private static final TUser[] incorrectEmail = {new TUser("TEST_LOG_IN@", "TEST_LOG_IN", "TEST_LOG_IN"),
+            new TUser("TEST_LOG_IN@.com", "TEST_LOG_IN", "TEST_LOG_IN")};
+    private static final TUser nullPassword = new TUser("TEST_LOG_IN@email.com", "TEST_LOG_IN", null);
 
     @BeforeClass
     public static void init() {
@@ -38,15 +36,6 @@ public class LogIn {
     public void testNullPassword() {
         try {
             assertNull(saUser.logIn(nullPassword));
-        } catch (Exception ae) {
-            fail(ae.getMessage());
-        }
-    }
-
-    @Test
-    public void testWrongPassword() {
-        try {
-            assertNull(saUser.logIn(wrongPassword));
         } catch (Exception ae) {
             fail(ae.getMessage());
         }

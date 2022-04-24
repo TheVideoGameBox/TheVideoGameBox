@@ -8,13 +8,13 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class LogIn {
     private static SAUser saUser;
     private static ObjectId idUser;
     private static final TUser correct = new TUser("TEST_LOG_IN@email.com", "TEST_LOG_IN", "TEST_LOG_IN");
+    private static final TUser wrongPassword = new TUser("TEST_LOG_IN@email.com", "TEST_LOG_IN", "TEST_LOG_IN_WRONG");
 
     @BeforeClass
     public static void init() {
@@ -26,6 +26,15 @@ public class LogIn {
     public void testCorrectLogIn() {
         try {
             assertNotNull(saUser.logIn(correct));
+        } catch (Exception ae) {
+            fail(ae.getMessage());
+        }
+    }
+
+    @Test
+    public void testWrongPassword() {
+        try {
+            assertNull(saUser.logIn(wrongPassword));
         } catch (Exception ae) {
             fail(ae.getMessage());
         }
