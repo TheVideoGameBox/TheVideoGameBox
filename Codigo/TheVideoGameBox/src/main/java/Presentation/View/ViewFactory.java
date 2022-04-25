@@ -14,6 +14,7 @@ import Presentation.View.Game.ViewShowOne;
 import Presentation.View.Main.ViewMain;
 import Presentation.View.User.ViewLogIn;
 import Presentation.View.User.ViewRegister;
+import Presentation.View.User.ViewSearchUsersByName;
 import Presentation.View.User.ViewUserBoxes;
 import org.bson.types.ObjectId;
 import org.apache.commons.lang3.tuple.Pair;
@@ -61,6 +62,9 @@ public class ViewFactory extends ViewAbstractFactory {
 				break;
 			case Event.RES_USER_BOXES_OK:
 				view = new ViewUserBoxes();
+				break;
+			case Event.RES_SEARCH_BY_NAME_OK:
+				view = new ViewSearchUsersByName();
 				break;
 			default:
 				break;

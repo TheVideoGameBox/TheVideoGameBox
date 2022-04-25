@@ -530,8 +530,11 @@ public class ViewMain extends JFrame implements IView{
 				String search = textUser.getText();
 				if(search.length() <= 50 && search.length() > 0) {
 					textUser.setText(null);
-					//LLAMADA AL EVENTO
-					setVisible(false);
+					ApplicationController.getInstance().action(new Context(Event.SEARCH_BY_NAME, search));
+					if(hideView)
+						setVisible(false);
+
+					hideView = true;
 				}
 				else if(search.length() > 50) {
 					JOptionPane.showMessageDialog(null, "Too many characters");
@@ -547,7 +550,7 @@ public class ViewMain extends JFrame implements IView{
 		
 		Button userButton = new Button("SEARCH", "tinylupa_icon.png", new Dimension(120, 35), Color.orange);
 		userButton.buttonIcon();
-		userButton.setToolTipText("Search a Box by Name");
+		userButton.setToolTipText("Search a User by Name");
 		userButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -556,11 +559,14 @@ public class ViewMain extends JFrame implements IView{
 				String search = textUser.getText();
 				if(search.length() <= 50 && search.length() > 0) {
 					textUser.setText(null);
-					//LLAMADA AL EVENTO
-					setVisible(false);
+					ApplicationController.getInstance().action(new Context(Event.SEARCH_BY_NAME, search));
+					if(hideView)
+						setVisible(false);
+
+					hideView = true;
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "There is no Boxes with that name");
+					JOptionPane.showMessageDialog(null, "There is no Users with that name");
 				}
 			}
 		});
