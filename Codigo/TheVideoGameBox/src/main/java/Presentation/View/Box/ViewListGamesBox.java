@@ -59,6 +59,9 @@ public class ViewListGamesBox extends JFrame implements IView {
                 setVisible(false);
                 games = (List<TGame>) context.getData();
                 break;
+            case Event.RES_ADD_GAME_TO_BOX_KO:
+                JOptionPane.showMessageDialog(null, "This game is already in this box!","Add Game", JOptionPane.ERROR_MESSAGE);
+                break;
             default:
                 break;
         }

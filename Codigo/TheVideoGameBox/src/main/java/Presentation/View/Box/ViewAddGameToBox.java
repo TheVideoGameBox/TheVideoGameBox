@@ -258,7 +258,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 				JOptionPane.showMessageDialog(this, "Game added!","Add Game", JOptionPane.INFORMATION_MESSAGE);
 				break;
 			case Event.RES_ADD_GAME_TO_BOX_KO:
-				JOptionPane.showMessageDialog(null, "Failed to add the game","Add Game", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Repeated game!","Add Game", JOptionPane.ERROR_MESSAGE);
 				break;
 		}
 		
