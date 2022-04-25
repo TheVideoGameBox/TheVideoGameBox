@@ -106,4 +106,12 @@ public class SAUserImp implements SAUser {
 		return result;
 	}
 
+	@Override
+	public List<TUser> searchAllByName(String name) {
+		if (name.length() <= 0 || name.length() > 25)
+            return null;
+
+        return daoFactory.createDAOUser().searchAllByName(name);
+	}
+
 }
