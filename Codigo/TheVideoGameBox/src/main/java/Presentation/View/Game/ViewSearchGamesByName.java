@@ -219,7 +219,7 @@ public class ViewSearchGamesByName extends JFrame implements IView {
             			platformPanel.add(platform(game.getPlatforms().get(i), num));
             		}
             		if(num > 3) {
-            			platformPanel.add(platform("+4", num));
+            			platformPanel.add(platform("+" + num, num));
             		}
             	}
             }
@@ -279,7 +279,7 @@ public class ViewSearchGamesByName extends JFrame implements IView {
 		else if(p.contains("Android")) aux.add(new Platform(p,new Color(61, 220, 132), Color.white));
 		else if(p.contains("Mac")) aux.add(new Platform(p,new Color(160, 82, 45), Color.white));
 		else if(p.contains("Linux")) aux.add(new Platform(p,new Color(222, 76, 138), Color.white));
-		else if(p == "+4") aux.add(new Platform(p,Color.darkGray, Color.white));
+		else if(p.equals("+" + n)) aux.add(new Platform(p,Color.darkGray, Color.white));
 		else{
 			rand  = new Random();
 			float r = rand.nextFloat();
