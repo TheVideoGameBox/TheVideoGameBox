@@ -10,6 +10,7 @@ import Presentation.View.IView;
 import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
 import Presentation.View.Utils.Button;
+import Presentation.View.Utils.Platform;
 import Presentation.View.Utils.TextField;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -26,6 +27,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 import static Presentation.View.Main.ViewMain.logged;
 import static Presentation.View.Main.ViewMain.viewOptions;
@@ -233,9 +235,9 @@ public class ViewListGamesBox extends JFrame implements IView {
         JPanel namePanel = new JPanel();
         namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.X_AXIS));
         namePanel.setOpaque(false);
-        namePanel.setMaximumSize(new Dimension(700, 135));
-        namePanel.setPreferredSize(new Dimension(700, 135));
-        namePanel.setMinimumSize(new Dimension(700, 135));
+        namePanel.setMaximumSize(new Dimension(600, 135));
+        namePanel.setPreferredSize(new Dimension(600, 135));
+        namePanel.setMinimumSize(new Dimension(600, 135));
 
         // NAME
         JLabel name = new JLabel(game.getName());
@@ -262,8 +264,45 @@ public class ViewListGamesBox extends JFrame implements IView {
         namePanel.add(Box.createRigidArea(new Dimension(55, 0)));
         namePanel.add(name);
 
+        JPanel platformPanel = new JPanel();
+        platformPanel.setOpaque(false);
+        platformPanel.setAlignmentY(JPanel.CENTER_ALIGNMENT);
+        if(game.getPlatforms() != null) {
+            int num = game.getPlatforms().size();
+            if(num != 0) {
+                if(num == 1) {
+                    platformPanel.setLayout(new GridLayout(1,1));
+                    for(String p : game.getPlatforms()) {
+                        platformPanel.add(platform(p, num));
+                    }
+                }
+                else if(num == 2) {
+                    platformPanel.setLayout(new GridLayout(1,2));
+                    for(String p : game.getPlatforms()) {
+                        platformPanel.add(platform(p, num));
+                    }
+                }
+                else if(num == 3) {
+                    platformPanel.setLayout(new GridLayout(0,1));
+                    for(int i = 0; i<3; i++) {
+                        platformPanel.add(platform(game.getPlatforms().get(i), num));
+                    }
+                }
+                else if(num > 3) {
+                    platformPanel.setLayout(new GridLayout(2,2));
+                    for(int i = 0; i<3; i++) {
+                        platformPanel.add(platform(game.getPlatforms().get(i), num));
+                    }
+                    if(num > 3) {
+                        platformPanel.add(platform("+4", num));
+                    }
+                }
+            }
+        }
+
         //BUTTON PANEL
-        JPanel buttonPanel = new JPanel(new BorderLayout());
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         buttonPanel.setOpaque(false);
         Button viewInfo = new Button("Details", "info_icon.png", Color.white, new Color(50, 170, 0), new Dimension(200, 45), Color.orange);
         viewInfo.buttonIcon();
@@ -295,15 +334,56 @@ public class ViewListGamesBox extends JFrame implements IView {
 
             }
         });
-        deletePanel.add(deleteButton);
+        buttonPanel.add(deleteButton);
 
         //CONSTRUIR PANEL
 
         panel.add(namePanel, BorderLayout.WEST);
-        panel.add(buttonPanel, BorderLayout.CENTER);
-        panel.add(deletePanel, BorderLayout.EAST);
+        panel.add(platformPanel, BorderLayout.CENTER);
+        panel.add(buttonPanel, BorderLayout.EAST);
+        //panel.add(deletePanel, BorderLayout.EAST);
 
         return panel;
+    }
+
+    private JPanel platform(String p, int n) {
+        JPanel aux = new JPanel();
+        aux.setLayout(new BoxLayout(aux, BoxLayout.Y_AXIS));
+        Dimension d = new Dimension(0,0);
+        Random rand = new Random();
+        if(n < 3) d = new Dimension(0,40);
+        aux.add(Box.createRigidArea(d));
+        aux.setOpaque(false);
+        aux.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+        aux.setAlignmentY(JPanel.CENTER_ALIGNMENT);
+        aux.setBorder(new EmptyBorder(2,2,2,2));
+        if(p.contains("Commodore"))	aux.add(new Platform(p,Color.gray, Color.white));
+        else if(p.contains("Sega")) aux.add(new Platform(p,new Color(51, 60, 135), Color.white));
+        else if(p.contains("Nintendo")) aux.add(new Platform(p,new Color(230, 0, 18), Color.white));
+        else if(p.contains("PlayStation")) aux.add(new Platform(p,new Color(46, 109, 180), Color.white));
+        else if(p.contains("iOS")) aux.add(new Platform(p,new Color(252, 49, 88), Color.white));
+        else if(p.contains("PC")) aux.add(new Platform(p,new Color(60, 149, 61), Color.white));
+        else if(p.contains("Philips")) aux.add(new Platform(p,new Color(22, 190, 190), Color.white));
+        else if(p.contains("Xbox")) aux.add(new Platform(p,new Color(16, 124, 16), Color.white));
+        else if(p.contains("Game Boy")) aux.add(new Platform(p,new Color(111, 38, 195), Color.white));
+        else if(p.contains("Neo")) aux.add(new Platform(p,new Color(145, 237, 40), Color.white));
+        else if(p.contains("Wii")) aux.add(new Platform(p,Color.white, Color.black));
+        else if(p.contains("Oculus")) aux.add(new Platform(p,Color.black, Color.white));
+        else if(p.contains("VR")) aux.add(new Platform(p,new Color(255, 140, 0), Color.white));
+        else if(p.contains("Google")) aux.add(new Platform(p,new Color(244, 180, 0), Color.black));
+        else if(p.contains("Android")) aux.add(new Platform(p,new Color(61, 220, 132), Color.white));
+        else if(p.contains("Mac")) aux.add(new Platform(p,new Color(160, 82, 45), Color.white));
+        else if(p.contains("Linux")) aux.add(new Platform(p,new Color(222, 76, 138), Color.white));
+        else if(p == "+4") aux.add(new Platform(p,Color.darkGray, Color.white));
+        else{
+            rand  = new Random();
+            float r = rand.nextFloat();
+            float g = rand.nextFloat();
+            float b = rand.nextFloat();
+            aux.add(new Platform(p,new Color(r, g, b), Color.white));
+        }
+        aux.add(Box.createRigidArea(d));
+        return aux;
     }
 
     private void refreshView(){

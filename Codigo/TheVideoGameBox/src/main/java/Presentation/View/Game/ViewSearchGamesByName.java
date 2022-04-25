@@ -229,7 +229,7 @@ public class ViewSearchGamesByName extends JFrame implements IView {
         //BUTTON PANEL
         JPanel buttonPanel = new JPanel(new BorderLayout());
         buttonPanel.setOpaque(false);
-        Button viewInfo = new Button("View Games", "info_icon.png", Color.white, null, new Dimension(170, 45), Color.orange);
+        Button viewInfo = new Button("Details", "info_icon.png", Color.white, null, new Dimension(170, 45), Color.orange);
         viewInfo.buttonIcon();
         viewInfo.setBorderPainted(false);
         viewInfo.setContentAreaFilled(false);
