@@ -385,8 +385,8 @@ public class ViewMain extends JFrame implements IView{
 		comboBoxGame.addActionListener(new ActionListener() {
 			   @Override
 			   public void actionPerformed(ActionEvent e) {
-				   String itemSeleecionado = (String)comboBoxGame.getSelectedItem();
-				   switch (itemSeleecionado) {
+				   String itemPicked = (String)comboBoxGame.getSelectedItem();
+				   switch (Objects.requireNonNull(itemPicked)) {
 						case "By Name": {
 							textGame.setVisible(true);
 							textPlatform.setVisible(false);
