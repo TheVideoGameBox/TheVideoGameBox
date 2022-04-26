@@ -48,7 +48,7 @@ public class ViewModifyBox extends JFrame implements IView {
 	private JCheckBox checkBoxSurvival;
 
 	private TextField nameBox;
-	private TextField descriptionBox;
+	private JTextArea descriptionBox;
 	
 	private JPanel backButtonContainer;
 	
@@ -106,7 +106,7 @@ public class ViewModifyBox extends JFrame implements IView {
 	    auxPanel.add(labelDescription);
 	    
 	 	// Input para el description
-	    JTextArea descriptionBox = new JTextArea();
+	    descriptionBox = new JTextArea();
 		descriptionBox.setText(tbox.getDescription());
 		descriptionBox.setLineWrap(true);
 		descriptionBox.setColumns(100);
