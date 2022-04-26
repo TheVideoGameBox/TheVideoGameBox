@@ -4,14 +4,15 @@ package Presentation.View.Main;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
-public class BorderTitle extends TitledBorder{
+public class BorderTitle extends TitledBorder {
 
-	public BorderTitle(String title) {
-		super(title);
-	}
-	public BorderTitle(String title, Color c) {
-		super(title);
-		setTitleColor(c);
-	}
+    public BorderTitle(String title) {
+        super(title);
+    }
+
+    public BorderTitle(String title, Color c) {
+        super(title);
+        setTitleColor(c);
+    }
 
 }

@@ -1,6 +1,5 @@
 package Presentation.Command.User;
 
-import Logic.Box.TBox;
 import Logic.SAAbstractFactory;
 import Logic.User.SAUser;
 import Presentation.Command.ICommand;
@@ -9,13 +8,12 @@ import Presentation.Controller.Event;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bson.types.ObjectId;
 
-import java.util.List;
-
 public class CommandDeleteBoxFromUser implements ICommand {
 
     @Override
     public Context execute(Object data) {
-        SAUser saUser = SAAbstractFactory.getInstance().createSAUser();;
+        SAUser saUser = SAAbstractFactory.getInstance().createSAUser();
+        ;
         Pair<ObjectId, ObjectId> args = (Pair<ObjectId, ObjectId>) data;
         saUser.deleteUserBoxFromDatabase(args.getLeft(), args.getRight());
 

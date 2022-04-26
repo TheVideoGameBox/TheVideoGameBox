@@ -19,17 +19,17 @@ import static org.junit.Assert.fail;
 public class ShowBox {
     private static final TBox tBox = new TBox("TEST_SHOW_BOX", "TEST_SHOW_BOX", Privacy.PRIVATE, Collections.singletonList(Genres.INDIE));
 
-	private static SABox saBox;
-	private static ObjectId _id;
-	
-	@BeforeClass
+    private static SABox saBox;
+    private static ObjectId _id;
+
+    @BeforeClass
     public static void init() {
         saBox = SAAbstractFactory.getInstance().createSABox();
         _id = saBox.createBox(tBox);
     }
 
     @Test
-    public void testCorrect(){
+    public void testCorrect() {
         try {
             assertNotNull(saBox.showBox(_id));
         } catch (Exception ae) {
@@ -38,8 +38,8 @@ public class ShowBox {
     }
 
     @AfterClass
-    public static void end(){
-        if(_id != null)
+    public static void end() {
+        if (_id != null)
             saBox.deleteFromDatabase(_id);
     }
 }

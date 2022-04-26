@@ -18,7 +18,7 @@ public class CommandAssociateBox implements ICommand {
         ObjectId result = saUser.addBox(aux.getLeft(), aux.getRight());
         Context con;
 
-        if(result != null) con = new Context(Event.RES_ASSOCIATE_BOX_OK, result);
+        if (result != null) con = new Context(Event.RES_ASSOCIATE_BOX_OK, result);
         else con = new Context(Event.RES_ASSOCIATE_BOX_KO, null);
 
         return con;

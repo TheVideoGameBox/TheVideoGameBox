@@ -2,16 +2,13 @@ package Presentation.Command;
 
 import Presentation.Command.Box.*;
 import Presentation.Command.Game.CommandRandomGames;
-import Presentation.Command.Box.CommandCreateBox;
-import Presentation.Command.Box.CommandModifyBox;
-import Presentation.Command.Box.CommandSearchAllBoxesByName;
 import Presentation.Command.Game.CommandSearchAllByName;
 import Presentation.Command.Game.CommandSearchAllByPlatform;
 import Presentation.Command.Game.CommandSearchOne;
 import Presentation.Command.User.*;
 import Presentation.Controller.Event;
 
-public class CommandFactory extends CommandAbstractFactory{
+public class CommandFactory extends CommandAbstractFactory {
     @Override
     public ICommand createCommand(int event) {
         ICommand command = null;
@@ -29,14 +26,14 @@ public class CommandFactory extends CommandAbstractFactory{
                 command = new CommandSearchAllBoxesByName();
                 break;
             case Event.CREATE_USER:
-            	command = new CommandCreateUser();
-            	break;
+                command = new CommandCreateUser();
+                break;
             case Event.MODIFY_BOX:
-            	command = new CommandModifyBox();
-            	break;
+                command = new CommandModifyBox();
+                break;
             case Event.SHOW_BOX:
-            	command = new CommandShowBox();
-            	break;
+                command = new CommandShowBox();
+                break;
             case Event.LIST_GAMES_OF_BOX:
                 command = new CommandListGames();
                 break;
@@ -50,7 +47,7 @@ public class CommandFactory extends CommandAbstractFactory{
                 command = new CommandSearchAllByPlatform();
                 break;
             case Event.DELETE_GAME_FROM_BOX:
-            	  command = new CommandDeleteGame();
+                command = new CommandDeleteGame();
                 break;
             case Event.DELETE_BOX:
                 command = new CommandDeleteBox();

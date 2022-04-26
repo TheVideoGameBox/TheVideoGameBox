@@ -1,7 +1,6 @@
 package Presentation.Command.Box;
 
 import Logic.Box.SABox;
-import Logic.Box.TBox;
 import Logic.SAAbstractFactory;
 import Presentation.Command.ICommand;
 import Presentation.Controller.Context;
@@ -16,7 +15,7 @@ public class CommandDeleteBox implements ICommand {
         ObjectId result = saBox.deleteBox((ObjectId) data);
         Context con;
 
-        if(result!=null) con = new Context(Event.RES_DELETE_BOX_OK, result);
+        if (result != null) con = new Context(Event.RES_DELETE_BOX_OK, result);
         else con = new Context(Event.RES_DELETE_BOX_KO, null);
 
         return con;

@@ -102,13 +102,13 @@ public class TGame {
     public void setRelease_dates(int release_dates) {
         this.release_dates = release_dates;
     }
-    
+
     public String getImage() {
-    	return image;
+        return image;
     }
-    
+
     public void setImage(String image) {
-    	this.image = image;
+        this.image = image;
     }
 
     @Override

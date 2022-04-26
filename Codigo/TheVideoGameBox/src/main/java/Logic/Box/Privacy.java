@@ -6,12 +6,12 @@ public enum Privacy {
 
     private String privacy;
 
-    Privacy(String privacy){
+    Privacy(String privacy) {
         this.privacy = privacy;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return privacy;
     }
 }

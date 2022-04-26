@@ -9,5 +9,6 @@ public abstract class CommandAbstractFactory {
             instance = new CommandFactory();
         return instance;
     }
+
     public abstract ICommand createCommand(int event);
 }

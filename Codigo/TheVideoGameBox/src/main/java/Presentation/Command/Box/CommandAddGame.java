@@ -17,7 +17,7 @@ public class CommandAddGame implements ICommand {
         ObjectId result = saBox.addGame(aux.getLeft(), aux.getRight());
         Context con;
 
-        if(result != null) con = new Context(Event.RES_ADD_GAME_TO_BOX_OK, result);
+        if (result != null) con = new Context(Event.RES_ADD_GAME_TO_BOX_OK, result);
         else con = new Context(Event.RES_ADD_GAME_TO_BOX_KO, null);
 
         return con;

@@ -11,19 +11,19 @@ import java.util.List;
 
 public class CommandSearchAllBoxesByName implements ICommand {
 
-	@Override
-	public Context execute(Object data) {
-		SABox saBox = SAAbstractFactory.getInstance().createSABox();
-		String aux= (String) data;
-		List<TBox> result = saBox.searchAllBoxesByName(aux);
-		Context con;
+    @Override
+    public Context execute(Object data) {
+        SABox saBox = SAAbstractFactory.getInstance().createSABox();
+        String aux = (String) data;
+        List<TBox> result = saBox.searchAllBoxesByName(aux);
+        Context con;
 
-        if(result != null && !result.isEmpty())
-			con = new Context(Event.RES_SEARCH_ALL_BOXES_BY_NAME_OK, result);
+        if (result != null && !result.isEmpty())
+            con = new Context(Event.RES_SEARCH_ALL_BOXES_BY_NAME_OK, result);
         else
-			con = new Context(Event.RES_SEARCH_ALL_BOXES_BY_NAME_KO, null);
+            con = new Context(Event.RES_SEARCH_ALL_BOXES_BY_NAME_KO, null);
 
-		return con;
-	}
+        return con;
+    }
 
 }

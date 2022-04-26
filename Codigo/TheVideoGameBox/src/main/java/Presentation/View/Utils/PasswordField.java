@@ -10,16 +10,16 @@ public class PasswordField extends JPasswordField {
     Dimension dimension;
     String prompt = null;
 
-    public PasswordField(Dimension dimension, String prompt){
+    public PasswordField(Dimension dimension, String prompt) {
         this.dimension = dimension;
         this.prompt = prompt;
     }
 
-    public PasswordField(Dimension dimension){
+    public PasswordField(Dimension dimension) {
         this.dimension = dimension;
     }
 
-    public void textField(){
+    public void textField() {
         PromptSupport.setPrompt(prompt, this);
         this.setPreferredSize(dimension);
         this.setMinimumSize(dimension);

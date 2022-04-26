@@ -4,8 +4,8 @@ import Presentation.Controller.Context;
 
 public abstract class ViewAbstractFactory {
     private static ViewAbstractFactory instance;
-    
-    public static ViewAbstractFactory getInstance(){
+
+    public static ViewAbstractFactory getInstance() {
         if (instance == null)
             instance = new ViewFactory();
 

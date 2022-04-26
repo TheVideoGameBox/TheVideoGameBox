@@ -64,7 +64,7 @@ public class SearchAllBoxesByName {
 
     @AfterClass
     public static void afterClass() {
-        if (tBox.getId() != null){
+        if (tBox.getId() != null) {
             saBox.deleteFromDatabase(tBox.getId());
             saBox.deleteFromDatabase(privateTBox.getId());
         }

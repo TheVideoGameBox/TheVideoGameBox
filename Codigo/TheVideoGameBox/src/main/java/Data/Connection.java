@@ -7,7 +7,7 @@ public abstract class Connection {
     private static Connection instance;
 
     public static Connection getInstance() {
-        if(instance==null) {
+        if (instance == null) {
             instance = new ConnectionImp();
         }
 

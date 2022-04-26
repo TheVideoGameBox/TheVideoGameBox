@@ -19,7 +19,7 @@ public abstract class ApplicationController {
 
     public abstract void action(Context context);
 
-    public void clearViewStack(){
+    public void clearViewStack() {
         viewStack.clear();
     }
 

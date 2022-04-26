@@ -22,6 +22,6 @@ public abstract class SAAbstractFactory {
 
     public abstract SAGame createSAGame();
 
-    public abstract SAUser  createSAUser();
+    public abstract SAUser createSAUser();
 
 }

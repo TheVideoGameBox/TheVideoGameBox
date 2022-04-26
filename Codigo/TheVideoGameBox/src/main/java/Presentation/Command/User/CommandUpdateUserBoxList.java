@@ -1,8 +1,6 @@
 package Presentation.Command.User;
 
-import Logic.Box.SABox;
 import Logic.Box.TBox;
-import Logic.Game.TGame;
 import Logic.SAAbstractFactory;
 import Logic.User.SAUser;
 import Presentation.Command.ICommand;
@@ -20,7 +18,7 @@ public class CommandUpdateUserBoxList implements ICommand {
         List<TBox> result = saUser.userBoxes((ObjectId) data);
         Context con;
 
-        if(result != null) con = new Context(Event.RES_UPDATE_USER_BOX_LIST_OK, result);
+        if (result != null) con = new Context(Event.RES_UPDATE_USER_BOX_LIST_OK, result);
         else con = new Context(Event.RES_UPDATE_USER_BOX_LIST_KO, null);
 
         return con;

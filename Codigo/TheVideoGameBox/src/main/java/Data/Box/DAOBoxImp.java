@@ -21,144 +21,142 @@ import static com.mongodb.client.model.Filters.*;
 
 public class DAOBoxImp implements DAOBox {
 
-	public ObjectId create(TBox box) {
-		ObjectId result;
+    public ObjectId create(TBox box) {
+        ObjectId result;
 
-		try {
-			MongoDatabase db = Connection.getInstance().getConnection();
-			MongoCollection<Box> boxes = db.getCollection("boxes", Box.class);
+        try {
+            MongoDatabase db = Connection.getInstance().getConnection();
+            MongoCollection<Box> boxes = db.getCollection("boxes", Box.class);
 
-			Box insert = new Box(box);
+            Box insert = new Box(box);
 
-			result = Objects.requireNonNull(boxes.insertOne(insert).getInsertedId()).asObjectId().getValue();
-		} catch (MongoException | NullPointerException e) {
-			result = null;
-		}
+            result = Objects.requireNonNull(boxes.insertOne(insert).getInsertedId()).asObjectId().getValue();
+        } catch (MongoException | NullPointerException e) {
+            result = null;
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	@Override
-	public ObjectId addGame(ObjectId idBox, ObjectId idGame) {
-		List<ObjectId> gameList = new ArrayList<>();
-		try {
-			MongoDatabase db = Connection.getInstance().getConnection();
-			Box box = db.getCollection("boxes", Box.class).find(eq("_id", idBox)).first();
-			if(box.getGameList() != null) gameList = box.getGameList();
-			if(gameList.contains(idGame)) return null;
-			gameList.add(idGame);
-			db.getCollection("boxes", Box.class).updateOne(eq("_id", idBox), Updates.set("gameList", gameList));
-		} catch (MongoException e) {
-			return null;
-		}
-		return idGame;
-	}
+    @Override
+    public ObjectId addGame(ObjectId idBox, ObjectId idGame) {
+        List<ObjectId> gameList = new ArrayList<>();
+        try {
+            MongoDatabase db = Connection.getInstance().getConnection();
+            Box box = db.getCollection("boxes", Box.class).find(eq("_id", idBox)).first();
+            if (box.getGameList() != null) gameList = box.getGameList();
+            if (gameList.contains(idGame)) return null;
+            gameList.add(idGame);
+            db.getCollection("boxes", Box.class).updateOne(eq("_id", idBox), Updates.set("gameList", gameList));
+        } catch (MongoException e) {
+            return null;
+        }
+        return idGame;
+    }
 
-	@Override
-	public ObjectId deleteGame(ObjectId idBox, ObjectId idGame) {
-		List<ObjectId> gameList = new ArrayList<>();
-		try {
-			MongoDatabase db = Connection.getInstance().getConnection();
-			Box box = db.getCollection("boxes", Box.class).find(eq("_id",idBox)).first();
+    @Override
+    public ObjectId deleteGame(ObjectId idBox, ObjectId idGame) {
+        List<ObjectId> gameList = new ArrayList<>();
+        try {
+            MongoDatabase db = Connection.getInstance().getConnection();
+            Box box = db.getCollection("boxes", Box.class).find(eq("_id", idBox)).first();
 
-			if(box.getGameList() != null) {
-				gameList = box.getGameList();
-				gameList.remove(idGame);
-				db.getCollection("boxes", Box.class).updateOne(eq("_id", idBox), Updates.set("gameList", gameList));
-			}
-		}
-		catch(MongoException e) {
-			return null;
-		}
-		return idGame;
-	}
+            if (box.getGameList() != null) {
+                gameList = box.getGameList();
+                gameList.remove(idGame);
+                db.getCollection("boxes", Box.class).updateOne(eq("_id", idBox), Updates.set("gameList", gameList));
+            }
+        } catch (MongoException e) {
+            return null;
+        }
+        return idGame;
+    }
 
-	@Override
-	public List<ObjectId> listGames(TBox tBox) {
-		List<ObjectId> gameList;
-		try {
-			MongoDatabase db = Connection.getInstance().getConnection();
-			Box box = db.getCollection("boxes", Box.class).find(eq("_id", tBox.getId())).first();
-			gameList = box.getGameList();
-			if(box.getGameList() == null) return null;
-		} catch (MongoException e) {
-			return null;
-		}
-		return gameList;
-	}
+    @Override
+    public List<ObjectId> listGames(TBox tBox) {
+        List<ObjectId> gameList;
+        try {
+            MongoDatabase db = Connection.getInstance().getConnection();
+            Box box = db.getCollection("boxes", Box.class).find(eq("_id", tBox.getId())).first();
+            gameList = box.getGameList();
+            if (box.getGameList() == null) return null;
+        } catch (MongoException e) {
+            return null;
+        }
+        return gameList;
+    }
 
-	@Override
-	public List<TBox> searchAllByName(String name) {
-		List<TBox> result = new ArrayList<>();
-			try {
-				MongoDatabase db = Connection.getInstance().getConnection();
-				Bson filter1 = regex("name", Pattern.compile(name, Pattern.CASE_INSENSITIVE));
-				Bson filter2 = eq("active", true);
-				Bson filter3 = eq("privacy", Privacy.PUBLIC);
-				FindIterable<Box> iter = db.getCollection("boxes", Box.class).find(and(filter1, and(filter2, filter3)));
-		        for (Box box : iter)
-					if(box.isActive() && box.getPrivacy() == Privacy.PUBLIC) result.add(box.toTransfer());
-		    } catch (MongoException e) {
-		    	result = null;
-		    }
-			
-		return result;
-	}
+    @Override
+    public List<TBox> searchAllByName(String name) {
+        List<TBox> result = new ArrayList<>();
+        try {
+            MongoDatabase db = Connection.getInstance().getConnection();
+            Bson filter1 = regex("name", Pattern.compile(name, Pattern.CASE_INSENSITIVE));
+            Bson filter2 = eq("active", true);
+            Bson filter3 = eq("privacy", Privacy.PUBLIC);
+            FindIterable<Box> iter = db.getCollection("boxes", Box.class).find(and(filter1, and(filter2, filter3)));
+            for (Box box : iter)
+                if (box.isActive() && box.getPrivacy() == Privacy.PUBLIC) result.add(box.toTransfer());
+        } catch (MongoException e) {
+            result = null;
+        }
 
-	@Override
-	public ObjectId deleteBox(ObjectId id) {
-		ObjectId result;
-		try {
-			MongoDatabase db = Connection.getInstance().getConnection();
-			Box box = db.getCollection("boxes", Box.class).findOneAndUpdate(eq("_id",  id), Updates.set("active", false));
-			result = box.getId();
+        return result;
+    }
 
-		} catch (MongoException e) {
-			return null;
-		}
-		return result;
-	}
+    @Override
+    public ObjectId deleteBox(ObjectId id) {
+        ObjectId result;
+        try {
+            MongoDatabase db = Connection.getInstance().getConnection();
+            Box box = db.getCollection("boxes", Box.class).findOneAndUpdate(eq("_id", id), Updates.set("active", false));
+            result = box.getId();
 
-	@Override
-	public TBox showBox(ObjectId _id) {
-		TBox tBox = null;
-		try {
-			MongoDatabase db = Connection.getInstance().getConnection();
-			tBox = Objects.requireNonNull(db.getCollection("boxes", Box.class).find(eq("_id", _id)).first()).toTransfer();
-		}
-		catch(MongoException e) {
-			return null;
-		}
-		return tBox;
-	}
+        } catch (MongoException e) {
+            return null;
+        }
+        return result;
+    }
 
-	@Override
-	public ObjectId modifyBox(TBox tBox) {
-		ObjectId result;
+    @Override
+    public TBox showBox(ObjectId _id) {
+        TBox tBox = null;
+        try {
+            MongoDatabase db = Connection.getInstance().getConnection();
+            tBox = Objects.requireNonNull(db.getCollection("boxes", Box.class).find(eq("_id", _id)).first()).toTransfer();
+        } catch (MongoException e) {
+            return null;
+        }
+        return tBox;
+    }
 
-		try {
-			MongoDatabase db = Connection.getInstance().getConnection();
+    @Override
+    public ObjectId modifyBox(TBox tBox) {
+        ObjectId result;
 
-			db.getCollection("boxes", Box.class).updateOne(eq("_id", tBox.getId()), Updates.combine(Updates.set("name", tBox.getName()), Updates.set("description", tBox.getDescription()),
-					Updates.set("genres", tBox.getGenres()), Updates.set("privacy", tBox.getPrivacy())));
-			result = tBox.getId();
-		} catch (MongoException e) {
-			result = null;
-		}
+        try {
+            MongoDatabase db = Connection.getInstance().getConnection();
 
-		return result;
-	}
+            db.getCollection("boxes", Box.class).updateOne(eq("_id", tBox.getId()), Updates.combine(Updates.set("name", tBox.getName()), Updates.set("description", tBox.getDescription()),
+                    Updates.set("genres", tBox.getGenres()), Updates.set("privacy", tBox.getPrivacy())));
+            result = tBox.getId();
+        } catch (MongoException e) {
+            result = null;
+        }
 
-	@Override
-	public void deleteFromDatabase(ObjectId id) {
-		try {
-			MongoDatabase db = Connection.getInstance().getConnection();
-			MongoCollection<Box> boxes = db.getCollection("boxes", Box.class);
+        return result;
+    }
 
-			boxes.deleteOne(eq("_id", id));
-		} catch (MongoException e) {
+    @Override
+    public void deleteFromDatabase(ObjectId id) {
+        try {
+            MongoDatabase db = Connection.getInstance().getConnection();
+            MongoCollection<Box> boxes = db.getCollection("boxes", Box.class);
 
-		}
-	}
+            boxes.deleteOne(eq("_id", id));
+        } catch (MongoException e) {
+
+        }
+    }
 
 }

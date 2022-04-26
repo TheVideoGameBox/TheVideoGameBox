@@ -7,7 +7,6 @@ import Logic.SAAbstractFactory;
 import Presentation.Command.ICommand;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class CommandUpdateGameList implements ICommand {
         List<TGame> result = saBox.listGames((TBox) data);
         Context con;
 
-        if(result != null) con = new Context(Event.RES_UPDATE_GAME_LIST_OK, result);
+        if (result != null) con = new Context(Event.RES_UPDATE_GAME_LIST_OK, result);
         else con = new Context(Event.RES_UPDATE_GAME_LIST_KO, null);
 
         return con;

@@ -8,7 +8,6 @@ import Presentation.Command.ICommand;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 import org.apache.commons.lang3.tuple.Pair;
-import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class CommandListGames implements ICommand {
 
         Context con;
 
-        if(result != null) con = new Context(Event.RES_LIST_GAMES_OF_BOX_OK, result);
+        if (result != null) con = new Context(Event.RES_LIST_GAMES_OF_BOX_OK, result);
         else con = new Context(Event.RES_LIST_GAMES_OF_BOX_KO, null);
 
         return con;
