@@ -109,28 +109,37 @@ public class ViewModifyBox extends JFrame implements IView {
 	    JTextArea descriptionBox = new JTextArea();
 		descriptionBox.setText(tbox.getDescription());
 		descriptionBox.setLineWrap(true);
+		descriptionBox.setColumns(100);
 	    descriptionBox.setToolTipText("Type new description");
-	    descriptionBox.setBounds(-18, 180, 600, 39);
+	    descriptionBox.setBounds(82, 180, 401, 40);
 	    auxPanel.add(descriptionBox);
 	    
 	    // GENRES LABEL
 	    JLabel labelGenres = label("Genres:");
 	    labelGenres.setToolTipText("Select Genres");
-	    labelGenres.setBounds(62, 290, 60, 19);
+	    labelGenres.setBounds(62, 245, 60, 19);
 	    auxPanel.add(labelGenres);
+
+		JLabel privacyLabel = new JLabel("Privacy:");
+		privacyLabel.setToolTipText("Select Privacy");
+		privacyLabel.setForeground(Color.WHITE);
+		privacyLabel.setFont(new Font("Leelawadee", Font.BOLD, 15));
+		privacyLabel.setAlignmentX(0.5f);
+		privacyLabel.setBounds(330, 315, 87, 22);
+		auxPanel.add(privacyLabel);
 	    
 	    // ComboBox para Privacy
 	    comboBoxPrivacy = new JComboBox(Privacy.values());
 		comboBoxPrivacy.setSelectedItem(tbox.getPrivacy());
 	    comboBoxPrivacy.setBackground(UIManager.getColor("Button.light"));
 	    comboBoxPrivacy.setFont(new Font("Leelawadee", Font.PLAIN, 14));
-	    comboBoxPrivacy.setBounds(395, 310, 87, 22);
+	    comboBoxPrivacy.setBounds(395, 315, 87, 22);
 	    auxPanel.add(comboBoxPrivacy);
 	    
 	    // Botón para confirmar los cambios
 	  	Button btnModify = new Button("MODIFY", new Color(64, 147, 255), new Dimension(120, 30));
 	  	btnModify.button();
-	  	btnModify.setBounds(232, 450, 127, 39);
+	  	btnModify.setBounds(232, 405, 127, 39);
 	  	btnModify.addActionListener(new ActionListener() {
 	  		@Override
 	  		public void actionPerformed(ActionEvent e) {
@@ -251,7 +260,7 @@ public class ViewModifyBox extends JFrame implements IView {
 	private void addPanelCheckboxes() {
 		// Checkbox Panel
 	  	panelCheckbox = new JPanel();
-	  	panelCheckbox.setBounds(120, 320, 215, 143);
+	  	panelCheckbox.setBounds(120, 260, 215, 143);
 	  	panelCheckbox.setOpaque(false);
 	  	panelCheckbox.setLayout(null);
 	    auxPanel.add(panelCheckbox);
@@ -348,15 +357,7 @@ public class ViewModifyBox extends JFrame implements IView {
 	    checkBoxSurvival.setBounds(101, 96, 114, 23);
 		checkBoxSurvival.setSelected(tbox.getGenres().contains(Genres.SURVIVAL));
 		panelCheckbox.add(checkBoxSurvival);
-	    
-	    // PRIVACY LABEL
-	    JLabel privacyLabel = new JLabel("Privacy:");
-	    privacyLabel.setToolTipText("Select Privacy");
-	    privacyLabel.setForeground(Color.WHITE);
-	    privacyLabel.setFont(new Font("Leelawadee", Font.BOLD, 15));
-	    privacyLabel.setAlignmentX(0.5f);
-	    privacyLabel.setBounds(238, 162, 97, 14);
-	    panelCheckbox.add(privacyLabel);
+
 	}
 	
 	private void addBackButton() {
