@@ -43,7 +43,7 @@ public class Game {
         this.image = image;
     }
 
-    public Game(TGame tGame){
+    public Game(TGame tGame) {
         this.id = tGame.getId();
         this.name = tGame.getName();
         this.cover = tGame.getCover();
@@ -112,17 +112,17 @@ public class Game {
     public void setSummary(String summary) {
         this.summary = summary;
     }
-    
+
     public String getImage() {
-    	return image;
+        return image;
     }
-    
+
     public void setImage(String image) {
-    	this.image = image;
+        this.image = image;
     }
 
     //Obtener todos los datos de un transfer
-    public void setData(TGame tGame){
+    public void setData(TGame tGame) {
         this.id = tGame.getId();
         this.name = tGame.getName();
         this.cover = tGame.getCover();
@@ -142,7 +142,7 @@ public class Game {
     }
 
     //Transformar una entidad de MongoDB a un transfer
-    public TGame toTransfer(){
+    public TGame toTransfer() {
         return new TGame(id, name, cover, involved_companies, genres, platforms, summary, release_dates, image);
     }
 

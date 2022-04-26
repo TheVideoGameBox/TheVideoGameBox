@@ -9,7 +9,6 @@ import Presentation.View.Main.JPanelConFondo;
 import Presentation.View.Main.JPanelRound;
 import Presentation.View.Utils.Button;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bson.types.ObjectId;
 
@@ -33,12 +32,11 @@ public class ViewUserBoxes extends JFrame implements IView {
 
     @Override
     public void update(Context context) {
-        if(context.getEvent() == Event.RES_USER_BOXES_OK){
+        if (context.getEvent() == Event.RES_USER_BOXES_OK) {
             this.boxes = (List<TBox>) context.getData();
             viewOptions = true;
             init_GUI();
-        }
-        else if(context.getEvent() == Event.RES_UPDATE_USER_BOX_LIST_OK){
+        } else if (context.getEvent() == Event.RES_UPDATE_USER_BOX_LIST_OK) {
             this.boxes = (List<TBox>) context.getData();
             refreshBoxes();
         }
@@ -146,7 +144,7 @@ public class ViewUserBoxes extends JFrame implements IView {
         boxesPanel.setOpaque(false);
         for (TBox box : boxes) {
             try {
-                if(box.isActive()) boxesPanel.add(boxPanel(box));
+                if (box.isActive()) boxesPanel.add(boxPanel(box));
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -243,13 +241,13 @@ public class ViewUserBoxes extends JFrame implements IView {
         return panel;
     }
 
-    private void refreshView(){
+    private void refreshView() {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    private void refreshBoxes(){
+    private void refreshBoxes() {
         contentContainer.remove(contentContainer.getComponentCount() - 1);
 
         JPanel boxesPanel = new JPanel();
@@ -258,7 +256,7 @@ public class ViewUserBoxes extends JFrame implements IView {
         boxesPanel.setOpaque(false);
         for (TBox box : boxes) {
             try {
-                if(box.isActive()) boxesPanel.add(boxPanel(box));
+                if (box.isActive()) boxesPanel.add(boxPanel(box));
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

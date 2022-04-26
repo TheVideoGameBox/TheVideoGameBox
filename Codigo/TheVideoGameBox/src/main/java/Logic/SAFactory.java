@@ -7,7 +7,7 @@ import Logic.Game.SAGameImp;
 import Logic.User.SAUser;
 import Logic.User.SAUserImp;
 
-public class SAFactory extends SAAbstractFactory{
+public class SAFactory extends SAAbstractFactory {
 
     @Override
     public SABox createSABox() {

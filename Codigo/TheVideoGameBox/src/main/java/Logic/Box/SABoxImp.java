@@ -8,17 +8,16 @@ import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class SABoxImp implements SABox {
 
     private DAOAbstractFactory daoFactory;
 
-    public SABoxImp(){
+    public SABoxImp() {
         daoFactory = DAOAbstractFactory.getInstance();
     }
 
-    public SABoxImp(DAOAbstractFactory daoFactory){
+    public SABoxImp(DAOAbstractFactory daoFactory) {
         this.daoFactory = daoFactory;
     }
 
@@ -53,15 +52,15 @@ public class SABoxImp implements SABox {
         DAOBox daoBox = daoFactory.createDAOBox();
         List<ObjectId> gameIDs = daoBox.listGames(box);
 
-        if(gameIDs == null)
+        if (gameIDs == null)
             return games;
 
         DAOGame daoGame = daoFactory.createDAOGame();
 
-        for(ObjectId gameID : gameIDs){
+        for (ObjectId gameID : gameIDs) {
             TGame game = daoGame.searchOne(gameID);
 
-            if(game == null)
+            if (game == null)
                 return new ArrayList<>();
 
             games.add(game);
@@ -72,7 +71,7 @@ public class SABoxImp implements SABox {
 
     @Override
     public List<TBox> searchAllBoxesByName(String name) {
-        if(!correctName(name))
+        if (!correctName(name))
             return null;
 
         DAOBox daoBox = daoFactory.createDAOBox();
@@ -87,7 +86,7 @@ public class SABoxImp implements SABox {
     }
 
     @Override
-    public void deleteFromDatabase(ObjectId id){
+    public void deleteFromDatabase(ObjectId id) {
         daoFactory.createDAOBox().deleteFromDatabase(id);
     }
 
@@ -97,36 +96,36 @@ public class SABoxImp implements SABox {
     }
 
     @Override
-	public ObjectId deleteGame(ObjectId idBox, ObjectId gameId) {
-		DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
-		return daoBox.deleteGame(idBox, gameId);
-	}
+    public ObjectId deleteGame(ObjectId idBox, ObjectId gameId) {
+        DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+        return daoBox.deleteGame(idBox, gameId);
+    }
 
-	@Override
-	public ObjectId modifyBox(TBox tBox) {
-		if (!correctName(tBox.getName()))  {
-			return null;
-		}
-		if (!correctDescription(tBox.getDescription())) {
-			return null;
-		}
-		if (!correctGenres(tBox.getGenres())) {
-			return null;
-		}
-		if( !correctPrivacy(tBox.getPrivacy())) {
-			return null;
-		}
+    @Override
+    public ObjectId modifyBox(TBox tBox) {
+        if (!correctName(tBox.getName())) {
+            return null;
+        }
+        if (!correctDescription(tBox.getDescription())) {
+            return null;
+        }
+        if (!correctGenres(tBox.getGenres())) {
+            return null;
+        }
+        if (!correctPrivacy(tBox.getPrivacy())) {
+            return null;
+        }
 
-		DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
+        DAOBox daoBox = DAOAbstractFactory.getInstance().createDAOBox();
 
-		return daoBox.modifyBox(tBox);
-	}
+        return daoBox.modifyBox(tBox);
+    }
 
     private boolean correctGenres(List<Genres> categories) {
         return categories != null && !categories.isEmpty();
     }
 
-    private boolean correctPrivacy(Privacy privacy){
+    private boolean correctPrivacy(Privacy privacy) {
         return privacy != null;
     }
 

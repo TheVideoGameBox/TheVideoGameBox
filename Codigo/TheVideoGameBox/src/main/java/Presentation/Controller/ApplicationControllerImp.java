@@ -7,23 +7,22 @@ import Presentation.View.ViewAbstractFactory;
 public class ApplicationControllerImp extends ApplicationController {
     @Override
     public void action(Context context) {
-        if(currentView != null)
+        if (currentView != null)
             viewStack.push(currentView);
 
         ICommand command = CommandAbstractFactory.getInstance().createCommand(context.getEvent());
 
-        if(command != null){
-        	Context res = command.execute(context.getData());
+        if (command != null) {
+            Context res = command.execute(context.getData());
 
             currentView = ViewAbstractFactory.getInstance().createView(res);
 
-            if(currentView == null){
+            if (currentView == null) {
                 currentView = viewStack.pop();
                 currentView.update(res);
-            }
-            else
+            } else
                 currentView.update(res);
-        }else
+        } else
             currentView = ViewAbstractFactory.getInstance().createView(context);
     }
 }

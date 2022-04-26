@@ -1,6 +1,6 @@
 <configuration debug="true">
 
-    <property name="LOG_DIR" value="logs" />
+    <property name="LOG_DIR" value="logs"/>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -24,20 +24,20 @@
         </encoder>
     </appender>
 
-    <logger name="info" level="INFO" />
+    <logger name="info" level="INFO"/>
     <logger name="tests" level="WARN">
-        <appender-ref ref="FILE_INFO" />
+        <appender-ref ref="FILE_INFO"/>
     </logger>
 
     <logger name="debug" level="DEBUG">
-        <appender-ref ref="FILE_DEBUG" />
+        <appender-ref ref="FILE_DEBUG"/>
     </logger>
 
     <logger name="error" level="ERROR">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
     </logger>
 
     <root level="INFO">
-        <appender-ref ref="FILE_INFO" />
+        <appender-ref ref="FILE_INFO"/>
     </root>
 </configuration>

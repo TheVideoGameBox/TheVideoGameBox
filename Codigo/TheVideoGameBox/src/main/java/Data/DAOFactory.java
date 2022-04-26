@@ -7,7 +7,7 @@ import Data.Game.DAOGameImp;
 import Data.User.DAOUser;
 import Data.User.DAOUserImp;
 
-public class DAOFactory extends DAOAbstractFactory{
+public class DAOFactory extends DAOAbstractFactory {
 
     @Override
     public DAOBox createDAOBox() {

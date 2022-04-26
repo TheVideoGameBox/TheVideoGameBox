@@ -5,15 +5,12 @@ import Presentation.Controller.ApplicationController;
 import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 import Presentation.View.IView;
-import Presentation.View.Main.BorderTitle;
 import Presentation.View.Main.JPanelConFondo;
-import Presentation.View.Main.JPanelRound;
 import Presentation.View.Utils.Button;
 import Presentation.View.Utils.PasswordField;
 import Presentation.View.Utils.TextField;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -99,7 +96,7 @@ public class ViewRegister extends JFrame implements IView {
                 setVisible(false);
             }
         });
-		topPanel.add(backButton);
+        topPanel.add(backButton);
         topPanel.add(Box.createRigidArea(new Dimension(50, 0)));
         topPanel.add(icon);
 
@@ -211,7 +208,7 @@ public class ViewRegister extends JFrame implements IView {
         return aux;
     }
 
-    private void refreshView(){
+    private void refreshView() {
         setLocationRelativeTo(null);
         setVisible(true);
     }

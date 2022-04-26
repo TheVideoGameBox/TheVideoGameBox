@@ -3,7 +3,7 @@ package Logic.User;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class BCryptUtility {
-    private static final int  logRounds = 11;
+    private static final int logRounds = 11;
 
     public static String hash(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());

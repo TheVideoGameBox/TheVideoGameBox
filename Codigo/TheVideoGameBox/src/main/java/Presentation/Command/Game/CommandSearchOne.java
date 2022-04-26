@@ -15,7 +15,7 @@ public class CommandSearchOne implements ICommand {
         TGame result = saGame.searchOne((ObjectId) data);
         Context con;
 
-        if(result != null) con = new Context(Event.RES_SEARCH_ONE_OK, result);
+        if (result != null) con = new Context(Event.RES_SEARCH_ONE_OK, result);
         else con = new Context(Event.RES_SEARCH_ONE_KO, null);
 
         return con;

@@ -8,19 +8,19 @@ import Presentation.Controller.Context;
 import Presentation.Controller.Event;
 import org.bson.types.ObjectId;
 
-public class CommandCreateUser implements ICommand{
+public class CommandCreateUser implements ICommand {
 
-	@Override
-	public Context execute(Object data) {
-		SAUser saUser = SAAbstractFactory.getInstance().createSAUser();
-		TUser user = (TUser) data;
-		ObjectId result = saUser.createUser(user);
-		Context con;
-	  	
-		if(result != null) con = new Context(Event.RES_CREATE_USER_OK, result);
-		else con = new Context(Event.RES_CREATE_USER_KO, null);
-		
-		return con;
-	}
+    @Override
+    public Context execute(Object data) {
+        SAUser saUser = SAAbstractFactory.getInstance().createSAUser();
+        TUser user = (TUser) data;
+        ObjectId result = saUser.createUser(user);
+        Context con;
+
+        if (result != null) con = new Context(Event.RES_CREATE_USER_OK, result);
+        else con = new Context(Event.RES_CREATE_USER_KO, null);
+
+        return con;
+    }
 
 }

@@ -17,7 +17,7 @@ public class CommandLogIn implements ICommand {
         ObjectId result = saUser.logIn(user);
         Context con;
 
-        if(result != null) con = new Context(Event.RES_LOGIN_USER_OK, result);
+        if (result != null) con = new Context(Event.RES_LOGIN_USER_OK, result);
         else con = new Context(Event.RES_LOGIN_USER_KO, null);
 
         return con;

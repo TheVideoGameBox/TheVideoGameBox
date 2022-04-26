@@ -16,7 +16,7 @@ public class CommandRandomGames implements ICommand {
         List<TGame> result = saGame.random();
         Context con;
 
-        if(result != null && !result.isEmpty()) con = new Context(Event.RES_RANDOM_GAMES_OK, result);
+        if (result != null && !result.isEmpty()) con = new Context(Event.RES_RANDOM_GAMES_OK, result);
         else con = new Context(Event.RES_RANDOM_GAMES_KO, null);
 
         return con;

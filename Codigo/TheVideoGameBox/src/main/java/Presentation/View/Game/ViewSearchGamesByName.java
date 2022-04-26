@@ -186,45 +186,42 @@ public class ViewSearchGamesByName extends JFrame implements IView {
         namePanel.add(cover);
         namePanel.add(Box.createRigidArea(new Dimension(55, 0)));
         namePanel.add(name);
-        
+
         //PLATFORM CATEGORY
-        
+
         JPanel platformPanel = new JPanel();
         platformPanel.setOpaque(false);
         platformPanel.setAlignmentY(JPanel.CENTER_ALIGNMENT);
-        if(game.getPlatforms() != null) {
-        	int num = game.getPlatforms().size();
-            if(num != 0) {
-            	if(num == 1) {
-            		platformPanel.setLayout(new GridLayout(1,1));
-            		for(String p : game.getPlatforms()) {
-            			platformPanel.add(platform(p, num));
-            		}
-            	}
-            	else if(num == 2) {
-            		platformPanel.setLayout(new GridLayout(1,2));
-            		for(String p : game.getPlatforms()) {
-            			platformPanel.add(platform(p, num));
-            		}
-            	}
-            	else if(num == 3) {
-            		platformPanel.setLayout(new GridLayout(0,1));
-            		for(int i = 0; i<3; i++) {
-            			platformPanel.add(platform(game.getPlatforms().get(i), num));
-            		}
-            	}
-            	else if(num > 3) {
-            		platformPanel.setLayout(new GridLayout(2,2));
-            		for(int i = 0; i<3; i++) {
-            			platformPanel.add(platform(game.getPlatforms().get(i), num));
-            		}
-            		if(num > 3) {
-            			platformPanel.add(platform("+" + num, num));
-            		}
-            	}
+        if (game.getPlatforms() != null) {
+            int num = game.getPlatforms().size();
+            if (num != 0) {
+                if (num == 1) {
+                    platformPanel.setLayout(new GridLayout(1, 1));
+                    for (String p : game.getPlatforms()) {
+                        platformPanel.add(platform(p, num));
+                    }
+                } else if (num == 2) {
+                    platformPanel.setLayout(new GridLayout(1, 2));
+                    for (String p : game.getPlatforms()) {
+                        platformPanel.add(platform(p, num));
+                    }
+                } else if (num == 3) {
+                    platformPanel.setLayout(new GridLayout(0, 1));
+                    for (int i = 0; i < 3; i++) {
+                        platformPanel.add(platform(game.getPlatforms().get(i), num));
+                    }
+                } else if (num > 3) {
+                    platformPanel.setLayout(new GridLayout(2, 2));
+                    for (int i = 0; i < 3; i++) {
+                        platformPanel.add(platform(game.getPlatforms().get(i), num));
+                    }
+                    if (num > 3) {
+                        platformPanel.add(platform("+" + num, num));
+                    }
+                }
             }
         }
-        
+
 
         //BUTTON PANEL
         JPanel buttonPanel = new JPanel(new BorderLayout());
@@ -250,48 +247,48 @@ public class ViewSearchGamesByName extends JFrame implements IView {
 
         return panel;
     }
-    
+
     private JPanel platform(String p, int n) {
-    	JPanel aux = new JPanel();
-    	aux.setLayout(new BoxLayout(aux, BoxLayout.Y_AXIS));
-    	Dimension d = new Dimension(0,0);
-    	Random rand = new Random();
-    	if(n < 3) d = new Dimension(0,40);
-    	aux.add(Box.createRigidArea(d));
-		aux.setOpaque(false);
-		aux.setAlignmentX(JPanel.CENTER_ALIGNMENT);
-		aux.setAlignmentY(JPanel.CENTER_ALIGNMENT);
-		aux.setBorder(new EmptyBorder(2,2,2,2));
-		if(p.contains("Commodore"))	aux.add(new Platform(p,Color.gray, Color.white));
-		else if(p.contains("Sega")) aux.add(new Platform(p,new Color(51, 60, 135), Color.white));
-		else if(p.contains("Nintendo")) aux.add(new Platform(p,new Color(230, 0, 18), Color.white));
-		else if(p.contains("PlayStation")) aux.add(new Platform(p,new Color(46, 109, 180), Color.white));
-		else if(p.contains("iOS")) aux.add(new Platform(p,new Color(252, 49, 88), Color.white));
-		else if(p.contains("PC")) aux.add(new Platform(p,new Color(60, 149, 61), Color.white));
-		else if(p.contains("Philips")) aux.add(new Platform(p,new Color(22, 190, 190), Color.white));
-		else if(p.contains("Xbox")) aux.add(new Platform(p,new Color(16, 124, 16), Color.white));
-		else if(p.contains("Game Boy")) aux.add(new Platform(p,new Color(111, 38, 195), Color.white));
-		else if(p.contains("Neo")) aux.add(new Platform(p,new Color(145, 237, 40), Color.white));
-		else if(p.contains("Wii")) aux.add(new Platform(p,Color.white, Color.black));
-		else if(p.contains("Oculus")) aux.add(new Platform(p,Color.black, Color.white));
-		else if(p.contains("VR")) aux.add(new Platform(p,new Color(255, 140, 0), Color.white));
-		else if(p.contains("Google")) aux.add(new Platform(p,new Color(244, 180, 0), Color.black));
-		else if(p.contains("Android")) aux.add(new Platform(p,new Color(61, 220, 132), Color.white));
-		else if(p.contains("Mac")) aux.add(new Platform(p,new Color(160, 82, 45), Color.white));
-		else if(p.contains("Linux")) aux.add(new Platform(p,new Color(222, 76, 138), Color.white));
-		else if(p.equals("+" + n)) aux.add(new Platform(p,Color.darkGray, Color.white));
-		else{
-			rand  = new Random();
-			float r = rand.nextFloat();
-			float g = rand.nextFloat();
-			float b = rand.nextFloat();
-			aux.add(new Platform(p,new Color(r, g, b), Color.white));
-		}
-		aux.add(Box.createRigidArea(d));
-		return aux;
+        JPanel aux = new JPanel();
+        aux.setLayout(new BoxLayout(aux, BoxLayout.Y_AXIS));
+        Dimension d = new Dimension(0, 0);
+        Random rand = new Random();
+        if (n < 3) d = new Dimension(0, 40);
+        aux.add(Box.createRigidArea(d));
+        aux.setOpaque(false);
+        aux.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+        aux.setAlignmentY(JPanel.CENTER_ALIGNMENT);
+        aux.setBorder(new EmptyBorder(2, 2, 2, 2));
+        if (p.contains("Commodore")) aux.add(new Platform(p, Color.gray, Color.white));
+        else if (p.contains("Sega")) aux.add(new Platform(p, new Color(51, 60, 135), Color.white));
+        else if (p.contains("Nintendo")) aux.add(new Platform(p, new Color(230, 0, 18), Color.white));
+        else if (p.contains("PlayStation")) aux.add(new Platform(p, new Color(46, 109, 180), Color.white));
+        else if (p.contains("iOS")) aux.add(new Platform(p, new Color(252, 49, 88), Color.white));
+        else if (p.contains("PC")) aux.add(new Platform(p, new Color(60, 149, 61), Color.white));
+        else if (p.contains("Philips")) aux.add(new Platform(p, new Color(22, 190, 190), Color.white));
+        else if (p.contains("Xbox")) aux.add(new Platform(p, new Color(16, 124, 16), Color.white));
+        else if (p.contains("Game Boy")) aux.add(new Platform(p, new Color(111, 38, 195), Color.white));
+        else if (p.contains("Neo")) aux.add(new Platform(p, new Color(145, 237, 40), Color.white));
+        else if (p.contains("Wii")) aux.add(new Platform(p, Color.white, Color.black));
+        else if (p.contains("Oculus")) aux.add(new Platform(p, Color.black, Color.white));
+        else if (p.contains("VR")) aux.add(new Platform(p, new Color(255, 140, 0), Color.white));
+        else if (p.contains("Google")) aux.add(new Platform(p, new Color(244, 180, 0), Color.black));
+        else if (p.contains("Android")) aux.add(new Platform(p, new Color(61, 220, 132), Color.white));
+        else if (p.contains("Mac")) aux.add(new Platform(p, new Color(160, 82, 45), Color.white));
+        else if (p.contains("Linux")) aux.add(new Platform(p, new Color(222, 76, 138), Color.white));
+        else if (p.equals("+" + n)) aux.add(new Platform(p, Color.darkGray, Color.white));
+        else {
+            rand = new Random();
+            float r = rand.nextFloat();
+            float g = rand.nextFloat();
+            float b = rand.nextFloat();
+            aux.add(new Platform(p, new Color(r, g, b), Color.white));
+        }
+        aux.add(Box.createRigidArea(d));
+        return aux;
     }
-    
-    private void refreshView(){
+
+    private void refreshView() {
         setLocationRelativeTo(null);
         setVisible(true);
     }

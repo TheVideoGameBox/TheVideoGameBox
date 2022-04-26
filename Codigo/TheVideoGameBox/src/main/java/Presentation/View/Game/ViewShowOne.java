@@ -16,14 +16,12 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.List;
 import java.util.Objects;
 
 import static Presentation.View.Utils.Images.backGround;
@@ -173,7 +171,7 @@ public class ViewShowOne extends JFrame implements IView {
         StyledDocument doc = nameTitle.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-        doc.setParagraphAttributes(0, doc.getLength(), center, false);       
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
         namePanel.add(nameTitle);
 
@@ -207,22 +205,21 @@ public class ViewShowOne extends JFrame implements IView {
         StyledDocument doc2 = companyText.getStyledDocument();
         SimpleAttributeSet center2 = new SimpleAttributeSet();
         StyleConstants.setAlignment(center2, StyleConstants.ALIGN_CENTER);
-        doc2.setParagraphAttributes(0, doc2.getLength(), center2, false); 
-        if (game.getInvolved_companies() != null){
-        	Boolean first = true;
+        doc2.setParagraphAttributes(0, doc2.getLength(), center2, false);
+        if (game.getInvolved_companies() != null) {
+            Boolean first = true;
             for (int i = 0; game.getInvolved_companies() != null && !game.getInvolved_companies().isEmpty() && i < game.getInvolved_companies().size(); i++) {
-            	if(first) {
-            		companyText.setText(game.getInvolved_companies().get(i));
-            		first = false;
-            	}
-            	else {
-            		String s = "\n" + game.getInvolved_companies().get(i);
-                	try {
-						companyText.getStyledDocument().insertString(companyText.getStyledDocument().getLength(),s, null);
-					} catch (BadLocationException e) {
-						e.printStackTrace();
-					}
-            	}
+                if (first) {
+                    companyText.setText(game.getInvolved_companies().get(i));
+                    first = false;
+                } else {
+                    String s = "\n" + game.getInvolved_companies().get(i);
+                    try {
+                        companyText.getStyledDocument().insertString(companyText.getStyledDocument().getLength(), s, null);
+                    } catch (BadLocationException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
         JScrollPane companyScroll = new JScrollPane(companyText);
@@ -232,14 +229,14 @@ public class ViewShowOne extends JFrame implements IView {
         companyScroll.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 12));
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-            	companyScroll.getVerticalScrollBar().setValue(0);
+                companyScroll.getVerticalScrollBar().setValue(0);
             }
         });
         companyPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         companyPanel.add(companyScroll);
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-            	companyScroll.getViewport().setViewPosition(new Point(0, 0));
+                companyScroll.getViewport().setViewPosition(new Point(0, 0));
             }
         });
 

@@ -13,12 +13,12 @@ public enum Genres {
 
     private String genre;
 
-    Genres(String genre){
+    Genres(String genre) {
         this.genre = genre;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return genre;
     }
 }

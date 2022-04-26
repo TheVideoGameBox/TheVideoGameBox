@@ -176,7 +176,7 @@ public class ViewCreateBox extends JFrame implements IView {
         String privacy = comboBoxPrivacy.getSelectedItem().toString();
 
         if (privacy.equals(Privacy.PRIVATE.toString())) return Privacy.PRIVATE;
-        else if(privacy.equals(Privacy.PUBLIC.toString())) return Privacy.PUBLIC;
+        else if (privacy.equals(Privacy.PUBLIC.toString())) return Privacy.PUBLIC;
         else return Privacy.PRIVATE;
     }
 
@@ -317,7 +317,7 @@ public class ViewCreateBox extends JFrame implements IView {
         backButtonContainer.add(backButton);
     }
 
-    private void refreshView(){
+    private void refreshView() {
         setLocationRelativeTo(null);
         setVisible(true);
     }
