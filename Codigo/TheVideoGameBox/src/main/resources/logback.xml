@@ -1,0 +1,43 @@
+<configuration debug="true">
+
+    <property name="LOG_DIR" value="logs" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_INFO" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_DIR}/info.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_DEBUG" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_DIR}/debug.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="info" level="INFO" />
+    <logger name="tests" level="WARN">
+        <appender-ref ref="FILE_INFO" />
+    </logger>
+
+    <logger name="debug" level="DEBUG">
+        <appender-ref ref="FILE_DEBUG" />
+    </logger>
+
+    <logger name="error" level="ERROR">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="FILE_INFO" />
+    </root>
+</configuration>

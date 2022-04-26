@@ -171,7 +171,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		namePanel.setMinimumSize(new Dimension(700, 135));
 		
 		// NAME
-		JLabel name = new JLabel("Nombre: " + game.getName());
+		JLabel name = new JLabel(game.getName());
 		name.setForeground(Color.white);
 		name.setFont(new Font("Leelawadee", Font.BOLD, 20));
 		name.addMouseListener(new MouseListener() {
@@ -209,7 +209,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 			cover = new JLabel(new ImageIcon(image));
 		}
 		else {
-			cover.setIcon(new ImageIcon((getClass().getClassLoader().getResource("no_image.png"))));
+			cover.setIcon(new ImageIcon((Objects.requireNonNull(getClass().getClassLoader().getResource("no_image.png")))));
 		}
 		
 		// CONSTRUIR NAMEPANEL
@@ -226,22 +226,23 @@ public class ViewAddGameToBox extends JFrame implements IView {
 		buttonPanel.setMinimumSize(new Dimension(300, 135));
 		
 
-		Button viewInfo = new Button("Add Game", "add_icon.png", Color.white, null, new Dimension(200, 45), Color.orange);
-		viewInfo.buttonIcon();
-		viewInfo.setBorderPainted(false);
-        viewInfo.setContentAreaFilled(false);
-		viewInfo.setAlignmentX(CENTER_ALIGNMENT);
-		viewInfo.setAlignmentY(CENTER_ALIGNMENT);
-		viewInfo.addActionListener(new ActionListener() {
+		Button addGame = new Button("Add Game", "add_icon.png", Color.white, null, new Dimension(200, 45), Color.orange);
+		addGame.buttonIcon();
+		addGame.setBorderPainted(false);
+        addGame.setContentAreaFilled(false);
+		addGame.setAlignmentX(CENTER_ALIGNMENT);
+		addGame.setAlignmentY(CENTER_ALIGNMENT);
+		addGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SAAbstractFactory.getInstance().createSABox().addGame(box.getId(), game.getId());
-				ApplicationController.getInstance().action(new Context(Event.VIEW, null));
+				ApplicationController.getInstance().backAux();
+				//ApplicationController.getInstance().action(new Context(Event.UPDATE_GAME_LIST, aux));
 				setVisible(false);
 			}
 		});
 
-		buttonPanel.add(viewInfo, BorderLayout.CENTER);
+		buttonPanel.add(addGame, BorderLayout.CENTER);
 		
 		//CONSTRUIR PANEL
 		panel.add(namePanel, BorderLayout.WEST);
@@ -257,7 +258,7 @@ public class ViewAddGameToBox extends JFrame implements IView {
 				JOptionPane.showMessageDialog(this, "Game added!","Add Game", JOptionPane.INFORMATION_MESSAGE);
 				break;
 			case Event.RES_ADD_GAME_TO_BOX_KO:
-				JOptionPane.showMessageDialog(null, "Failed to add the game","Add Game", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Repeated game!","Add Game", JOptionPane.ERROR_MESSAGE);
 				break;
 		}
 		
