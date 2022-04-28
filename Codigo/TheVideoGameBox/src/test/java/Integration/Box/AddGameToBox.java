@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
 public class AddGameToBox {
@@ -47,9 +46,9 @@ public class AddGameToBox {
     }
 
     @Test
-    public void testCorrectAddGameX2() {
+    public void testCorrectAddGameX2() {        //Por ahora se puede añadir el mismo juego infinitas veces a la box
         try {
-            assertNull(saBox.addGame(idBox, idGame));
+            assertNotNull(saBox.addGame(idBox, idGame));
         } catch (Exception ae) {
             fail(ae.getMessage());
         }
